@@ -23,15 +23,15 @@ author:
   code: '64295'
   city: Darmstadt
   country: Germany
-- ins: M. Eckel
-  name: Michael Eckel
-  org: Fraunhofer SIT
-  abbrev: Fraunhofer SIT
-  email: michael.eckel@sit.fraunhofer.de
-  street: Rheinstrasse 75
-  code: '64295'
-  city: Darmstadt
-  country: Germany
+- ins: W. Pan
+  name: Wei Pan
+  org: Huawei Technologies
+  email: william.panwei@huawei.com
+- ins: E. Voit
+  name: Eric Voit
+  org: Cisco Systems
+  abbrev: Cisco
+  email: evoit@cisco.com
 - ins: C. Newton
   name: Christopher Newton
   org: University of Surrey
