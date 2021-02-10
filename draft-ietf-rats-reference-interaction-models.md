@@ -117,9 +117,9 @@ A PKIX Certificate is an X.509v3 format certificate as specified by {{RFC5280}}.
 
 The term "Remote Attestation" is a common expression and often associated or connoted with certain properties.
 The term "Remote" in this context does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
-It rather refers to a decoupled system or entities that exchange the payload of the Conceptual Message type called Evidence {{-RATS}}.
+It rather refers to decoupled systems or entities that exchange the payload of the Conceptual Message type called Evidence {{-RATS}}.
 This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
-Examples of these types of co-located environments include: a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g. embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in Section 4.3 Two Types of Environments of an Attester in {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
+Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include: a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g. embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in Section 4.3 Two Types of Environments of an Attester in {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
 
 # Scope and Intent
 
