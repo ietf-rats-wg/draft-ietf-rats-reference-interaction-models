@@ -113,7 +113,7 @@ A PKIX Certificate is an X.509v3 format certificate as specified by {{RFC5280}}.
 
 {::boilerplate bcp14}
 
-# Disambiguation
+## Disambiguation
 
 The term "Remote Attestation" is a common expression and often associated or connoted with certain properties.
 The term "Remote" in this context does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
