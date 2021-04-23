@@ -128,11 +128,23 @@ Complementary procedures, functions, or services that are required for a complet
 Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.
 
 Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.
-For instance, using the results of a remote attestation that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
+For instance, using the results of a remote attestation that are created by the Verifier, e.g., how to trigger remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
 
 The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
 Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
 Analogously, deviations from the generic model descriptions in this document can be illustrated in solutions documents to highlight distinct contributions.
+
+# Essential Requirements
+
+In order to ensure appropriate conveyance of Evidence, there exist essential requirements which MUST be fulfilled:
+
+Integrity:
+
+: Information provided by an Attester MUST be integral. This may be achieved by means of a digital signature over Attestation Evidence. The signature may be symmetric, such as an HMAC, or asymmetric, such as ECDSA.
+
+Authentication:
+
+: The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.
 
 # Direct Anonymous Attestation
 
