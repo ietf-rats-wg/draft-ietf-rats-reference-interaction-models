@@ -106,7 +106,7 @@ While the conveyance of other Conceptual Messages is out-of-scope the methods de
 # Terminology
 
 This document uses the following set of terms, roles, and concepts as defined in {{-RATS}}:
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
+Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment
 
 A PKIX Certificate is an X.509v3 format certificate as specified by {{RFC5280}}.
 
