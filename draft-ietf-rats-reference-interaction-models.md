@@ -197,11 +197,17 @@ This section defines the information elements that are vital to all kinds intera
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
 
-Authentication Secret IDs ('authSecID'):
+Attester Identity ('attesterIdentity'):
 
 : *mandatory*
 
-: A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Evidence.
+: A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity - used as proof of identity.
+
+Authentication Secret IDs ('authSecIDs'):
+
+: *mandatory*
+
+: A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.
 
 : Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment. Consequently, an Authentication Secret ID also identifies an Attesting Environment.
 
@@ -237,9 +243,9 @@ Claim Selection ('claimSelection'):
 
 : *optional*
 
-: A statement that represents a (sub-)set of Claims that can be created by an Attester.
+: A (sub-)set of Claims which can be created by an Attester.
 
-: Claim Selections can act as filters that can specify the exact set of Claims to be included in Evidence. An Attester MAY decide whether or not to provide all Claims as requested via a Claim Selection.
+: Claim Selections act as filters to specify the exact set of Claims to be included in Evidence. In a remote attestation process, a Verifier sends a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
 
 Collected Claims ('collectedClaims'):
 
