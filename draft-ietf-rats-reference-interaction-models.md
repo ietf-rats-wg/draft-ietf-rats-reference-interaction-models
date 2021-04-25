@@ -23,6 +23,15 @@ author:
   code: '64295'
   city: Darmstadt
   country: Germany
+- ins: M. Eckel
+  name: Michael Eckel
+  org: Fraunhofer SIT
+  abbrev: Fraunhofer SIT
+  email: michael.eckel@sit.fraunhofer.de
+  street: Rheinstrasse 75
+  code: '64295'
+  city: Darmstadt
+  country: Germany
 - ins: W. Pan
   name: Wei Pan
   org: Huawei Technologies
@@ -32,14 +41,6 @@ author:
   org: Cisco Systems
   abbrev: Cisco
   email: evoit@cisco.com
-- ins: C. Newton
-  name: Christopher Newton
-  org: University of Surrey
-  email: cn0016@surrey.ac.uk
-- ins: L. Chen
-  name: Liqun Chen
-  org: University of Surrey
-  email: liqun.chen@surrey.ac.uk
 
 normative:
   RFC2119:
@@ -83,7 +84,7 @@ informative:
 
 This document describes interaction models for remote attestation procedures (RATS).
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
-Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. Privacy preserving conveyance of Evidence via Direct Anonymous Attestation is elaborated on in the context of the Attester, Endorser, and Verifier role.
+Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.
 
 --- middle
 
@@ -96,9 +97,8 @@ This document defines interaction models that can be used in specific RATS-relat
 The primary focus of this document is the conveyance of attestation Evidence. The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.
 Specific goals of this document are to:
 
-* prevent inconsistencies in descriptions of interaction models in other documents (due to text cloning and evolution over time),
-* enable to highlight an exact delta/divergence between the core set of characteristics captured here in this document and variants of these interaction models used in other specifications or solutions, and to
-* illustrate the application of Direct Anonymous Attestation (DAA) for the defined set of reference models.
+1.) prevent inconsistencies in descriptions of interaction models in other documents (due to text cloning and evolution over time), and to
+2.) enable to highlight an exact delta/divergence between the core set of characteristics captured here in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
 While the conveyance of other Conceptual Messages is out-of-scope the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.
@@ -128,7 +128,9 @@ Complementary procedures, functions, or services that are required for a complet
 Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.
 
 Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.
-For instance, using the results of a remote attestation that are created by the Verifier, e.g., how to trigger remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
+
+For instance, using the results of a remote attestation procedure that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
+
 
 The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
 Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
@@ -146,21 +148,7 @@ Authentication:
 
 : The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.
 
-# Direct Anonymous Attestation
-
-DAA {{DAA}} is a signature scheme used in RATS that allows preservation of the privacy of users that are associated with an Attester (e.g. its owner).
-Essentially, DAA can be seen as a group signature scheme with the feature that given a DAA signature no-one can find out who the signer is, i.e., the anonymity is not revocable.
-To be able to sign anonymously an Attester has to obtain a credential from a DAA Issuer.
-The DAA Issuer uses a private/public key pair to generate a credential for an Attester and makes the public key (in the form of a public key certificate) available to the verifier in order to enable them to validate the DAA signature obtained as part of the Evidence.
-
-In order to support these DAA signatures, the DAA Issuer MUST associate a single key pair with each group of Attesters and use the same key pair when creating the credentials for all of the Attesters in this group.
-The DAA Issuer’s public key certificate used by a group of Attesters replaces the individual  Attester Identity documents during authenticity validation as a part of the appraisal of Evidence conducted by a Verifier.
-This is in contrast to intuition that there has to be a unique Attester Identity per device.
-
-This document extends the duties of the Endorser role as defined by the RATS architecture with respect to the provision of these Attester Identity documents to Attesters.
-The existing duties of the Endorser role and the duties of a DAA Issuer are quite similar as illustrated in the following subsections.
-
-## Endorsers
+## Endorsement of Attesting Environments
 
 Via its Attesting Environments, an Attester only generates Evidence about its Target Environments.
 After being appraised to be trustworthy, a Target Environment may become a new Attesting Environment in charge of generating Evidence for further Target Environments.
@@ -171,20 +159,6 @@ An Attester cannot generate Evidence about its own RoTs by design.
 As a consequence, a Verifier requires trustable statements about this subset of Attesting Environments from a different source than the Attester itself.
 The corresponding trustable statements are called Endorsements and originate from external, trustable entities that take on the role of an Endorser (e.g., supply chain entities).
 
-## Endorsers for Direct Anonymous Attestation
-
-In order to enable the use of DAA, an Endorser role takes on the duties of a DAA Issuer in addition to its already defined duties.
-DAA Issuers offer zero-knowledge proofs based on public key certificates used for a group of Attesters {{DAA}}.
-Effectively, these certificates share the semantics of Endorsements, with the following exceptions:
-
-* The associated private keys are used by the DAA Issuer to provide an Attester with a credential that it can use to convince the Verifier that its Evidence is valid.
-To keep their anonymity the Attester randomizes this credential each time that it is used.
-* The Verifier can use the DAA Issuer's public key certificate, together with the randomized credential from the Attester, to confirm that the Evidence comes from a valid Attester.
-* A credential is conveyed from an Endorser to an Attester in combination with the conveyance of the public key certificates from Endorser to Verifier.
-
-The zero-knowledge proofs required cannot be created by an Attester alone -- like the Endorsements of RoTs -- and have to be created by a trustable third entity -- like an Endorser.
-Due to that semantic overlap, the Endorser role is augmented via the definition of DAA duties as defined below. This augmentation enables the Endorser to convey trustable third party statements both to Verifier roles and Attester roles.
-
 # Normative Prerequisites
 
 In order to ensure an appropriate conveyance of Evidence via interaction models in general, the following set of prerequisites MUST be in place to support the implementation of interaction models:
@@ -193,13 +167,13 @@ Attester Identity:
 
 : The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), or it MAY be part of a group signature, or it MAY be a randomized DAA credential.
+: An Attester Identity MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), or it MAY be part of a group signature, or it MAY be a randomised DAA credential {{DAA}}.
 
 Attestation Evidence Authenticity:
 
 : Attestation Evidence MUST be authentic.
 
-: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential respectively), or SHOULD include a correct, unambiguous, and stable reference to an accessible identity document.
+: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g. an PKIX certificate or trusted key material, or a randomised DAA credential {{DAA}}), or SHOULD include a correct and unambiguous and stable reference to an accessible identity document.
 
 Authentication Secret:
 
@@ -228,7 +202,6 @@ Attester Identity ('attesterIdentity'):
 
 : A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity - used as proof of identity.
 
-: In DAA, the Attester's identity is not revealed to the verifier.
 The Attester is issued with a credential by the Endorser that is randomised and then used to anonymously confirm the validity of their evidence.
 The evidence is verified using the Endorser’s public key.
 
@@ -238,12 +211,7 @@ Authentication Secret IDs ('authSecID'):
 
 : A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Evidence.
 
-: In DAA, Authentication Secret IDs are represented by the Endorser (DAA issuer)’s public key that MUST be used to create DAA credentials for the corresponding Authentication Secrets used to protect Evidence.
-
 : Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment. Consequently, an Authentication Secret ID also identifies an Attesting Environment.
-
-: In DAA, an Authentication Secret ID does not identify a unique Attesting Environment but associated with a group of Attesting Environments.
-This is because an Attesting Environment should not be distinguishable and the DAA credential which represents the Attesting Environment is randomised each time it used.
 
 Handle ('handle'):
 
@@ -547,54 +515,6 @@ There is also a possibility to scramble the Nonce or Attester Identity with othe
 # Acknowledgments
 
 Olaf Bergmann, Michael Richardson, and Ned Smith
-
-# Change Log
-
-- Initial draft -00
-
-- Changes from version 00 to version 01:
-  - Added details to the flow diagram
-  - Integrated comments from Ned Smith (Intel)
-  - Reorganized sections and
-  - Updated interaction model
-  - Replaced "claims" with "assertions"
-  - Added proof-of-concept CDDL for CBOR via CoAP based on a TPM 2.0 quote operation
-
-- Changes from version 01 to version 02:
-  - Revised the relabeling of "claims" with "assertion" in alignment with the RATS Architecture I-D.
-  - Added Implementation Status section
-  - Updated interaction model
-  - Text revisions based on changes in {{-RATS}} and comments provided on rats@ietf.org.
-
-- Changes from version 02 to version 00 RATS related document
-  - update of the challenge/response diagram
-  - minor rephrasing of Prerequisites section
-  - rephrasing to information elements and interaction model section
-
-- Changes from version 00 to version 01
-  - added Attestation Authenticity, updated Identity and Secret
-  - relabeled Secret ID to Authentication Secret ID + rephrasing
-  - relabeled Claim Selection to Assertion Selection + rephrasing
-  - relabeled Evidence to (Signed) Attestation Evidence
-  - Added Attestation Result and Reference Assertions
-  - update of the challenge/response diagram and expositional text
-  - added CDDL spec for CoAP FETCH operation proof-of-concept
-
-- Changes from version 01 to version 02
-  - prepared the inclusion of additional reference models
-  - update to Introduction and Scope section
-  - major update to (Normative) Prerequisites
-  - relabeled Attestation Authenticity to Att. Evidence Authenticity
-  - relabeled Assertion term back to Claim terms
-  - added BCP205 Implementation Status section related to Appendix CDDL
-
-- Changes from version 02 to version 03
-  - major refactoring to now accommodate three interaction models
-  - updated existing and added two new diagrams for models
-  - major refactoring of existing and adding of new diagram description
-  - incorporated content about Direct Anonymous Attestation
-  - integrated comments from Michael Richardson
-  - updated roster
 
 --- back
 
