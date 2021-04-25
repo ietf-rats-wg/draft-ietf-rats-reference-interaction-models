@@ -170,7 +170,6 @@ Attester Identity:
 
 : An Attester Identity MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
 
-: The Endorser issues the Attester with a randomized credential which is then used to anonymously confirm the validity of its evidence. The evidence is verified using the public key of the Endorser.
 
 Attestation Evidence Authenticity:
 
