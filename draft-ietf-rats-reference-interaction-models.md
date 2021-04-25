@@ -205,11 +205,11 @@ Attester Identity ('attesterIdentity'):
 The Attester is issued with a credential by the Endorser that is randomised and then used to anonymously confirm the validity of their evidence.
 The evidence is verified using the Endorser’s public key.
 
-Authentication Secret IDs ('authSecID'):
+Authentication Secret IDs ('authSecIDs'):
 
 : *mandatory*
 
-: A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Evidence.
+: A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.
 
 : Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment. Consequently, an Authentication Secret ID also identifies an Attesting Environment.
 
