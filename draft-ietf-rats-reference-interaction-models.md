@@ -128,11 +128,23 @@ Complementary procedures, functions, or services that are required for a complet
 Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.
 
 Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.
-For instance, using the results of a remote attestation that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
+For instance, using the results of a remote attestation that are created by the Verifier, e.g., how to trigger remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
 
 The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
 Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
 Analogously, deviations from the generic model descriptions in this document can be illustrated in solutions documents to highlight distinct contributions.
+
+# Essential Requirements
+
+In order to ensure appropriate conveyance of Evidence, there exist essential requirements which MUST be fulfilled:
+
+Integrity:
+
+: Information provided by an Attester MUST be integral. This may be achieved by means of a digital signature over Attestation Evidence. The signature may be symmetric, such as an HMAC, or asymmetric, such as ECDSA.
+
+Authentication:
+
+: The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.
 
 # Direct Anonymous Attestation
 
@@ -181,13 +193,13 @@ Attester Identity:
 
 : The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), or it MAY be part of a group signature, or it MAY be a randomised DAA credential.
+: An Attester Identity MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), or it MAY be part of a group signature, or it MAY be a randomized DAA credential.
 
 Attestation Evidence Authenticity:
 
-: Attestation Evidence MUST be correct and authentic.
+: Attestation Evidence MUST be authentic.
 
-: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g. an PKIX certificate or trusted key material, or a randomised DAA credential), or SHOULD include a correct and unambiguous and stable reference to an accessible identity document.
+: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential respectively), or SHOULD include a correct, unambiguous, and stable reference to an accessible identity document.
 
 Authentication Secret:
 
@@ -255,7 +267,7 @@ Reference Claims ('refClaims')
 
 : Reference Claims are components of Reference Values as defined in {{-RATS}}. [Editor's Note: Definition might become obsolete, if replaced by Reference Values. Is there a difference between Claims and Values here? Analogously, why is not named Reference Claims in the RATS arch?]
 
-: Reference Claims are used to appraise the Claims received from an Attester via appraisal by direct comparison. For example, Reference Claims MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Claims typically represent (trusted) Claim sets about an Attester's intended platform operational state.
+: Reference Claims are used to appraise the Claims received from an Attester. For example, Reference Claims MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Claims typically represent (trusted) Claim sets about an Attester's intended platform operational state.
 
 Claim Selection ('claimSelection'):
 
@@ -275,7 +287,7 @@ Attestation Result ('attestationResult'):
 
 : *mandatory*
 
-: An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence. Attestation Results include condensed assertions about integrity or other characteristics of the corresponding Attester that are digestable by Relying Parties.
+: An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence. Attestation Results include condensed assertions about integrity or other characteristics of the corresponding Attester that are processible by Relying Parties.
 
 # Interaction Models
 
@@ -497,11 +509,11 @@ The current version ('1bcb469') implements a challenge/response interaction mode
 
 ## License
 
-The CHARRA project and all corresponding code and data maintained on github are provided under the BSD 3-Clause "New" or "Revised" license.
+The CHARRA project and all corresponding code and data maintained on GitHub are provided under the BSD 3-Clause "New" or "Revised" license.
 
 ## Implementation Dependencies
 
-The implementation requires the use of the official Trusted Computing Group (TCG) open-source Trusted Software Stack (TSS) for the Trusted Platform Module (TPM) 2.0. The corresponding code and data is also maintained on github and the project resources can be located via: https://github.com/tpm2-software/tpm2-tss/
+The implementation requires the use of the official Trusted Computing Group (TCG) open-source Trusted Software Stack (TSS) for the Trusted Platform Module (TPM) 2.0. The corresponding code and data is also maintained on GitHub and the project resources can be located via: https://github.com/tpm2-software/tpm2-tss/
 
 The implementation uses the Constrained Application Protocol {{-COAP}} (http://coap.technology/) and the Concise Binary Object Representation {{-CBOR}} (https://cbor.io/).
 
