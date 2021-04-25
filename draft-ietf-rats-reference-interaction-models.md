@@ -229,13 +229,11 @@ Claims ('claims'):
 
 : Claims are part Conceptual Message and are, for example, used to appraise the integrity of Attesters via a Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.
 
-Reference Claims ('refClaims')
+Reference Values ('refValues')
 
 : *mandatory*
 
-: Reference Claims are components of Reference Values as defined in {{-RATS}}. [Editor's Note: Definition might become obsolete, if replaced by Reference Values. Is there a difference between Claims and Values here? Analogously, why is not named Reference Claims in the RATS arch?]
-
-: Reference Claims are used to appraise the Claims received from an Attester. For example, Reference Claims MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Claims typically represent (trusted) Claim sets about an Attester's intended platform operational state.
+: Reference Values as defined in {{-RATS}}. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.
 
 Claim Selection ('claimSelection'):
 
@@ -291,7 +289,7 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
      | signedEvidence, eventLogs -------------------------------> |
      |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refClaims)
+     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
@@ -319,7 +317,7 @@ With the Handle, the Authentication Secret IDs, and the collected Claims, the At
 While it is crucial that Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded. For further reference see section {{security-and-privacy-considerations}}.
 
 As soon as the Verifier receives the signed Evidence and Event Logs, it appraises the Evidence. For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
-Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Claims, such as Reference Integrity Measurements.
+Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ## Uni-Directional Remote Attestation
@@ -340,8 +338,8 @@ The final output of the Verifier are Attestation Results. Attestation Results co
   evidenceGeneration(handle, authSecIDs, collectedClaims)         |
      | => Evidence                                                |
      |                                                            |
-     | evidence, eventLogs -------------------------------------> |     |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refClaims)
+     | evidence, eventLogs -------------------------------------> |          |                                                            |
+     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -358,7 +356,7 @@ The final output of the Verifier are Attestation Results. Attestation Results co
 *    |                                                            |    *
 * signedEvidence, eventLogsDelta -------------------------------> |    *
 *    |                                                            |    *
-*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refClaims) *
+*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refValues) *
 *    |                                       attestationResult <= |    *
 *    |                                                            |    *
 ************************************************************************
@@ -407,7 +405,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
      |                                                            |
      | signedEvidence, eventLogs -------------------------------> |
      |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refClaims)
+     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -424,7 +422,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 *    |                                                            |    *
 * signedEvidence, eventLogsDelta -------------------------------> |    *
 *    |                                                            |    *
-*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refClaims) *
+*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refValues) *
 *    |                                       attestationResult <= |    *
 *    |                                                            |    *
 ************************************************************************
