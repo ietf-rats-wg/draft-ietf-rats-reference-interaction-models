@@ -195,7 +195,7 @@ Evidence Protection:
 
 # Generic Information Elements
 
-This section defines information elements which are vital to all kinds of interaction models.
+This section defines the information elements that are vital to all kinds interaction models.
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
 
