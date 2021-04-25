@@ -310,7 +310,7 @@ The way these handles are processed is the most prominent difference between the
 | Attester |                                                | Verifier |
 '----------'                                                '----------'
      |                                                            |
-  produceClaims(attestingEnvironment)                             |
+  generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
      | <-- requestAttestation(handle, authSecIDs, claimSelection) |
@@ -318,8 +318,8 @@ The way these handles are processed is the most prominent difference between the
   collectClaims(claimSelection)                                   |
      | => collectedClaims                                         |
      |                                                            |
-  produceEvidence(handle, authSecIDs, collectedClaims)            |
-     | => signedEvidence                                          |
+  evidenceGeneration(handle, authSecIDs, collectedClaims)         |
+     | => evidence                                                |
      |                                                            |
      | signedEvidence, eventLogs -------------------------------> |
      |                                                            |
@@ -342,7 +342,7 @@ Correspondingly, a particular set of Evidence originating from a particular Atte
 Methods to acquire Authentication Secret IDs or mappings between Attesting Environments to Authentication Secret IDs are out-of-scope of this document.
 
 The Attester collects Claims based on the Claim Selection. With the Claim Selection the Verifier defines the set of Claims it requires.
-Correspondingly, collected Claims are a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
+Correspondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
 If the Claim Selection is omitted, then by default all Claims that are known and available on the Attester MUST be used to create corresponding Evidence.
 For example, when performing a boot integrity evaluation, a Verifier may only be requesting a particular subset of claims about the Attester, such as Evidence about BIOS/UEFI and firmware that the Attester booted up, and not include information about all currently running software.
 
@@ -352,7 +352,7 @@ While it is crucial that Claims, the Handle, and the Attester Identity informati
 
 As soon as the Verifier receives the signed Evidence and Event Logs, it appraises the Evidence. For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
 Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Claims, such as Reference Integrity Measurements.
-The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess the trustworthiness of an Attester.
+The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ## Uni-Directional Remote Attestation
 
@@ -363,30 +363,30 @@ The final output of the Verifier are Attestation Results. Attestation Results co
      |                                       |                    |
      | <----------------------------- handle | handle ----------> |
      |                                       |                    |
-  produceClaims(attestingEnvironment)        x                    |
+  generateClaims(attestingEnvironment)       x                    |
      | => claims, eventLogs                                       |
      |                                                            |
   collectClaims(claimSelection)                                   |
      | => collectedClaims                                         |
      |                                                            |
-  produceEvidence(handle, authSecIDs, collectedClaims)            |
-     | => signedEvidence                                          |
+  evidenceGeneration(handle, authSecIDs, collectedClaims)         |
+     | => Evidence                                                |
      |                                                            |
-     | signedEvidence, eventLogs -------------------------------> |     |                                                            |
+     | evidence, eventLogs -------------------------------------> |     |                                                            |
      |          appraiseEvidence(signedEvidence, eventLogs, refClaims)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
 **********[loop]********************************************************
 *    |                                                            |    *
-* produceClaims(attestingEnvironment)                             |    *
+* generateClaims(attestingEnvironment)                            |    *
 *    | => claimsDelta, eventLogsDelta                             |    *
 *    |                                                            |    *
 * collectClaims(claimSelection)                                   |    *
 *    | => collectedClaimsDelta                                    |    *
 *    |                                                            |    *
-* produceEvidence(handle, authSecIDs, collectedClaimsDelta)       |    *
-*    | => signedEvidence                                          |    *
+* evidenceGeneration(handle, authSecIDs, collectedClaims)         |    *
+*    | => evidence                                                |    *
 *    |                                                            |    *
 * signedEvidence, eventLogsDelta -------------------------------> |    *
 *    |                                                            |    *
@@ -413,7 +413,7 @@ Timestamps created from local clocks (absolute clocks using a global timescale, 
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.
 
-While periodically pushing Evidence to the Verifier, the Attester only needs to produce and send the differences of Evidence and Event Logs compared to the previous push. Differences are called "delta" in the sequence diagram above.
+While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Logs entries since the previous conveyance. This updates reflecting the differences are called "delta" in the sequence diagram above.
 
 Effectively, the Uni-Directional model allows for a series of Evidence to be pushed to multiple Verifiers simultaneously.
 Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.
@@ -425,7 +425,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 | Attester |                                                | Verifier |
 '----------'                                                '----------'
      |                                                            |
-  produceClaims(attestingEnvironment)                             |
+  generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
      | <----------- subscribe(handle, authSecIDs, claimSelection) |
@@ -434,8 +434,8 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
   collectClaims(claimSelection)                                   |
      | => collectedClaims                                         |
      |                                                            |
-  produceEvidence(handle, authSecIDs, collectedClaims)            |
-     | => signedEvidence                                          |
+  generateEvidence(handle, authSecIDs, collectedClaims)           |
+     | => evidence                                                |
      |                                                            |
      | signedEvidence, eventLogs -------------------------------> |
      |                                                            |
@@ -445,14 +445,14 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
      |                                                            |
 **********[loop]********************************************************
 *    |                                                            |    *
-* produceClaims(attestingEnvironment)                             |    *
+* generateClaims(attestingEnvironment)                            |    *
 *    | => claimsDelta, eventLogsDelta                             |    *
 *    |                                                            |    *
 * collectClaims(claimSelection)                                   |    *
 *    | => collectedClaimsDelta                                    |    *
 *    |                                                            |    *
-* produceEvidence(handle, authSecIDs, collectedClaimsDelta)       |    *
-*    | => signedEvidence                                          |    *
+* generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    *
+*    | => evidence                                                |    *
 *    |                                                            |    *
 * signedEvidence, eventLogsDelta -------------------------------> |    *
 *    |                                                            |    *
@@ -479,7 +479,7 @@ Depending on the use cases covered, there can be additional requirements. An exe
 
 ## Confidentiality
 
-Confidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.
+Confidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality protection. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.
 
 ## Mutual Authentication
 
