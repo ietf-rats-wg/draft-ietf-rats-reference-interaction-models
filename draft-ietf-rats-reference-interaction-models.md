@@ -106,8 +106,7 @@ While the conveyance of other Conceptual Messages is out-of-scope the methods de
 # Terminology
 
 This document uses the following set of terms, roles, and concepts as defined in {{-RATS}}:
-
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment
+Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
 
 A PKIX Certificate is an X.509v3 format certificate as specified by {{RFC5280}}.
 
@@ -165,15 +164,19 @@ In order to ensure an appropriate conveyance of Evidence via interaction models 
 
 Attester Identity:
 
+: A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity, used as proof of identity.
+
 : The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), or it MAY be part of a group signature, or it MAY be a randomised DAA credential {{DAA}}.
+: An Attester Identity MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
+
+: The Endorser issues the Attester with a randomized credential which is then used to anonymously confirm the validity of its evidence. The evidence is verified using the public key of the Endorser.
 
 Attestation Evidence Authenticity:
 
 : Attestation Evidence MUST be authentic.
 
-: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g. an PKIX certificate or trusted key material, or a randomised DAA credential {{DAA}}), or SHOULD include a correct and unambiguous and stable reference to an accessible identity document.
+: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g. an PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct and unambiguous and stable reference to an accessible identity document.
 
 Authentication Secret:
 
@@ -192,18 +195,9 @@ Evidence Protection:
 
 # Generic Information Elements
 
-This section defines the information elements that are vital to all kinds interaction models.
+This section defines information elements which are vital to all kinds of interaction models.
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
-
-Attester Identity ('attesterIdentity'):
-
-: *mandatory*
-
-: A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity - used as proof of identity.
-
-The Attester is issued with a credential by the Endorser that is randomised and then used to anonymously confirm the validity of their evidence.
-The evidence is verified using the Endorser’s public key.
 
 Authentication Secret IDs ('authSecID'):
 
@@ -227,7 +221,13 @@ Claims ('claims'):
 
 : Claims are assertions that represent characteristics of an Attester's Target Environment.
 
-: Claims are part Conceptual Message and are, for example, used to appraise the integrity of Attesters via a Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.
+: Claims are part of a Conceptual Message and are, for example, used to appraise the integrity of Attesters via Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.
+
+Event Logs ('eventLogs'):
+
+: *optional*
+
+: Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to support Claim reproducibility by providing information on how Claims originated.
 
 Reference Values ('refValues')
 
@@ -243,7 +243,15 @@ Claim Selection ('claimSelection'):
 
 : Claim Selections can act as filters that can specify the exact set of Claims to be included in Evidence. An Attester MAY decide whether or not to provide all Claims as requested via a Claim Selection.
 
-Evidence ('signedAttestationEvidence'):
+Collected Claims ('collectedClaims'):
+
+: *mandatory*
+
+: Collected Claims represent a (sub-)set of Claims created by an Attester.
+
+: Collected Claims are gathered based on the Claims selected in the Claim Selection. If a Verifier does not provide a Claim Selection, then all available Claims on the Attester are part of the Collected Claims.
+
+Evidence ('evidence'):
 
 : *mandatory*
 
@@ -294,7 +302,7 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
 ~~~~
 
-The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events of a system. Claims are produced by all attesting Environments of an Attester system.
+The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events in a system. Claims are produced by all attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, a list of Authentication Secret IDs, and a Claim Selection.
 
@@ -326,6 +334,9 @@ The final output of the Verifier are Attestation Results. Attestation Results co
 .----------.                       .--------------------.   .----------.
 | Attester |                       | Handle Distributor |   | Verifier |
 '----------'                       '--------------------'   '----------'
+     |                                       |                    |
+     |                                    generateHandle()        |
+     |                                       | => handle          |
      |                                       |                    |
      | <----------------------------- handle | handle ----------> |
      |                                       |                    |
