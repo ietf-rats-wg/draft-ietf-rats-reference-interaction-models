@@ -293,15 +293,15 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
      | <-- requestAttestation(handle, authSecIDs, claimSelection) |
      |                                                            |
-  collectClaims(claimSelection)                                   |
+  collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  evidenceGeneration(handle, authSecIDs, collectedClaims)         |
+  generateEvidence(handle, authSecIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | signedEvidence, eventLogs -------------------------------> |
+     | evidence, eventLogs -------------------------------------> |
      |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
+     |                appraiseEvidence(evidence, eventLogs, refValues)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
@@ -347,14 +347,14 @@ The final output of the Verifier are Attestation Results. Attestation Results co
   generateClaims(attestingEnvironment)       x                    |
      | => claims, eventLogs                                       |
      |                                                            |
-  collectClaims(claimSelection)                                   |
+  collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  evidenceGeneration(handle, authSecIDs, collectedClaims)         |
-     | => Evidence                                                |
+  generateEvidence(handle, authSecIDs, collectedClaims)           |
+     | => evidence                                                |
      |                                                            |
      | evidence, eventLogs -------------------------------------> |          |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
+     |                appraiseEvidence(evidence, eventLogs, refValues)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -363,15 +363,15 @@ The final output of the Verifier are Attestation Results. Attestation Results co
 * generateClaims(attestingEnvironment)                            |    *
 *    | => claimsDelta, eventLogsDelta                             |    *
 *    |                                                            |    *
-* collectClaims(claimSelection)                                   |    *
+* collectClaims(claimsDelta, claimSelection)                      |    *
 *    | => collectedClaimsDelta                                    |    *
 *    |                                                            |    *
-* evidenceGeneration(handle, authSecIDs, collectedClaims)         |    *
+* generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    *
 *    | => evidence                                                |    *
 *    |                                                            |    *
-* signedEvidence, eventLogsDelta -------------------------------> |    *
+*    | evidence, eventLogsDelta --------------------------------> |    *
 *    |                                                            |    *
-*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refValues) *
+*    |           appraiseEvidence(evidence, eventLogsDelta, refValues) *
 *    |                                       attestationResult <= |    *
 *    |                                                            |    *
 ************************************************************************
@@ -412,15 +412,15 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
      | <----------- subscribe(handle, authSecIDs, claimSelection) |
      | subscriptionResult --------------------------------------> |
      |                                                            |
-  collectClaims(claimSelection)                                   |
+  collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
   generateEvidence(handle, authSecIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | signedEvidence, eventLogs -------------------------------> |
+     | evidence, eventLogs -------------------------------------> |
      |                                                            |
-     |          appraiseEvidence(signedEvidence, eventLogs, refValues)
+     |                appraiseEvidence(evidence, eventLogs, refValues)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -429,15 +429,15 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 * generateClaims(attestingEnvironment)                            |    *
 *    | => claimsDelta, eventLogsDelta                             |    *
 *    |                                                            |    *
-* collectClaims(claimSelection)                                   |    *
+* collectClaims(claimsDelta, claimSelection)                      |    *
 *    | => collectedClaimsDelta                                    |    *
 *    |                                                            |    *
 * generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    *
 *    | => evidence                                                |    *
 *    |                                                            |    *
-* signedEvidence, eventLogsDelta -------------------------------> |    *
+*    | evidence, eventLogsDelta --------------------------------> |    *
 *    |                                                            |    *
-*    |     appraiseEvidence(signedEvidence, eventLogsDelta, refValues) *
+*    |           appraiseEvidence(evidence, eventLogsDelta, refValues) *
 *    |                                       attestationResult <= |    *
 *    |                                                            |    *
 ************************************************************************
