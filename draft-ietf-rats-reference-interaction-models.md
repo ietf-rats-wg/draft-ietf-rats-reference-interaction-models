@@ -67,7 +67,7 @@ informative:
       name: Liqun Chen
     seriesinfo:
       ACM: >
-        Proceedings of the 11rd ACM conference on Computer and Communications Security
+        Proceedings of the 11th ACM conference on Computer and Communications Security
       page: 132-145
     date: 2004
   turtles:
@@ -85,8 +85,7 @@ informative:
     - ins: TCG
       name: Trusted Computing Group
     seriesinfo:
-      Specification Version 2.0
-      Revision 13
+      Specification: Version 2.0 Revision 13
     date: 2017
   MQTT:
     title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
@@ -94,7 +93,7 @@ informative:
     - ins: OASIS
       name: Organization for the Advancement of Structured Information Standards
     seriesinfo:
-      MQTT Version 5.0
+      Specification: Version 5.0
     date: 2018
 
 --- abstract
@@ -480,8 +479,8 @@ Nor do Verifiers (need to) know consumers of their produced Attestation Results.
 With an increasing number of Attesters, Verifiers, and Relying Parties, the publish-subscribe pattern may reduce interdependencies and provide better scalability.
 
 There exist several publish-subscribe solutions.
-In the IoT landscape, for example, the Message Queuing Telemetry Transport (MQTT) protocol is widely used ({{-MQTT}}).
-For remote attestation, the TCG has published the Trusted Network Communications (TNC) specification, an open Network Admission Control (NAC) solution ({{-TNC}}).
+In the IoT landscape, for example, the Message Queuing Telemetry Transport (MQTT) protocol is widely used ({{MQTT}}).
+For remote attestation, the TCG has published the Trusted Network Communications (TNC) specification, an open Network Admission Control (NAC) solution ({{TNC}}).
 TNC is based on a Metadata Access Point (MAC) server which implements the publish-subscribe pattern.
 
 With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server).
