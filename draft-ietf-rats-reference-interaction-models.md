@@ -79,6 +79,23 @@ informative:
       The Faulkner Journal: 25.2
       DOI: "10.1353/fau.2010.0002"
     date: 2010
+  TNC:
+    title: TCG Trusted Network Communications TNC Architecture for Interoperability
+    author:
+    - ins: TCG
+      name: Trusted Computing Group
+    seriesinfo:
+      Specification Version 2.0
+      Revision 13
+    date: 2017
+  MQTT:
+    title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
+    author:
+    - ins: OASIS
+      name: Organization for the Advancement of Structured Information Standards
+    seriesinfo:
+      MQTT Version 5.0
+    date: 2018
 
 --- abstract
 
