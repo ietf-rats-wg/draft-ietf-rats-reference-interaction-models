@@ -162,26 +162,26 @@ The corresponding trustable statements are called Endorsements and originate fro
 
 In order to ensure an appropriate conveyance of Evidence via interaction models in general, the following set of prerequisites MUST be in place to support the implementation of interaction models:
 
+Authentication Secret:
+
+: An Authentication Secret MUST be available exclusively to an Attesting Environment of an Attester.
+
+: The Attester MUST protect Claims with that Authentication Secret, thereby proving the authenticity of the Claims included in Evidence.
+The Authentication Secret MUST be established before RATS can take place.
+
 Attester Identity:
 
-: A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity, used as proof of identity.
+: A statement about a distinguishable Attester made by an Endorser.
 
 : The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
+: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester. It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
 
 Attestation Evidence Authenticity:
 
 : Attestation Evidence MUST be authentic.
 
-: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g. an PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct and unambiguous and stable reference to an accessible identity document.
-
-Authentication Secret:
-
-: An Authentication Secret MUST be available exclusively to an Attester's Attesting Environment.
-
-: The Attester MUST protect Claims with that Authentication Secret, thereby proving the authenticity of the Claims included in Evidence.
-The Authentication Secret MUST be established before RATS can take place.
+: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.
 
 Evidence Freshness:
 
@@ -196,12 +196,6 @@ Evidence Protection:
 This section defines the information elements that are vital to all kinds interaction models.
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
-
-Attester Identity ('attesterIdentity'):
-
-: *mandatory*
-
-: A statement about a distinguishable Attester made by an Endorser without accompanying evidence about its validity - used as proof of identity.
 
 Authentication Secret IDs ('authSecIDs'):
 
@@ -326,9 +320,9 @@ For example, when performing a boot integrity evaluation, a Verifier may only be
 
 With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-While it is crucial that Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded. For further reference see section {{security-and-privacy-considerations}}.
+While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded. For further reference see section {{security-and-privacy-considerations}}.
 
-As soon as the Verifier receives the signed Evidence and Event Logs, it appraises the Evidence. For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
+As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence. For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
 Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
