@@ -347,7 +347,8 @@ The final output of the Verifier are Attestation Results. Attestation Results co
   generateEvidence(handle, authSecIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | evidence, eventLogs -------------------------------------> |          |                                                            |
+     | evidence, eventLogs -------------------------------------> |
+     |                                                            |
      |                appraiseEvidence(evidence, eventLogs, refValues)
      |                                       attestationResult <= |
      ~                                                            ~
@@ -371,8 +372,6 @@ The final output of the Verifier are Attestation Results. Attestation Results co
 ************************************************************************
      |                                                            |
 ~~~~
-
-TODO: Describe Deltas
 
 Uni-Directional Remote Attestation procedures can be initiated both by the Attester and by the Verifier.
 Initiation by the Attester can result in unsolicited pushes of Evidence to the Verifier.
