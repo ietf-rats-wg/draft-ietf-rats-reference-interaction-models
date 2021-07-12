@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 28 October 2021                                          W. Pan
+Expires: 13 January 2022                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                           26 April 2021
+                                                            12 July 2021
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 October 2021.
+   This Internet-Draft will expire on 13 January 2022.
 
 Copyright Notice
 
@@ -242,33 +242,34 @@ Table of Contents
    interaction models in general, the following set of prerequisites
    MUST be in place to support the implementation of interaction models:
 
+   Authentication Secret:  An Authentication Secret MUST be available
+      exclusively to an Attesting Environment of an Attester.
+
+      The Attester MUST protect Claims with that Authentication Secret,
+      thereby proving the authenticity of the Claims included in
+      Evidence.  The Authentication Secret MUST be established before
+      RATS can take place.
+
    Attester Identity:  A statement about a distinguishable Attester made
-      by an Endorser without accompanying evidence about its validity,
-      used as proof of identity.
+      by an Endorser.
 
       The provenance of Evidence with respect to a distinguishable
       Attesting Environment MUST be correct and unambiguous.
 
-      An Attester Identity MAY be a unique identity, MAY be included in
-      a zero-knowledge proof (ZKP), MAY be part of a group signature, or
-      it MAY be a randomized DAA credential [DAA].
+      An Attester Identity MAY be an Authentication Secret which is
+      available exclusively to one of the Attesting Environments of an
+      Attester.  It MAY be a unique identity, MAY be included in a zero-
+      knowledge proof (ZKP), MAY be part of a group signature, or it MAY
+      be a randomized DAA credential [DAA].
 
    Attestation Evidence Authenticity:  Attestation Evidence MUST be
       authentic.
 
       In order to provide proofs of authenticity, Attestation Evidence
       SHOULD be cryptographically associated with an identity document
-      (e.g. an PKIX certificate or trusted key material, or a randomized
-      DAA credential [DAA]), or SHOULD include a correct and unambiguous
+      (e.g., a PKIX certificate or trusted key material, or a randomized
+      DAA credential [DAA]), or SHOULD include a correct, unambiguous
       and stable reference to an accessible identity document.
-
-   Authentication Secret:  An Authentication Secret MUST be available
-      exclusively to an Attester's Attesting Environment.
-
-      The Attester MUST protect Claims with that Authentication Secret,
-      thereby proving the authenticity of the Claims included in
-      Evidence.  The Authentication Secret MUST be established before
-      RATS can take place.
 
    Evidence Freshness:  Evidence MUST include an indicator about its
       freshness that can be understood by a Verifier.  Analogously,
@@ -290,12 +291,6 @@ Table of Contents
    information elements are required by any kind of scalable remote
    attestation procedure using one or more of the interaction models
    provided.
-
-   Attester Identity ('attesterIdentity'):  _mandatory_
-
-      A statement about a distinguishable Attester made by an Endorser
-      without accompanying evidence about its validity - used as proof
-      of identity.
 
    Authentication Secret IDs ('authSecIDs'):  _mandatory_
 
@@ -479,13 +474,13 @@ Table of Contents
    Evidence as well as all accompanying Event Logs back to the Verifier.
 
    While it is crucial that Claims, the Handle, and the Attester
-   Identity information MUST be cryptographically bound to the signature
-   of Evidence, they MAY be presented obfuscated, encrypted, or
-   cryptographically blinded.  For further reference see section
-   Section 10.
+   Identity information (i.e., the Authentication Secret) MUST be
+   cryptographically bound to the signature of Evidence, they MAY be
+   presented obfuscated, encrypted, or cryptographically blinded.  For
+   further reference see section Section 10.
 
-   As soon as the Verifier receives the signed Evidence and Event Logs,
-   it appraises the Evidence.  For this purpose, it validates the
+   As soon as the Verifier receives the Evidence and the Event Logs, it
+   appraises the Evidence.  For this purpose, it validates the
    signature, the Attester Identity, and the Handle, and then appraises
    the Claims.  Appraisal procedures are application-specific and can be
    conducted via comparison of the Claims with corresponding Reference
@@ -819,24 +814,24 @@ Table of Contents
    [I-D.birkholz-rats-tuda]
               Fuchs, A., Birkholz, H., McDonald, I. E., and C. Bormann,
               "Time-Based Uni-Directional Attestation", Work in
-              Progress, Internet-Draft, draft-birkholz-rats-tuda-04, 13
-              January 2021, <https://datatracker.ietf.org/doc/html/
-              draft-birkholz-rats-tuda-04.txt>.
+              Progress, Internet-Draft, draft-birkholz-rats-tuda-05, 12
+              July 2021, <https://datatracker.ietf.org/doc/html/draft-
+              birkholz-rats-tuda-05>.
 
    [I-D.ietf-rats-architecture]
               Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote Attestation Procedures Architecture", Work
               in Progress, Internet-Draft, draft-ietf-rats-architecture-
               12, 23 April 2021, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-architecture-12.txt>.
+              draft-ietf-rats-architecture-12>.
 
    [I-D.ietf-rats-tpm-based-network-device-attest]
               Fedorkow, G., Voit, E., and J. Fitzgerald-McKay, "TPM-
               based Network Device Remote Integrity Verification", Work
               in Progress, Internet-Draft, draft-ietf-rats-tpm-based-
-              network-device-attest-06, 7 December 2020,
+              network-device-attest-07, 10 June 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              tpm-based-network-device-attest-06.txt>.
+              tpm-based-network-device-attest-07>.
 
    [turtles]  Rudnicki, R., "Turtles All the Way Down: Foundation,
               Edifice, and Ruin in Faulkner and McCarthy", The Faulkner
