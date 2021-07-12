@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-04-26T05:40:27.303388+00:00",
+  "timestamp": "2021-07-12T19:49:46.535946+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -333,15 +333,15 @@
       "id": "MDU6SXNzdWU4MDUyOTE0NDc=",
       "title": "Attester Identity",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attester Identity:  The provenance of Evidence with respect to a\r\n> distinguishable Attesting Environment MUST be correct and\r\n> unambiguous.\r\n\r\nThe Attester Identity is to identify which Attester the Evidence comes from. But if the Attester has multiple Attesting Environments, what should be the Attester Identity?",
       "createdAt": "2021-02-10T08:27:16Z",
-      "updatedAt": "2021-04-21T11:19:59Z",
-      "closedAt": null,
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "closedAt": "2021-07-12T19:49:19Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -395,15 +395,15 @@
       "id": "MDU6SXNzdWU4MDUyOTMzMTA=",
       "title": "Authentication Secret",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/12",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Authentication Secret:  An Authentication Secret MUST be available\r\n> exclusively to an Attester's Attesting Environment.\r\n> \r\n> The Attester MUST protect Claims with that Authentication Secret,\r\n> thereby proving the authenticity of the Claims included in\r\n> Evidence.  The Authentication Secret MUST be established before\r\n> RATS can take place.\r\n\r\nDoes the Authentication Secret represent the identity of the Attesting Environment?",
       "createdAt": "2021-02-10T08:30:16Z",
-      "updatedAt": "2021-04-25T20:29:43Z",
-      "closedAt": "2021-04-25T20:29:43Z",
+      "updatedAt": "2021-04-28T08:44:24Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "henkbirkholz",
@@ -418,6 +418,20 @@
           "body": "This comment also addresses #15.\r\n\r\nTL;DR: A TPM AIK is an Authentication Secret.\r\n\r\nIn the first draft, I named this element just \"Secret\". And yes, an AIK (Attestation Identity Key) in TPM 1.2 terminology, or AK (Attestation Key) in TPM 2.0 terminology, can be such a \"Secret\". The \"Secret ID\" basically is a key identifier/ID, e.g., the fingerprint/hash of such a key or the public part of the AK. The TPM FAPI uses key paths, such as \"HS/SRK/RSASignKey\". These are also valid key/secret identifiers/IDs. There is no official (unique) way of identifying keys, except for the FAPI key -- but: You need to use the FAPI for that purpose which is not available on embedded devices with no OS (because it needs at least a filesystem). In summary, it can be stated that \"Secret IDs\" are application-specific.\r\n\r\nNow, what is the matter with \"Authentication Secret\" and \"Authentication Secret ID\"?\r\nIn a later draft I replaced \"Secret (ID)\" with \"Authentication Secret (ID)\" intentionally, after talking to a crypto colleague. \"Authentication Secret\" is more specific than just \"secret\". And, in fact, its purpose is to provide authentication, i.e. evidence must provide the security property of \"authentication\", so that one knows it originates from a valid/specific source, e.g. TPM. This can also be some kind of group key (or DAA key).\r\n\r\n* \"Authentication Secret\": This element must be present in the attesting environment as it signs evidence (and a digital signature provides integrity and *authentication*).\r\n* \"Authentication Secret ID(s)\": This element must be mandatory as it identifies the \"Authentication Secret(s)\".",
           "createdAt": "2021-03-30T22:14:34Z",
           "updatedAt": "2021-03-30T22:14:34Z"
+        },
+        {
+          "author": "William-PanWei",
+          "authorAssociation": "NONE",
+          "body": "In our implementation, during the router booting up, the BIOS measures the BootLoader and records the measured hash value into the TPM, then the BootLoader measures the OS Kernel and records the measured hash value into the TPM as well.\r\n\r\nBased on our implementation, I can see some inconsistencies from two different aspects:\r\n* According to the definition of Layered Attestation, I think the Attesting Environments are BIOS and Bootloader.\r\n* But, according to the definition of \"Authentication Secret\", because the TPM's AIK/AK signs Evidence so the TPM's AIK/AK is the Authentication Secret, and because \"Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment\" so the TPM should be the Attesting Environment.\r\n\r\nSo, which one is correct?",
+          "createdAt": "2021-04-27T08:54:07Z",
+          "updatedAt": "2021-04-27T08:54:07Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "After talking with Wei I came to realize (again) that the use of a TPM creates this \"interesting\" setup of the two layers of Attesting Environments:\r\n\r\nBoth the first layer that is the BIOS and the second layer that is the Bootloader share an Attesting Envirment component that is the TPM. In acronyms, the BIOS 's claim collection capability and the TPM that is an RTS and RTR compose the first Attesting Environment. The Bootloader's claim collection capability in combination with the identical TPM compose the seceond Attesting Environment. As a result, I agree that the sentence \"Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment\" does not really allow for that scnerario and needs some help.",
+          "createdAt": "2021-04-28T08:42:51Z",
+          "updatedAt": "2021-04-28T08:44:24Z"
         }
       ]
     },
@@ -426,15 +440,15 @@
       "id": "MDU6SXNzdWU4MDUyOTQ5MTY=",
       "title": "What in an Attester is acutally identified and how?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attester Identity ('attesterIdentity'):  _mandatory_\r\n> A statement about a distinguishable Attester made by an Endorser\r\n> without accompanying evidence about its validity - used as proof\r\n> of identity.\r\n\r\nPrevious section says \u201cAttester Identity\u201d is about \u201ca distinguishable Attesting Environment\u201d, and here says it\u2019s about \u201ca distinguishable Attester\u201d.",
       "createdAt": "2021-02-10T08:32:58Z",
-      "updatedAt": "2021-04-25T21:23:49Z",
-      "closedAt": null,
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "closedAt": "2021-07-12T19:49:19Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -547,7 +561,7 @@
       "labels": [],
       "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Authentication Secret IDs ('authSecID'):  _mandatory_\r\n> In DAA, Authentication Secret IDs are represented by the Endorser\r\n> (DAA issuer)'s public key that MUST be used to create DAA\r\n> credentials for the corresponding Authentication Secrets used to\r\n> protect Evidence.\r\n> In DAA, an Authentication Secret ID does not identify a unique\r\n> Attesting Environment but associated with a group of Attesting\r\n> Environments.  This is because an Attesting Environment should not\r\n> be distinguishable and the DAA credential which represents the\r\n> Attesting Environment is randomised each time it used.\r\n\r\nIn my understanding, here says that the DAA credential identities the Attesting Environment. Compared with the description in the \u201cAttester Identity\u201d part, what does the DAA credential represent actually?",
       "createdAt": "2021-02-10T08:38:25Z",
-      "updatedAt": "2021-04-25T16:25:38Z",
+      "updatedAt": "2021-04-27T03:18:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -563,6 +577,13 @@
           "body": "Moved to draft-birkholz-rats-daa",
           "createdAt": "2021-04-25T16:25:38Z",
           "updatedAt": "2021-04-25T16:25:38Z"
+        },
+        {
+          "author": "William-PanWei",
+          "authorAssociation": "NONE",
+          "body": "> Because the Attester is bound with the Attesting Environment, the DAA credential represents the Attester's identity and also the Attesting Environment.\r\n\r\nThe DAA credential directly represents the Attesting Environment, and indirectly represents the Attester's identity because the Attester owns this Attesting Environment, do I understand correctly?\r\nBut the Attester may have several Attesting Environments, in such case will the Attester have several identities?",
+          "createdAt": "2021-04-27T03:18:22Z",
+          "updatedAt": "2021-04-27T03:18:22Z"
         }
       ]
     },
@@ -826,6 +847,24 @@
       "createdAt": "2021-04-25T21:15:30Z",
       "updatedAt": "2021-04-26T05:40:06Z",
       "closedAt": "2021-04-26T05:40:06Z",
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "MDU6SXNzdWU5MzkzMTQ5MDc=",
+      "title": "Publish-Subscripe Attestation may be nice to have",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/42",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "A publish-subscribe model for remote attestation would be nice to have.",
+      "createdAt": "2021-07-07T22:38:40Z",
+      "updatedAt": "2021-07-07T22:38:40Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -1397,6 +1436,76 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 41,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIzMDA3NDQ0",
+      "title": "Fixed Attester Identity.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/41",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #10.\r\nFixes #13.\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-26T06:35:41Z",
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "92cb3a429b31792c6243e24c745643e68f7e7ebf",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-attester-identity",
+      "headRefOid": "4baa5b11941e2510c8d60e426a52a79ee397af8a",
+      "closedAt": "2021-07-12T19:49:19Z",
+      "mergedAt": "2021-07-12T19:49:19Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "004b822538dad3ccc30f051adfd57d77abbd3100"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzA0NDgzMjcw",
+          "commit": {
+            "abbreviatedOid": "4baa5b1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "As discussed, polish can happen later",
+          "createdAt": "2021-07-12T19:49:09Z",
+          "updatedAt": "2021-07-12T19:49:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "MDExOlB1bGxSZXF1ZXN0Njg1NTU2OTY2",
+      "title": "Introduced publish-subscribe model.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/43",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "Resolves #42.\r\n* Introduced publish-subscribe model.\r\n* Removed \"delta\" TODO as there was nothing to be fixed.\r\n* Fixed line break in uni-directional diagram.\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-07-07T22:40:54Z",
+      "updatedAt": "2021-07-07T22:49:41Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "92cb3a429b31792c6243e24c745643e68f7e7ebf",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "add-pubsub-attestation-model",
+      "headRefOid": "e05ce9cdfc1dbdcde5d2e01010e5cd16d7310aca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
