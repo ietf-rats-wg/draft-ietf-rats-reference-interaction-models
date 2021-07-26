@@ -67,7 +67,7 @@ informative:
       name: Liqun Chen
     seriesinfo:
       ACM: >
-        Proceedings of the 11rd ACM conference on Computer and Communications Security
+        Proceedings of the 11th ACM conference on Computer and Communications Security
       page: 132-145
     date: 2004
   turtles:
@@ -387,7 +387,7 @@ Timestamps created from local clocks (absolute clocks using a global timescale, 
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.
 
-While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Logs entries since the previous conveyance. This updates reflecting the differences are called "delta" in the sequence diagram above.
+While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Logs entries since the previous conveyance. These updates reflecting the differences are called "delta" in the sequence diagram above.
 
 Effectively, the Uni-Directional model allows for a series of Evidence to be pushed to multiple Verifiers simultaneously.
 Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.
