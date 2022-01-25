@@ -327,8 +327,7 @@ Appraisal procedures are application-specific and can be conducted via compariso
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ### Models and example sequences of Challenge/Response Remote Attestation
-According to RATS Architecture Document{{-RATS}}, two reference models for Challenge/Response Attestation has been proposed. This sections highlights the 
-information flow bewteen the Attestor, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.
+According to RATS Architecture Document, two reference models for Challenge/Response Attestation has been proposed. This sections highlights the information flow bewteen the Attestor, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.
 
 1. Passport Model
 
@@ -348,24 +347,24 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      |                                                            |                                      |
   collectClaims(claims, claimSelection)                           |                                      |
      | => collectedClaims                                         |                                      |
-     |                                                            |                                      | 
+     |                                                            |                                      |
   generateEvidence(handle, authSecIDs, collectedClaims)           |                                      |
      | => evidence                                                |                                      |
      |                                                            |                                      |
      | evidence, eventLogs -------------------------------------> |                                      |
-     |                                                            |                                      |  
-     |                appraiseEvidence(evidence, eventLogs, refValues)                                   | 
      |                                                            |                                      |
-     |   attestationResults <-----------------------------------  |                                      | 
-     |                                                            |                                      | 
-     | attestationResults(evidence, results) ----------------------------------------------------------> |      |                                                            |                                      | 
+     |                appraiseEvidence(evidence, eventLogs, refValues)                                   |
+     |                                                            |                                      |
+     |   attestationResults <-----------------------------------  |                                      |
+     |                                                            |                                      |
+     | attestationResults(evidence, results) ----------------------------------------------------------> |      |                                                            |                                      |
      |                                                            |                                      |      |                                                            |                                      | appraiseResults()
-     |                                                            |                                      | 
+     |                                                            |                                      |
 ~~~~
 
 2. BackGround Check Model
 
-The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attestor conveys Evidence to the Relying Party. Upon receiving evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, compares the received Evidence to its appraisal policy for evidence and returns an Attestation Result to the Relying Party. The Relying Party then compares the 
+The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attestor conveys Evidence to the Relying Party. Upon receiving evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, compares the received Evidence to its appraisal policy for evidence and returns an Attestation Result to the Relying Party. The Relying Party then compares the
 Attestation Result against its own appraisal policy.
 
 ~~~~
@@ -380,20 +379,20 @@ Attestation Result against its own appraisal policy.
      |                                                            |                                      |
   collectClaims(claims, claimSelection)                           |                                      |
      | => collectedClaims                                         |                                      |
-     |                                                            |                                      | 
+     |                                                            |                                      |
   generateEvidence(handle, authSecIDs, collectedClaims)           |                                      |
      | => evidence                                                |                                      |
      |                                                            |                                      |
      | evidence, eventLogs -------------------------------------> |                                      |
-     |                                                            |                                      |  
+     |                                                            |                                      |
      |                                                            | handle, evidence, eventLogs -------> |
      |                                                            |                                      |appraiseEvidence()
-     |                                                            |                                      | 
-     |                                                            |  attestationResults <--------------- | 
-     |                                                            |   (evidence, results)                | 
-     |                                                            |                                      | 
-     |                       appraiseResults(evidence, results)   |                                      | 
-     |                                                            |                                      | 
+     |                                                            |                                      |
+     |                                                            |  attestationResults <--------------- |
+     |                                                            |   (evidence, results)                |
+     |                                                            |                                      |
+     |                       appraiseResults(evidence, results)   |                                      |
+     |                                                            |                                      |
 ~~~~
 
 ## Uni-Directional Remote Attestation
