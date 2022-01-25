@@ -358,18 +358,14 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      |                                                            |                                      |
      |   attestationResults <-----------------------------------  |                                      | 
      |                                                            |                                      | 
-     | attestationResults(evidence, results) ----------------------------------------------------------> | 
-     |                                                            |                                      | 
-     |                                                            |                                      | appraiseResults(evidence, results)
-     |                                                            |                                      | 
+     | attestationResults(evidence, results) ----------------------------------------------------------> |      |                                                            |                                      | 
+     |                                                            |                                      |      |                                                            |                                      | appraiseResults()
      |                                                            |                                      | 
 ~~~~
 
 2. BackGround Check Model
-The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the
-attestation sequence is initiated by a Relying Party. The Attestor conveys Evidence to the Relying Party. Upon receiving evidence the Relying Party initiates a 
-session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, compares the received Evidence to 
-its appraisal policy for evidence and returns an Attestation Result to the Relying Party. The Relying Party then compares the 
+
+The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attestor conveys Evidence to the Relying Party. Upon receiving evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, compares the received Evidence to its appraisal policy for evidence and returns an Attestation Result to the Relying Party. The Relying Party then compares the 
 Attestation Result against its own appraisal policy.
 
 ~~~~
@@ -391,7 +387,7 @@ Attestation Result against its own appraisal policy.
      | evidence, eventLogs -------------------------------------> |                                      |
      |                                                            |                                      |  
      |                                                            | handle, evidence, eventLogs -------> |
-     |                                                            |                                      |appraiseEvidence(evidence, eventLogs, refValues)
+     |                                                            |                                      |appraiseEvidence()
      |                                                            |                                      | 
      |                                                            |  attestationResults <--------------- | 
      |                                                            |   (evidence, results)                | 
