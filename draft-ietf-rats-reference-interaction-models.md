@@ -327,7 +327,7 @@ Appraisal procedures are application-specific and can be conducted via compariso
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ### Models and example sequences of Challenge/Response Remote Attestation
-According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This sections highlights the information flows bewteen the Attestor, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.
+According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows bewteen the Attester, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.
 
 1. Passport Model
 
@@ -364,7 +364,7 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
 
 2. BackGround Check Model
 
-The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attestor conveys Evidence to the Relying Party, which does not process its payload, but realys the message and optionally check its signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, appraises the received Evidence according to its appraisal policy for evidence and returns a coresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.
+The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but realys the message and optionally check its signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.
 
 ~~~~
 .----------.                                                 .----------.                            .----------.
