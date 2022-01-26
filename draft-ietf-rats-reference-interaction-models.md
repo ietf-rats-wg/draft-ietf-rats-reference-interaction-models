@@ -333,7 +333,7 @@ According to the RATS Architecture, two reference models for Challenge/Response 
 
 The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
 two step procedure. In the first step, an Attester conveys Evidence to a Verifier which compares the Evidence against its appraisal policy.  The Verifier
-then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the attester.
+then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.
 
 ~~~~
 .----------.                                                .----------.                            .----------.
