@@ -327,71 +327,85 @@ Appraisal procedures are application-specific and can be conducted via compariso
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ### Models and example sequences of Challenge/Response Remote Attestation
-According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows bewteen the Attester, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.
+According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows bewteen the Attester, Verifier, and Relying Party undergoing Remote Attestation Procedure, using these models.
 
 1. Passport Model
 
 The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
-two step procedure. In the first step, an Attester conveys Evidence to a Verifier which compares the Evidence against its appraisal policy.  The Verifier
+two-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier
 then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.
 
 ~~~~
-.----------.                                                .----------.                            .----------.
-| Attester |                                                | Verifier |                            | R. P.    |
-'----------'                                                '----------'                            '----------'
-     |                                                            |                                      |
-  generateClaims(attestingEnvironment)                            |                                      |
-     | => claims, eventLogs                                       |                                      |
-     |                                                            |                                      |
-     | <-- requestAttestation(handle, authSecIDs, claimSelection) |                                      |
-     |                                                            |                                      |
-  collectClaims(claims, claimSelection)                           |                                      |
-     | => collectedClaims                                         |                                      |
-     |                                                            |                                      |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |                                      |
-     | => evidence                                                |                                      |
-     |                                                            |                                      |
-     | evidence, eventLogs -------------------------------------> |                                      |
-     |                                                            |                                      |
-     |                appraiseEvidence(evidence, eventLogs, refValues)                                   |
-     |                                                            |                                      |
-     |   attestationResults <-----------------------------------  |                                      |
-     |                                                            |                                      |
-     | attestationResults(evidence, results) ----------------------------------------------------------> |      |                                                            |                                      |
-     |                                                            |                                      |      |                                                            |                                      | appraiseResult()
-     |                                                            |                                      |
+.----------.                          .----------.    .---------------.
+| Attester |                          | Verifier |    | Relying Party |
+'----------'                          '----------'    '---------------'
+     |                                      |                 |
+  generateClaims(attestingEnvironment)      |                 |
+     | => claims, eventLogs                 |                 |
+     |                                      |                 |
+     | <------- requestAttestation(handle,  |                 |
+     |         authSecIDs, claimSelection)  |                 |
+     |                                      |                 |
+  collectClaims(claims, claimSelection)     |                 |
+     | => collectedClaims                   |                 |
+     |                                      |                 |
+  generateEvidence(handle,                  |                 |
+     authSecIDs, collectedClaims)           |                 |
+     | => evidence                          |                 |
+     |                                      |                 |
+     | evidence, eventLogs ---------------> |                 |
+     |                                      |                 |
+     |                appraiseEvidence(evidence,              |
+     |                   eventLogs, refValues)                |
+     |                 attestationResult <= |                 |
+     |                                      |                 |
+     | <----------------- attestationResult |                 |
+     |                                      |                 |
+     | evidence, attestationResult -------------------------> |
+     |                                      |                 |
+     |                                      |  appraiseResult(evidence,
+     |                                      |      attestationResult)
+     |                                      |                 |
 ~~~~
 
 2. BackGround Check Model
 
-The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but realys the message and optionally check its signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.
+The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but relays the message and optionally checks its signature against a policed trust anchor store. Upon receiving the Evidence, the Relying Party initiates a session with the Verifier. Once the session is established, it forwards the received Evidence to the Verifier. The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.
 
 ~~~~
-.----------.                                                 .----------.                            .----------.
-| Attester |                                                 | R. P.    |                            | Verifier |
-'----------'                                                 '----------'                            '----------'
-     |                                                            |                                      |
-  generateClaims(attestingEnvironment)                            |                                      |
-     | => claims, eventLogs                                       |                                      |
-     |                                                            |                                      |
-     | <-- requestAttestation(handle, authSecIDs, claimSelection) |                                      |
-     |                                                            |                                      |
-  collectClaims(claims, claimSelection)                           |                                      |
-     | => collectedClaims                                         |                                      |
-     |                                                            |                                      |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |                                      |
-     | => evidence                                                |                                      |
-     |                                                            |                                      |
-     | evidence, eventLogs -------------------------------------> |                                      |
-     |                                                            |                                      |
-     |                                                            | handle, evidence, eventLogs -------> |
-     |                                                            |                                      |appraiseEvidenc()
-     |                                                            |                                      |
-     |                                                            |  attestationResults <--------------- |
-     |                                                            |   (evidence, results)                |
-     |                                                            |                                      |
-     |                       appraiseResults(evidence, results)   |                                      |
-     |                                                            |                                      |
+.----------.                     .---------------.         .----------.
+| Attester |                     | Relying Party |         | Verifier |
+'----------'                     '---------------'         '----------'
+     |                                   |                       |
+  generateClaims(attestingEnvironment)   |                       |
+     | => claims, eventLogs              |                       |
+     |                                   |                       |
+     | <----- requestAttestation(handle, |                       |
+     |       authSecIDs, claimSelection) |                       |
+     |                                   |                       |
+  collectClaims(claims,                  |                       |
+     claimSelection)                     |                       |
+     | => collectedClaims                |                       |
+     |                                   |                       |
+  generateEvidence(handle,               |                       |
+     authSecIDs, collectedClaims)        |                       |
+     | => evidence                       |                       |
+     |                                   |                       |
+     | evidence, eventLogs ------------> |                       |
+     |                                   |                       |
+     |                                   | (handle, evidence,    |
+     |                                   |  eventLogs) --------> |
+     |                                   |                       |
+     |                                   |   appraiseEvidence(evidence,
+     |                                   |        eventLogs, refValues)
+     |                                   |  attestationResult <= |
+     |                                   |                       |
+     |                                   | <--------- (evidence, |
+     |                                   |    attestationResult) |
+     |                                   |                       |
+     |               appraiseResult(evidence,                    |
+     |                    attestationResult)                     |
+     |                                   |                       |
 ~~~~
 
 ## Uni-Directional Remote Attestation
