@@ -327,7 +327,7 @@ Appraisal procedures are application-specific and can be conducted via compariso
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
 ### Models and example sequences of Challenge/Response Remote Attestation
-According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows bewteen the Attester, Verifier, and Relying Party undergoing Remote Attestation Procedure, using these models.
+According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows between the Attester, Verifier, and Relying Party undergoing Remote Attestation Procedure, using these models.
 
 1. Passport Model
 
