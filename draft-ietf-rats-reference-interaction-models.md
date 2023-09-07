@@ -79,6 +79,22 @@ informative:
       The Faulkner Journal: 25.2
       DOI: "10.1353/fau.2010.0002"
     date: 2010
+  TNC:
+    title: TCG Trusted Network Communications TNC Architecture for Interoperability
+    author:
+    - ins: TCG
+      name: Trusted Computing Group
+    seriesinfo:
+      Specification: Version 2.0 Revision 13
+    date: 2017
+  MQTT:
+    title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
+    author:
+    - ins: OASIS
+      name: Organization for the Advancement of Structured Information Standards
+    seriesinfo:
+      Specification: Version 5.0
+    date: 2018
 
 --- abstract
 
@@ -175,7 +191,8 @@ Attester Identity:
 
 : The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester. It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
+: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester.
+It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
 
 Attestation Evidence Authenticity:
 
@@ -203,7 +220,8 @@ Authentication Secret IDs ('authSecIDs'):
 
 : A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.
 
-: Each distinguishable Attesting Environment has access to a protected capability that provides an Authentication Secret associated with that Attesting Environment. Consequently, an Authentication Secret ID can also identify an Attesting Environment.
+: Each distinguishable Attesting Environment has access to a protected capability that provides an Authentication Secret associated with that Attesting Environment.
+Consequently, an Authentication Secret ID can also identify an Attesting Environment.
 
 Handle ('handle'):
 
@@ -320,9 +338,11 @@ For example, when performing a boot integrity evaluation, a Verifier may only be
 
 With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded. For further reference see section {{security-and-privacy-considerations}}.
+While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
+For further reference see section {{security-and-privacy-considerations}}.
 
-As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence. For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
+As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence.
+For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
 Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
 The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
 
@@ -333,7 +353,7 @@ According to the RATS Architecture, two reference models for Challenge/Response 
 
 The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
 two-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier
-then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.
+then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.
 
 ~~~~
 .----------.                          .----------.    .---------------.
@@ -469,7 +489,8 @@ Timestamps created from local clocks (absolute clocks using a global timescale, 
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.
 
-While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Logs entries since the previous conveyance. These updates reflecting the differences are called "delta" in the sequence diagram above.
+While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance.
+These updates reflecting the differences are called "delta" in the sequence diagram above.
 
 Effectively, the Uni-Directional model allows for a series of Evidence to be pushed to multiple Verifiers simultaneously.
 Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.
@@ -527,6 +548,247 @@ While a Handle Distributor is not required in this model, it is also limited to 
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
 The Streaming model uses the same information elements as the Challenge/Response and the Uni-Directional model.
 Methods to detect excessive time drift that would mandate a refreshed Handle to be conveyed via another subscribe operation are out-of-scope of this document.
+
+
+## Publish-Subscribe Remote Attestation
+
+The publish-subscribe messaging pattern is widely used for communication in different areas.
+The strengths of the communication pattern include loose coupling and scalability.
+Unlike the Streaming Remote Attestation interaction model, Attesters do not (need to) know the corresponding Verifiers of attestation Evidence.
+Nor do Verifiers (need to) know consumers of their produced Attestation Results.
+With an increasing number of Attesters, Verifiers, and Relying Parties, the publish-subscribe pattern may reduce interdependencies and provide better scalability.
+
+There exist several publish-subscribe solutions.
+In the IoT landscape, for example, the Message Queuing Telemetry Transport (MQTT) protocol is widely used ({{MQTT}}).
+For remote attestation, the TCG has published the Trusted Network Communications (TNC) specification, an open Network Admission Control (NAC) solution ({{TNC}}).
+TNC is based on a Metadata Access Point (MAC) server which implements the publish-subscribe pattern.
+
+With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server).
+Clients may *publish* data in the form of a *message* under a certain *topic*.
+*Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
+Depending on the particular  publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
+
+In the following sections, the interaction models *Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe* are described.
+There are different phases that both models go through:
+
+1. Handle Generation
+2. Attestation
+3. Verification
+4. Attestation Result Consumption
+
+The models only differ in the handle generation phase. Attestation, verification, and attestation result consumption are identical from a protocol point of view.
+
+
+### Connection Establishment and Client ID
+
+~~~~
+.--------.                                             .---------------.
+| Client |                                             | PubSub Server |
+'--------'                                             '---------------'
+      |                                                        |
+      | connect(id=C?) --------------------------------------> |
+      |                                                        |
+      |                                                 addClient(id=C?)
+      |                                                        |
+      | <----------------------------------------- conAck(id?) |
+      |                                                        |
+      ~                                                        ~
+~~~~
+
+Depending on the PubSub server, clients connecting to it must provide their own (unique) client ID or are assigned a (unique) client ID by the PubSub server.
+In the diagram above, the optional client ID arguments are marked with a trailing "?".
+After the PubSub server receives a connection request, it adds the client to its internal management facilities with its (unique) ID.
+In addition, clients may need to authenticate to the server and/or vice versa in a separate step.
+All of this is beyond the scope of this document.
+
+For reasons of readability, the connection step is omitted in the following diagrams as well as acknowledgement steps for subscribing and publishing.
+
+
+### Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe
+
+~~~~
+
+.----------.                  .---------------.             .----------.
+| Attester |                  | PubSub Server |             | Verifier |
+'----------'                  '---------------'             '----------'
+     |              |                    |                        |
+=======================[HANDLE GENERATION PHASE]========================
+     |              |                    |                        |
+     | sub(topic=AttReq) -----------> |                           |
+     |                                | <------ pub(topic=AttReq, |
+     |                                |             handle)       |
+     | <--------- notify(topic=AttReq |                           |
+     |                   handle)      |                           |
+     ~                                ~                           ~
+~~~~
+
+The Challenge/Response Remote Attestation over Publish-Subscribe model uses the same information elements as the Challenge/Response Remote Attestation model.
+Handles are provided by a Verifier on a per-request basis.
+In the sequence diagram above, an Attester subscribes to the "AttReq" (= Attestation Request) topic on the PubSub server.
+The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server forwards to the Attester by notifying it.
+
+### Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe
+
+~~~~
+.----------. .-------------.     .---------------.          .----------.
+| Attester | |   Handle    |     | PubSub Server |          | Verifier |
+'----------' | Distributor |     '---------------'          '----------'
+     |       '-------------'             |                        |
+     |              |                    |                        |
+=======================[HANDLE GENERATION PHASE]========================
+     |              |                    |                        |
+     |              .                    |                        |
+     | sub(topic=handle) --------------> | <--- sub(topic=Handle) |
+     |              .                    |                        |
+     |              |                    |                        |
+     |           generateHandle()        |                        |
+     |              | => handle          |                        |
+     |              |                    |                        |
+     |              | pub(topic=Handle,  |                        |
+     |              |     handle) -----> |                        |
+     |              x                    |                        |
+     |                                   |                        |
+     | <------------ notify(topic=Handle | notify(topic=Handle,   |
+     |                      handle)      |        handle) ------> |
+     |                                   |                        |
+     ~                                   ~                        ~
+~~~~
+
+The Uni-Directional Remote Attestation over Publish-Subscribe model uses the same information elements as the Uni-Directional Remote Attestation model.
+Accordingly, Handles are created by a 3rd party, the Handle Distributor.
+In the sequence diagram above, both an Attester and a Verifier subscribe to the "Handle" topic on the PubSub server.
+When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards the Handle to them (handle generation phase).
+
+### Attestation and Verification
+
+~~~~
+     ~                                   ~                        ~
+     |                                   |                        |
+.----------.                     .---------------.          .----------.
+| Attester |                     | PubSub Server |          | Verifier |
+'----------'                     '---------------'          '----------'
+     |                                   |                        |
+* ========================[ATTESTATION PHASE]========================= *
+*    |                                   |                        |    *
+*    |                                   | <---- sub(topic=AttEv) |    *
+*    |                                   |                        |    *
+**********[loop]********************************************************
+*    |                                   |                        |    *
+* generateClaims(attestingEnvironment)   |                        |    *
+*    | => claims, eventLogs              |                        |    *
+*    |                                   |                        |    *
+*  collectClaims(claims, claimSelection) |                        |    *
+*    | => collectedClaims                |                        |    *
+*    |                                   |                        |    *
+* generateEvidence(handle, authSecIDs,   |                        |    *
+*    |             collectedClaims)      |                        |    *
+*    | => evidence                       |                        |    *
+*    |                                   |                        |    *
+*    | pub(topic=AttEv,                  |                        |    *
+*    |     evidence, eventLogs) -------> |                        |    *
+*    |                                   | notify(topic=AttEv,    |    *
+*    |                                   |        evidence,       |    *
+*    |                                   |        eventLogs) ---> |    *
+*    |                                   |                        |    *
+* ========================[VERIFICATION PHASE]======================== *
+*    |                                   |                        |    *
+*    |                                   |           appraiseEvidence( *
+*    |                                   |                  evidence,  *
+*    |                                   |                  eventLogs, *
+*    |                                   |                  refValues) *
+*    |                                   |   attestationResult <= |    *
+*    |                                   |                        |    *
+************************************************************************
+     |                                   |                        |
+     ~                                   ~                        ~
+~~~~
+
+Exactly as in the Challenge/Response and Uni-Directional models, there is an attestation-verification loop in which the Attester generates Evidence and the Verifier appraises it.
+In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
+The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
+Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
+Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.
+
+### Attestation Result Consumption
+
+~~~~
+     ~          ~                        ~                        ~
+     |          |                        |                        |
+.----------. .---------------.   .---------------.          .----------.
+| Attester | | Relying Party |   | PubSub Server |          | Verifier |
+'----------' '---------------'   '---------------'          '----------'
+     |          |                        |                        |
+=================[ATTESTATION RESULT CONSUMPTION PHASE]=================
+     |          |                        |                        |
+     |          | sub(topic=AttRes)      |                        |
+     |          |     handle) ---------> |                        |
+     |          |                        |                        |
+**********[loop]********************************************************
+*    |          |                        |                        |    *
+*    |          |                        | <-------- pub(topic=AttRes, *
+*    |          |                        |          attestationResult) *
+*    |          |    notify(topic=AttRes |                        |    *
+*    |          | <-- attestationResult) |                        |    *
+*    |          |                        |                        |    *
+************************************************************************
+     |          |                        |                        |
+     ~          ~                        ~                        ~
+~~~~
+
+Attestation Result consumption by Relying Parties is the same for both publish-subscribe models, Challenge/Response Remote Attestation over Publish-Subscribe and Uni-Directional Remote Attestation over Publish-Subscribe.
+Relying Parties subscribe to topic "AttRes" (= Attestation Result) on the PubSub server.
+The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic "AttRes".
+
+### Publish/Subscribe Topics
+
+Many publish-subscribe models provide hierarchical organization of topics.
+This way, subscribers can subscribe to either all attestations (topic "AttRes"), or, for example, to topic "AttRes/DbServers/Germany" to receive only attestations from database servers in Germany.
+Further, it may be required to distinguish between uni-directional and challenge-response attestation evidence.
+For this purpose a wildcard subscription may be useful, for example "AttRes/DbServers/Germany/\*\*/uni" (to receive only uni-directional attestation evidence) or "AttRes/DbServers/Germany/\*\*/cr" (to receive only challenge-response attestation evidence).
+
+### Security Considerations
+
+Attestation Evidence is digitally signed and, thus, authenticated and integral.
+A man-in-the-middle attack that tampers with the Evidence undetected is practically infeasible.
+The PubSub server is used for (temporarily) storing and forwarding attestation Evidence to interested clients, i. e. Verifiers.
+Further, Attestation Results published on the SubSub server by Verifiers are digitally signed, too, and cannot be altered undetected.
+
+### Reference Implementation(s)
+
+* On the practical Application of a Trusted Information Agent -- Michael Eckel. *Master's Thesis*. (September 30, 2014) -- <https://sit.sit.fraunhofer.de/smv/publications/download/masters-thesis-michael-eckel-2014.pdf>\
+  Realize TPM-based remote attestation on the TNC publish-subscribe server called Metadata Access Point (MAP).
+  Uses TPM 1.2, Java, jTSS Wrapper, and TCG Trusted Network Communications (TNC) on Android platforms.
+
+* TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Additional Application-Specific Requirements
