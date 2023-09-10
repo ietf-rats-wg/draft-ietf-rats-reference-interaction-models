@@ -77,7 +77,7 @@ informative:
       name: Robert Rudnicki
     seriesinfo:
       The Faulkner Journal: 25.2
-      DOI: "10.1353/fau.2010.0002"
+      DOI: 10.1353/fau.2010.0002
     date: 2010
   TNC:
     title: TCG Trusted Network Communications TNC Architecture for Interoperability
@@ -419,14 +419,14 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      |                                      |                 |
      | evidence, attestationResult -------------------------->|
      |                                      |                 |
-=================[ATTESTATION RESULT CONSUMPTION PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]=================
      |                                      |                 |
-     |                                      |   appraiseResult(evidence,
-     |                                      |      attestationResult)
+     |                                      |    appraiseResult(policy,
+     |                                      |       attestationResult)
      |                                      |                 |
 ~~~~
 
-#### Background Check Model
+#### Background-Check Model
 
 The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks.
 In this model, the attestation sequence is initiated by a Relying Party.
@@ -471,9 +471,9 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |<---------- (evidence, |
      |                                   |    attestationResult) |
      |                                   |                       |
-=================[ATTESTATION RESULT CONSUMPTION PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]=================
      |                                   |                       |
-     |                       appraiseResult(evidence,            |
+     |                        appraiseResult(policy,             |
      |                          attestationResult)               |
      |                                   |                       |
 ~~~~
@@ -666,10 +666,10 @@ There are different phases that both models go through:
 1. Handle Generation
 2. Attestation
 3. Verification
-4. Attestation Result Consumption
+4. Attestation Result Processing/Consumption
 
 The models only differ in the handle generation phase.
-Attestation, verification, and attestation result consumption are identical from a protocol point of view.
+Attestation, verification, and attestation result processing/consumption are identical from a protocol point of view.
 
 #### Connection Establishment and Client ID
 
@@ -795,7 +795,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |                                   |                  refValues) |
 |    |                                   |   attestationResult <= |    |
 |    |                                   |                        |    |
-| ===============[ATTESTATION RESULT CONSUMPTION PHASE]=============== |
+| ===============[ATTESTATION RESULT PROCESSING PHASE]=============== |
 |    |                                   |                        |    |
 |    |                                   |<--------- pub(topic=AttRes, |
 |    |                                   |          attestationResult) |
@@ -811,7 +811,7 @@ The PubSub server notifies Verifiers, accordingly, by forwarding the attestation
 Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
 Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.
 
-#### Attestation Result Consumption
+#### Attestation Result Processing/Consumption
 
 ~~~~ aasvg
      ~          ~                        ~                        ~
@@ -820,7 +820,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
 | Attester | | Relying Party |   | PubSub Server |          | Verifier |
 '----+-----' '--+------------'   '-------+-------'          '-----+----'
      |          |                        |                        |
-=================[ATTESTATION RESULT CONSUMPTION PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]=================
      |          |                        |                        |
      |     sub(topic=AttRes)             |                        |
      |         handle) ----------------->|                        |
@@ -838,7 +838,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      ~          ~                        ~                        ~
 ~~~~
 
-Attestation Result consumption by Relying Parties is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
+Attestation Result processing/consumption by Relying Parties is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
 
@@ -906,7 +906,7 @@ The open-source implementation is named "CHAllenge-Response based Remote Attesta
 
 ## Implementation URL
 
-The open-source implementation project resource can be located via: <https://github.com/Fraunhofer-SIT/charra>
+The open-source implementation project resource can be located via: <https://github.com/fraunhofer-sit/charra>
 
 ## Maturity
 
