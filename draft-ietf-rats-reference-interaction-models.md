@@ -760,7 +760,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 ~~~~ aasvg
      ~                                   ~                        ~
      |                                   |                        |
-.----------.                     .---------------.          .----------.
+.----+-----.                     .-------+-------.          .-----+----.
 | Attester |                     | PubSub Server |          | Verifier |
 '----+-----'                     '-------+-------'          '-----+----'
      |                                   |                        |
