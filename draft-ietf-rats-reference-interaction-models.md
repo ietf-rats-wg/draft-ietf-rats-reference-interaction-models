@@ -397,8 +397,8 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
   generateClaims(attestingEnvironment)      |                 |
      | => claims, eventLogs                 |                 |
      |                                      |                 |
-     |<-------- requestAttestation(handle,  |                 |
-     |         authSecIDs, claimSelection)  |                 |
+     |<--------------------- requestAttestation(handle,       |
+     |                           authSecIDs, claimSelection)  |
      |                                      |                 |
   collectClaims(claims, claimSelection)     |                 |
      | => collectedClaims                   |                 |
@@ -407,17 +407,17 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      authSecIDs, collectedClaims)           |                 |
      | => evidence                          |                 |
      |                                      |                 |
-     | evidence, eventLogs ---------------->|                 |
+     | {evidence, eventLogs} -------------->|                 |
      |                                      |                 |
 ==========================[VERIFICATION PHASE]==========================
      |                                      |                 |
-     |                appraiseEvidence(evidence,              |
-     |                   eventLogs, refValues)                |
+     |                         appraiseEvidence(evidence,     |
+     |                             eventLogs, refValues)      |
      |                 attestationResult <= |                 |
      |                                      |                 |
      |<------------------ attestationResult |                 |
      |                                      |                 |
-     | evidence, attestationResult -------------------------->|
+     | {evidence, attestationResult} ------------------------>|
      |                                      |                 |
 =================[ATTESTATION RESULT PROCESSING PHASE]==================
      |                                      |                 |
@@ -443,11 +443,11 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |                       |
 ==========================[ATTESTATION PHASE]===========================
      |                                   |                       |
-  generateClaims(attestingEnvironment)   |                       |
-     | => claims, eventLogs              |                       |
+     |<--------------------- requestAttestation(handle,          |
+     |                           authSecIDs, claimSelection)     |
      |                                   |                       |
-     |<------ requestAttestation(handle, |                       |
-     |       authSecIDs, claimSelection) |                       |
+  generateClaims(attestingEnvironment)   |                       |
+     | => {claims, eventLogs}            |                       |
      |                                   |                       |
   collectClaims(claims,                  |                       |
      claimSelection)                     |                       |
@@ -457,19 +457,19 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      authSecIDs, collectedClaims)        |                       |
      | => evidence                       |                       |
      |                                   |                       |
-     | evidence, eventLogs ------------->|                       |
+     | {evidence, eventLogs} ------------->|                       |
      |                                   |                       |
 ==========================[VERIFICATION PHASE]==========================
      |                                   |                       |
-     |                                   | (handle, evidence,    |
-     |                                   |  eventLogs) --------->|
+     |                                   | {handle, evidence,    |
+     |                                   |  eventLogs} --------->|
      |                                   |                       |
      |                                   |   appraiseEvidence(evidence,
      |                                   |        eventLogs, refValues)
      |                                   |  attestationResult <= |
      |                                   |                       |
-     |                                   |<---------- (evidence, |
-     |                                   |    attestationResult) |
+     |                                   |<---------- {evidence, |
+     |                                   |    attestationResult} |
      |                                   |                       |
 =================[ATTESTATION RESULT PROCESSING PHASE]==================
      |                                   |                       |
@@ -489,7 +489,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                    generateHandle()        |
      |                                       | => handle          |
      |                                       |                    |
-     |<------------------------------ handle | handle ----------->|
+     |<---------------------------- {handle} | {handle} --------->|
      |                                       |                    |
      |                                       x                    |
      |                                                            |
@@ -504,7 +504,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
   generateEvidence(handle, authSecIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | evidence, eventLogs -------------------------------------->|
+     | {evidence, eventLogs} ------------------------------------>|
      |                                                            |
 ==========================[VERIFICATION PHASE]==========================
      |                                                            |
@@ -527,7 +527,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 | generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-|    | evidence, eventLogsDelta --------------------------------->|    |
+|    | {evidence, eventLogsDelta} ------------------------------->|    |
 |    |                                                            |    |
 | =====================[DELTA VERIFICATION PHASE]===================== |
 |    |                                                            |    |
@@ -581,7 +581,7 @@ In the following, the streaming remote attestation without a broker (observer pa
      |                                                   handle<= |
      |                                                            |
      |<------------ subscribe(handle, authSecIDs, claimSelection) |
-     | handle --------------------------------------------------->|
+     | {handle} ------------------------------------------------->|
      |                                                            |
 ==========================[ATTESTATION PHASE]===========================
      |                                                            |
@@ -596,7 +596,7 @@ In the following, the streaming remote attestation without a broker (observer pa
      |                                                            |
 ==========================[VERIFICATION PHASE]==========================
      |                                                            |
-     | handle, evidence, eventLogs ------------------------------>|
+     | {handle, evidence, eventLogs} ---------------------------->|
      |                                                            |
      |                                      appraiseEvidence(evidence,
      |                                                      eventLogs,
@@ -619,7 +619,7 @@ In the following, the streaming remote attestation without a broker (observer pa
 |    |                                                            |    |
 | =====================[DELTA VERIFICATION PHASE]===================== |
 |    |                                                            |    |
-|    | evidence, eventLogsDelta --------------------------------->|    |
+|    | {evidence, eventLogsDelta} ------------------------------->|    |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
 |    |                                                 eventLogsDelta, |
@@ -731,7 +731,7 @@ The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server f
 =======================[HANDLE GENERATION PHASE]========================
      |               |                   |                        |
      |               |                   |                        |
-  sub(topic=Handle) -------------------->|                        |
+   sub(topic=Handle) ------------------->|                        |
      |               |                   |                        |
      |               |                   |<--------- sub(topic=Handle)
      |               |                   |                        |
@@ -739,7 +739,7 @@ The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server f
      |           generateHandle()        |                        |
      |               | => handle         |                        |
      |               |                   |                        |
-     |            pub(topic=Handle,      |                        |
+     |             pub(topic=Handle,     |                        |
      |               | handle) --------->|                        |
      |               x                   |                        |
      |                                   |                        |
@@ -780,8 +780,8 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |
-| pub(topic=AttEv,                       |                        |    |
-|    |  evidence, eventLogs) ----------->|                        |    |
+|  pub(topic=AttEv,                      |                        |    |
+|    | evidence, eventLogs) ------------>|                        |    |
 |    |                                   |                        |    |
 |    |                               notify(topic=AttEv,          |    |
 |    |                                   |  evidence,             |    |
