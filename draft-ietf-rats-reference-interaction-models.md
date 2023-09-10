@@ -419,7 +419,7 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      |                                      |                 |
      | evidence, attestationResult -------------------------->|
      |                                      |                 |
-=================[ATTESTATION RESULT PROCESSING PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]==================
      |                                      |                 |
      |                                      |    appraiseResult(policy,
      |                                      |       attestationResult)
@@ -471,7 +471,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |<---------- (evidence, |
      |                                   |    attestationResult) |
      |                                   |                       |
-=================[ATTESTATION RESULT PROCESSING PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]==================
      |                                   |                       |
      |                        appraiseResult(policy,             |
      |                          attestationResult)               |
@@ -795,7 +795,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |                                   |                  refValues) |
 |    |                                   |   attestationResult <= |    |
 |    |                                   |                        |    |
-| ===============[ATTESTATION RESULT PROCESSING PHASE]=============== |
+| ===============[ATTESTATION RESULT PROCESSING PHASE]================ |
 |    |                                   |                        |    |
 |    |                                   |<--------- pub(topic=AttRes, |
 |    |                                   |          attestationResult) |
@@ -820,7 +820,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
 | Attester | | Relying Party |   | PubSub Server |          | Verifier |
 '----+-----' '--+------------'   '-------+-------'          '-----+----'
      |          |                        |                        |
-=================[ATTESTATION RESULT PROCESSING PHASE]=================
+=================[ATTESTATION RESULT PROCESSING PHASE]==================
      |          |                        |                        |
      |     sub(topic=AttRes)             |                        |
      |         handle) ----------------->|                        |
