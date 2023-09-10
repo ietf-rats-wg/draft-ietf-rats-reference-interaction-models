@@ -342,8 +342,7 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
 ==========================[Evidence Appraisal]==========================
      |                                                            |
-     |                                      appraiseEvidence(evidence,
-                                                 eventLogs, refValues)
+     |                appraiseEvidence(evidence, eventLogs, refValues)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
@@ -563,10 +562,10 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 ## Streaming Remote Attestation
 
-Streaming Remote Attestation serves as the foundational concept for both the observer pattern ({{ISIS}} and the publish-subscribe pattern ({{DesignPatterns}}).
-It entails establishing subscription states to continuously verify the status of remote devices.
+Streaming Remote Attestation serves as the foundational concept for both the observer pattern ({{ISIS}}) and the publish-subscribe pattern ({{DesignPatterns}}).
+It entails establishing subscription states to enable continuous remote attestation.
 The observer pattern directly connects observers to subjects without a broker, while the publish-subscribe pattern involves a central broker for message distribution.
-In the following, the streaming remote attestation without a broker (observer pattern) as well as with a broker (publish-subscribe pattern) are described.
+In the following Subsections, streaming remote attestation without a broker (observer pattern) as well as with a broker (publish-subscribe pattern) are illustrated.
 
 ### Streaming Remote Attestation without a Broker
 
@@ -631,31 +630,23 @@ In the following, the streaming remote attestation without a broker (observer pa
 ~~~~
 
 The observer pattern is employed in scenarios where message delivery does not involve a central broker.
-Instead, an observer directly subscribes to the observed resource through another entity.
-Consequently, this other entity possesses direct knowledge of the observer and is responsible for maintaining the subscription state.
+Instead, an observer directly subscribes to observed resources via a dedicated mechanism.
+Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining subscription state.
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
-The subscribe operation is used to convey required Handles for producing Evidence.
+The subscribe operation is used to convey Handles required for Evidence generation.
 Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
-While a Handle Distributor is not required in this model, it is also limited to bi-lateral subscription relationships in which each Verifier has to create and provide its individual Handle.
+While a Handle Distributor is not mandatory in this model, the model is also limited to bi-lateral subscription relationships, in which each Verifier has to create and provide Handles individually.
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
 The streaming model without a broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
-Methods to detect excessive time drift that would mandate a refreshed Handle to be conveyed via another subscribe operation are out-of-scope of this document.
+Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.
 
 ### Streaming Remote Attestation with a Broker
 
 The publish-subscribe messaging pattern is widely used for communication in different areas.
-The strengths of the communication pattern include loose coupling and scalability.
-Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters do not (need to) know the corresponding Verifiers of attestation Evidence.
-Nor do Verifiers (need to) know consumers of their produced Attestation Results.
-With an increasing number of Attesters, Verifiers, and Relying Parties, the publish-subscribe pattern may reduce interdependencies and provide better scalability.
+Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters do not (need to) be aware of corresponding Verifiers.
+In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
 
-There exist several publish-subscribe technologies and solutions.
-In the IoT landscape, for example, the Message Queuing Telemetry Transport (MQTT) protocol is widely used ({{MQTT}}).
-For remote attestation, the TCG has published the Trusted Network Communications (TNC) specification, an open Network Admission Control (NAC) solution ({{TNC}}).
-TNC is based on a Metadata Access Point (MAC) server which implements the publish-subscribe pattern.
-Further technologies and solutions include, among others, the Advanced Message Queuing Protocol (AMQP), Apache Kafka, Google Cloud Pub/Sub, RabbitMQ, and ZeroMQ.
-
-With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server).
+With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server or Broker).
 Clients may *publish* data in the form of a *message* under a certain *topic*.
 *Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
 Depending on the particular  publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
@@ -664,38 +655,12 @@ In the following sections, the interaction models *Challenge/Response Remote Att
 There are different phases that both models go through:
 
 1. Handle Generation
-2. Attestation
-3. Verification
-4. Attestation Result Processing/Consumption
+2. Evidence Generation and Conveyance
+3. Evidence Appraisal
+4. Attestation Result Generation
 
 The models only differ in the handle generation phase.
-Attestation, verification, and attestation result processing/consumption are identical from a protocol point of view.
-
-#### Connection Establishment and Client ID
-
-~~~~ aasvg
-  .--------.                                           .---------------.
-  | Client |                                           | PubSub Server |
-  '---+----'                                           '-------+-------'
-      |                                                        |
-    connect(?id=C) ------------------------------------------->|
-      |                                                        |
-      |                                                 addClient(?id=C)
-      |                                                        |
-      |<-------------------------------------------------- conAck(?id)
-      |                                                        |
-      ~                                                        ~
-~~~~
-
-Depending on the PubSub server, clients connecting to it must provide their own (unique) client ID or are assigned a (unique) client ID by the PubSub server.
-In the diagram above, the optional client ID arguments are marked with a preceding "?".
-After the PubSub server has received a connection request, it adds the client to its internal management facilities with its (unique) ID.
-In addition, clients may need to authenticate to the server and/or vice versa in a separate step.
-All of this is beyond the scope of this document.
-In the following, the term "handle" is used instead of the (unique) client ID.
-
-For reasons of readability, the connection step is omitted in the following diagrams as well as acknowledgment steps for subscribe and publish operations.
-
+From a remote attestations procedure's point of view Evidence Generation, Conveyance, and Appraisal, as well as Attestation Result Generation are identical in both models.
 
 #### Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe
 
@@ -753,7 +718,7 @@ The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server f
 The *Uni-Directional Remote Attestation over Publish-Subscribe* model uses the same information elements as the Uni-Directional Remote Attestation model.
 Accordingly, Handles are created by a 3rd party, the Handle Distributor.
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
-When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them (handle generation phase).
+When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them during Handle Generation.
 
 #### Evidence Generation and Appraisal
 
@@ -805,13 +770,13 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
      ~                                   ~                        ~
 ~~~~
 
-Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an attestation-verification loop in which the Attester generates Evidence and the Verifier appraises it.
+Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
 Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
 Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.
 
-#### Attestation Result Processing/Consumption
+#### Attestation Result Generation
 
 ~~~~ aasvg
      ~          ~                        ~                        ~
@@ -838,7 +803,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      ~          ~                        ~                        ~
 ~~~~
 
-Attestation Result processing/consumption by Relying Parties is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
+Attestation Result Generation is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
 
@@ -847,23 +812,7 @@ The PubSub server forwards Attestation Results to the Relying Parties as soon as
 Many publish-subscribe models provide hierarchical organization of topics.
 This way, subscribers can subscribe to either all attestations (topic `AttRes`), or, for example, to topic `AttRes/DbServers/Germany` to receive only attestations from database servers in Germany.
 Further, it may be required to distinguish between uni-directional and challenge-response attestation evidence.
-For this purpose a wildcard subscription may be useful, for example `AttRes/DbServers/Germany/\*\*/uni` (to receive only uni-directional attestation evidence) or `AttRes/DbServers/Germany/\*\*/cr` (to receive only challenge-response attestation Evidence).
-
-#### Security Considerations
-
-Attestation Evidence is digitally signed and, thus, authenticated and integral.
-A man-in-the-middle attack that tampers with the Evidence undetected is practically infeasible.
-The PubSub server is used for (temporarily) storing and forwarding attestation Evidence to interested clients, i. e., Verifiers.
-Further, Attestation Results published on the SubSub server by Verifiers are digitally signed, too, and cannot be altered undetected.
-
-#### Reference Implementation(s)
-
-The following reference implementations exist:
-
-* On the practical Application of a Trusted Information Agent -- Michael Eckel. *Master's Thesis*. (September 30, 2014) -- <https://www.sit.fraunhofer.de/fileadmin/publications/masters-thesis-michael-eckel-2014.pdf>
-  Realize TPM-based remote attestation on the TNC publish-subscribe server called Metadata Access Point (MAP).
-  Uses TPM 1.2, Java, jTSS Wrapper, and TCG Trusted Network Communications (TNC) on Android platforms.
-
+<!--For this purpose a wildcard subscription may be useful, for example `AttRes/DbServers/Germany/\*\*/uni` (to receive only uni-directional attestation evidence) or `AttRes/DbServers/Germany/\*\*/cr` (to receive only challenge-response attestation Evidence).-->
 
 # Additional Application-Specific Requirements
 
@@ -951,7 +900,7 @@ Olaf Bergmann, Michael Richardson, and Ned Smith
 # CDDL Specification for a simple CoAP Challenge/Response Interaction
 
 The following CDDL specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
-The used communication protocol is CoAP.
+The communication protocol used is CoAP.
 Both the request message and the response message are exchanged via the FETCH operation and corresponding FETCH request and FETCH response body.
 
 In this example, Evidence is created via the root-of-trust for reporting primitive operation "quote" that is provided by a TPM 2.0.
