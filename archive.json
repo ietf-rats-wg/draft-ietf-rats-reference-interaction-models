@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:50:15.218119+00:00",
+  "timestamp": "2024-03-05T00:46:56.678348+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1980,24 +1980,26 @@
       "id": "PR_kwDOEYizNM5Z9Uo5",
       "title": "Add pubsub attestation model v2",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-09-10T18:26:42Z",
-      "updatedAt": "2023-09-10T19:40:14Z",
+      "updatedAt": "2024-03-04T20:53:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "4dd3dd29d0f432765cab6c06608316b6bd7414ac",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "add-pubsub-attestation-model-v2",
       "headRefOid": "bcfd21302b8d2b652253400fb95cd58c7dbd792f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-04T20:53:44Z",
+      "mergedAt": "2024-03-04T20:53:44Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "c693a2148641eaf8b3766a578b57944ce0111f84"
+      },
       "comments": [],
       "reviews": []
     }
