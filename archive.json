@@ -1,0 +1,2007 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-04-04T00:49:52.284771+00:00",
+  "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "MDU6SXNzdWU4MDUyNzg0NzA=",
+      "title": "Disambiguation as a part of Terminology",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/1",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\nThis section is talking about the disambiguation of terminology, so I suggest making it a sub-section of Section 2 Terminology.\r\n\r\n> Examples of these types of co-located environments include: a Trusted\r\n> Execution Environment (TEE), Baseboard Management Controllers (BMCs),\r\n> as well as other physical or logical protected/isolated/shielded\r\n> Computing Environments (e.g. embedded Secure Elements (eSE) or\r\n> Trusted Platform Modules (TPM)).",
+      "createdAt": "2021-02-10T08:06:38Z",
+      "updatedAt": "2021-02-10T10:54:36Z",
+      "closedAt": "2021-02-10T10:54:36Z",
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "MDU6SXNzdWU4MDUyNzkyNzA=",
+      "title": "Context of co-located environments",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/2",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\nIn Section 1, 3 Disambiguation\r\n\r\nAbout \u201cthese types of co-located environments\u201d, The previous sentences are about the Verifier and Attester don\u2019t need to be remote. So \u201cthese\u201d is weird here, because here is about the attesting environment and target environment.",
+      "createdAt": "2021-02-10T08:07:57Z",
+      "updatedAt": "2021-04-25T14:21:37Z",
+      "closedAt": "2021-04-25T14:21:37Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "So, can this issue then be closed?",
+          "createdAt": "2021-03-30T22:37:03Z",
+          "updatedAt": "2021-03-30T22:37:03Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "MDU6SXNzdWU4MDUyODA0MDI=",
+      "title": "Direct Anonymous Attestation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/3",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\nI think it\u2019s better to move this section to the bottom of the draft. DAA doesn\u2019t introduce a new information elements, and only augments the scope/definition of Attester Identity and Authentication Secret IDs, describing it after the introduction of all the 3 basic interaction models would be better. Putting DAA in the middle makes me feel the basic interaction models rely upon DAA, but actually it\u2019s not.\r\n",
+      "createdAt": "2021-02-10T08:09:42Z",
+      "updatedAt": "2021-04-25T16:35:36Z",
+      "closedAt": "2021-04-25T16:35:36Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "That's a good point. Creating a proposal that moves the content as a proposal.",
+          "createdAt": "2021-02-10T11:04:49Z",
+          "updatedAt": "2021-02-10T11:04:49Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "moved to draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:35:36Z",
+          "updatedAt": "2021-04-25T16:35:36Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "MDU6SXNzdWU4MDUyODE1MDc=",
+      "title": "Endorsers interact with Attesters even without DAA",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/4",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> This document extends the duties of the Endorser role as defined by\r\n> the RATS architecture with respect to the provision of these Attester\r\n> Identity documents to Attesters.  The existing duties of the Endorser\r\n> role and the duties of a DAA Issuer are quite similar as illustrated\r\n> in the following subsections.\r\n\r\nWithout DAA, I think the Endorser also needs to provision the Attester Identity to Attesters. And as I understand, the DAA Issuer is a supply chain entity before the Attester being shipped, so it is the Endorser when DAA is used, right? If yes, then in the next sentence, the comparison between Endorser and DAA Issuer doesn\u2019t make sense to me.",
+      "createdAt": "2021-02-10T08:11:35Z",
+      "updatedAt": "2021-04-25T16:35:03Z",
+      "closedAt": "2021-04-25T16:35:03Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "tl;dr in essence, yes an Attester needs that communication arc anyways, but the provisioning is out-of-scope without the anticipated rechartering\r\n\r\nIn principle, that is correct, I think. An Attester is provisioned by the same authority (e.g. a supply chain entity) that is also in charge of the corresponding endorsements provided by the Endorser role. The \"Provisioner\" role does not necessarily have to reside on the same entity as the Endorser role, but both typically share the same owner and they also have to convey massages when they do not reside on the same entity (mainly the Claims for Endorsements that are based on the data provisioned on the Attester).\r\n\r\nThe RATS architecture does not include a corresponding arc between Endorser(/Provisioner) in https://www.ietf.org/archive/id/draft-ietf-rats-architecture-10.html#dataflow. During chartering of the WG the idea was to limit the scope of arcs between roles by excluding Attestation Provisioning Flows. Now, with the RATS architecture stabilizing, it becomes more apparent that there are pieces missing from that Figure 1. That is fine, as these can be described in other document.\r\n\r\nDAA is a kind of an outlier that - if one looks at it closely - needs an Arc coming from that Provisioning scope even on the operational level that is in scope of the Attestation \"Evidence\" (and its friends) Flows. Does that shed a different light on the phrasing?",
+          "createdAt": "2021-02-10T12:18:34Z",
+          "updatedAt": "2021-02-10T12:18:34Z"
+        },
+        {
+          "author": "Liqun-Chen",
+          "authorAssociation": "NONE",
+          "body": "The Endorser and DAA Issuer may not be the same entity and the DAA Issuer can provide the DAA credential to the Attester at anytime (in the supply chain or sometime later).   ",
+          "createdAt": "2021-03-28T16:21:25Z",
+          "updatedAt": "2021-03-28T16:21:25Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "addressed in the new diagram in draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:35:03Z",
+          "updatedAt": "2021-04-25T16:35:03Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "MDU6SXNzdWU4MDUyODIxMDE=",
+      "title": "Value add of the Endorsers section",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/5",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\nDoes this section have difference with the definition of Endorser in architecture draft? If not, is it necessary to keep this section?",
+      "createdAt": "2021-02-10T08:12:36Z",
+      "updatedAt": "2021-04-25T16:34:02Z",
+      "closedAt": "2021-04-25T16:34:02Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "This section only describes the Layered Attestation, but the scope of Endorsement is more than what\u2019s described here. Endorsement indicates the Attester\u2019s various capabilities such as Claims collection and Evidence signing. For other situations than Layered Attestation, the Endorser and Endorsement are also needed. So why only mention Layered Attestation here? I don\u2019t see any special relationship between DAA and Layered Attestation.",
+          "createdAt": "2021-02-10T08:13:28Z",
+          "updatedAt": "2021-02-10T08:13:28Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "trimmed and moved as a context section to draft-birkholz-rats-daa\r\n\r\n(but there it is more about the endorsements than layered attestation and still needs some rework)",
+          "createdAt": "2021-04-25T16:34:02Z",
+          "updatedAt": "2021-04-25T16:34:02Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "MDU6SXNzdWU4MDUyODM4NzQ=",
+      "title": "Collapsed Endorser role and DAA Issuer role",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/6",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> In order to enable the use of DAA, an Endorser role takes on the\r\n> duties of a DAA Issuer in addition to its already defined duties.\r\n> DAA Issuers offer zero-knowledge proofs based on public key\r\n> certificates used for a group of Attesters [DAA].  Effectively, these\r\n> certificates share the semantics of Endorsements, with the following\r\n> exceptions:\r\n\r\nIn the first sentence, I suggest saying that \u201ca DAA Issuer takes on the role of an Endorser\u201d.",
+      "createdAt": "2021-02-10T08:15:20Z",
+      "updatedAt": "2021-04-25T16:31:31Z",
+      "closedAt": "2021-04-25T16:31:31Z",
+      "comments": [
+        {
+          "author": "Liqun-Chen",
+          "authorAssociation": "NONE",
+          "body": "We agree that it is more accurate to say that the DAA Issuer takes on the role of an Endorser. We note that the DAA Issuer and the Endorser could be two separate entities. ",
+          "createdAt": "2021-03-28T16:32:28Z",
+          "updatedAt": "2021-03-28T16:32:28Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "resolved in draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:31:31Z",
+          "updatedAt": "2021-04-25T16:31:31Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "MDU6SXNzdWU4MDUyODgyMTc=",
+      "title": "Validity of Evidence",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/7",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> The associated private keys are used by the DAA Issuer to provide\r\n> an Attester with a credential that it can use to convince the\r\n> Verifier that its Evidence is valid.  To keep their anonymity the\r\n> Attester randomizes this credential each time that it is used.\r\n\r\nHow to understand \u201cEvidence is valid\u201d? Does it mean the Evidence is sent from an authentic Attester and not tampered during the conveyance? Or does it mean the Evidence comes from a RoT and is trustable (although the Evidence can diverge from the Reference Values)?",
+      "createdAt": "2021-02-10T08:22:04Z",
+      "updatedAt": "2021-07-26T10:41:26Z",
+      "closedAt": "2021-07-26T10:41:26Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "When saying \u201cAttester randomizes this credential\u201d, how many credentials does an Attester have? 1) Can a DAA Issuer have multiple key pairs and use them for one Attester? 2) Can a DAA Issuer use one key pair to generate multiple credentials for one Attester?",
+          "createdAt": "2021-02-10T08:22:19Z",
+          "updatedAt": "2021-02-10T08:22:19Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This issue seems to have vanished into thin air in the course of the DAA refactoring.",
+          "createdAt": "2021-04-25T18:35:27Z",
+          "updatedAt": "2021-04-25T18:35:37Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "MDU6SXNzdWU4MDUyODk0Mjg=",
+      "title": "Conveyance of pub-keys",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/8",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> A credential is conveyed from an Endorser to an Attester in\r\n> combination with the conveyance of the public key certificates\r\n> from Endorser to Verifier.\r\n\r\nIs there another way to convey the public key certificate, for example, can the public key certificates be conveyed from Endorser to Attester first and then from Attester to Verifier?\r\n",
+      "createdAt": "2021-02-10T08:24:02Z",
+      "updatedAt": "2021-07-26T10:41:02Z",
+      "closedAt": "2021-07-26T10:41:02Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "TL;DR: I think that is a valid conveyance method.\r\n\r\nIn general, I think it does not matter. At the end, the correct public key must be available to the entity which verifies signed evidence. The public key can be part of a certificate, but can be stored in a verifier during production, too (and many many other ways are thinkable).\r\n\r\nHow the key is distributed? There are also no limits to this. On a USB pendrive via airmail ... why not? (It would even provide air gap support).\r\n\r\nFeel free to correct me.",
+          "createdAt": "2021-03-30T22:28:50Z",
+          "updatedAt": "2021-03-30T22:28:50Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "moved to draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T18:33:31Z",
+          "updatedAt": "2021-04-25T18:33:31Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This issue seems to have vanished into thin air in the course of the DAA refactoring. So, it can be closed.",
+          "createdAt": "2021-04-25T18:33:38Z",
+          "updatedAt": "2021-04-25T18:33:38Z"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "MDU6SXNzdWU4MDUyOTA2Nzk=",
+      "title": "Definition of DAA duties",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/9",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> The zero-knowledge proofs required cannot be created by an Attester\r\n> alone - like the Endorsements of RoTs - and have to be created by a\r\n> trustable third entity - like an Endorser.  Due to that semantic\r\n> overlap, the Endorser role is augmented via the definition of DAA\r\n> duties as defined below.  This augmentation enables the Endorser to\r\n> convey trustable third party statements both to Verifier roles and\r\n> Attester roles.\r\n\r\nFor \u201cthe definition of DAA duties as defined below\u201d, what is the definition of DAA duties?",
+      "createdAt": "2021-02-10T08:26:05Z",
+      "updatedAt": "2021-04-25T16:30:38Z",
+      "closedAt": "2021-04-25T16:30:38Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "In the last sentence, the Endorsement with its original definition is the third party statement for Verifier and Attester, isn\u2019t it? So, \u201caugmentation\u201d isn\u2019t the correct expression.",
+          "createdAt": "2021-02-10T08:26:15Z",
+          "updatedAt": "2021-02-10T08:26:15Z"
+        },
+        {
+          "author": "Liqun-Chen",
+          "authorAssociation": "NONE",
+          "body": "\"the definition of DAA duties\" should be \"the definition of the DAA Issuer's duties\". The DAA Issuer's duty is to provide the attester with a DAA credential.\r\n\r\nThe last sentence could be omitted. ",
+          "createdAt": "2021-03-28T16:44:56Z",
+          "updatedAt": "2021-03-28T16:44:56Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "resolved in draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:30:38Z",
+          "updatedAt": "2021-04-25T16:30:38Z"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "MDU6SXNzdWU4MDUyOTE0NDc=",
+      "title": "Attester Identity",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/10",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attester Identity:  The provenance of Evidence with respect to a\r\n> distinguishable Attesting Environment MUST be correct and\r\n> unambiguous.\r\n\r\nThe Attester Identity is to identify which Attester the Evidence comes from. But if the Attester has multiple Attesting Environments, what should be the Attester Identity?",
+      "createdAt": "2021-02-10T08:27:16Z",
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "closedAt": "2021-07-12T19:49:19Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "The TPM\u2019s AIK certificate is one kind of Attester Identity, right?",
+          "createdAt": "2021-02-10T08:27:28Z",
+          "updatedAt": "2021-02-10T08:27:28Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\"The TPM\u2019s AIK certificate is one kind of Attester Identity, right?\": Correct.",
+          "createdAt": "2021-04-20T18:27:43Z",
+          "updatedAt": "2021-04-20T18:27:43Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\"The Attester Identity is to identify which Attester the Evidence comes from. But if the Attester has multiple Attesting Environments, what should be the Attester Identity?\" I see the point, too, and agree. So, perhaps it should be renamed to \"Attesting Environment identity\"!? The Attester Identity then should be something different. It may be the TPM AK/AIK of one of the Attesting Environments, but not necessarily.",
+          "createdAt": "2021-04-21T11:19:58Z",
+          "updatedAt": "2021-04-21T11:19:58Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "MDU6SXNzdWU4MDUyOTI0MTI=",
+      "title": "Correct Evidence",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/11",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attestation Evidence Authenticity:  Attestation Evidence MUST be\r\n> correct and authentic.\r\n\r\nIs it appropriate to say \u201ccorrect Evidence\u201d? If saying so, I think it means that the Evidence satisfies the Attestation Policy for Evidence. ",
+      "createdAt": "2021-02-10T08:28:49Z",
+      "updatedAt": "2021-04-25T16:04:02Z",
+      "closedAt": "2021-04-25T16:04:02Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\"I think it means that the Evidence satisfies the Attestation Policy for Evidence.\": I agree. So, perhaps it is the best to just remove the words \"correct and \", because this is about authenticity and not at all related to correctness.\r\n\r\nCorrect me if I am wrong.",
+          "createdAt": "2021-04-20T18:22:39Z",
+          "updatedAt": "2021-04-23T14:20:31Z"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "MDU6SXNzdWU4MDUyOTMzMTA=",
+      "title": "Authentication Secret",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/12",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Authentication Secret:  An Authentication Secret MUST be available\r\n> exclusively to an Attester's Attesting Environment.\r\n> \r\n> The Attester MUST protect Claims with that Authentication Secret,\r\n> thereby proving the authenticity of the Claims included in\r\n> Evidence.  The Authentication Secret MUST be established before\r\n> RATS can take place.\r\n\r\nDoes the Authentication Secret represent the identity of the Attesting Environment?",
+      "createdAt": "2021-02-10T08:30:16Z",
+      "updatedAt": "2021-07-26T10:48:13Z",
+      "closedAt": "2021-07-26T10:48:13Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "How to understand the Authentication Secret, and is it necessary all the time? For example, in our implementation, during the router booting up, the BIOS measures the BootLoader and records the measured hash value into the TPM, and the BootLoader measures the OS Kernel and records the measured hash value into the TPM as well. From the Layered Attestation perspective, I think (BIOS + TPM) is the Attesting Environment and (BootLoader + TPM) is also the Attesting Environment. But the Claims (measured hash values) aren\u2019t protected separately, and they finally becomes the Evidence (TPM Quote) and it\u2019s only protected by the TPM\u2019s AIK. So, what is the Authentication Secret?",
+          "createdAt": "2021-02-10T08:30:22Z",
+          "updatedAt": "2021-02-10T08:30:22Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This comment also addresses #15.\r\n\r\nTL;DR: A TPM AIK is an Authentication Secret.\r\n\r\nIn the first draft, I named this element just \"Secret\". And yes, an AIK (Attestation Identity Key) in TPM 1.2 terminology, or AK (Attestation Key) in TPM 2.0 terminology, can be such a \"Secret\". The \"Secret ID\" basically is a key identifier/ID, e.g., the fingerprint/hash of such a key or the public part of the AK. The TPM FAPI uses key paths, such as \"HS/SRK/RSASignKey\". These are also valid key/secret identifiers/IDs. There is no official (unique) way of identifying keys, except for the FAPI key -- but: You need to use the FAPI for that purpose which is not available on embedded devices with no OS (because it needs at least a filesystem). In summary, it can be stated that \"Secret IDs\" are application-specific.\r\n\r\nNow, what is the matter with \"Authentication Secret\" and \"Authentication Secret ID\"?\r\nIn a later draft I replaced \"Secret (ID)\" with \"Authentication Secret (ID)\" intentionally, after talking to a crypto colleague. \"Authentication Secret\" is more specific than just \"secret\". And, in fact, its purpose is to provide authentication, i.e. evidence must provide the security property of \"authentication\", so that one knows it originates from a valid/specific source, e.g. TPM. This can also be some kind of group key (or DAA key).\r\n\r\n* \"Authentication Secret\": This element must be present in the attesting environment as it signs evidence (and a digital signature provides integrity and *authentication*).\r\n* \"Authentication Secret ID(s)\": This element must be mandatory as it identifies the \"Authentication Secret(s)\".",
+          "createdAt": "2021-03-30T22:14:34Z",
+          "updatedAt": "2021-03-30T22:14:34Z"
+        },
+        {
+          "author": "William-PanWei",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "In our implementation, during the router booting up, the BIOS measures the BootLoader and records the measured hash value into the TPM, then the BootLoader measures the OS Kernel and records the measured hash value into the TPM as well.\r\n\r\nBased on our implementation, I can see some inconsistencies from two different aspects:\r\n* According to the definition of Layered Attestation, I think the Attesting Environments are BIOS and Bootloader.\r\n* But, according to the definition of \"Authentication Secret\", because the TPM's AIK/AK signs Evidence so the TPM's AIK/AK is the Authentication Secret, and because \"Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment\" so the TPM should be the Attesting Environment.\r\n\r\nSo, which one is correct?",
+          "createdAt": "2021-04-27T08:54:07Z",
+          "updatedAt": "2021-04-27T08:54:07Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "After talking with Wei I came to realize (again) that the use of a TPM creates this \"interesting\" setup of the two layers of Attesting Environments:\r\n\r\nBoth the first layer that is the BIOS and the second layer that is the Bootloader share an Attesting Envirment component that is the TPM. In acronyms, the BIOS 's claim collection capability and the TPM that is an RTS and RTR compose the first Attesting Environment. The Bootloader's claim collection capability in combination with the identical TPM compose the seceond Attesting Environment. As a result, I agree that the sentence \"Each Authentication Secret is uniquely associated with a distinguishable Attesting Environment\" does not really allow for that scnerario and needs some help.",
+          "createdAt": "2021-04-28T08:42:51Z",
+          "updatedAt": "2021-04-28T08:44:24Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "fixed in #44 ",
+          "createdAt": "2021-07-26T10:48:13Z",
+          "updatedAt": "2021-07-26T10:48:13Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "MDU6SXNzdWU4MDUyOTQ5MTY=",
+      "title": "What in an Attester is acutally identified and how?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/13",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attester Identity ('attesterIdentity'):  _mandatory_\r\n> A statement about a distinguishable Attester made by an Endorser\r\n> without accompanying evidence about its validity - used as proof\r\n> of identity.\r\n\r\nPrevious section says \u201cAttester Identity\u201d is about \u201ca distinguishable Attesting Environment\u201d, and here says it\u2019s about \u201ca distinguishable Attester\u201d.",
+      "createdAt": "2021-02-10T08:32:58Z",
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "closedAt": "2021-07-12T19:49:19Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "How to understand \u201cwithout accompanying evidence about its validity\u201d?",
+          "createdAt": "2021-02-10T08:33:10Z",
+          "updatedAt": "2021-02-10T08:33:10Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> How to understand \u201cwithout accompanying evidence about its validity\u201d?\r\n\r\nI think it means that there is no certificate conveyed along with it which proves its validity.",
+          "createdAt": "2021-04-25T21:22:16Z",
+          "updatedAt": "2021-04-25T21:22:16Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n> \r\n> > Attester Identity ('attesterIdentity'):  _mandatory_\r\n> > A statement about a distinguishable Attester made by an Endorser\r\n> > without accompanying evidence about its validity - used as proof\r\n> > of identity.\r\n> \r\n> Previous section says \u201cAttester Identity\u201d is about \u201ca distinguishable Attesting Environment\u201d, and here says it\u2019s about \u201ca distinguishable Attester\u201d.\r\n\r\nI think this is related to #10 and should be fixed.",
+          "createdAt": "2021-04-25T21:23:48Z",
+          "updatedAt": "2021-04-25T21:23:48Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "MDU6SXNzdWU4MDUyOTU4OTM=",
+      "title": "Attester Identity in DAA",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/14",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Attester Identity ('attesterIdentity'):  _mandatory_\r\n> In DAA, the Attester's identity is not revealed to the verifier.\r\n> The Attester is issued with a credential by the Endorser that is\r\n> randomized and then used to anonymously confirm the validity of\r\n> their evidence.  The evidence is verified using the Endorser's\r\n> public key.\r\n\r\nI think here means the DAA credential represents the Attester Identity.",
+      "createdAt": "2021-02-10T08:34:38Z",
+      "updatedAt": "2021-07-26T10:41:15Z",
+      "closedAt": "2021-07-26T10:41:15Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "There is ambiguity of \u201cthat is randomized\u201d, does it mean randomized Endorser or randomized credential?",
+          "createdAt": "2021-02-10T08:34:47Z",
+          "updatedAt": "2021-02-10T08:34:47Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "For \u201cconfirm the validity of their evidence\u201d, what does \u201ctheir\u201d refer to? And what does \u201cthe validity of evidence\u201d mean?",
+          "createdAt": "2021-02-10T08:34:55Z",
+          "updatedAt": "2021-02-10T08:34:55Z"
+        },
+        {
+          "author": "Liqun-Chen",
+          "authorAssociation": "NONE",
+          "body": "Yes, the DAA credential represents the Attester's identity.\r\n\r\nThe DAA credential is randomised so that it is not revealed when providing the Attestation evidence to the verifier. The Endorser is not randomised. \r\n\r\nTo make it clear \"the validity of their evidence\" can be changed to \"the validity of the Attester's evidence\". The validity of evidence means that the evidence provided by the Attester to the verifier is confirmed to be true.\r\n\r\n",
+          "createdAt": "2021-03-28T17:01:31Z",
+          "updatedAt": "2021-03-28T17:01:31Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Moved to draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:27:25Z",
+          "updatedAt": "2021-04-25T16:27:25Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "MDU6SXNzdWU4MDUyOTcwMzY=",
+      "title": "Authentication Secret ID",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/15",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Authentication Secret IDs ('authSecID'):  _mandatory_\r\n> A statement representing an identifier list that MUST be\r\n> associated with corresponding Authentication Secrets used to\r\n> protect Evidence.\r\n\r\nPrevious section says \u201cAuthentication Secret\u201d is used to protect Claims, but here says it\u2019s used to protect Evidence.",
+      "createdAt": "2021-02-10T08:36:31Z",
+      "updatedAt": "2021-04-25T20:29:43Z",
+      "closedAt": "2021-04-25T20:29:43Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "As I understand, if Authentication Secret represents the identity of Attesting Environment, then it\u2019s not mandatory, at least in our implementation.",
+          "createdAt": "2021-02-10T08:36:37Z",
+          "updatedAt": "2021-02-10T08:36:37Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "TL;DR: \u201cAuthentication Secret\u201d protects evidence (i.e. a TPM Quote) and must be *mandatory*.\r\n\r\nPlease also have a look at my comment https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/12#issuecomment-810613988.\r\n\r\nFeel free to correct me. :-)",
+          "createdAt": "2021-03-30T22:18:05Z",
+          "updatedAt": "2021-03-30T22:18:05Z"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "MDU6SXNzdWU4MDUyOTgyMTk=",
+      "title": "What does a DAA credential represent actually?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/16",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Authentication Secret IDs ('authSecID'):  _mandatory_\r\n> In DAA, Authentication Secret IDs are represented by the Endorser\r\n> (DAA issuer)'s public key that MUST be used to create DAA\r\n> credentials for the corresponding Authentication Secrets used to\r\n> protect Evidence.\r\n> In DAA, an Authentication Secret ID does not identify a unique\r\n> Attesting Environment but associated with a group of Attesting\r\n> Environments.  This is because an Attesting Environment should not\r\n> be distinguishable and the DAA credential which represents the\r\n> Attesting Environment is randomised each time it used.\r\n\r\nIn my understanding, here says that the DAA credential identities the Attesting Environment. Compared with the description in the \u201cAttester Identity\u201d part, what does the DAA credential represent actually?",
+      "createdAt": "2021-02-10T08:38:25Z",
+      "updatedAt": "2021-07-26T10:41:52Z",
+      "closedAt": "2021-07-26T10:41:52Z",
+      "comments": [
+        {
+          "author": "Liqun-Chen",
+          "authorAssociation": "NONE",
+          "body": "Because the Attester is bound with the Attesting Environment, the DAA credential represents the Attester's identity and also the Attesting Environment.",
+          "createdAt": "2021-03-28T17:06:30Z",
+          "updatedAt": "2021-03-28T17:06:30Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Moved to draft-birkholz-rats-daa",
+          "createdAt": "2021-04-25T16:25:38Z",
+          "updatedAt": "2021-04-25T16:25:38Z"
+        },
+        {
+          "author": "William-PanWei",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Because the Attester is bound with the Attesting Environment, the DAA credential represents the Attester's identity and also the Attesting Environment.\r\n\r\nThe DAA credential directly represents the Attesting Environment, and indirectly represents the Attester's identity because the Attester owns this Attesting Environment, do I understand correctly?\r\nBut the Attester may have several Attesting Environments, in such case will the Attester have several identities?",
+          "createdAt": "2021-04-27T03:18:22Z",
+          "updatedAt": "2021-04-27T03:18:22Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "MDU6SXNzdWU4MDUyOTkxNDk=",
+      "title": "Reference Claims vs Reference Values",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/17",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Reference Claims ('refClaims')  _mandatory_\r\n> Reference Claims are components of Reference Values as defined in\r\n> [I-D.ietf-rats-architecture].  [Editor's Note: Definition might\r\n> become obsolete, if replaced by Reference Values.  Is there a\r\n> difference between Claims and Values here?  Analogously, why is\r\n> not named Reference Claims in the RATS arch?]\r\n\r\nI suggest using Reference Values to keep consistent with the RATS arch.",
+      "createdAt": "2021-02-10T08:39:43Z",
+      "updatedAt": "2021-04-25T16:56:42Z",
+      "closedAt": "2021-04-25T16:56:42Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "+1 for \"Reference Values\"",
+          "createdAt": "2021-03-30T22:19:56Z",
+          "updatedAt": "2021-03-30T22:19:56Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "on it",
+          "createdAt": "2021-04-25T16:41:45Z",
+          "updatedAt": "2021-04-25T16:41:45Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "MDU6SXNzdWU4MDUzMDAwMzU=",
+      "title": "Application of Reference Values",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/18",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Reference Claims are used to appraise the Claims received from an\r\n> Attester via appraisal by direct comparison.\r\n\r\n\u201cDirect comparison\u201d isn\u2019t the correct expression, the comparison can have other rules.",
+      "createdAt": "2021-02-10T08:40:57Z",
+      "updatedAt": "2021-04-25T16:04:02Z",
+      "closedAt": "2021-04-25T16:04:02Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. So, we should remove the words \"via appraisal by direct comparison.\"",
+          "createdAt": "2021-04-23T14:17:36Z",
+          "updatedAt": "2021-04-23T14:17:36Z"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "MDU6SXNzdWU4MDUzMDA5NTc=",
+      "title": "Scope of Claims Set in Claims Selection",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/19",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Claim Selection ('claimSelection'):  _optional_\r\n> A statement that represents a (sub-)set of Claims that can be\r\n> created by an Attester.\r\n> Claim Selections can act as filters that can specify the exact set\r\n> of Claims to be included in Evidence.  An Attester MAY decide\r\n> whether or not to provide all Claims as requested via a Claim\r\n> Selection.\r\n\r\nThe \u201call Claims\u201d may be ambiguous, I\u2019d like to double check, does it refer to all Claims that the Attester can create or refer to all Claims requested in the Claim Selection?\r\n\r\n ",
+      "createdAt": "2021-02-10T08:42:16Z",
+      "updatedAt": "2021-04-25T20:28:51Z",
+      "closedAt": "2021-04-25T20:28:51Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If understand correctly, the message here is that an Attester can decide to provide less Claims than specified in the Claims Selection, which appears viable to me and is used in practice, too. I will adapt the text accordingly.",
+          "createdAt": "2021-04-25T19:37:54Z",
+          "updatedAt": "2021-04-25T19:37:54Z"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "MDU6SXNzdWU4MDUzMDE4MjA=",
+      "title": "A few definitions are missing for Challenge/Response Remote Attestation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/20",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\nIn the sequence diagram, some elements in the bracket are not defined in the \u201cInformation Elements\u201d section, such as targetEnvironment, collectedClaims, eventLog. Should these elements be defined?",
+      "createdAt": "2021-02-10T08:43:25Z",
+      "updatedAt": "2021-04-25T21:03:39Z",
+      "closedAt": "2021-04-25T21:03:39Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I totally agree. These elements should either be put into Information elements (preferred), or at least be mentioned in the text.",
+          "createdAt": "2021-04-23T20:20:17Z",
+          "updatedAt": "2021-04-23T20:20:17Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "MDU6SXNzdWU4MDUzMDM2MzY=",
+      "title": "Weird appearence of the term requierments at the end of the document",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/21",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on https://mailarchive.ietf.org/arch/msg/rats/okJriJPpapmZgeOfjbVGVP57bQk/\r\n\r\n> Depending on the use cases covered, there can be additional\r\n> requirements.  An exemplary subset is illustrated in this section.\r\n\r\nHere starts to talk about \u201cadditional requirements\u201d, but I wonder there is no other places in this draft talking about requirement, so what are the basic requirements?",
+      "createdAt": "2021-02-10T08:46:02Z",
+      "updatedAt": "2021-04-25T16:04:01Z",
+      "closedAt": "2021-04-25T16:04:01Z",
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Perhaps we should introduce a dedicated section \"(Basic) Requirements\", describing basic requirements, such as:\r\n* \"Integrity\": The information provided by the Attester MUST be integral. This may be achieved by means of a digital signature over the attestation evidence.\r\n* \"(Attester) Authentication\": The information provided by the Attester MUST be authentic. The Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps.",
+          "createdAt": "2021-04-21T11:37:15Z",
+          "updatedAt": "2021-04-21T11:37:15Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I suggest to place the new section\"(Basic) Requirements\" directly after \"Scope and Intent\".",
+          "createdAt": "2021-04-21T11:39:46Z",
+          "updatedAt": "2021-04-21T11:39:46Z"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "MDU6SXNzdWU4NjM3Njg4NDE=",
+      "title": "Wording: \"github\" -> \"GitHub\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/24",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In sections \"9.6. License\" and \"9.7. Implementation Dependencies\" the two mentions of \"github\" should be \"GitHub\".",
+      "createdAt": "2021-04-21T11:31:30Z",
+      "updatedAt": "2021-04-25T16:04:02Z",
+      "closedAt": "2021-04-25T16:04:02Z",
+      "comments": []
+    },
+    {
+      "number": 25,
+      "id": "MDU6SXNzdWU4NjYxNjc0MDk=",
+      "title": "\"digestable\" should be replaced with \"processible\".",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/25",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "<EOM>",
+      "createdAt": "2021-04-23T14:29:38Z",
+      "updatedAt": "2021-04-25T16:04:02Z",
+      "closedAt": "2021-04-25T16:04:02Z",
+      "comments": []
+    },
+    {
+      "number": 28,
+      "id": "MDU6SXNzdWU4NjY0MDcwOTY=",
+      "title": "Challenge/Response diagram: targetEnvironment should be attestingEnvironment",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/28",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This should also be described in the text.",
+      "createdAt": "2021-04-23T20:21:23Z",
+      "updatedAt": "2021-04-25T16:06:42Z",
+      "closedAt": "2021-04-25T16:06:42Z",
+      "comments": []
+    },
+    {
+      "number": 29,
+      "id": "MDU6SXNzdWU4NjY0MDg5ODU=",
+      "title": "Challenge/Response interaction model rework.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/29",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The text must be reworked.\r\n\r\nAll above, the sequence in the diagram should be described entirely.\r\n\r\nThis may also apply to the other models.",
+      "createdAt": "2021-04-23T20:24:01Z",
+      "updatedAt": "2021-04-25T16:06:42Z",
+      "closedAt": "2021-04-25T16:06:42Z",
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "MDU6SXNzdWU4NjY0MTE0MzQ=",
+      "title": "Diagrams consistency (also with UML)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/30",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Diagrams should be as close to UML as possible to improve understanding.\r\nThat is (this applies to all diagrams):\r\n* Actions should be verbs, not nouns (\"generateValues\" instead of \"valueGeneration\").\r\n* Returns of data should also be just arrows with data elements, i.e. nouns (\"evidence --->\" instead of \"returnEvidence --->\".\r\n\r\nUni-Directional Remote Attestation:\r\n* Handle Distributor should be at the top as an actor.\r\n* It should be indicated that the \"claimsDelta\" value generation is a loop.",
+      "createdAt": "2021-04-23T20:28:31Z",
+      "updatedAt": "2021-04-25T16:06:42Z",
+      "closedAt": "2021-04-25T16:06:42Z",
+      "comments": []
+    },
+    {
+      "number": 31,
+      "id": "MDU6SXNzdWU4NjY0MTY2MDQ=",
+      "title": "valueGeneration -> produceClaims",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/31",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In all diagrams, valueGeneration should be replaced by produceClaims. The return type \"claims\" also indicates that claims are produced(/generated) somehow. Generated claims, e.g. could be Measured Boot data (TPM PCRs + the boot event log).\r\n\r\nBTW: I don't see a passage in the text that describes valueGeneration.\r\n\r\nSee also #30.",
+      "createdAt": "2021-04-23T20:37:48Z",
+      "updatedAt": "2021-04-25T16:06:42Z",
+      "closedAt": "2021-04-25T16:06:42Z",
+      "comments": []
+    },
+    {
+      "number": 35,
+      "id": "MDU6SXNzdWU4NjcwNzM0OTM=",
+      "title": "generateHandle() missing in Uni-Directional Remote Attestation diagram",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/35",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "An handle mustbe created/generated before it can be distributed. Adding a generateHandle() call would also strengthen understanding by readers.",
+      "createdAt": "2021-04-25T18:00:26Z",
+      "updatedAt": "2021-04-25T21:03:39Z",
+      "closedAt": "2021-04-25T21:03:39Z",
+      "comments": []
+    },
+    {
+      "number": 39,
+      "id": "MDU6SXNzdWU4NjcxMTYwMzg=",
+      "title": "Consistency of diagrams.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/39",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There exist some inconsistencies in the diagrams. For example:\r\n* \"evidence\" and \"signedEvidence\" (the latter should be replaced).\r\n* \"evidenceGeneration\" vs. \"evidenceGeneration\" (the latter is preferred since it denotes an action indicated by a verb, not a noun, as in UML)\r\n* \"collectClaims(claimSelection)\" should be \"collectClaims(claimsDelta, claimSelection)\" since the claim selection requires the claims as input, too.\r\n* Alignment of return arrows must be fixed.",
+      "createdAt": "2021-04-25T21:15:30Z",
+      "updatedAt": "2021-04-26T05:40:06Z",
+      "closedAt": "2021-04-26T05:40:06Z",
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "MDU6SXNzdWU5MzkzMTQ5MDc=",
+      "title": "Publish-Subscripe Attestation may be nice to have",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/42",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "A publish-subscribe model for remote attestation would be nice to have.",
+      "createdAt": "2021-07-07T22:38:40Z",
+      "updatedAt": "2021-07-26T10:49:18Z",
+      "closedAt": "2021-07-26T10:49:18Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Considered out-of-scope, see https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/43#pullrequestreview-714699122",
+          "createdAt": "2021-07-26T10:49:18Z",
+          "updatedAt": "2021-07-26T10:49:18Z"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "I_kwDOEYizNM514pgQ",
+      "title": "Nonce handling considerations",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/51",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).",
+      "createdAt": "2023-11-05T13:15:05Z",
+      "updatedAt": "2023-11-05T13:15:05Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 22,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTcxMDA4NzEw",
+      "title": "Disambiguation is now a subsection",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/22",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #1 ",
+      "createdAt": "2021-02-10T10:52:58Z",
+      "updatedAt": "2021-02-10T10:54:45Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "6891055a1e416fa71805e01a34f4a71ccd356de0",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "issue1",
+      "headRefOid": "ff200eefdeb5dea91943b9818c95158f6319d5d7",
+      "closedAt": "2021-02-10T10:54:36Z",
+      "mergedAt": "2021-02-10T10:54:35Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "e82cc248db3fa5d4247195a8ea5d918716df8b7a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTcxMDE1MTU3",
+      "title": "replaced \"co-located environment\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/23",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #2 ",
+      "createdAt": "2021-02-10T11:03:22Z",
+      "updatedAt": "2021-04-25T14:21:37Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "e82cc248db3fa5d4247195a8ea5d918716df8b7a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "disambiguation.inconsistency",
+      "headRefOid": "ee899098ea3239e644157145f8e1ac55efa0c859",
+      "closedAt": "2021-04-25T14:21:37Z",
+      "mergedAt": "2021-04-25T14:21:37Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "5372582d3d00c093b4c44cfeb1ab4daef7c6fb2d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 26,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyMTIyMDUz",
+      "title": "Fixed issues dealing with wording and smaller issues.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/26",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #11 (Correct Evidence).\r\nFixes #18 (Application of Reference Values).\r\nFixes #24 (Wording: \"github\" -> \"GitHub\").\r\nFixes #25 (\"digestable\" should be replaced with \"processible\").\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-23T14:41:25Z",
+      "updatedAt": "2021-04-25T16:04:02Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "e82cc248db3fa5d4247195a8ea5d918716df8b7a",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-corrected-wording",
+      "headRefOid": "faf8024e66abd5ad7818b8c4cb5078827986f98f",
+      "closedAt": "2021-04-25T16:04:02Z",
+      "mergedAt": "2021-04-25T16:04:02Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "faf8024e66abd5ad7818b8c4cb5078827986f98f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyMTQwOTg3",
+      "title": "Fix weird appearance of the term requirements",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/27",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #21.",
+      "createdAt": "2021-04-23T15:08:28Z",
+      "updatedAt": "2021-04-25T16:04:01Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "e82cc248db3fa5d4247195a8ea5d918716df8b7a",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-weird-appearance-of-the-term-requirements",
+      "headRefOid": "9fad48fe0115db496ea8d0d77ce1be00044ddbf1",
+      "closedAt": "2021-04-25T16:04:01Z",
+      "mergedAt": "2021-04-25T16:04:00Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "1f267fa7ad759400ea80156edd0fbe4d0c418cdf"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 32,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyNjUzMzc4",
+      "title": "Fix diagrams and text.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/32",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #28.\r\nFixes #29.\r\nFixes #30.\r\nFixes #31.",
+      "createdAt": "2021-04-24T21:42:30Z",
+      "updatedAt": "2021-04-25T16:06:42Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "e82cc248db3fa5d4247195a8ea5d918716df8b7a",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-diagrams-and-text",
+      "headRefOid": "b84fb11904f3ffe65a70c44bb2f91dd717b0036f",
+      "closedAt": "2021-04-25T16:06:42Z",
+      "mergedAt": "2021-04-25T16:06:42Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "0f796df50d416e21dac5eac4c53227d46937fb2a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTQxODc2",
+          "commit": {
+            "abbreviatedOid": "09da122"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2021-04-25T13:45:49Z",
+          "updatedAt": "2021-04-25T14:05:51Z",
+          "comments": [
+            {
+              "originalPosition": 95,
+              "body": "changing this back to wording and concepts of the current architecture:\r\n* \"evidenceGeneration\" in alligment with the events defined in Appendix A, and\r\n* evidence (as it does not have to be signed but can also be conveyed via a Secure Channel)",
+              "createdAt": "2021-04-25T13:45:49Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 128,
+              "body": "```suggestion\r\nCorrespondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.\r\n```",
+              "createdAt": "2021-04-25T13:47:44Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 95,
+              "body": "```suggestion\r\n  evidenceGeneration(handle, authSecIDs, collectedClaims)         |\r\n     | => evidence                                                |\r\n```",
+              "createdAt": "2021-04-25T13:48:50Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "```suggestion\r\nThe final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.\r\n```\r\nphrasing",
+              "createdAt": "2021-04-25T13:50:54Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 177,
+              "body": "```suggestion\r\n  evidenceGeneration(handle, authSecIDs, collectedClaims)         |\r\n     | => Evidence                                                |\r\n```",
+              "createdAt": "2021-04-25T13:52:11Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 240,
+              "body": "```suggestion\r\nWhile periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Logs entries since the previous conveyance. This updates reflecting the differences are called \"delta\" in the sequence diagram above.\r\n```",
+              "createdAt": "2021-04-25T13:55:33Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 206,
+              "body": "```suggestion\r\n* evidenceGeneration(handle, authSecIDs, collectedClaims)         |    *\r\n*    | => evidence                                                |    *\r\n*    |                                                            |    *\r\n```",
+              "createdAt": "2021-04-25T13:57:48Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\r\n     | evidence, eventLogs -------------------------------------> |     |                                                            |\r\n```",
+              "createdAt": "2021-04-25T13:59:34Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 199,
+              "body": "```suggestion\r\n* generateClaims(attestingEnvironment)                            |    *\r\n*    | => claimsDelta, eventLogsDelta                             |    *\r\n```",
+              "createdAt": "2021-04-25T14:00:29Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "```suggestion\r\n  generateClaims(attestingEnvironment)       x                    |\r\n```",
+              "createdAt": "2021-04-25T14:00:53Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "```suggestion\r\n  generateClaims(attestingEnvironment)                            |\r\n```",
+              "createdAt": "2021-04-25T14:01:16Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 253,
+              "body": "```suggestion\r\n  generateClaims(attestingEnvironment)                            |\r\n```",
+              "createdAt": "2021-04-25T14:02:22Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 266,
+              "body": "```suggestion\r\n  generateEvidence(handle, authSecIDs, collectedClaims)           |\r\n     | => evidence                                                |\r\n```",
+              "createdAt": "2021-04-25T14:03:21Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 290,
+              "body": "```suggestion\r\n* generateClaims(attestingEnvironment)                            |    *\r\n```",
+              "createdAt": "2021-04-25T14:03:50Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 299,
+              "body": "```suggestion\r\n* generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    *\r\n*    | => evidence                                                |    *\r\n*    |                                                            |    *\r\n* signedEvidence, eventLogsDelta -------------------------------> |    *\r\n```",
+              "createdAt": "2021-04-25T14:04:25Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            },
+            {
+              "originalPosition": 324,
+              "body": "```suggestion\r\nConfidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality protection. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.\r\n```",
+              "createdAt": "2021-04-25T14:05:23Z",
+              "updatedAt": "2021-04-25T16:05:57Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyNzc5NjA2",
+      "title": "cutting out DAA",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/33",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "(leaving in two refs that are now DAA, but will becoming -daa later),\r\nrefactoring of remaining loose ends,\r\nremoved the changelog",
+      "createdAt": "2021-04-25T14:50:01Z",
+      "updatedAt": "2021-04-25T16:10:03Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "0f796df50d416e21dac5eac4c53227d46937fb2a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "without-daa",
+      "headRefOid": "4fa44dfe3e5b651228f144e36145ab1694b424c8",
+      "closedAt": "2021-04-25T16:10:03Z",
+      "mergedAt": "2021-04-25T16:10:03Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "be2dab90759c7b7a0f50076345cc14288b598832"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyNzk4ODg1",
+      "title": "using the term Reference Values more consistently wrt the architeture",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/34",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #17 ",
+      "createdAt": "2021-04-25T16:48:22Z",
+      "updatedAt": "2021-04-25T16:56:48Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "4d35a953ba424fb073536e6ce23b8937b59943f3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "reference-values",
+      "headRefOid": "99708333c420dea75b47702340117d37776526f1",
+      "closedAt": "2021-04-25T16:56:43Z",
+      "mergedAt": "2021-04-25T16:56:42Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "1c3eea0f17d064d3a7c9b4a37b66c2b83f4629bc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyODExNjQ0",
+      "title": "Defined missing Information Elements; added generateHandle() function\u2026",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/36",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026 in diagram.\r\n\r\nFixes #20.\r\nFixes #35.\r\n\r\nAlso fixed \"randomized\" (was British English before).\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-25T18:06:32Z",
+      "updatedAt": "2021-04-25T21:03:39Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "db23e3b9a45f65aa2fc83c6bf79ce7f06548e829",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-information-elements",
+      "headRefOid": "43efa98592d22ff85042016d958b31f80797ea7d",
+      "closedAt": "2021-04-25T21:03:39Z",
+      "mergedAt": "2021-04-25T21:03:39Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f89903b0119eb743fde417bcc2d3f56d8c9a5566"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTc4NjI3",
+          "commit": {
+            "abbreviatedOid": "f353dce"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-04-25T20:30:56Z",
+          "updatedAt": "2021-04-25T20:30:57Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nAttester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment\r\n```",
+              "createdAt": "2021-04-25T20:30:57Z",
+              "updatedAt": "2021-04-25T21:03:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTc5NDM2",
+          "commit": {
+            "abbreviatedOid": "4483434"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-04-25T20:41:00Z",
+          "updatedAt": "2021-04-25T20:41:01Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nThis section defines the information elements that are vital to all kinds interaction models.\r\n```",
+              "createdAt": "2021-04-25T20:41:01Z",
+              "updatedAt": "2021-04-25T21:03:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTc5NzAz",
+          "commit": {
+            "abbreviatedOid": "42c5f0a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-25T20:44:10Z",
+          "updatedAt": "2021-04-25T20:44:10Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTgwODk5",
+          "commit": {
+            "abbreviatedOid": "42c5f0a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-04-25T20:59:10Z",
+          "updatedAt": "2021-04-25T20:59:11Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2021-04-25T20:59:10Z",
+              "updatedAt": "2021-04-25T21:03:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTgwOTM3",
+          "commit": {
+            "abbreviatedOid": "3687313"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-04-25T20:59:37Z",
+          "updatedAt": "2021-04-25T20:59:37Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2021-04-25T20:59:37Z",
+              "updatedAt": "2021-04-25T21:03:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTgwOTY0",
+          "commit": {
+            "abbreviatedOid": "733097c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-25T20:59:57Z",
+          "updatedAt": "2021-04-25T20:59:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyODE0NDE2",
+      "title": "Authentication Secret protects Claims included in Evidence.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/37",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #15.\r\nAlso fixes #12.\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-25T18:22:49Z",
+      "updatedAt": "2021-04-25T20:29:43Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "1c3eea0f17d064d3a7c9b4a37b66c2b83f4629bc",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-authentication-secret-id-protection",
+      "headRefOid": "15754116c31f7514041507a8e77ee0f1f06989f1",
+      "closedAt": "2021-04-25T20:29:43Z",
+      "mergedAt": "2021-04-25T20:29:43Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "db23e3b9a45f65aa2fc83c6bf79ce7f06548e829"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTc4NTE4",
+          "commit": {
+            "abbreviatedOid": "1575411"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-25T20:29:38Z",
+          "updatedAt": "2021-04-25T20:29:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyODMwNDEz",
+      "title": "Scope of Claims Set in Claims Selection.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/38",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #19.\r\nIssue: The \u201call Claims\u201d may be ambiguous, I\u2019d like to double check, does\r\nit refer to all Claims that the Attester can create or refer to all\r\nClaims requested in the Claim Selection?\r\n\r\nSolution in this commit: Made it clear.\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-25T20:01:39Z",
+      "updatedAt": "2021-04-25T20:28:51Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "1c3eea0f17d064d3a7c9b4a37b66c2b83f4629bc",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-claims-selection",
+      "headRefOid": "273edeec64b8812b7610d7d093193331d27951f8",
+      "closedAt": "2021-04-25T20:28:51Z",
+      "mergedAt": "2021-04-25T20:28:51Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "7ebe424cb55797b1184443aed1524255a90eb1bd"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0MTc4NDQy",
+          "commit": {
+            "abbreviatedOid": "273edee"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-25T20:28:42Z",
+          "updatedAt": "2021-04-25T20:28:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIyODQxOTY2",
+      "title": "Fixed consistency of diagrams.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/40",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #39.\r\n\r\n* Replaced \"signedEvidence\" with \"evidence\"\r\n* Replaced \"evidenceGeneration\" with \"evidenceGeneration\"\r\n* Replaced \"collectClaims(claimSelection)\" with \"collectClaims(claimsDelta, claimSelection)\"\r\n* Fixed alignment/layout of return arrows\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-25T21:18:26Z",
+      "updatedAt": "2021-04-26T05:40:07Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "f89903b0119eb743fde417bcc2d3f56d8c9a5566",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-diagrams-consistency",
+      "headRefOid": "ac0a0fa43535e89d7fb05c0203ba8fd01b65e5dd",
+      "closedAt": "2021-04-26T05:40:06Z",
+      "mergedAt": "2021-04-26T05:40:06Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "92cb3a429b31792c6243e24c745643e68f7e7ebf"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjQ0Mjc4OTk4",
+          "commit": {
+            "abbreviatedOid": "ac0a0fa"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-26T05:39:58Z",
+          "updatedAt": "2021-04-26T05:39:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjIzMDA3NDQ0",
+      "title": "Fixed Attester Identity.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/41",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #10.\r\nFixes #13.\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-04-26T06:35:41Z",
+      "updatedAt": "2021-07-12T19:49:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "92cb3a429b31792c6243e24c745643e68f7e7ebf",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-attester-identity",
+      "headRefOid": "4baa5b11941e2510c8d60e426a52a79ee397af8a",
+      "closedAt": "2021-07-12T19:49:19Z",
+      "mergedAt": "2021-07-12T19:49:19Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "004b822538dad3ccc30f051adfd57d77abbd3100"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzA0NDgzMjcw",
+          "commit": {
+            "abbreviatedOid": "4baa5b1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "As discussed, polish can happen later",
+          "createdAt": "2021-07-12T19:49:09Z",
+          "updatedAt": "2021-07-12T19:49:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "MDExOlB1bGxSZXF1ZXN0Njg1NTU2OTY2",
+      "title": "Draft: Introduced publish-subscribe model.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/43",
+      "state": "CLOSED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "Resolves #42.\r\n* Introduced publish-subscribe model.\r\n* Removed \"delta\" TODO as there was nothing to be fixed.\r\n* Fixed line break in uni-directional diagram.\r\n\r\nSigned-off-by: Michael Eckel <michael.eckel@sit.fraunhofer.de>",
+      "createdAt": "2021-07-07T22:40:54Z",
+      "updatedAt": "2022-01-26T17:37:53Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "92cb3a429b31792c6243e24c745643e68f7e7ebf",
+      "headRepository": "eckelmeckel/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "add-pubsub-attestation-model",
+      "headRefOid": "e05ce9cdfc1dbdcde5d2e01010e5cd16d7310aca",
+      "closedAt": "2022-01-26T17:37:53Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ericvoit",
+          "authorAssociation": "NONE",
+          "body": "I think that this Pull is premature for commit.   Several reasons include:\r\n\r\n(1) It introduces new terms / roles which are not included in the Architecture document.  E.g., the PubSub server.  \r\n\r\n(2) This seems to be a very large scope change to an already adopted document.  Likely there needs to be discussion on the list of the meaning of the functionality.\r\n\r\n(3)  There is draft-birkholz-rats-network-device-subscription which includes items like Subscription identifier.  However this PR doesn't describe the relationship to draft-birkholz-rats-network-device-subscription.\r\n\r\n(4)  Basic questions on capability discovery (like how to know what streams are available for subscription) are already handled elsewhere in places like NETCONF, RESTCONF, etc.  Do we need additional documents describing these functions specific to RATS?",
+          "createdAt": "2021-07-12T20:00:12Z",
+          "updatedAt": "2021-07-12T20:00:12Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Abandoning this item for the moment to become future work in a different document.",
+          "createdAt": "2022-01-26T17:37:53Z",
+          "updatedAt": "2022-01-26T17:37:53Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzE0Njk5MTIy",
+          "commit": {
+            "abbreviatedOid": "e05ce9c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "Most of this content should fuel an additional I-D that provides guidance and orchestration, as it would add new roles and has to be harmonized with other I-Ds close to adoptions (such as network device subscription). Not abandoned, but deferred.",
+          "createdAt": "2021-07-26T10:44:35Z",
+          "updatedAt": "2021-07-26T10:44:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "MDExOlB1bGxSZXF1ZXN0Njk2OTEwNjYz",
+      "title": "fixex #12",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/44",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-07-26T10:45:46Z",
+      "updatedAt": "2021-07-26T10:47:40Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "a0baf21ebaffc48bee7ff6dc31609258ab528077",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "auth-secret",
+      "headRefOid": "474b2e01812c043d734f38d1de3d3c2bbf8681ef",
+      "closedAt": "2021-07-26T10:47:40Z",
+      "mergedAt": "2021-07-26T10:47:40Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "38a0092d442c2428540f36c3a024a700d442be37"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 45,
+      "id": "MDExOlB1bGxSZXF1ZXN0Njk2OTQzNTU1",
+      "title": "nits fixed by Michael transplanted here from PR #43",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/45",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2021-07-26T11:29:31Z",
+      "updatedAt": "2021-07-26T11:30:52Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "38a0092d442c2428540f36c3a024a700d442be37",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "michaels-polish",
+      "headRefOid": "919c676fbd4e81eeaec8ab841bc1e5f5102ea77a",
+      "closedAt": "2021-07-26T11:30:52Z",
+      "mergedAt": "2021-07-26T11:30:52Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "0d3b884e7bcf8401e4edd529b2768f321a132c35"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOEYizNM4xjoA2",
+      "title": "First draft of adding Interaction Model examples",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/46",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "henkbirkholz",
+        "yogeshbdeshpande"
+      ],
+      "labels": [],
+      "body": "@henkbirkholz : Please let me know, your views as to how is the information flow and anything else, we need to add?",
+      "createdAt": "2022-01-25T12:46:36Z",
+      "updatedAt": "2022-01-27T02:06:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "0d3b884e7bcf8401e4edd529b2768f321a132c35",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "rats-example-branch",
+      "headRefOid": "23bc4c58dc22a307d61c6cc905f97c3169b8b18e",
+      "closedAt": "2022-01-26T17:55:03Z",
+      "mergedAt": "2022-01-26T17:55:03Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "e44940656788aae4da81bdcf4af9e148b4bbeeb1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM4zaM98",
+          "commit": {
+            "abbreviatedOid": "d56dbd1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2022-01-25T16:01:42Z",
+          "updatedAt": "2022-01-25T16:06:07Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nAccording to the RATS Architecture , two reference models for Challenge/Response Attestation have been proposed. This sections highlights the information flows between the Attester, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.\r\n```",
+              "createdAt": "2022-01-25T16:01:42Z",
+              "updatedAt": "2022-01-25T16:06:07Z"
+            },
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\r\nThe background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but relays the message and optionally checks it's signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a  with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier appraises the received Evidence according to its Appraisal Policy for Evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the\r\n```",
+              "createdAt": "2022-01-25T16:05:50Z",
+              "updatedAt": "2022-01-25T16:06:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zfgS6",
+          "commit": {
+            "abbreviatedOid": "e918295"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-01-26T17:50:32Z",
+          "updatedAt": "2022-01-26T17:58:25Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nThe passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a\r\n```",
+              "createdAt": "2022-01-26T17:50:32Z",
+              "updatedAt": "2022-01-26T17:58:25Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nAccording to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This sections highlights the information flows bewteen the Attester, Verifier and Relying Party undergoing Remote Attestation Procedure, using these models.\r\n```",
+              "createdAt": "2022-01-26T17:51:18Z",
+              "updatedAt": "2022-01-26T17:58:25Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nthen gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the attester.\r\n```",
+              "createdAt": "2022-01-26T17:55:34Z",
+              "updatedAt": "2022-01-26T17:58:26Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "there seems to be a problem with NL here",
+              "createdAt": "2022-01-26T17:56:40Z",
+              "updatedAt": "2022-01-26T17:58:26Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\nThe background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but realys the message and optionally check its signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a session with the Verifier. Once session is established, it forwards the received Evidence to the Verfier. The Verifier, appraises the received Evidence according to its appraisal policy for evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.\r\n```",
+              "createdAt": "2022-01-26T17:57:00Z",
+              "updatedAt": "2022-01-26T17:58:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zfkHW",
+          "commit": {
+            "abbreviatedOid": "23bc4c5"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-01-26T18:02:34Z",
+          "updatedAt": "2022-01-26T18:02:34Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "Sure thanks Thomas, will look into this later today!",
+              "createdAt": "2022-01-26T18:02:34Z",
+              "updatedAt": "2022-01-26T18:02:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zfkfZ",
+          "commit": {
+            "abbreviatedOid": "23bc4c5"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-01-26T18:03:27Z",
+          "updatedAt": "2022-01-26T18:03:28Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "I think, I have already addressed it!\r\n\r\nThank You!",
+              "createdAt": "2022-01-26T18:03:27Z",
+              "updatedAt": "2022-01-26T18:03:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zfkoD",
+          "commit": {
+            "abbreviatedOid": "23bc4c5"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-01-26T18:03:47Z",
+          "updatedAt": "2022-01-26T18:03:47Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Will correct this in next revision!",
+              "createdAt": "2022-01-26T18:03:47Z",
+              "updatedAt": "2022-01-26T18:03:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zcbBG",
+          "commit": {
+            "abbreviatedOid": "e918295"
+          },
+          "author": "William-PanWei",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2022-01-26T03:40:42Z",
+          "updatedAt": "2022-01-27T01:57:21Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nAccording to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed. This section highlights the information flows between the Attestor, Verifier, and Relying Party undergoing Remote Attestation Procedure, using these models.\r\n```",
+              "createdAt": "2022-01-26T03:40:42Z",
+              "updatedAt": "2022-01-27T01:57:21Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nThe passport model is so named because of its resemblance to how nations issue passports to their citizens. In this Model, the attestation sequence is a\r\n```",
+              "createdAt": "2022-01-26T03:40:56Z",
+              "updatedAt": "2022-01-27T01:57:21Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\ntwo-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier\r\n```",
+              "createdAt": "2022-01-26T03:42:00Z",
+              "updatedAt": "2022-01-27T01:57:21Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nthen gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.\r\n```",
+              "createdAt": "2022-01-26T03:42:52Z",
+              "updatedAt": "2022-01-27T01:59:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zhDZR",
+          "commit": {
+            "abbreviatedOid": "23bc4c5"
+          },
+          "author": "William-PanWei",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-01-27T02:02:32Z",
+          "updatedAt": "2022-01-27T02:02:32Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "The width of this diagram exceeds the width limitation of the I-D.",
+              "createdAt": "2022-01-27T02:02:32Z",
+              "updatedAt": "2022-01-27T02:02:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM4zhDzX",
+          "commit": {
+            "abbreviatedOid": "23bc4c5"
+          },
+          "author": "William-PanWei",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-01-27T02:06:19Z",
+          "updatedAt": "2022-01-27T02:06:19Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\nThe background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks. In this model, the attestation sequence is initiated by a Relying Party. The Attester conveys Evidence to the Relying Party, which does not process its payload, but relays the message and optionally checks its signature against a policed trust anchor store. Upon receiving the evidence the Relying Party initiates a session with the Verifier. Once the session is established, it forwards the received Evidence to the Verifier. The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party. The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.\r\n```",
+              "createdAt": "2022-01-27T02:06:19Z",
+              "updatedAt": "2022-01-27T02:06:19Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOEYizNM4xogEt",
+      "title": "Fix daigrams",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/47",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@henkbirkholz Could you please check if this version Editor copy comes up nicely ?",
+      "createdAt": "2022-01-26T18:36:28Z",
+      "updatedAt": "2022-01-26T19:43:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "e44940656788aae4da81bdcf4af9e148b4bbeeb1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "further-tidyup",
+      "headRefOid": "cc56328bb0d1a868ad889baca1dc4098e5ddb338",
+      "closedAt": "2022-01-26T19:43:19Z",
+      "mergedAt": "2022-01-26T19:43:19Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "001c86289fbc02274a96cc4719f6735bfafc4dbc"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOEYizNM4xppwi",
+      "title": "fix some typos and optimize the newly added diagrams to adapt to the width limitation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/48",
+      "state": "MERGED",
+      "author": "William-PanWei",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "fix some typos and optimize the newly added diagrams to adapt to the width limitation",
+      "createdAt": "2022-01-27T03:21:26Z",
+      "updatedAt": "2022-01-27T08:21:00Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "7c6bc71a38fb4e0715b267407b551acc40175dda",
+      "headRepository": "William-PanWei/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "patch-1",
+      "headRefOid": "af9ba2fb21ca7724578753bdeb9e9be8477ffc4b",
+      "closedAt": "2022-01-27T08:21:00Z",
+      "mergedAt": "2022-01-27T08:21:00Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "fe92482dfac6e8dc30e17492f6b47b49b07e009e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM4zh28N",
+          "commit": {
+            "abbreviatedOid": "af9ba2f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thanks Wei!\r\n\r\nMy humongous backlog told me \"you'll fix this later\" and now you did. Awesome!",
+          "createdAt": "2022-01-27T08:20:34Z",
+          "updatedAt": "2022-01-27T08:20:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOEYizNM5Il4cQ",
+      "title": "Update draft-ietf-rats-reference-interaction-models.md",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/49",
+      "state": "MERGED",
+      "author": "doubl3dge",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "typo fix",
+      "createdAt": "2023-01-26T13:39:59Z",
+      "updatedAt": "2023-09-06T14:35:54Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "fe92482dfac6e8dc30e17492f6b47b49b07e009e",
+      "headRepository": "doubl3dge/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "master",
+      "headRefOid": "083c4d57f7902241f43e37caf11b11f804c5def6",
+      "closedAt": "2023-09-06T14:35:54Z",
+      "mergedAt": "2023-09-06T14:35:54Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "4dd3dd29d0f432765cab6c06608316b6bd7414ac"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM5gLCNU",
+          "commit": {
+            "abbreviatedOid": "083c4d5"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-09-06T14:35:43Z",
+          "updatedAt": "2023-09-06T14:35:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOEYizNM5Z9Uo5",
+      "title": "Add pubsub attestation model v2",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/50",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-09-10T18:26:42Z",
+      "updatedAt": "2024-03-04T20:53:44Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "4dd3dd29d0f432765cab6c06608316b6bd7414ac",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "add-pubsub-attestation-model-v2",
+      "headRefOid": "bcfd21302b8d2b652253400fb95cd58c7dbd792f",
+      "closedAt": "2024-03-04T20:53:44Z",
+      "mergedAt": "2024-03-04T20:53:44Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "c693a2148641eaf8b3766a578b57944ce0111f84"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
