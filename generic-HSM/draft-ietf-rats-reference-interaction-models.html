@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Reference Interaction Models for Remote Attestation Procedures</title>
+<meta content="Henk Birkholz" name="author">
+<meta content="Michael Eckel" name="author">
+<meta content="Wei Pan" name="author">
+<meta content="Eric Voit" name="author">
+<meta content="
+       This document describes interaction models for remote attestation procedures (RATS).
+Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
+Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. 
+    " name="description">
+<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="Internet-Draft" name="keyword">
+<meta content="draft-ietf-rats-reference-interaction-models-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.22.0
+    Python 3.12.3
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 69.5.1
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-rats-reference-interaction-models.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">REIM</td>
+<td class="right">July 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Birkholz, et al.</td>
+<td class="center">Expires 4 January 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">RATS Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-rats-reference-interaction-models-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-07-03" class="published">3 July 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-01-04">4 January 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">H. Birkholz</div>
+<div class="org">Fraunhofer SIT</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Eckel</div>
+<div class="org">Fraunhofer SIT</div>
+</div>
+<div class="author">
+      <div class="author-name">W. Pan</div>
+<div class="org">Huawei Technologies</div>
+</div>
+<div class="author">
+      <div class="author-name">E. Voit</div>
+<div class="org">Cisco</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Reference Interaction Models for Remote Attestation Procedures</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document describes interaction models for remote attestation procedures (RATS).
+Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
+Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Discussion of this document takes place on the
+  RATS Working Group mailing list (rats@ietf.org),
+  which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/rats/">https://mailarchive.ietf.org/arch/browse/rats/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+  <span><a href="https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models">https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 4 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-disambiguation" class="internal xref">Disambiguation</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-scope-and-intent" class="internal xref">Scope and Intent</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-essential-requirements" class="internal xref">Essential Requirements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-endorsement-of-attesting-en" class="internal xref">Endorsement of Attesting Environments</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-prerequisites" class="internal xref">Normative Prerequisites</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-generic-information-element" class="internal xref">Generic Information Elements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-interaction-models" class="internal xref">Interaction Models</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-challenge-response-remote-a" class="internal xref">Challenge/Response Remote Attestation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.1">
+                    <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="auto internal xref">7.1.1</a>.  <a href="#name-models-and-example-sequence" class="internal xref">Models and Example Sequences of Challenge/Response Remote Attestation</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-uni-directional-remote-atte" class="internal xref">Uni-Directional Remote Attestation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-streaming-remote-attestatio" class="internal xref">Streaming Remote Attestation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.1">
+                    <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="auto internal xref">7.3.1</a>.  <a href="#name-streaming-remote-attestation" class="internal xref">Streaming Remote Attestation without a Broker</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.2">
+                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="auto internal xref">7.3.2</a>.  <a href="#name-streaming-remote-attestation-" class="internal xref">Streaming Remote Attestation with a Broker</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-additional-application-spec" class="internal xref">Additional Application-Specific Requirements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-confidentiality" class="internal xref">Confidentiality</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-mutual-authentication" class="internal xref">Mutual Authentication</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-hardware-enforcement-suppor" class="internal xref">Hardware-Enforcement/Support</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-implementation-status" class="internal xref">Implementation Status</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-implementer" class="internal xref">Implementer</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-implementation-name" class="internal xref">Implementation Name</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-implementation-url" class="internal xref">Implementation URL</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-maturity" class="internal xref">Maturity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-coverage-and-version-compat" class="internal xref">Coverage and Version Compatibility</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
+                <p id="section-toc.1-1.9.2.6.1"><a href="#section-9.6" class="auto internal xref">9.6</a>.  <a href="#name-license" class="internal xref">License</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.7">
+                <p id="section-toc.1-1.9.2.7.1"><a href="#section-9.7" class="auto internal xref">9.7</a>.  <a href="#name-implementation-dependencies" class="internal xref">Implementation Dependencies</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.8">
+                <p id="section-toc.1-1.9.2.8.1"><a href="#section-9.8" class="auto internal xref">9.8</a>.  <a href="#name-contact" class="internal xref">Contact</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-security-and-privacy-consid" class="internal xref">Security and Privacy Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-cddl-specification-for-a-si" class="internal xref">CDDL Specification for a simple CoAP Challenge/Response Interaction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">Remote ATtestation procedureS (RATS, <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>) are workflows composed of roles and interactions, in which Verifiers create Attestation Results about the trustworthiness of an Attester's system component characteristics.
+The Verifier's assessment in the form of Attestation Results is created based on Attestation Policies and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics -- generated by an Attester.
+The roles <em>Attester</em> and <em>Verifier</em>, as well as the Conceptual Messages <em>Evidence</em> and <em>Attestation Results</em> are concepts defined by the RATS Architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+This document defines interaction models that can be used in specific RATS-related solution documents.
+The primary focus of this document is the conveyance of attestation Evidence. The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.
+Specific goals of this document are to:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-1-2">
+<li id="section-1-2.1">
+          <p id="section-1-2.1.1">prevent inconsistencies in descriptions of interaction models in other documents (due to text cloning and evolution over time), and to<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-1-2.2">
+          <p id="section-1-2.2.1">enable to highlight an exact delta/divergence between the core set of characteristics captured here in this document and variants of these interaction models used in other specifications or solutions.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-1-3">In summary, this document enables the specification and design of trustworthy and privacy preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
+While the conveyance of other Conceptual Messages is out-of-scope the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.<a href="#section-1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-2">
+      <h2 id="name-terminology">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-2-1">This document uses the following set of terms, roles, and concepts as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>:
+Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">A PKIX Certificate is an X.509v3 format certificate as specified by <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+"MAY", and "OPTIONAL" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<div id="disambiguation">
+<section id="section-2.1">
+        <h3 id="name-disambiguation">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-disambiguation" class="section-name selfRef">Disambiguation</a>
+        </h3>
+<p id="section-2.1-1">The term "Remote Attestation" is a common expression and often associated or connoted with certain properties.
+The term "Remote" in this context does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
+It rather refers to decoupled systems or entities that exchange the payload of the Conceptual Message type called Evidence <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
+Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include: a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g. embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in Section 3.1 Two Types of Environments of an Attester in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and the definition of Attestation as described in <span>[<a href="#I-D.ietf-rats-tpm-based-network-device-attest" class="cite xref">I-D.ietf-rats-tpm-based-network-device-attest</a>]</span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="scope-and-intent">
+<section id="section-3">
+      <h2 id="name-scope-and-intent">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-scope-and-intent" class="section-name selfRef">Scope and Intent</a>
+      </h2>
+<p id="section-3-1">This document focuses on generic interaction models between Attesters and Verifiers in order to convey Evidence.
+Complementary procedures, functions, or services that are required for a complete semantic binding of the concepts defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are out-of-scope of this document.
+Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">For instance, using the results of a remote attestation procedure that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
+Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
+Analogously, deviations from the generic model descriptions in this document can be illustrated in solutions documents to highlight distinct contributions.<a href="#section-3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="essential-requirements">
+<section id="section-4">
+      <h2 id="name-essential-requirements">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-essential-requirements" class="section-name selfRef">Essential Requirements</a>
+      </h2>
+<p id="section-4-1">In order to ensure appropriate conveyance of Evidence, there exist essential requirements which MUST be fulfilled:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4-2">
+        <dt id="section-4-2.1">Integrity:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.2">
+          <p id="section-4-2.2.1">Information provided by an Attester MUST be integral. This may be achieved by means of a digital signature over Attestation Evidence. The signature may be symmetric, such as an HMAC, or asymmetric, such as ECDSA.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-4-2.3">Authentication:</dt>
+        <dd style="margin-left: 1.5em" id="section-4-2.4">
+          <p id="section-4-2.4.1">The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<div id="endorsement-of-attesting-environments">
+<section id="section-4.1">
+        <h3 id="name-endorsement-of-attesting-en">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-endorsement-of-attesting-en" class="section-name selfRef">Endorsement of Attesting Environments</a>
+        </h3>
+<p id="section-4.1-1">Via its Attesting Environments, an Attester only generates Evidence about its Target Environments.
+After being appraised to be trustworthy, a Target Environment may become a new Attesting Environment in charge of generating Evidence for further Target Environments.
+<span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> explains this as Layered Attestation.
+Layered Attestation has to start with an initial Attesting Environment. In essence, there cannot be turtles all the way down <span>[<a href="#turtles" class="cite xref">turtles</a>]</span>.
+At this rock bottom of Layered Attestation, the Attesting Environments are always called Roots of Trust (RoT).
+An Attester cannot generate Evidence about its own RoTs by design.
+As a consequence, a Verifier requires trustable statements about this subset of Attesting Environments from a different source than the Attester itself.
+The corresponding trustable statements are called Endorsements and originate from external, trustable entities that take on the role of an Endorser (e.g., supply chain entities).<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="normative-prerequisites">
+<section id="section-5">
+      <h2 id="name-normative-prerequisites">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-prerequisites" class="section-name selfRef">Normative Prerequisites</a>
+      </h2>
+<p id="section-5-1">In order to ensure an appropriate conveyance of Evidence via interaction models in general, the following set of prerequisites MUST be in place to support the implementation of interaction models:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5-2">
+        <dt id="section-5-2.1">Authentication Secret:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.2">
+          <p id="section-5-2.2.1">An Authentication Secret MUST be available exclusively to an Attesting Environment of an Attester.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.3"></dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.4">
+          <p id="section-5-2.4.1">The Attester MUST protect Claims with that Authentication Secret, thereby proving the authenticity of the Claims included in Evidence.
+The Authentication Secret MUST be established before RATS can take place.<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.5">Attester Identity:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.6">
+          <p id="section-5-2.6.1">A statement about a distinguishable Attester made by an Endorser.<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.7"></dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.8">
+          <p id="section-5-2.8.1">The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.<a href="#section-5-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.9"></dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.10">
+          <p id="section-5-2.10.1">An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester.
+It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>.<a href="#section-5-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.11">Attestation Evidence Authenticity:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.12">
+          <p id="section-5-2.12.1">Attestation Evidence MUST be authentic.<a href="#section-5-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.13"></dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.14">
+          <p id="section-5-2.14.1">In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.<a href="#section-5-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.15">Evidence Freshness:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.16">
+          <p id="section-5-2.16.1">Evidence MUST include an indicator about its freshness that can be understood by a Verifier. Analogously, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.<a href="#section-5-2.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.17">Evidence Protection:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.18">
+          <p id="section-5-2.18.1">Evidence MUST be a set of well-formatted and well-protected Claims that an Attester can create and convey to a Verifier in a tamper-evident manner.<a href="#section-5-2.18.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="generic-information-elements">
+<section id="section-6">
+      <h2 id="name-generic-information-element">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-generic-information-element" class="section-name selfRef">Generic Information Elements</a>
+      </h2>
+<p id="section-6-1">This section defines the information elements that are vital to all kinds interaction models.
+Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
+Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-6-2">
+        <dt id="section-6-2.1">Authentication Secret IDs ('authSecIDs'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.2">
+          <p id="section-6-2.2.1"><em>mandatory</em><a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.3"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.4">
+          <p id="section-6-2.4.1">A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.5"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.6">
+          <p id="section-6-2.6.1">Each distinguishable Attesting Environment has access to a protected capability that provides an Authentication Secret associated with that Attesting Environment.
+Consequently, an Authentication Secret ID can also identify an Attesting Environment.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.7">Handle ('handle'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.8">
+          <p id="section-6-2.8.1"><em>mandatory</em><a href="#section-6-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.9"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.10">
+          <p id="section-6-2.10.1">A statement that is intended to uniquely distinguish received Evidence and/or determine the freshness of Evidence.<a href="#section-6-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.11"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.12">
+          <p id="section-6-2.12.1">A Verifier can also use a Handle as an indicator for authenticity or attestation provenance, as only Attesters and Verifiers that are intended to exchange Evidence should have knowledge of the corresponding Handles. Examples include Nonces or signed timestamps.<a href="#section-6-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.13">Claims ('claims'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.14">
+          <p id="section-6-2.14.1"><em>mandatory</em><a href="#section-6-2.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.15"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.16">
+          <p id="section-6-2.16.1">Claims are assertions that represent characteristics of an Attester's Target Environment.<a href="#section-6-2.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.17"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.18">
+          <p id="section-6-2.18.1">Claims are part of a Conceptual Message and are, for example, used to appraise the integrity of Attesters via Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.<a href="#section-6-2.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.19">Event Logs ('eventLogs'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.20">
+          <p id="section-6-2.20.1"><em>optional</em><a href="#section-6-2.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.21"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.22">
+          <p id="section-6-2.22.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to support Claim reproducibility by providing information on how Claims originated.<a href="#section-6-2.22.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.23">Reference Values ('refValues')</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.24">
+          <p id="section-6-2.24.1"><em>mandatory</em><a href="#section-6-2.24.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.25"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.26">
+          <p id="section-6-2.26.1">Reference Values as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.<a href="#section-6-2.26.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.27">Claim Selection ('claimSelection'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.28">
+          <p id="section-6-2.28.1"><em>optional</em><a href="#section-6-2.28.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.29"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.30">
+          <p id="section-6-2.30.1">A (sub-)set of Claims which can be created by an Attester.<a href="#section-6-2.30.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.31"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.32">
+          <p id="section-6-2.32.1">Claim Selections act as filters to specify the exact set of Claims to be included in Evidence. In a remote attestation process, a Verifier sends a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.33">Collected Claims ('collectedClaims'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.34">
+          <p id="section-6-2.34.1"><em>mandatory</em><a href="#section-6-2.34.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.35"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.36">
+          <p id="section-6-2.36.1">Collected Claims represent a (sub-)set of Claims created by an Attester.<a href="#section-6-2.36.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.37"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.38">
+          <p id="section-6-2.38.1">Collected Claims are gathered based on the Claims selected in the Claim Selection. If a Verifier does not provide a Claim Selection, then all available Claims on the Attester are part of the Collected Claims.<a href="#section-6-2.38.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.39">Evidence ('evidence'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.40">
+          <p id="section-6-2.40.1"><em>mandatory</em><a href="#section-6-2.40.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.41"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.42">
+          <p id="section-6-2.42.1">A set of Claims that consists of a list of Authentication Secret IDs that each identifies an Authentication Secret in a single Attesting Environment, the Attester Identity, Claims, and a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritative.<a href="#section-6-2.42.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.43">Attestation Result ('attestationResult'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.44">
+          <p id="section-6-2.44.1"><em>mandatory</em><a href="#section-6-2.44.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.45"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.46">
+          <p id="section-6-2.46.1">An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence. Attestation Results include condensed assertions about integrity or other characteristics of the corresponding Attester that are processible by Relying Parties.<a href="#section-6-2.46.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="interaction-models">
+<section id="section-7">
+      <h2 id="name-interaction-models">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-interaction-models" class="section-name selfRef">Interaction Models</a>
+      </h2>
+<p id="section-7-1">The following subsections introduce and illustrate the interaction models:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7-2">
+<li id="section-7-2.1">
+          <p id="section-7-2.1.1">Challenge/Response Remote Attestation<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-7-2.2">
+          <p id="section-7-2.2.1">Uni-Directional Remote Attestation<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-7-2.3">
+          <p id="section-7-2.3.1">Streaming Remote Attestation<a href="#section-7-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-7-3">Each section starts with a sequence diagram illustrating the interactions between Attester and Verifier.
+While the presented interaction models focus on the conveyance of Evidence, the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">All interaction models have a strong focus on the use of a handle to incorporate a type of proof of freshness and to prevent replay attacks.
+The way these handles are processed is the most prominent difference between the three interaction models.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<div id="challengeresponse-remote-attestation">
+<section id="section-7.1">
+        <h3 id="name-challenge-response-remote-a">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-challenge-response-remote-a" class="section-name selfRef">Challenge/Response Remote Attestation</a>
+        </h3>
+<div id="section-7.1-1">
+          <div class="alignLeft art-svg artwork" id="section-7.1-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="416" width="584" viewBox="0 0 584 416" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+              <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+              <path d="M 48,144 L 48,192" fill="none" stroke="black"></path>
+              <path d="M 48,224 L 48,240" fill="none" stroke="black"></path>
+              <path d="M 48,272 L 48,320" fill="none" stroke="black"></path>
+              <path d="M 48,352 L 48,400" fill="none" stroke="black"></path>
+              <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+              <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+              <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+              <path d="M 536,112 L 536,320" fill="none" stroke="black"></path>
+              <path d="M 536,384 L 536,400" fill="none" stroke="black"></path>
+              <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+              <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+              <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+              <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+              <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+              <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+              <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+              <path d="M 56,176 L 80,176" fill="none" stroke="black"></path>
+              <path d="M 224,304 L 528,304" fill="none" stroke="black"></path>
+              <path d="M 8,334 L 208,334" fill="none" stroke="black"></path>
+              <path d="M 8,338 L 208,338" fill="none" stroke="black"></path>
+              <path d="M 376,334 L 576,334" fill="none" stroke="black"></path>
+              <path d="M 376,338 L 576,338" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="536,304 524,298.4 524,309.6" fill="black" transform="rotate(0,528,304)"></polygon>
+              <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+              <g class="text">
+                <text x="52" y="52">Attester</text>
+                <text x="532" y="52">Verifier</text>
+                <text x="176" y="100">[Evidence</text>
+                <text x="260" y="100">Generation</text>
+                <text x="320" y="100">and</text>
+                <text x="384" y="100">Conveyance]</text>
+                <text x="48" y="116">|</text>
+                <text x="164" y="132">generateClaims(attestingEnvironment)</text>
+                <text x="68" y="148">=&gt;</text>
+                <text x="112" y="148">claims,</text>
+                <text x="184" y="148">eventLogs</text>
+                <text x="196" y="180">requestAttestation(handle,</text>
+                <text x="352" y="180">authSecIDs,</text>
+                <text x="464" y="180">claimSelection)</text>
+                <text x="104" y="212">collectClaims(claims,</text>
+                <text x="256" y="212">claimSelection)</text>
+                <text x="68" y="228">=&gt;</text>
+                <text x="144" y="228">collectedClaims</text>
+                <text x="116" y="260">generateEvidence(handle,</text>
+                <text x="264" y="260">authSecIDs,</text>
+                <text x="380" y="260">collectedClaims)</text>
+                <text x="68" y="276">=&gt;</text>
+                <text x="116" y="276">evidence</text>
+                <text x="96" y="308">evidence,</text>
+                <text x="176" y="308">eventLogs</text>
+                <text x="248" y="340">[Evidence</text>
+                <text x="332" y="340">Appraisal]</text>
+                <text x="536" y="356">|</text>
+                <text x="284" y="372">appraiseEvidence(evidence,</text>
+                <text x="436" y="372">eventLogs,</text>
+                <text x="524" y="372">refValues)</text>
+                <text x="432" y="388">attestationResult</text>
+                <text x="516" y="388">&lt;=</text>
+              </g>
+            </svg><a href="#section-7.1-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.1-2">The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events in a system. Claims are produced by all attesting Environments of an Attester system.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, a list of Authentication Secret IDs, and a Claim Selection.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">In the Challenge/Response model, the handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
+The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1-5">The list of Authentication Secret IDs selects the attestation keys with which the Attester is requested to sign the Attestation Evidence.
+Each selected key is uniquely associated with an Attesting Environment of the Attester.
+As a result, a single Authentication Secret ID identifies a single Attesting Environment.
+Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Authentication Secret IDs.
+Methods to acquire Authentication Secret IDs or mappings between Attesting Environments to Authentication Secret IDs are out-of-scope of this document.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1-6">The Attester collects Claims based on the Claim Selection. With the Claim Selection the Verifier defines the set of Claims it requires.
+Correspondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
+If the Claim Selection is omitted, then by default all Claims that are known and available on the Attester MUST be used to create corresponding Evidence.
+For example, when performing a boot integrity evaluation, a Verifier may only be requesting a particular subset of claims about the Attester, such as Evidence about BIOS/UEFI and firmware that the Attester booted up, and not include information about all currently running software.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
+<p id="section-7.1-7">With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+<p id="section-7.1-8">While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
+For further reference see section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 10</a>.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1-9">As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence.
+For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
+Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
+The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+<div id="models-and-example-sequences-of-challengeresponse-remote-attestation">
+<section id="section-7.1.1">
+          <h4 id="name-models-and-example-sequence">
+<a href="#section-7.1.1" class="section-number selfRef">7.1.1. </a><a href="#name-models-and-example-sequence" class="section-name selfRef">Models and Example Sequences of Challenge/Response Remote Attestation</a>
+          </h4>
+<p id="section-7.1.1-1">According to the RATS Architecture, two reference models for Challenge/Response Attestation have been proposed.
+This section highlights the information flows between the Attester, Verifier, and Relying Party undergoing Remote Attestation Procedure, using these models.<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
+<div id="passport-model">
+<section id="section-7.1.1.1">
+            <h5 id="name-passport-model">
+<a href="#section-7.1.1.1" class="section-number selfRef">7.1.1.1. </a><a href="#name-passport-model" class="section-name selfRef">Passport Model</a>
+            </h5>
+<p id="section-7.1.1.1-1">The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
+two-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier
+then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
+<div id="section-7.1.1.1-2">
+              <div class="alignLeft art-svg artwork" id="section-7.1.1.1-2.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="608" width="584" viewBox="0 0 584 608" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                  <path d="M 48,144 L 48,208" fill="none" stroke="black"></path>
+                  <path d="M 48,240 L 48,256" fill="none" stroke="black"></path>
+                  <path d="M 48,304 L 48,352" fill="none" stroke="black"></path>
+                  <path d="M 48,384 L 48,512" fill="none" stroke="black"></path>
+                  <path d="M 48,544 L 48,592" fill="none" stroke="black"></path>
+                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 312,32 L 312,64" fill="none" stroke="black"></path>
+                  <path d="M 360,64 L 360,80" fill="none" stroke="black"></path>
+                  <path d="M 360,112 L 360,160" fill="none" stroke="black"></path>
+                  <path d="M 360,208 L 360,352" fill="none" stroke="black"></path>
+                  <path d="M 360,416 L 360,488" fill="none" stroke="black"></path>
+                  <path d="M 360,544 L 360,592" fill="none" stroke="black"></path>
+                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 440,32 L 440,64" fill="none" stroke="black"></path>
+                  <path d="M 504,64 L 504,80" fill="none" stroke="black"></path>
+                  <path d="M 504,112 L 504,352" fill="none" stroke="black"></path>
+                  <path d="M 504,384 L 504,512" fill="none" stroke="black"></path>
+                  <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
+                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                  <path d="M 312,32 L 400,32" fill="none" stroke="black"></path>
+                  <path d="M 440,32 L 568,32" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 312,64 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 440,64 L 568,64" fill="none" stroke="black"></path>
+                  <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+                  <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+                  <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+                  <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+                  <path d="M 56,176 L 224,176" fill="none" stroke="black"></path>
+                  <path d="M 240,336 L 352,336" fill="none" stroke="black"></path>
+                  <path d="M 8,366 L 208,366" fill="none" stroke="black"></path>
+                  <path d="M 8,370 L 208,370" fill="none" stroke="black"></path>
+                  <path d="M 376,366 L 576,366" fill="none" stroke="black"></path>
+                  <path d="M 376,370 L 576,370" fill="none" stroke="black"></path>
+                  <path d="M 56,464 L 200,464" fill="none" stroke="black"></path>
+                  <path d="M 304,496 L 496,496" fill="none" stroke="black"></path>
+                  <path d="M 8,526 L 160,526" fill="none" stroke="black"></path>
+                  <path d="M 8,530 L 160,530" fill="none" stroke="black"></path>
+                  <path d="M 416,526 L 576,526" fill="none" stroke="black"></path>
+                  <path d="M 416,530 L 576,530" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="504,496 492,490.4 492,501.6" fill="black" transform="rotate(0,496,496)"></polygon>
+                  <polygon class="arrowhead" points="360,336 348,330.4 348,341.6" fill="black" transform="rotate(0,352,336)"></polygon>
+                  <polygon class="arrowhead" points="64,464 52,458.4 52,469.6" fill="black" transform="rotate(180,56,464)"></polygon>
+                  <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                  <g class="text">
+                    <text x="52" y="52">Attester</text>
+                    <text x="356" y="52">Verifier</text>
+                    <text x="480" y="52">Relying</text>
+                    <text x="536" y="52">Party</text>
+                    <text x="176" y="100">[Evidence</text>
+                    <text x="260" y="100">Generation</text>
+                    <text x="320" y="100">and</text>
+                    <text x="384" y="100">Conveyance]</text>
+                    <text x="48" y="116">|</text>
+                    <text x="164" y="132">generateClaims(attestingEnvironment)</text>
+                    <text x="68" y="148">=&gt;</text>
+                    <text x="112" y="148">claims,</text>
+                    <text x="184" y="148">eventLogs</text>
+                    <text x="340" y="180">requestAttestation(handle,</text>
+                    <text x="312" y="196">authSecIDs,</text>
+                    <text x="424" y="196">claimSelection)</text>
+                    <text x="104" y="228">collectClaims(claims,</text>
+                    <text x="256" y="228">claimSelection)</text>
+                    <text x="68" y="244">=&gt;</text>
+                    <text x="144" y="244">collectedClaims</text>
+                    <text x="116" y="276">generateEvidence(handle,</text>
+                    <text x="88" y="292">authSecIDs,</text>
+                    <text x="204" y="292">collectedClaims)</text>
+                    <text x="68" y="308">=&gt;</text>
+                    <text x="116" y="308">evidence</text>
+                    <text x="100" y="340">{evidence,</text>
+                    <text x="188" y="340">eventLogs}</text>
+                    <text x="248" y="372">[Evidence</text>
+                    <text x="332" y="372">Appraisal]</text>
+                    <text x="360" y="388">|</text>
+                    <text x="356" y="404">appraiseEvidence(evidence,</text>
+                    <text x="320" y="420">eventLogs</text>
+                    <text x="412" y="420">refValues)</text>
+                    <text x="256" y="436">attestationResult</text>
+                    <text x="340" y="436">&lt;=</text>
+                    <text x="280" y="468">attestationResult</text>
+                    <text x="100" y="500">{evidence,</text>
+                    <text x="220" y="500">attestationResult}</text>
+                    <text x="360" y="516">|</text>
+                    <text x="212" y="532">[Attestation</text>
+                    <text x="292" y="532">Result</text>
+                    <text x="368" y="532">Generation]</text>
+                    <text x="504" y="548">|</text>
+                    <text x="484" y="564">appraiseResult(policy,</text>
+                    <text x="492" y="580">attestationResult)</text>
+                    <text x="504" y="596">|</text>
+                  </g>
+                </svg><a href="#section-7.1.1.1-2.1" class="pilcrow">¶</a>
+</div>
+</div>
+</section>
+</div>
+<div id="background-check-model">
+<section id="section-7.1.1.2">
+            <h5 id="name-background-check-model">
+<a href="#section-7.1.1.2" class="section-number selfRef">7.1.1.2. </a><a href="#name-background-check-model" class="section-name selfRef">Background-Check Model</a>
+            </h5>
+<p id="section-7.1.1.2-1">The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks.
+In this model, the attestation sequence is initiated by a Relying Party.
+The Attester conveys Evidence to the Relying Party, which does not process its payload, but relays the message and optionally checks its signature against a policed trust anchor store.
+Upon receiving the Evidence, the Relying Party initiates a session with the Verifier.
+Once the session is established, it forwards the received Evidence to the Verifier.
+The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party.
+The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.<a href="#section-7.1.1.2-1" class="pilcrow">¶</a></p>
+<div id="section-7.1.1.2-2">
+              <div class="alignLeft art-svg artwork" id="section-7.1.1.2-2.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="656" width="584" viewBox="0 0 584 656" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                  <path d="M 48,112 L 48,160" fill="none" stroke="black"></path>
+                  <path d="M 48,192 L 48,208" fill="none" stroke="black"></path>
+                  <path d="M 48,256 L 48,272" fill="none" stroke="black"></path>
+                  <path d="M 48,320 L 48,368" fill="none" stroke="black"></path>
+                  <path d="M 48,400 L 48,560" fill="none" stroke="black"></path>
+                  <path d="M 48,592 L 48,640" fill="none" stroke="black"></path>
+                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                  <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
+                  <path d="M 336,160 L 336,368" fill="none" stroke="black"></path>
+                  <path d="M 336,400 L 336,560" fill="none" stroke="black"></path>
+                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 480,32 L 480,64" fill="none" stroke="black"></path>
+                  <path d="M 528,64 L 528,80" fill="none" stroke="black"></path>
+                  <path d="M 528,112 L 528,368" fill="none" stroke="black"></path>
+                  <path d="M 528,400 L 528,448" fill="none" stroke="black"></path>
+                  <path d="M 528,496 L 528,560" fill="none" stroke="black"></path>
+                  <path d="M 528,592 L 528,640" fill="none" stroke="black"></path>
+                  <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
+                  <path d="M 568,464 L 568,472" fill="none" stroke="black"></path>
+                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                  <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                  <path d="M 480,32 L 568,32" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 480,64 L 568,64" fill="none" stroke="black"></path>
+                  <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+                  <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+                  <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+                  <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+                  <path d="M 56,128 L 224,128" fill="none" stroke="black"></path>
+                  <path d="M 240,352 L 328,352" fill="none" stroke="black"></path>
+                  <path d="M 8,382 L 208,382" fill="none" stroke="black"></path>
+                  <path d="M 8,386 L 208,386" fill="none" stroke="black"></path>
+                  <path d="M 376,382 L 576,382" fill="none" stroke="black"></path>
+                  <path d="M 376,386 L 576,386" fill="none" stroke="black"></path>
+                  <path d="M 448,432 L 520,432" fill="none" stroke="black"></path>
+                  <path d="M 344,528 L 424,528" fill="none" stroke="black"></path>
+                  <path d="M 8,574 L 160,574" fill="none" stroke="black"></path>
+                  <path d="M 8,578 L 160,578" fill="none" stroke="black"></path>
+                  <path d="M 416,574 L 576,574" fill="none" stroke="black"></path>
+                  <path d="M 416,578 L 576,578" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="528,432 516,426.4 516,437.6" fill="black" transform="rotate(0,520,432)"></polygon>
+                  <polygon class="arrowhead" points="352,528 340,522.4 340,533.6" fill="black" transform="rotate(180,344,528)"></polygon>
+                  <polygon class="arrowhead" points="336,352 324,346.4 324,357.6" fill="black" transform="rotate(0,328,352)"></polygon>
+                  <polygon class="arrowhead" points="64,128 52,122.4 52,133.6" fill="black" transform="rotate(180,56,128)"></polygon>
+                  <g class="text">
+                    <text x="52" y="52">Attester</text>
+                    <text x="312" y="52">Relying</text>
+                    <text x="368" y="52">Party</text>
+                    <text x="524" y="52">Verifier</text>
+                    <text x="176" y="100">[Evidence</text>
+                    <text x="260" y="100">Generation</text>
+                    <text x="320" y="100">and</text>
+                    <text x="384" y="100">Conveyance]</text>
+                    <text x="336" y="116">|</text>
+                    <text x="340" y="132">requestAttestation(handle,</text>
+                    <text x="312" y="148">authSecIDs,</text>
+                    <text x="424" y="148">claimSelection)</text>
+                    <text x="164" y="180">generateClaims(attestingEnvironment)</text>
+                    <text x="68" y="196">=&gt;</text>
+                    <text x="116" y="196">{claims,</text>
+                    <text x="196" y="196">eventLogs}</text>
+                    <text x="104" y="228">collectClaims(claims,</text>
+                    <text x="104" y="244">claimSelection)</text>
+                    <text x="68" y="260">=&gt;</text>
+                    <text x="144" y="260">collectedClaims</text>
+                    <text x="116" y="292">generateEvidence(handle,</text>
+                    <text x="88" y="308">authSecIDs,</text>
+                    <text x="204" y="308">collectedClaims)</text>
+                    <text x="68" y="324">=&gt;</text>
+                    <text x="116" y="324">evidence</text>
+                    <text x="100" y="356">{evidence,</text>
+                    <text x="188" y="356">eventLogs}</text>
+                    <text x="248" y="388">[Evidence</text>
+                    <text x="332" y="388">Appraisal]</text>
+                    <text x="380" y="420">{handle,</text>
+                    <text x="456" y="420">evidence,</text>
+                    <text x="396" y="436">eventLogs}</text>
+                    <text x="464" y="468">appraiseEvidence(evidence</text>
+                    <text x="444" y="484">eventLogs,</text>
+                    <text x="532" y="484">refValues)</text>
+                    <text x="424" y="500">attestationResult</text>
+                    <text x="508" y="500">&lt;=</text>
+                    <text x="476" y="532">{evidence,</text>
+                    <text x="444" y="548">attestationResult}</text>
+                    <text x="212" y="580">[Attestation</text>
+                    <text x="292" y="580">Result</text>
+                    <text x="368" y="580">Generation]</text>
+                    <text x="336" y="596">|</text>
+                    <text x="332" y="612">appraiseResult(policy,</text>
+                    <text x="332" y="628">attestationResult)</text>
+                    <text x="336" y="644">|</text>
+                  </g>
+                </svg><a href="#section-7.1.1.2-2.1" class="pilcrow">¶</a>
+</div>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="uni-directional-remote-attestation">
+<section id="section-7.2">
+        <h3 id="name-uni-directional-remote-atte">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-uni-directional-remote-atte" class="section-name selfRef">Uni-Directional Remote Attestation</a>
+        </h3>
+<div id="section-7.2-1">
+          <div class="alignLeft art-svg artwork" id="section-7.2-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="944" width="584" viewBox="0 0 584 944" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+              <path d="M 8,576 L 8,896" fill="none" stroke="black"></path>
+              <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+              <path d="M 48,112 L 48,208" fill="none" stroke="black"></path>
+              <path d="M 48,272 L 48,288" fill="none" stroke="black"></path>
+              <path d="M 48,320 L 48,336" fill="none" stroke="black"></path>
+              <path d="M 48,368 L 48,416" fill="none" stroke="black"></path>
+              <path d="M 48,448 L 48,512" fill="none" stroke="black"></path>
+              <path d="M 48,640 L 48,656" fill="none" stroke="black"></path>
+              <path d="M 48,688 L 48,704" fill="none" stroke="black"></path>
+              <path d="M 48,736 L 48,784" fill="none" stroke="black"></path>
+              <path d="M 48,816 L 48,904" fill="none" stroke="black"></path>
+              <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+              <path d="M 288,32 L 288,64" fill="none" stroke="black"></path>
+              <path d="M 368,64 L 368,80" fill="none" stroke="black"></path>
+              <path d="M 368,128 L 368,176" fill="none" stroke="black"></path>
+              <path d="M 456,32 L 456,64" fill="none" stroke="black"></path>
+              <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+              <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+              <path d="M 536,112 L 536,208" fill="none" stroke="black"></path>
+              <path d="M 536,240 L 536,416" fill="none" stroke="black"></path>
+              <path d="M 536,608 L 536,784" fill="none" stroke="black"></path>
+              <path d="M 536,880 L 536,904" fill="none" stroke="black"></path>
+              <path d="M 560,480 L 560,488" fill="none" stroke="black"></path>
+              <path d="M 560,848 L 560,856" fill="none" stroke="black"></path>
+              <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+              <path d="M 576,576 L 576,896" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+              <path d="M 288,32 L 456,32" fill="none" stroke="black"></path>
+              <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+              <path d="M 288,64 L 456,64" fill="none" stroke="black"></path>
+              <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+              <path d="M 8,94 L 208,94" fill="none" stroke="black"></path>
+              <path d="M 8,98 L 208,98" fill="none" stroke="black"></path>
+              <path d="M 368,94 L 576,94" fill="none" stroke="black"></path>
+              <path d="M 368,98 L 576,98" fill="none" stroke="black"></path>
+              <path d="M 56,160 L 280,160" fill="none" stroke="black"></path>
+              <path d="M 456,160 L 528,160" fill="none" stroke="black"></path>
+              <path d="M 8,222 L 136,222" fill="none" stroke="black"></path>
+              <path d="M 8,226 L 136,226" fill="none" stroke="black"></path>
+              <path d="M 432,222 L 576,222" fill="none" stroke="black"></path>
+              <path d="M 432,226 L 576,226" fill="none" stroke="black"></path>
+              <path d="M 240,400 L 528,400" fill="none" stroke="black"></path>
+              <path d="M 8,430 L 208,430" fill="none" stroke="black"></path>
+              <path d="M 8,434 L 208,434" fill="none" stroke="black"></path>
+              <path d="M 376,430 L 576,430" fill="none" stroke="black"></path>
+              <path d="M 376,434 L 576,434" fill="none" stroke="black"></path>
+              <path d="M 24,560 L 80,560" fill="none" stroke="black"></path>
+              <path d="M 136,560 L 560,560" fill="none" stroke="black"></path>
+              <path d="M 24,590 L 120,590" fill="none" stroke="black"></path>
+              <path d="M 24,594 L 120,594" fill="none" stroke="black"></path>
+              <path d="M 464,590 L 560,590" fill="none" stroke="black"></path>
+              <path d="M 464,594 L 560,594" fill="none" stroke="black"></path>
+              <path d="M 280,768 L 528,768" fill="none" stroke="black"></path>
+              <path d="M 24,798 L 184,798" fill="none" stroke="black"></path>
+              <path d="M 24,802 L 184,802" fill="none" stroke="black"></path>
+              <path d="M 400,798 L 560,798" fill="none" stroke="black"></path>
+              <path d="M 400,802 L 560,802" fill="none" stroke="black"></path>
+              <path d="M 24,912 L 560,912" fill="none" stroke="black"></path>
+              <path d="M 24,560 C 15.16936,560 8,567.16936 8,576" fill="none" stroke="black"></path>
+              <path d="M 560,560 C 568.83064,560 576,567.16936 576,576" fill="none" stroke="black"></path>
+              <path d="M 24,912 C 15.16936,912 8,904.83064 8,896" fill="none" stroke="black"></path>
+              <path d="M 560,912 C 568.83064,912 576,904.83064 576,896" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="536,768 524,762.4 524,773.6" fill="black" transform="rotate(0,528,768)"></polygon>
+              <polygon class="arrowhead" points="536,400 524,394.4 524,405.6" fill="black" transform="rotate(0,528,400)"></polygon>
+              <polygon class="arrowhead" points="536,160 524,154.4 524,165.6" fill="black" transform="rotate(0,528,160)"></polygon>
+              <polygon class="arrowhead" points="64,160 52,154.4 52,165.6" fill="black" transform="rotate(180,56,160)"></polygon>
+              <g class="text">
+                <text x="52" y="52">Attester</text>
+                <text x="324" y="52">Handle</text>
+                <text x="400" y="52">Distributor</text>
+                <text x="532" y="52">Verifier</text>
+                <text x="240" y="100">[Handle</text>
+                <text x="320" y="100">Generation]</text>
+                <text x="404" y="116">generateHandle()</text>
+                <text x="388" y="132">=&gt;</text>
+                <text x="428" y="132">handle</text>
+                <text x="324" y="164">{handle}</text>
+                <text x="412" y="164">{handle}</text>
+                <text x="368" y="196">x</text>
+                <text x="176" y="228">[Evidence</text>
+                <text x="260" y="228">Generation</text>
+                <text x="320" y="228">and</text>
+                <text x="384" y="228">Conveyance]</text>
+                <text x="48" y="244">|</text>
+                <text x="164" y="260">generateClaims(attestingEnvironment)</text>
+                <text x="68" y="276">=&gt;</text>
+                <text x="112" y="276">claims,</text>
+                <text x="184" y="276">eventLogs</text>
+                <text x="104" y="308">collectClaims(claims,</text>
+                <text x="256" y="308">claimSelection)</text>
+                <text x="68" y="324">=&gt;</text>
+                <text x="144" y="324">collectedClaims</text>
+                <text x="116" y="356">generateEvidence(handle,</text>
+                <text x="264" y="356">authSecIDs,</text>
+                <text x="380" y="356">collectedClaims)</text>
+                <text x="68" y="372">=&gt;</text>
+                <text x="116" y="372">evidence</text>
+                <text x="100" y="404">{evidence,</text>
+                <text x="188" y="404">eventLogs}</text>
+                <text x="248" y="436">[Evidence</text>
+                <text x="332" y="436">Appraisal]</text>
+                <text x="536" y="452">|</text>
+                <text x="460" y="468">appraiseEvidence(evidence,</text>
+                <text x="520" y="484">eventLogs</text>
+                <text x="524" y="500">refValues)</text>
+                <text x="432" y="516">attestationResult</text>
+                <text x="516" y="516">&lt;=</text>
+                <text x="536" y="516">|</text>
+                <text x="48" y="532">~</text>
+                <text x="536" y="532">~</text>
+                <text x="48" y="548">|</text>
+                <text x="536" y="548">|</text>
+                <text x="108" y="564">[loop]</text>
+                <text x="48" y="580">|</text>
+                <text x="536" y="580">|</text>
+                <text x="148" y="596">[Delta</text>
+                <text x="212" y="596">Evidence</text>
+                <text x="292" y="596">Generation</text>
+                <text x="352" y="596">and</text>
+                <text x="416" y="596">Conveyance]</text>
+                <text x="48" y="612">|</text>
+                <text x="164" y="628">generateClaims(attestingEnvironment)</text>
+                <text x="68" y="644">=&gt;</text>
+                <text x="132" y="644">claimsDelta,</text>
+                <text x="244" y="644">eventLogsDelta</text>
+                <text x="124" y="676">collectClaims(claimsDelta,</text>
+                <text x="296" y="676">claimSelection)</text>
+                <text x="68" y="692">=&gt;</text>
+                <text x="164" y="692">collectedClaimsDelta</text>
+                <text x="116" y="724">generateEvidence(handle,</text>
+                <text x="264" y="724">authSecIDs,</text>
+                <text x="400" y="724">collectedClaimsDelta)</text>
+                <text x="68" y="740">=&gt;</text>
+                <text x="116" y="740">evidence</text>
+                <text x="100" y="772">{evidence,</text>
+                <text x="208" y="772">eventLogsDelta}</text>
+                <text x="212" y="804">[Delta</text>
+                <text x="276" y="804">Evidence</text>
+                <text x="356" y="804">Appraisal]</text>
+                <text x="536" y="820">|</text>
+                <text x="460" y="836">appraiseEvidence(evidence,</text>
+                <text x="500" y="852">eventLogsDelta</text>
+                <text x="524" y="868">refValues)</text>
+                <text x="432" y="884">attestationResult</text>
+                <text x="516" y="884">&lt;=</text>
+                <text x="48" y="932">|</text>
+                <text x="536" y="932">|</text>
+              </g>
+            </svg><a href="#section-7.2-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.2-2">Uni-Directional Remote Attestation procedures can be initiated both by the Attester and by the Verifier.
+Initiation by the Attester can result in unsolicited pushes of Evidence to the Verifier.
+Initiation by the Verifier always results in solicited pushes to the Verifier.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-3">The Uni-Directional model uses the same information elements as the Challenge/Response model.
+In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation or the emission of a beacon).
+While a request of Evidence from the Verifier would result in a sequence diagram more similar to the Challenge/Response model (comparable with a RESTful GET operation).
+The specific manner how Handles are created and used always remains as the distinguishing quality of this model.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.2-4">In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in <span>[<a href="#I-D.birkholz-rats-tuda" class="cite xref">I-D.birkholz-rats-tuda</a>]</span>, potentially including other qualifying data.
+The Handles are created by an external 3rd entity -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>).
+Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
+This binding provides a proof of synchronization that MUST be included in all produced Evidence.
+Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
+<p id="section-7.2-5">While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance.
+These updates reflecting the differences are called "delta" in the sequence diagram above.<a href="#section-7.2-5" class="pilcrow">¶</a></p>
+<p id="section-7.2-6">Effectively, the Uni-Directional model allows for a series of Evidence to be pushed to multiple Verifiers simultaneously.
+Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="streaming-remote-attestation">
+<section id="section-7.3">
+        <h3 id="name-streaming-remote-attestatio">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-streaming-remote-attestatio" class="section-name selfRef">Streaming Remote Attestation</a>
+        </h3>
+<p id="section-7.3-1">Streaming Remote Attestation serves as the foundational concept for both the observer pattern (<span>[<a href="#ISIS" class="cite xref">ISIS</a>]</span>) and the publish-subscribe pattern (<span>[<a href="#DesignPatterns" class="cite xref">DesignPatterns</a>]</span>).
+It entails establishing subscription states to enable continuous remote attestation.
+The observer pattern directly connects observers to subjects without a broker, while the publish-subscribe pattern involves a central broker for message distribution.
+In the following Subsections, streaming remote attestation without a broker (observer pattern) as well as with a broker (publish-subscribe pattern) are illustrated.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<div id="streaming-remote-attestation-without-a-broker">
+<section id="section-7.3.1">
+          <h4 id="name-streaming-remote-attestation">
+<a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-streaming-remote-attestation" class="section-name selfRef">Streaming Remote Attestation without a Broker</a>
+          </h4>
+<div id="section-7.3.1-1">
+            <div class="alignLeft art-svg artwork" id="section-7.3.1-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="944" width="584" viewBox="0 0 584 944" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                <path d="M 8,576 L 8,896" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                <path d="M 48,112 L 48,208" fill="none" stroke="black"></path>
+                <path d="M 48,272 L 48,288" fill="none" stroke="black"></path>
+                <path d="M 48,320 L 48,336" fill="none" stroke="black"></path>
+                <path d="M 48,368 L 48,384" fill="none" stroke="black"></path>
+                <path d="M 48,416 L 48,512" fill="none" stroke="black"></path>
+                <path d="M 48,640 L 48,656" fill="none" stroke="black"></path>
+                <path d="M 48,688 L 48,704" fill="none" stroke="black"></path>
+                <path d="M 48,736 L 48,752" fill="none" stroke="black"></path>
+                <path d="M 48,784 L 48,904" fill="none" stroke="black"></path>
+                <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+                <path d="M 536,144 L 536,208" fill="none" stroke="black"></path>
+                <path d="M 536,240 L 536,384" fill="none" stroke="black"></path>
+                <path d="M 536,416 L 536,448" fill="none" stroke="black"></path>
+                <path d="M 536,608 L 536,752" fill="none" stroke="black"></path>
+                <path d="M 536,784 L 536,816" fill="none" stroke="black"></path>
+                <path d="M 536,880 L 536,904" fill="none" stroke="black"></path>
+                <path d="M 560,480 L 560,488" fill="none" stroke="black"></path>
+                <path d="M 560,848 L 560,856" fill="none" stroke="black"></path>
+                <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 576,576 L 576,896" fill="none" stroke="black"></path>
+                <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 8,94 L 208,94" fill="none" stroke="black"></path>
+                <path d="M 8,98 L 208,98" fill="none" stroke="black"></path>
+                <path d="M 368,94 L 576,94" fill="none" stroke="black"></path>
+                <path d="M 368,98 L 576,98" fill="none" stroke="black"></path>
+                <path d="M 56,176 L 152,176" fill="none" stroke="black"></path>
+                <path d="M 136,192 L 528,192" fill="none" stroke="black"></path>
+                <path d="M 8,222 L 136,222" fill="none" stroke="black"></path>
+                <path d="M 8,226 L 136,226" fill="none" stroke="black"></path>
+                <path d="M 432,222 L 576,222" fill="none" stroke="black"></path>
+                <path d="M 432,226 L 576,226" fill="none" stroke="black"></path>
+                <path d="M 8,398 L 208,398" fill="none" stroke="black"></path>
+                <path d="M 8,402 L 208,402" fill="none" stroke="black"></path>
+                <path d="M 376,398 L 576,398" fill="none" stroke="black"></path>
+                <path d="M 376,402 L 576,402" fill="none" stroke="black"></path>
+                <path d="M 304,432 L 528,432" fill="none" stroke="black"></path>
+                <path d="M 24,560 L 80,560" fill="none" stroke="black"></path>
+                <path d="M 136,560 L 560,560" fill="none" stroke="black"></path>
+                <path d="M 24,590 L 120,590" fill="none" stroke="black"></path>
+                <path d="M 24,594 L 120,594" fill="none" stroke="black"></path>
+                <path d="M 464,590 L 560,590" fill="none" stroke="black"></path>
+                <path d="M 464,594 L 560,594" fill="none" stroke="black"></path>
+                <path d="M 24,766 L 184,766" fill="none" stroke="black"></path>
+                <path d="M 24,770 L 184,770" fill="none" stroke="black"></path>
+                <path d="M 400,766 L 560,766" fill="none" stroke="black"></path>
+                <path d="M 400,770 L 560,770" fill="none" stroke="black"></path>
+                <path d="M 280,800 L 528,800" fill="none" stroke="black"></path>
+                <path d="M 24,912 L 560,912" fill="none" stroke="black"></path>
+                <path d="M 24,560 C 15.16936,560 8,567.16936 8,576" fill="none" stroke="black"></path>
+                <path d="M 560,560 C 568.83064,560 576,567.16936 576,576" fill="none" stroke="black"></path>
+                <path d="M 24,912 C 15.16936,912 8,904.83064 8,896" fill="none" stroke="black"></path>
+                <path d="M 560,912 C 568.83064,912 576,904.83064 576,896" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="536,800 524,794.4 524,805.6" fill="black" transform="rotate(0,528,800)"></polygon>
+                <polygon class="arrowhead" points="536,432 524,426.4 524,437.6" fill="black" transform="rotate(0,528,432)"></polygon>
+                <polygon class="arrowhead" points="536,192 524,186.4 524,197.6" fill="black" transform="rotate(0,528,192)"></polygon>
+                <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                <g class="text">
+                  <text x="52" y="52">Attester</text>
+                  <text x="532" y="52">Verifier</text>
+                  <text x="240" y="100">[Handle</text>
+                  <text x="320" y="100">Generation]</text>
+                  <text x="536" y="116">|</text>
+                  <text x="500" y="132">generateHandle()</text>
+                  <text x="492" y="148">handle&lt;=</text>
+                  <text x="232" y="180">subscribe(handle,</text>
+                  <text x="352" y="180">authSecIDs,</text>
+                  <text x="464" y="180">claimSelection)</text>
+                  <text x="92" y="196">{handle}</text>
+                  <text x="176" y="228">[Evidence</text>
+                  <text x="260" y="228">Generation</text>
+                  <text x="320" y="228">and</text>
+                  <text x="384" y="228">Conveyance]</text>
+                  <text x="48" y="244">|</text>
+                  <text x="164" y="260">generateClaims(attestingEnvironment)</text>
+                  <text x="68" y="276">=&gt;</text>
+                  <text x="112" y="276">claims,</text>
+                  <text x="184" y="276">eventLogs</text>
+                  <text x="104" y="308">collectClaims(claims,</text>
+                  <text x="256" y="308">claimSelection)</text>
+                  <text x="68" y="324">=&gt;</text>
+                  <text x="144" y="324">collectedClaims</text>
+                  <text x="116" y="356">generateEvidence(handle,</text>
+                  <text x="264" y="356">authSecIDs,</text>
+                  <text x="380" y="356">collectedClaims)</text>
+                  <text x="68" y="372">=&gt;</text>
+                  <text x="116" y="372">evidence</text>
+                  <text x="248" y="404">[Evidence</text>
+                  <text x="332" y="404">Appraisal]</text>
+                  <text x="92" y="436">{handle,</text>
+                  <text x="168" y="436">evidence,</text>
+                  <text x="252" y="436">eventLogs}</text>
+                  <text x="460" y="468">appraiseEvidence(evidence,</text>
+                  <text x="520" y="484">eventLogs</text>
+                  <text x="524" y="500">refValues)</text>
+                  <text x="432" y="516">attestationResult</text>
+                  <text x="516" y="516">&lt;=</text>
+                  <text x="536" y="516">|</text>
+                  <text x="48" y="532">~</text>
+                  <text x="536" y="532">~</text>
+                  <text x="48" y="548">|</text>
+                  <text x="536" y="548">|</text>
+                  <text x="108" y="564">[loop]</text>
+                  <text x="48" y="580">|</text>
+                  <text x="536" y="580">|</text>
+                  <text x="148" y="596">[Delta</text>
+                  <text x="212" y="596">Evidence</text>
+                  <text x="292" y="596">Generation</text>
+                  <text x="352" y="596">and</text>
+                  <text x="416" y="596">Conveyance]</text>
+                  <text x="48" y="612">|</text>
+                  <text x="164" y="628">generateClaims(attestingEnvironment)</text>
+                  <text x="68" y="644">=&gt;</text>
+                  <text x="132" y="644">claimsDelta,</text>
+                  <text x="244" y="644">eventLogsDelta</text>
+                  <text x="124" y="676">collectClaims(claimsDelta,</text>
+                  <text x="296" y="676">claimSelection)</text>
+                  <text x="68" y="692">=&gt;</text>
+                  <text x="164" y="692">collectedClaimsDelta</text>
+                  <text x="116" y="724">generateEvidence(handle,</text>
+                  <text x="264" y="724">authSecIDs,</text>
+                  <text x="400" y="724">collectedClaimsDelta)</text>
+                  <text x="68" y="740">=&gt;</text>
+                  <text x="116" y="740">evidence</text>
+                  <text x="212" y="772">[Delta</text>
+                  <text x="276" y="772">Evidence</text>
+                  <text x="356" y="772">Appraisal]</text>
+                  <text x="100" y="804">{evidence,</text>
+                  <text x="208" y="804">eventLogsDelta}</text>
+                  <text x="460" y="836">appraiseEvidence(evidence,</text>
+                  <text x="500" y="852">eventLogsDelta</text>
+                  <text x="524" y="868">refValues)</text>
+                  <text x="432" y="884">attestationResult</text>
+                  <text x="516" y="884">&lt;=</text>
+                  <text x="48" y="932">|</text>
+                  <text x="536" y="932">|</text>
+                </g>
+              </svg><a href="#section-7.3.1-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.3.1-2">The observer pattern is employed in scenarios where message delivery does not involve a central broker.
+Instead, an observer directly subscribes to observed resources via a dedicated mechanism.
+Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining subscription state.
+Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
+The subscribe operation is used to convey Handles required for Evidence generation.
+Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
+While a Handle Distributor is not mandatory in this model, the model is also limited to bi-lateral subscription relationships, in which each Verifier has to create and provide Handles individually.
+Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
+The streaming model without a broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
+Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.<a href="#section-7.3.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="streaming-remote-attestation-with-a-broker">
+<section id="section-7.3.2">
+          <h4 id="name-streaming-remote-attestation-">
+<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-streaming-remote-attestation-" class="section-name selfRef">Streaming Remote Attestation with a Broker</a>
+          </h4>
+<p id="section-7.3.2-1">The publish-subscribe messaging pattern is widely used for communication in different areas.
+Unlike the <em>Streaming Remote Attestation without a Broker</em> interaction model, Attesters do not (need to) be aware of corresponding Verifiers.
+In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-2">With publish-subscribe, clients typically <em>connect</em> to (or <em>register</em> with) a publish-subscribe server (PubSub server or Broker).
+Clients may <em>publish</em> data in the form of a <em>message</em> under a certain <em>topic</em>.
+<em>Subscribers</em> to that topic get <em>notified</em> whenever a message arrives under a topic, and the appropriate message is forwarded to them.
+Depending on the particular  publish-subscribe model and implementation, clients can be either publishers or subscribers or both.<a href="#section-7.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.3.2-3">In the following sections, the interaction models <em>Challenge/Response Remote Attestation over Publish-Subscribe</em> and <em>Uni-Directional Remote Attestation over Publish-Subscribe</em> are described.
+There are different phases that both models go through:<a href="#section-7.3.2-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.3.2-4">
+<li id="section-7.3.2-4.1">
+              <p id="section-7.3.2-4.1.1">Handle Generation<a href="#section-7.3.2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.3.2-4.2">
+              <p id="section-7.3.2-4.2.1">Evidence Generation and Conveyance<a href="#section-7.3.2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.3.2-4.3">
+              <p id="section-7.3.2-4.3.1">Evidence Appraisal<a href="#section-7.3.2-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.3.2-4.4">
+              <p id="section-7.3.2-4.4.1">Attestation Result Generation<a href="#section-7.3.2-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<p id="section-7.3.2-5">The models only differ in the handle generation phase.
+From a remote attestations procedure's point of view Evidence Generation, Conveyance, and Appraisal, as well as Attestation Result Generation are identical in both models.<a href="#section-7.3.2-5" class="pilcrow">¶</a></p>
+<div id="handle-generation-for-challengeresponse-remote-attestation-over-publish-subscribe">
+<section id="section-7.3.2.1">
+            <h5 id="name-handle-generation-for-chall">
+<a href="#section-7.3.2.1" class="section-number selfRef">7.3.2.1. </a><a href="#name-handle-generation-for-chall" class="section-name selfRef">Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
+            </h5>
+<div id="section-7.3.2.1-1">
+              <div class="alignLeft art-svg artwork" id="section-7.3.2.1-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="224" width="584" viewBox="0 0 584 224" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                  <path d="M 48,144 L 48,192" fill="none" stroke="black"></path>
+                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 248,32 L 248,64" fill="none" stroke="black"></path>
+                  <path d="M 312,64 L 312,80" fill="none" stroke="black"></path>
+                  <path d="M 312,112 L 312,160" fill="none" stroke="black"></path>
+                  <path d="M 376,32 L 376,64" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                  <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+                  <path d="M 536,112 L 536,128" fill="none" stroke="black"></path>
+                  <path d="M 536,176 L 536,192" fill="none" stroke="black"></path>
+                  <path d="M 560,144 L 560,152" fill="none" stroke="black"></path>
+                  <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                  <path d="M 248,32 L 376,32" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 248,64 L 376,64" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 8,94 L 208,94" fill="none" stroke="black"></path>
+                  <path d="M 8,98 L 208,98" fill="none" stroke="black"></path>
+                  <path d="M 368,94 L 576,94" fill="none" stroke="black"></path>
+                  <path d="M 368,98 L 576,98" fill="none" stroke="black"></path>
+                  <path d="M 176,128 L 304,128" fill="none" stroke="black"></path>
+                  <path d="M 320,144 L 416,144" fill="none" stroke="black"></path>
+                  <path d="M 56,176 L 208,176" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="328,144 316,138.4 316,149.6" fill="black" transform="rotate(180,320,144)"></polygon>
+                  <polygon class="arrowhead" points="312,128 300,122.4 300,133.6" fill="black" transform="rotate(0,304,128)"></polygon>
+                  <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                  <g class="text">
+                    <text x="52" y="52">Attester</text>
+                    <text x="284" y="52">PubSub</text>
+                    <text x="340" y="52">Server</text>
+                    <text x="532" y="52">Verifier</text>
+                    <text x="240" y="100">[Handle</text>
+                    <text x="320" y="100">Generation]</text>
+                    <text x="48" y="116">|</text>
+                    <text x="96" y="132">sub(topic=AttReq)</text>
+                    <text x="492" y="148">pub(topic=AttReq</text>
+                    <text x="536" y="164">handle)</text>
+                    <text x="300" y="180">notify(topic=AttReq,</text>
+                    <text x="416" y="180">handle)</text>
+                    <text x="312" y="196">|</text>
+                    <text x="48" y="212">~</text>
+                    <text x="312" y="212">~</text>
+                    <text x="536" y="212">~</text>
+                  </g>
+                </svg><a href="#section-7.3.2.1-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.3.2.1-2">The <em>Challenge/Response Remote Attestation over Publish-Subscribe</em> interaction model uses the same information elements as the <em>Challenge/Response Remote Attestation</em> interaction model.
+Handles are provided by a Verifier on a per-request basis.
+In the sequence diagram above, an Attester subscribes to the "AttReq" (= Attestation Request) topic on the PubSub server.
+The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server forwards to the Attester by notifying it.<a href="#section-7.3.2.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="handle-generation-for-uni-directional-remote-attestation-over-publish-subscribe">
+<section id="section-7.3.2.2">
+            <h5 id="name-handle-generation-for-uni-d">
+<a href="#section-7.3.2.2" class="section-number selfRef">7.3.2.2. </a><a href="#name-handle-generation-for-uni-d" class="section-name selfRef">Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
+            </h5>
+<div id="section-7.3.2.2-1">
+              <div class="alignLeft art-svg artwork" id="section-7.3.2.2-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="432" width="584" viewBox="0 0 584 432" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                  <path d="M 48,64 L 48,96" fill="none" stroke="black"></path>
+                  <path d="M 48,128 L 48,144" fill="none" stroke="black"></path>
+                  <path d="M 48,176 L 48,400" fill="none" stroke="black"></path>
+                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 120,32 L 120,80" fill="none" stroke="black"></path>
+                  <path d="M 176,80 L 176,96" fill="none" stroke="black"></path>
+                  <path d="M 176,128 L 176,152" fill="none" stroke="black"></path>
+                  <path d="M 176,168 L 176,224" fill="none" stroke="black"></path>
+                  <path d="M 176,256 L 176,272" fill="none" stroke="black"></path>
+                  <path d="M 232,32 L 232,80" fill="none" stroke="black"></path>
+                  <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                  <path d="M 336,64 L 336,96" fill="none" stroke="black"></path>
+                  <path d="M 336,128 L 336,336" fill="none" stroke="black"></path>
+                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                  <path d="M 536,64 L 536,96" fill="none" stroke="black"></path>
+                  <path d="M 536,128 L 536,176" fill="none" stroke="black"></path>
+                  <path d="M 536,208 L 536,400" fill="none" stroke="black"></path>
+                  <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                  <path d="M 120,32 L 232,32" fill="none" stroke="black"></path>
+                  <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 120,80 L 232,80" fill="none" stroke="black"></path>
+                  <path d="M 8,110 L 208,110" fill="none" stroke="black"></path>
+                  <path d="M 8,114 L 208,114" fill="none" stroke="black"></path>
+                  <path d="M 368,110 L 576,110" fill="none" stroke="black"></path>
+                  <path d="M 368,114 L 576,114" fill="none" stroke="black"></path>
+                  <path d="M 176,160 L 328,160" fill="none" stroke="black"></path>
+                  <path d="M 344,192 L 416,192" fill="none" stroke="black"></path>
+                  <path d="M 256,304 L 328,304" fill="none" stroke="black"></path>
+                  <path d="M 56,352 L 224,352" fill="none" stroke="black"></path>
+                  <path d="M 472,384 L 528,384" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="536,384 524,378.4 524,389.6" fill="black" transform="rotate(0,528,384)"></polygon>
+                  <polygon class="arrowhead" points="352,192 340,186.4 340,197.6" fill="black" transform="rotate(180,344,192)"></polygon>
+                  <polygon class="arrowhead" points="336,304 324,298.4 324,309.6" fill="black" transform="rotate(0,328,304)"></polygon>
+                  <polygon class="arrowhead" points="336,160 324,154.4 324,165.6" fill="black" transform="rotate(0,328,160)"></polygon>
+                  <polygon class="arrowhead" points="64,352 52,346.4 52,357.6" fill="black" transform="rotate(180,56,352)"></polygon>
+                  <g class="text">
+                    <text x="52" y="52">Attester</text>
+                    <text x="172" y="52">Handle</text>
+                    <text x="308" y="52">PubSub</text>
+                    <text x="364" y="52">Server</text>
+                    <text x="532" y="52">Verifier</text>
+                    <text x="176" y="68">Distributor</text>
+                    <text x="240" y="116">[Handle</text>
+                    <text x="320" y="116">Generation]</text>
+                    <text x="96" y="164">sub(topic=Handle)</text>
+                    <text x="496" y="196">sub(topic=Handle)</text>
+                    <text x="204" y="244">generateHandle()</text>
+                    <text x="196" y="260">=&gt;</text>
+                    <text x="236" y="260">handle</text>
+                    <text x="224" y="292">pub(topic=Handle,</text>
+                    <text x="176" y="308">|</text>
+                    <text x="216" y="308">handle)</text>
+                    <text x="176" y="324">x</text>
+                    <text x="316" y="356">notify(topic=Handle,</text>
+                    <text x="432" y="356">handle)</text>
+                    <text x="336" y="372">|</text>
+                    <text x="316" y="388">notify(topic=Handle,</text>
+                    <text x="432" y="388">handle)</text>
+                    <text x="336" y="404">|</text>
+                    <text x="48" y="420">~</text>
+                    <text x="336" y="420">~</text>
+                    <text x="536" y="420">~</text>
+                  </g>
+                </svg><a href="#section-7.3.2.2-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.3.2.2-2">The <em>Uni-Directional Remote Attestation over Publish-Subscribe</em> model uses the same information elements as the Uni-Directional Remote Attestation model.
+Accordingly, Handles are created by a 3rd party, the Handle Distributor.
+In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
+When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them during Handle Generation.<a href="#section-7.3.2.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="evidence-generation-and-appraisal">
+<section id="section-7.3.2.3">
+            <h5 id="name-evidence-generation-and-app">
+<a href="#section-7.3.2.3" class="section-number selfRef">7.3.2.3. </a><a href="#name-evidence-generation-and-app" class="section-name selfRef">Evidence Generation and Appraisal</a>
+            </h5>
+<div id="section-7.3.2.3-1">
+              <div class="alignLeft art-svg artwork" id="section-7.3.2.3-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="752" width="584" viewBox="0 0 584 752" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
+                  <path d="M 8,176 L 8,688" fill="none" stroke="black"></path>
+                  <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
+                  <path d="M 48,96 L 48,152" fill="none" stroke="black"></path>
+                  <path d="M 48,240 L 48,256" fill="none" stroke="black"></path>
+                  <path d="M 48,288 L 48,304" fill="none" stroke="black"></path>
+                  <path d="M 48,336 L 48,368" fill="none" stroke="black"></path>
+                  <path d="M 48,400 L 48,480" fill="none" stroke="black"></path>
+                  <path d="M 48,512 L 48,608" fill="none" stroke="black"></path>
+                  <path d="M 48,640 L 48,696" fill="none" stroke="black"></path>
+                  <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
+                  <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
+                  <path d="M 336,96 L 336,152" fill="none" stroke="black"></path>
+                  <path d="M 336,208 L 336,416" fill="none" stroke="black"></path>
+                  <path d="M 336,448 L 336,480" fill="none" stroke="black"></path>
+                  <path d="M 336,512 L 336,608" fill="none" stroke="black"></path>
+                  <path d="M 336,640 L 336,696" fill="none" stroke="black"></path>
+                  <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
+                  <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
+                  <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
+                  <path d="M 536,208 L 536,480" fill="none" stroke="black"></path>
+                  <path d="M 536,592 L 536,608" fill="none" stroke="black"></path>
+                  <path d="M 560,560 L 560,568" fill="none" stroke="black"></path>
+                  <path d="M 560,656 L 560,664" fill="none" stroke="black"></path>
+                  <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
+                  <path d="M 576,176 L 576,688" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
+                  <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
+                  <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
+                  <path d="M 344,128 L 424,128" fill="none" stroke="black"></path>
+                  <path d="M 24,160 L 80,160" fill="none" stroke="black"></path>
+                  <path d="M 136,160 L 560,160" fill="none" stroke="black"></path>
+                  <path d="M 24,190 L 136,190" fill="none" stroke="black"></path>
+                  <path d="M 24,194 L 136,194" fill="none" stroke="black"></path>
+                  <path d="M 432,190 L 560,190" fill="none" stroke="black"></path>
+                  <path d="M 432,194 L 560,194" fill="none" stroke="black"></path>
+                  <path d="M 232,400 L 328,400" fill="none" stroke="black"></path>
+                  <path d="M 448,464 L 528,464" fill="none" stroke="black"></path>
+                  <path d="M 24,494 L 208,494" fill="none" stroke="black"></path>
+                  <path d="M 24,498 L 208,498" fill="none" stroke="black"></path>
+                  <path d="M 376,494 L 560,494" fill="none" stroke="black"></path>
+                  <path d="M 376,498 L 560,498" fill="none" stroke="black"></path>
+                  <path d="M 24,622 L 160,622" fill="none" stroke="black"></path>
+                  <path d="M 24,626 L 160,626" fill="none" stroke="black"></path>
+                  <path d="M 416,622 L 560,622" fill="none" stroke="black"></path>
+                  <path d="M 416,626 L 560,626" fill="none" stroke="black"></path>
+                  <path d="M 344,656 L 416,656" fill="none" stroke="black"></path>
+                  <path d="M 24,704 L 560,704" fill="none" stroke="black"></path>
+                  <path d="M 24,160 C 15.16936,160 8,167.16936 8,176" fill="none" stroke="black"></path>
+                  <path d="M 560,160 C 568.83064,160 576,167.16936 576,176" fill="none" stroke="black"></path>
+                  <path d="M 24,704 C 15.16936,704 8,696.83064 8,688" fill="none" stroke="black"></path>
+                  <path d="M 560,704 C 568.83064,704 576,696.83064 576,688" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="536,464 524,458.4 524,469.6" fill="black" transform="rotate(0,528,464)"></polygon>
+                  <polygon class="arrowhead" points="352,656 340,650.4 340,661.6" fill="black" transform="rotate(180,344,656)"></polygon>
+                  <polygon class="arrowhead" points="352,128 340,122.4 340,133.6" fill="black" transform="rotate(180,344,128)"></polygon>
+                  <polygon class="arrowhead" points="336,400 324,394.4 324,405.6" fill="black" transform="rotate(0,328,400)"></polygon>
+                  <g class="text">
+                    <text x="48" y="36">~</text>
+                    <text x="336" y="36">~</text>
+                    <text x="536" y="36">~</text>
+                    <text x="52" y="84">Attester</text>
+                    <text x="308" y="84">PubSub</text>
+                    <text x="364" y="84">Server</text>
+                    <text x="532" y="84">Verifier</text>
+                    <text x="500" y="132">sub(topic=AttEv)</text>
+                    <text x="536" y="148">|</text>
+                    <text x="108" y="164">[loop]</text>
+                    <text x="48" y="180">|</text>
+                    <text x="336" y="180">|</text>
+                    <text x="536" y="180">|</text>
+                    <text x="176" y="196">[Evidence</text>
+                    <text x="260" y="196">Generation</text>
+                    <text x="320" y="196">and</text>
+                    <text x="384" y="196">Conveyance]</text>
+                    <text x="48" y="212">|</text>
+                    <text x="164" y="228">generateClaims(attestingEnvironment)</text>
+                    <text x="68" y="244">=&gt;</text>
+                    <text x="112" y="244">claims,</text>
+                    <text x="184" y="244">eventLogs</text>
+                    <text x="104" y="276">collectClaims(claims,</text>
+                    <text x="256" y="276">claimSelection)</text>
+                    <text x="68" y="292">=&gt;</text>
+                    <text x="144" y="292">collectedClaims</text>
+                    <text x="116" y="324">generateEvidence(handle,</text>
+                    <text x="264" y="324">authSecIDs,</text>
+                    <text x="220" y="340">collectedClaims)</text>
+                    <text x="68" y="356">=&gt;</text>
+                    <text x="116" y="356">evidence</text>
+                    <text x="92" y="388">pub(topic=AttEv,</text>
+                    <text x="96" y="404">evidence,</text>
+                    <text x="180" y="404">eventLogs)</text>
+                    <text x="376" y="436">notify(topic=AttEv,</text>
+                    <text x="392" y="452">evidence,</text>
+                    <text x="396" y="468">eventLogs)</text>
+                    <text x="248" y="500">[Evidence</text>
+                    <text x="332" y="500">Appraisal]</text>
+                    <text x="536" y="516">|</text>
+                    <text x="496" y="532">appraiseEvidence(</text>
+                    <text x="528" y="548">evidence,</text>
+                    <text x="520" y="564">eventLogs</text>
+                    <text x="524" y="580">refValues)</text>
+                    <text x="432" y="596">attestationResult</text>
+                    <text x="516" y="596">&lt;=</text>
+                    <text x="212" y="628">[Attestation</text>
+                    <text x="292" y="628">Result</text>
+                    <text x="368" y="628">Generation]</text>
+                    <text x="536" y="644">|</text>
+                    <text x="492" y="660">pub(topic=AttRes</text>
+                    <text x="492" y="676">attestationResult)</text>
+                    <text x="536" y="692">|</text>
+                    <text x="48" y="724">|</text>
+                    <text x="336" y="724">|</text>
+                    <text x="536" y="724">|</text>
+                    <text x="48" y="740">~</text>
+                    <text x="336" y="740">~</text>
+                    <text x="536" y="740">~</text>
+                  </g>
+                </svg><a href="#section-7.3.2.3-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.3.2.3-2">Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
+In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
+The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
+Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
+Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.<a href="#section-7.3.2.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="attestation-result-generation">
+<section id="section-7.3.2.4">
+            <h5 id="name-attestation-result-generati">
+<a href="#section-7.3.2.4" class="section-number selfRef">7.3.2.4. </a><a href="#name-attestation-result-generati" class="section-name selfRef">Attestation Result Generation</a>
+            </h5>
+<div id="section-7.3.2.4-1">
+              <div class="alignLeft art-svg artwork" id="section-7.3.2.4-1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="584" viewBox="0 0 584 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
+                  <path d="M 8,224 L 8,320" fill="none" stroke="black"></path>
+                  <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
+                  <path d="M 48,96 L 48,112" fill="none" stroke="black"></path>
+                  <path d="M 48,144 L 48,200" fill="none" stroke="black"></path>
+                  <path d="M 48,216 L 48,328" fill="none" stroke="black"></path>
+                  <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
+                  <path d="M 112,64 L 112,96" fill="none" stroke="black"></path>
+                  <path d="M 136,48 L 136,64" fill="none" stroke="black"></path>
+                  <path d="M 136,96 L 136,112" fill="none" stroke="black"></path>
+                  <path d="M 136,216 L 136,328" fill="none" stroke="black"></path>
+                  <path d="M 240,64 L 240,96" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
+                  <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
+                  <path d="M 336,96 L 336,112" fill="none" stroke="black"></path>
+                  <path d="M 336,144 L 336,200" fill="none" stroke="black"></path>
+                  <path d="M 336,216 L 336,272" fill="none" stroke="black"></path>
+                  <path d="M 336,304 L 336,328" fill="none" stroke="black"></path>
+                  <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
+                  <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
+                  <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
+                  <path d="M 536,144 L 536,200" fill="none" stroke="black"></path>
+                  <path d="M 536,272 L 536,328" fill="none" stroke="black"></path>
+                  <path d="M 560,240 L 560,248" fill="none" stroke="black"></path>
+                  <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
+                  <path d="M 576,224 L 576,320" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 112,64 L 240,64" fill="none" stroke="black"></path>
+                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
+                  <path d="M 112,96 L 240,96" fill="none" stroke="black"></path>
+                  <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
+                  <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
+                  <path d="M 8,126 L 160,126" fill="none" stroke="black"></path>
+                  <path d="M 8,130 L 160,130" fill="none" stroke="black"></path>
+                  <path d="M 416,126 L 576,126" fill="none" stroke="black"></path>
+                  <path d="M 416,130 L 576,130" fill="none" stroke="black"></path>
+                  <path d="M 192,176 L 328,176" fill="none" stroke="black"></path>
+                  <path d="M 24,208 L 80,208" fill="none" stroke="black"></path>
+                  <path d="M 136,208 L 560,208" fill="none" stroke="black"></path>
+                  <path d="M 344,240 L 416,240" fill="none" stroke="black"></path>
+                  <path d="M 144,288 L 280,288" fill="none" stroke="black"></path>
+                  <path d="M 24,336 L 560,336" fill="none" stroke="black"></path>
+                  <path d="M 24,208 C 15.16936,208 8,215.16936 8,224" fill="none" stroke="black"></path>
+                  <path d="M 560,208 C 568.83064,208 576,215.16936 576,224" fill="none" stroke="black"></path>
+                  <path d="M 24,336 C 15.16936,336 8,328.83064 8,320" fill="none" stroke="black"></path>
+                  <path d="M 560,336 C 568.83064,336 576,328.83064 576,320" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="352,240 340,234.4 340,245.6" fill="black" transform="rotate(180,344,240)"></polygon>
+                  <polygon class="arrowhead" points="336,176 324,170.4 324,181.6" fill="black" transform="rotate(0,328,176)"></polygon>
+                  <polygon class="arrowhead" points="152,288 140,282.4 140,293.6" fill="black" transform="rotate(180,144,288)"></polygon>
+                  <g class="text">
+                    <text x="48" y="36">~</text>
+                    <text x="136" y="36">~</text>
+                    <text x="336" y="36">~</text>
+                    <text x="536" y="36">~</text>
+                    <text x="52" y="84">Attester</text>
+                    <text x="152" y="84">Relying</text>
+                    <text x="208" y="84">Party</text>
+                    <text x="308" y="84">PubSub</text>
+                    <text x="364" y="84">Server</text>
+                    <text x="532" y="84">Verifier</text>
+                    <text x="212" y="132">[Attestation</text>
+                    <text x="292" y="132">Result</text>
+                    <text x="368" y="132">Generation]</text>
+                    <text x="136" y="148">|</text>
+                    <text x="160" y="164">sub(topic=AttRes)</text>
+                    <text x="152" y="180">handle)</text>
+                    <text x="136" y="196">|</text>
+                    <text x="108" y="212">[loop]</text>
+                    <text x="536" y="228">|</text>
+                    <text x="492" y="244">pub(topic=AttRes</text>
+                    <text x="492" y="260">attestationResult)</text>
+                    <text x="368" y="292">notify(topic=AttRes</text>
+                    <text x="420" y="308">attestationResult)</text>
+                    <text x="48" y="356">|</text>
+                    <text x="136" y="356">|</text>
+                    <text x="336" y="356">|</text>
+                    <text x="536" y="356">|</text>
+                    <text x="48" y="372">~</text>
+                    <text x="136" y="372">~</text>
+                    <text x="336" y="372">~</text>
+                    <text x="536" y="372">~</text>
+                  </g>
+                </svg><a href="#section-7.3.2.4-1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-7.3.2.4-2">Attestation Result Generation is the same for both publish-subscribe models,<em>Challenge/Response Remote Attestation over Publish-Subscribe</em> and <em>Uni-Directional Remote Attestation over Publish-Subscribe</em>.
+Relying Parties subscribe to topic <code>AttRes</code> (= Attestation Result) on the PubSub server.
+The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic <code>AttRes</code>.<a href="#section-7.3.2.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="publishsubscribe-topics">
+<section id="section-7.3.2.5">
+            <h5 id="name-publish-subscribe-topics">
+<a href="#section-7.3.2.5" class="section-number selfRef">7.3.2.5. </a><a href="#name-publish-subscribe-topics" class="section-name selfRef">Publish/Subscribe Topics</a>
+            </h5>
+<p id="section-7.3.2.5-1">Many publish-subscribe models provide hierarchical organization of topics.
+This way, subscribers can subscribe to either all attestations (topic <code>AttRes</code>), or, for example, to topic <code>AttRes/DbServers/Germany</code> to receive only attestations from database servers in Germany.
+Further, it may be required to distinguish between uni-directional and challenge-response attestation evidence.<a href="#section-7.3.2.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="additional-application-specific-requirements">
+<section id="section-8">
+      <h2 id="name-additional-application-spec">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-additional-application-spec" class="section-name selfRef">Additional Application-Specific Requirements</a>
+      </h2>
+<p id="section-8-1">Depending on the use cases covered, there can be additional requirements. An exemplary subset is illustrated in this section.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<div id="confidentiality">
+<section id="section-8.1">
+        <h3 id="name-confidentiality">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-confidentiality" class="section-name selfRef">Confidentiality</a>
+        </h3>
+<p id="section-8.1-1">Confidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality protection. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mutual-authentication">
+<section id="section-8.2">
+        <h3 id="name-mutual-authentication">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-mutual-authentication" class="section-name selfRef">Mutual Authentication</a>
+        </h3>
+<p id="section-8.2-1">In particular use cases, mutual authentication may be desirable in such a way that a Verifier also needs to prove its identity to the Attester, instead of only the Attester proving its identity to the Verifier.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hardware-enforcementsupport">
+<section id="section-8.3">
+        <h3 id="name-hardware-enforcement-suppor">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-hardware-enforcement-suppor" class="section-name selfRef">Hardware-Enforcement/Support</a>
+        </h3>
+<p id="section-8.3-1">Depending on given usage scenarios, hardware support for secure storage of cryptographic keys, crypto accelerators, as well as protected or isolated execution environments can be mandatory requirements. Well-known technologies in support of these requirements are roots of trusts, such as Hardware Security Modules (HSM), Physically Unclonable Functions (PUFs), Shielded Secrets, or Trusted Executions Environments (TEEs).<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="implementation-status">
+<section id="section-9">
+      <h2 id="name-implementation-status">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
+      </h2>
+<p id="section-9-1">Note to RFC Editor: Please remove this section as well as references to <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span> before AUTH48.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span>.
+The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.
+Please note that the listing of any individual implementation here does not imply endorsement by the IETF.
+Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.
+This is not intended as, and must not be construed to be, a catalog of available implementations or their features.
+Readers are advised to note that other implementations may exist.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">According to <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span>,
+"this will allow reviewers and working groups to assign due consideration to documents that have the benefit of running code, which may serve as evidence of valuable experimentation and feedback that have made the implemented protocols more mature.
+It is up to the individual working groups to use this information as they see fit".<a href="#section-9-3" class="pilcrow">¶</a></p>
+<div id="implementer">
+<section id="section-9.1">
+        <h3 id="name-implementer">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-implementer" class="section-name selfRef">Implementer</a>
+        </h3>
+<p id="section-9.1-1">The open-source implementation was initiated and is maintained by the Fraunhofer Institute for Secure Information Technology SIT.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="implementation-name">
+<section id="section-9.2">
+        <h3 id="name-implementation-name">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-implementation-name" class="section-name selfRef">Implementation Name</a>
+        </h3>
+<p id="section-9.2-1">The open-source implementation is named "CHAllenge-Response based Remote Attestation" or in short: CHARRA.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="implementation-url">
+<section id="section-9.3">
+        <h3 id="name-implementation-url">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-implementation-url" class="section-name selfRef">Implementation URL</a>
+        </h3>
+<p id="section-9.3-1">The open-source implementation project resource can be located via: <a href="https://github.com/fraunhofer-sit/charra">https://github.com/fraunhofer-sit/charra</a><a href="#section-9.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="maturity">
+<section id="section-9.4">
+        <h3 id="name-maturity">
+<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-maturity" class="section-name selfRef">Maturity</a>
+        </h3>
+<p id="section-9.4-1">The code's level of maturity is considered to be "prototype".<a href="#section-9.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="coverage-and-version-compatibility">
+<section id="section-9.5">
+        <h3 id="name-coverage-and-version-compat">
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-coverage-and-version-compat" class="section-name selfRef">Coverage and Version Compatibility</a>
+        </h3>
+<p id="section-9.5-1">The current version ('6194b3b') implements a challenge/response interaction model and is aligned with the exemplary specification of the CoAP FETCH bodies defined in Section <a href="#coap-fetch-bodies" class="auto internal xref">Appendix A</a> of this document.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="license">
+<section id="section-9.6">
+        <h3 id="name-license">
+<a href="#section-9.6" class="section-number selfRef">9.6. </a><a href="#name-license" class="section-name selfRef">License</a>
+        </h3>
+<p id="section-9.6-1">The CHARRA project and all corresponding code and data maintained on GitHub are provided under the BSD 3-Clause "New" or "Revised" license.<a href="#section-9.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="implementation-dependencies">
+<section id="section-9.7">
+        <h3 id="name-implementation-dependencies">
+<a href="#section-9.7" class="section-number selfRef">9.7. </a><a href="#name-implementation-dependencies" class="section-name selfRef">Implementation Dependencies</a>
+        </h3>
+<p id="section-9.7-1">The implementation requires the use of the Trusted Computing Group (TCG) Trusted Software Stack (TSS), and an HSM interoperable with the Trusted Platform Module Library specifications, e.g., a Trusted Platform Module (TPM) 2.0 or equivalent implementation.
+The corresponding project resources (code and data) for Linux-based operating systems are maintained on GitHub at <a href="https://github.com/tpm2-software/tpm2-tss/">https://github.com/tpm2-software/tpm2-tss/</a>.<a href="#section-9.7-1" class="pilcrow">¶</a></p>
+<p id="section-9.7-2">The implementation uses the Constrained Application Protocol <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> (http://coap.technology/) and the Concise Binary Object Representation <span>[<a href="#RFC7049" class="cite xref">RFC7049</a>]</span> (https://cbor.io/).<a href="#section-9.7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contact">
+<section id="section-9.8">
+        <h3 id="name-contact">
+<a href="#section-9.8" class="section-number selfRef">9.8. </a><a href="#name-contact" class="section-name selfRef">Contact</a>
+        </h3>
+<p id="section-9.8-1">Michael Eckel (michael.eckel@sit.fraunhofer.de)<a href="#section-9.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-and-privacy-considerations">
+<section id="section-10">
+      <h2 id="name-security-and-privacy-consid">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-and-privacy-consid" class="section-name selfRef">Security and Privacy Considerations</a>
+      </h2>
+<p id="section-10-1">In a remote attestation procedure the Verifier or the Attester MAY want to cryptographically blind several attributes.
+For instance, information can be part of the signature after applying a one-way function (e. g., a hash function).<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">There is also a possibility to scramble the Nonce or Attester Identity with other information that is known to both the Verifier and Attester.
+A prominent example is the IP address of the Attester that usually is known by the Attester itself as well as the Verifier.
+This extra information can be used to scramble the Nonce in order to counter certain types of relay attacks.<a href="#section-10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="section-11">
+      <h2 id="name-acknowledgments">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="section-11-1">Olaf Bergmann, Michael Richardson, and Ned Smith<a href="#section-11-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-12">
+      <h2 id="name-references">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-12.1">
+        <h3 id="name-normative-references">
+<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="BCP205">[BCP205]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span> and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Improving Awareness of Running Code: The Implementation Status Section"</span>, <span class="seriesInfo">BCP 205</span>, <span class="seriesInfo">RFC 7942</span>, <span class="seriesInfo">DOI 10.17487/RFC7942</span>, <time datetime="2016-07" class="refDate">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7942">https://www.rfc-editor.org/rfc/rfc7942</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3161">[RFC3161]</dt>
+        <dd>
+<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5280">[RFC5280]</dt>
+        <dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7049">[RFC7049]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 7049</span>, <span class="seriesInfo">DOI 10.17487/RFC7049</span>, <time datetime="2013-10" class="refDate">October 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7049">https://www.rfc-editor.org/rfc/rfc7049</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7252">[RFC7252]</dt>
+        <dd>
+<span class="refAuthor">Shelby, Z.</span>, <span class="refAuthor">Hartke, K.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"The Constrained Application Protocol (CoAP)"</span>, <span class="seriesInfo">RFC 7252</span>, <span class="seriesInfo">DOI 10.17487/RFC7252</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7252">https://www.rfc-editor.org/rfc/rfc7252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8610">[RFC8610]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9334">[RFC9334]</dt>
+      <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-12.2">
+        <h3 id="name-informative-references">
+<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="DAA">[DAA]</dt>
+        <dd>
+<span class="refAuthor">Brickell, E.</span>, <span class="refAuthor">Camenisch, J.</span>, and <span class="refAuthor">L. Chen</span>, <span class="refTitle">"Direct Anonymous Attestation"</span>, <span class="seriesInfo">ACM Proceedings of the 11th ACM conference on Computer and Communications Security</span>, <span class="seriesInfo">page 132-145</span>, <time datetime="2004" class="refDate">2004</time>. </dd>
+<dd class="break"></dd>
+<dt id="DesignPatterns">[DesignPatterns]</dt>
+        <dd>
+<span class="refAuthor">Gamma, E.</span>, <span class="refAuthor">Helm, R.</span>, <span class="refAuthor">Johnson, R.</span>, and <span class="refAuthor">J. Vlissides</span>, <span class="refTitle">"Design Patterns - Elements of Reusable Object-Oriented Software"</span>, <span class="seriesInfo">Publisher Addison-Wesley</span>, <time datetime="1994" class="refDate">1994</time>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.birkholz-rats-tuda">[I-D.birkholz-rats-tuda]</dt>
+        <dd>
+<span class="refAuthor">Fuchs, A.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">McDonald, I.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Time-Based Uni-Directional Attestation"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-birkholz-rats-tuda-07</span>, <time datetime="2022-07-10" class="refDate">10 July 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-birkholz-rats-tuda-07">https://datatracker.ietf.org/doc/html/draft-birkholz-rats-tuda-07</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-rats-tpm-based-network-device-attest">[I-D.ietf-rats-tpm-based-network-device-attest]</dt>
+        <dd>
+<span class="refAuthor">Fedorkow, G.</span>, <span class="refAuthor">Voit, E.</span>, and <span class="refAuthor">J. Fitzgerald-McKay</span>, <span class="refTitle">"TPM-based Network Device Remote Integrity Verification"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-tpm-based-network-device-attest-14</span>, <time datetime="2022-03-22" class="refDate">22 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-tpm-based-network-device-attest-14">https://datatracker.ietf.org/doc/html/draft-ietf-rats-tpm-based-network-device-attest-14</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ISIS">[ISIS]</dt>
+        <dd>
+<span class="refAuthor">Birman, K.</span> and <span class="refAuthor">T. Joseph</span>, <span class="refTitle">"Exploiting Virtual Synchrony in Distributed Systems"</span>, <span class="seriesInfo">DOI 10.1145/41457.37515</span>, <time datetime="1987" class="refDate">1987</time>, <span>&lt;<a href="https://doi.org/10.1145/41457.37515">https://doi.org/10.1145/41457.37515</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MQTT">[MQTT]</dt>
+        <dd>
+<span class="refAuthor">OASIS</span>, <span class="refTitle">"Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02"</span>, <span class="seriesInfo">Specification Version 5.0</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
+<dd class="break"></dd>
+<dt id="TNC">[TNC]</dt>
+        <dd>
+<span class="refAuthor">TCG</span>, <span class="refTitle">"TCG Trusted Network Communications TNC Architecture for Interoperability"</span>, <span class="seriesInfo">Specification Version 2.0 Revision 13</span>, <time datetime="2017" class="refDate">2017</time>. </dd>
+<dd class="break"></dd>
+<dt id="turtles">[turtles]</dt>
+      <dd>
+<span class="refAuthor">Rudnicki, R.</span>, <span class="refTitle">"Turtles All the Way Down: Foundation, Edifice, and Ruin in Faulkner and McCarthy"</span>, <span class="seriesInfo">The Faulkner Journal 25.2</span>, <span class="seriesInfo">DOI 10.1353/fau.2010.0002</span>, <time datetime="2010" class="refDate">2010</time>, <span>&lt;<a href="https://doi.org/10.1353/fau.2010.0002">https://doi.org/10.1353/fau.2010.0002</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+<div id="coap-fetch-bodies">
+<section id="appendix-A">
+      <h2 id="name-cddl-specification-for-a-si">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-cddl-specification-for-a-si" class="section-name selfRef">CDDL Specification for a simple CoAP Challenge/Response Interaction</a>
+      </h2>
+<p id="appendix-A-1">The following CDDL specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
+The communication protocol used is CoAP.
+Both the request message and the response message are exchanged via the FETCH operation and corresponding FETCH request and FETCH response body.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">In this example, Evidence is created via the root-of-trust for reporting primitive operation "quote" that is provided by a TPM 2.0.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<div class="lang-cddl sourcecode" id="appendix-A-3">
+<pre>
+charra-bodies = charra-attestation-request / charra-attestation-response
+
+charra-attestation-request = [
+    hello: bool,    ; if true, the TPM 2.0 AK Cert shall be conveyed
+    key-id: bytes,  ; the key ID to use for signing
+    nonce: bytes,   ; a (random) nonce, providing freshness and/or recentness
+    pcr-selections: [ * pcr-selection ]
+]
+
+pcr-selection = [
+    tcg-hash-alg-id: uint .size 2,  ; TPM2_ALG_ID
+    pcrs: [
+        pcr: uint .size 2
+    ]
+]
+
+charra-attestation-response = [
+    attestation-data: bytes,  ; TPMS_ATTEST.quoted
+    tpm2-signature: bytes,
+    ? ak-cert: bytes,         ; TPM2 attestation key certificate (AK Cert)
+]
+</pre><a href="#appendix-A-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Henk Birkholz</span></div>
+<div dir="auto" class="left"><span class="org">Fraunhofer SIT</span></div>
+<div dir="auto" class="left"><span class="street-address">Rheinstrasse 75</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">64295</span> <span class="locality">Darmstadt</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:henk.birkholz@sit.fraunhofer.de" class="email">henk.birkholz@sit.fraunhofer.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Michael Eckel</span></div>
+<div dir="auto" class="left"><span class="org">Fraunhofer SIT</span></div>
+<div dir="auto" class="left"><span class="street-address">Rheinstrasse 75</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">64295</span> <span class="locality">Darmstadt</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:michael.eckel@sit.fraunhofer.de" class="email">michael.eckel@sit.fraunhofer.de</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Wei Pan</span></div>
+<div dir="auto" class="left"><span class="org">Huawei Technologies</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:william.panwei@huawei.com" class="email">william.panwei@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Eric Voit</span></div>
+<div dir="auto" class="left"><span class="org">Cisco Systems</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:evoit@cisco.com" class="email">evoit@cisco.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
