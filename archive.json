@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-02T00:54:30.043365+00:00",
+  "timestamp": "2024-07-04T00:54:30.653448+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -2000,6 +2000,32 @@
       "mergeCommit": {
         "oid": "c693a2148641eaf8b3766a578b57944ce0111f84"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOEYizNM50SlmG",
+      "title": "Generalizing language around HSM requirements",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/52",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "as a help for implementers of the reference code",
+      "createdAt": "2024-07-03T07:59:57Z",
+      "updatedAt": "2024-07-03T07:59:57Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "c693a2148641eaf8b3766a578b57944ce0111f84",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "generic-HSM",
+      "headRefOid": "3107c1981dc8b4c93484929aab1320672c61f1a5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
