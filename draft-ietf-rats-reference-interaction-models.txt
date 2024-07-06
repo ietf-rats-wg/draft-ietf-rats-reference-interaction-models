@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 5 September 2024                                         W. Pan
+Expires: 7 January 2025                                           W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                            4 March 2024
+                                                             6 July 2024
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2024.
+   This Internet-Draft will expire on 7 January 2025.
 
 Copyright Notice
 
@@ -1101,12 +1101,13 @@ Table of Contents
 
 9.7.  Implementation Dependencies
 
-   The implementation requires the use of the official Trusted Computing
-   Group (TCG) open-source Trusted Software Stack (TSS) for the Trusted
-   Platform Module (TPM) 2.0.  The corresponding project resources (code
-   and data) for Linux-based operating systems are maintained on GitHub
-   at https://github.com/tpm2-software/tpm2-tss/ (https://github.com/
-   tpm2-software/tpm2-tss/).
+   The implementation requires the use of the Trusted Computing Group
+   (TCG) Trusted Software Stack (TSS), and an HSM interoperable with the
+   Trusted Platform Module Library specifications, e.g., a Trusted
+   Platform Module (TPM) 2.0 or equivalent implementation.  The
+   corresponding project resources (code and data) for Linux-based
+   operating systems are maintained on GitHub at https://github.com/
+   tpm2-software/tpm2-tss/ (https://github.com/tpm2-software/tpm2-tss/).
 
    The implementation uses the Constrained Application Protocol
    [RFC7252] (http://coap.technology/) and the Concise Binary Object
