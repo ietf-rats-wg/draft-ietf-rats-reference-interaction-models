@@ -305,7 +305,7 @@ Table of Contents
       secrets) used to protect Claims in Evidence produced by Attesting
       Environments of an Attester.
 
-      While a verifier does not necessarily has knowledge about an
+      While a verifier does not necessarily have knowledge about an
       Attesting Environment's Attestation Key (ID), each distinguishable
       Attesting Environment has access to a protected capability that
       includes an Attestation Key (Authentication Secret).
