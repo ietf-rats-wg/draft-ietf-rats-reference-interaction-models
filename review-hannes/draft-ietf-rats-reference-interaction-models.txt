@@ -305,10 +305,12 @@ Table of Contents
       secrets) used to protect Claims in Evidence produced by Attesting
       Environments of an Attester.
 
-      Each distinguishable Attesting Environment has access to a
-      protected capability that includes an Attestation Key
-      (Authentication Secret).  Consequently, an Attestation Key ID can
-      also identify an Attesting Environment.
+      While a verifier does not necessarily has knowledge about an
+      Attesting Environment's Attestation Key (ID), each distinguishable
+      Attesting Environment has access to a protected capability that
+      includes an Attestation Key (Authentication Secret).
+      Consequently, an Attestation Key ID can also identify an Attesting
+      Environment.
 
    Handle ('handle'):  _mandatory_
 
