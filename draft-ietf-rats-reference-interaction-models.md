@@ -52,6 +52,7 @@ normative:
   BCP205: RFC7942
   RFC8610: CDDL
   RFC9334: RATS
+  I-D.birkholz-rats-epoch-markers: epoch-markers
 
 informative:
   I-D.ietf-rats-tpm-based-network-device-attest: RIV
