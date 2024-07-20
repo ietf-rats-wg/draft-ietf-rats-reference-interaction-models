@@ -252,9 +252,9 @@ Handle ('handle'):
 
 : *mandatory*
 
-: A statement that is intended to uniquely distinguish received Evidence and/or determine the freshness of Evidence.
+: A statement provided to the Attester from the outside to be included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.
 
-: A Verifier can also use a Handle as an indicator for authenticity or attestation provenance, as only Attesters and Verifiers that are intended to exchange Evidence should have knowledge of the corresponding Handles. Examples include Nonces or signed timestamps.
+: Handle is an umbrella term for existing data types that accomplish one or more of (a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include: Nonces that are used to protect from replay attacks or Epoch Markers that identify distinct period (Epoch) of freshness {{-epoch-markers}}. Handles can also be used as an indicator for authenticity or attestation Evidence provenance, as only a select number of RATS Roles (e.g., an Attester and a Verifier in a challenge-response interaction) are intended to have knowledge of a current Handle.
 
 Claims ('claims'):
 
