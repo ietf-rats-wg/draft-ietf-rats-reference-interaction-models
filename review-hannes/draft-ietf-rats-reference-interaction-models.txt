@@ -298,17 +298,17 @@ Table of Contents
    attestation procedure using one or more of the interaction models
    provided.
 
-   Authentication Secret IDs ('authSecIDs'):  _mandatory_
+   Attestation Key IDs ('authSecIDs'):  _optional_
 
       A statement representing an identifier list that MUST be
-      associated with corresponding Authentication Secrets used to
-      protect Claims included in Evidence.
+      associated with corresponding Attestation Keys (authentication
+      secrets) used to protect Claims in Evidence produced by Attesting
+      Environments of an Attester.
 
       Each distinguishable Attesting Environment has access to a
-      protected capability that provides an Authentication Secret
-      associated with that Attesting Environment.  Consequently, an
-      Authentication Secret ID can also identify an Attesting
-      Environment.
+      protected capability that includes an Attestation Key
+      (Authentication Secret).  Consequently, an Attestation Key ID can
+      also identify an Attesting Environment.
 
    Handle ('handle'):  _mandatory_
 
@@ -430,12 +430,12 @@ Table of Contents
   generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
-     |<--- requestAttestation(handle, authSecIDs, claimSelection) |
+     |<--- requestAttestation(handle, attKeyIDs, claimSelection)  |
      |                                                            |
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | evidence, eventLogs -------------------------------------->|
@@ -543,13 +543,13 @@ Table of Contents
      | => claims, eventLogs                 |                 |
      |                                      |                 |
      |<--------------------- requestAttestation(handle,       |
-     |                           authSecIDs, claimSelection)  |
+     |                           attKeyIDs, claimSelection)   |
      |                                      |                 |
   collectClaims(claims, claimSelection)     |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     authSecIDs, collectedClaims)           |                 |
+     attKeyIDs, collectedClaims)            |                 |
      | => evidence                          |                 |
      |                                      |                 |
      | {evidence, eventLogs} -------------->|                 |
@@ -593,7 +593,7 @@ Table of Contents
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
      |<--------------------- requestAttestation(handle,          |
-     |                           authSecIDs, claimSelection)     |
+     |                           attKeyIDs, claimSelection)      |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, eventLogs}            |                       |
@@ -603,7 +603,7 @@ Table of Contents
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     authSecIDs, collectedClaims)        |                       |
+     attKeyIDs, collectedClaims)         |                       |
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, eventLogs} ----------->|                       |
@@ -648,7 +648,7 @@ Table of Contents
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | {evidence, eventLogs} ------------------------------------>|
@@ -671,7 +671,7 @@ Table of Contents
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 |    | {evidence, eventLogsDelta} ------------------------------->|    |
@@ -750,7 +750,7 @@ Table of Contents
      |                                                generateHandle()
      |                                                   handle<= |
      |                                                            |
-     |<------------ subscribe(handle, authSecIDs, claimSelection) |
+     |<------------ subscribe(handle, attKeyIDs, claimSelection)  |
      | {handle} ------------------------------------------------->|
      |                                                            |
 =================[Evidence Generation and Conveyance]===================
@@ -761,7 +761,7 @@ Table of Contents
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
 ==========================[Evidence Appraisal]==========================
@@ -784,7 +784,7 @@ Table of Contents
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 | =====================[Delta Evidence Appraisal]===================== |
@@ -939,7 +939,7 @@ Table of Contents
 | collectClaims(claims, claimSelection)  |                        |    |
 |    | => collectedClaims                |                        |    |
 |    |                                   |                        |    |
-| generateEvidence(handle, authSecIDs,   |                        |    |
+| generateEvidence(handle, attKeyIDs,    |                        |    |
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |

@@ -1430,20 +1430,20 @@ It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MA
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6-2">
-        <dt id="section-6-2.1">Authentication Secret IDs ('authSecIDs'):</dt>
+        <dt id="section-6-2.1">Attestation Key IDs ('authSecIDs'):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.2">
-          <p id="section-6-2.2.1"><em>mandatory</em><a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.2.1"><em>optional</em><a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.3"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.4">
-          <p id="section-6-2.4.1">A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.4.1">A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.5"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.6">
-          <p id="section-6-2.6.1">Each distinguishable Attesting Environment has access to a protected capability that provides an Authentication Secret associated with that Attesting Environment.
-Consequently, an Authentication Secret ID can also identify an Attesting Environment.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.6.1">Each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
+Consequently, an Attestation Key ID can also identify an Attesting Environment.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.7">Handle ('handle'):</dt>
@@ -1619,15 +1619,15 @@ The way these handles are processed is the most prominent difference between the
                 <text x="112" y="148">claims,</text>
                 <text x="184" y="148">eventLogs</text>
                 <text x="196" y="180">requestAttestation(handle,</text>
-                <text x="352" y="180">authSecIDs,</text>
-                <text x="464" y="180">claimSelection)</text>
+                <text x="348" y="180">attKeyIDs,</text>
+                <text x="456" y="180">claimSelection)</text>
                 <text x="104" y="212">collectClaims(claims,</text>
                 <text x="256" y="212">claimSelection)</text>
                 <text x="68" y="228">=&gt;</text>
                 <text x="144" y="228">collectedClaims</text>
                 <text x="116" y="260">generateEvidence(handle,</text>
-                <text x="264" y="260">authSecIDs,</text>
-                <text x="380" y="260">collectedClaims)</text>
+                <text x="260" y="260">attKeyIDs,</text>
+                <text x="372" y="260">collectedClaims)</text>
                 <text x="68" y="276">=&gt;</text>
                 <text x="116" y="276">evidence</text>
                 <text x="96" y="308">evidence,</text>
@@ -1743,15 +1743,15 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
                     <text x="112" y="148">claims,</text>
                     <text x="184" y="148">eventLogs</text>
                     <text x="340" y="180">requestAttestation(handle,</text>
-                    <text x="312" y="196">authSecIDs,</text>
-                    <text x="424" y="196">claimSelection)</text>
+                    <text x="308" y="196">attKeyIDs,</text>
+                    <text x="416" y="196">claimSelection)</text>
                     <text x="104" y="228">collectClaims(claims,</text>
                     <text x="256" y="228">claimSelection)</text>
                     <text x="68" y="244">=&gt;</text>
                     <text x="144" y="244">collectedClaims</text>
                     <text x="116" y="276">generateEvidence(handle,</text>
-                    <text x="88" y="292">authSecIDs,</text>
-                    <text x="204" y="292">collectedClaims)</text>
+                    <text x="84" y="292">attKeyIDs,</text>
+                    <text x="196" y="292">collectedClaims)</text>
                     <text x="68" y="308">=&gt;</text>
                     <text x="116" y="308">evidence</text>
                     <text x="100" y="340">{evidence,</text>
@@ -1855,8 +1855,8 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                     <text x="384" y="100">Conveyance]</text>
                     <text x="336" y="116">|</text>
                     <text x="340" y="132">requestAttestation(handle,</text>
-                    <text x="312" y="148">authSecIDs,</text>
-                    <text x="424" y="148">claimSelection)</text>
+                    <text x="308" y="148">attKeyIDs,</text>
+                    <text x="416" y="148">claimSelection)</text>
                     <text x="164" y="180">generateClaims(attestingEnvironment)</text>
                     <text x="68" y="196">=&gt;</text>
                     <text x="116" y="196">{claims,</text>
@@ -1866,8 +1866,8 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                     <text x="68" y="260">=&gt;</text>
                     <text x="144" y="260">collectedClaims</text>
                     <text x="116" y="292">generateEvidence(handle,</text>
-                    <text x="88" y="308">authSecIDs,</text>
-                    <text x="204" y="308">collectedClaims)</text>
+                    <text x="84" y="308">attKeyIDs,</text>
+                    <text x="196" y="308">collectedClaims)</text>
                     <text x="68" y="324">=&gt;</text>
                     <text x="116" y="324">evidence</text>
                     <text x="100" y="356">{evidence,</text>
@@ -2004,8 +2004,8 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                 <text x="68" y="324">=&gt;</text>
                 <text x="144" y="324">collectedClaims</text>
                 <text x="116" y="356">generateEvidence(handle,</text>
-                <text x="264" y="356">authSecIDs,</text>
-                <text x="380" y="356">collectedClaims)</text>
+                <text x="260" y="356">attKeyIDs,</text>
+                <text x="372" y="356">collectedClaims)</text>
                 <text x="68" y="372">=&gt;</text>
                 <text x="116" y="372">evidence</text>
                 <text x="100" y="404">{evidence,</text>
@@ -2041,8 +2041,8 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                 <text x="68" y="692">=&gt;</text>
                 <text x="164" y="692">collectedClaimsDelta</text>
                 <text x="116" y="724">generateEvidence(handle,</text>
-                <text x="264" y="724">authSecIDs,</text>
-                <text x="400" y="724">collectedClaimsDelta)</text>
+                <text x="260" y="724">attKeyIDs,</text>
+                <text x="392" y="724">collectedClaimsDelta)</text>
                 <text x="68" y="740">=&gt;</text>
                 <text x="116" y="740">evidence</text>
                 <text x="100" y="772">{evidence,</text>
@@ -2170,8 +2170,8 @@ In the following Subsections, streaming remote attestation without a broker (obs
                   <text x="500" y="132">generateHandle()</text>
                   <text x="492" y="148">handle&lt;=</text>
                   <text x="232" y="180">subscribe(handle,</text>
-                  <text x="352" y="180">authSecIDs,</text>
-                  <text x="464" y="180">claimSelection)</text>
+                  <text x="348" y="180">attKeyIDs,</text>
+                  <text x="456" y="180">claimSelection)</text>
                   <text x="92" y="196">{handle}</text>
                   <text x="176" y="228">[Evidence</text>
                   <text x="260" y="228">Generation</text>
@@ -2187,8 +2187,8 @@ In the following Subsections, streaming remote attestation without a broker (obs
                   <text x="68" y="324">=&gt;</text>
                   <text x="144" y="324">collectedClaims</text>
                   <text x="116" y="356">generateEvidence(handle,</text>
-                  <text x="264" y="356">authSecIDs,</text>
-                  <text x="380" y="356">collectedClaims)</text>
+                  <text x="260" y="356">attKeyIDs,</text>
+                  <text x="372" y="356">collectedClaims)</text>
                   <text x="68" y="372">=&gt;</text>
                   <text x="116" y="372">evidence</text>
                   <text x="248" y="404">[Evidence</text>
@@ -2224,8 +2224,8 @@ In the following Subsections, streaming remote attestation without a broker (obs
                   <text x="68" y="692">=&gt;</text>
                   <text x="164" y="692">collectedClaimsDelta</text>
                   <text x="116" y="724">generateEvidence(handle,</text>
-                  <text x="264" y="724">authSecIDs,</text>
-                  <text x="400" y="724">collectedClaimsDelta)</text>
+                  <text x="260" y="724">attKeyIDs,</text>
+                  <text x="392" y="724">collectedClaimsDelta)</text>
                   <text x="68" y="740">=&gt;</text>
                   <text x="116" y="740">evidence</text>
                   <text x="212" y="772">[Delta</text>
@@ -2535,7 +2535,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
                     <text x="68" y="292">=&gt;</text>
                     <text x="144" y="292">collectedClaims</text>
                     <text x="116" y="324">generateEvidence(handle,</text>
-                    <text x="264" y="324">authSecIDs,</text>
+                    <text x="260" y="324">attKeyIDs,</text>
                     <text x="220" y="340">collectedClaims)</text>
                     <text x="68" y="356">=&gt;</text>
                     <text x="116" y="356">evidence</text>
