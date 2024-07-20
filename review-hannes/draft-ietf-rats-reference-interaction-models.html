@@ -1508,7 +1508,7 @@ Consequently, an Authentication Secret ID can also identify an Attesting Environ
         <dd class="break"></dd>
 <dt id="section-6-2.31"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.32">
-          <p id="section-6-2.32.1">Claim Selections act as filters to specify the exact set of Claims to be included in Evidence. In a remote attestation process, a Verifier sends a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.32.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.33">Collected Claims ('collectedClaims'):</dt>
