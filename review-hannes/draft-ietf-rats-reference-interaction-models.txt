@@ -323,7 +323,7 @@ Table of Contents
       one or more of (a) determining recentness, (b) determining
       freshness, or (c) provide replay protection.  Examples include:
       Nonces that are used to protect from replay attacks or Epoch
-      Markers that identify distinct period (Epoch) of freshness
+      Markers that identify distinct periods (Epoch) of freshness
       [I-D.birkholz-rats-epoch-markers].  Handles can also be used as an
       indicator for authenticity or attestation Evidence provenance, as
       only a select number of RATS Roles (e.g., an Attester and a
