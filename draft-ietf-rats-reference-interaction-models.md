@@ -246,7 +246,7 @@ Attestation Key IDs ('authSecIDs'):
 
 : A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.
 
-: While a verifier does not necessarily has knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
+: While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
 Consequently, an Attestation Key ID can also identify an Attesting Environment.
 
 Handle ('handle'):
