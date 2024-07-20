@@ -283,7 +283,7 @@ Claim Selection ('claimSelection'):
 
 : A (sub-)set of Claims which can be created by an Attester.
 
-: Claim Selections act as filters to specify the exact set of Claims to be included in Evidence. In a remote attestation process, a Verifier sends a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
+: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.
 
 Collected Claims ('collectedClaims'):
 
