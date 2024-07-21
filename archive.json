@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-18T00:54:56.520050+00:00",
+  "timestamp": "2024-07-21T00:59:44.704424+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -2030,6 +2030,81 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOEYizNM51_ox-",
+      "title": "Addressing Hannes comment on Nonces",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/53",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Improved expositional text on Handles",
+      "createdAt": "2024-07-20T19:28:10Z",
+      "updatedAt": "2024-07-20T20:47:26Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "97a4da1030b4f706b354f42da2a4f316b3d5fb49",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "review-hannes",
+      "headRefOid": "0f7b79bde28a4d25573b518cd4a95d09dc2ffc18",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "NONE",
+          "body": "Looks good. Will re-read the whole document after submission.",
+          "createdAt": "2024-07-20T20:28:24Z",
+          "updatedAt": "2024-07-20T20:28:24Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6CiZrT",
+          "commit": {
+            "abbreviatedOid": "2e56d7d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-20T20:24:51Z",
+          "updatedAt": "2024-07-20T20:24:51Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\n: While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).\r\n```",
+              "createdAt": "2024-07-20T20:24:51Z",
+              "updatedAt": "2024-07-20T20:24:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6CiaQY",
+          "commit": {
+            "abbreviatedOid": "bf1ddff"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-20T20:47:07Z",
+          "updatedAt": "2024-07-20T20:47:07Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\n: Handle is an umbrella term for existing data types that accomplish one or more of (a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include: Nonces that are used to protect from replay attacks or Epoch Markers that identify distinct periods (Epoch) of freshness {{-epoch-markers}}. Handles can also be used as an indicator for authenticity or attestation Evidence provenance, as only a select number of RATS Roles (e.g., an Attester and a Verifier in a challenge-response interaction) are intended to have knowledge of a current Handle.\r\n```",
+              "createdAt": "2024-07-20T20:47:07Z",
+              "updatedAt": "2024-07-20T20:47:07Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
