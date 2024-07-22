@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 7 January 2025                                           W. Pan
+Expires: 23 January 2025                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                             6 July 2024
+                                                            22 July 2024
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2025.
+   This Internet-Draft will expire on 23 January 2025.
 
 Copyright Notice
 
@@ -298,28 +298,37 @@ Table of Contents
    attestation procedure using one or more of the interaction models
    provided.
 
-   Authentication Secret IDs ('authSecIDs'):  _mandatory_
+   Attestation Key IDs ('authSecIDs'):  _optional_
 
       A statement representing an identifier list that MUST be
-      associated with corresponding Authentication Secrets used to
-      protect Claims included in Evidence.
+      associated with corresponding Attestation Keys (authentication
+      secrets) used to protect Claims in Evidence produced by Attesting
+      Environments of an Attester.
 
-      Each distinguishable Attesting Environment has access to a
-      protected capability that provides an Authentication Secret
-      associated with that Attesting Environment.  Consequently, an
-      Authentication Secret ID can also identify an Attesting
+      While a verifier does not necessarily have knowledge about an
+      Attesting Environment's Attestation Key (ID), each distinguishable
+      Attesting Environment has access to a protected capability that
+      includes an Attestation Key (Authentication Secret).
+      Consequently, an Attestation Key ID can also identify an Attesting
       Environment.
 
    Handle ('handle'):  _mandatory_
 
-      A statement that is intended to uniquely distinguish received
-      Evidence and/or determine the freshness of Evidence.
+      A statement provided to the Attester from the outside to be
+      included in Evidence (or other RATS Conceptual Messages) to
+      determine recentness, freshness, or to protect against replay
+      attacks.
 
-      A Verifier can also use a Handle as an indicator for authenticity
-      or attestation provenance, as only Attesters and Verifiers that
-      are intended to exchange Evidence should have knowledge of the
-      corresponding Handles.  Examples include Nonces or signed
-      timestamps.
+      Handle is an umbrella term for existing data types that accomplish
+      one or more of (a) determining recentness, (b) determining
+      freshness, or (c) provide replay protection.  Examples include:
+      Nonces that are used to protect from replay attacks or Epoch
+      Markers that identify distinct periods (Epoch) of freshness
+      [I-D.birkholz-rats-epoch-markers].  Handles can also be used as an
+      indicator for authenticity or attestation Evidence provenance, as
+      only a select number of RATS Roles (e.g., an Attester and a
+      Verifier in a challenge-response interaction) are intended to have
+      knowledge of a current Handle.
 
    Claims ('claims'):  _mandatory_
 
@@ -352,11 +361,14 @@ Table of Contents
 
       A (sub-)set of Claims which can be created by an Attester.
 
-      Claim Selections act as filters to specify the exact set of Claims
-      to be included in Evidence.  In a remote attestation process, a
-      Verifier sends a Claim Selection, among other elements, to an
+      Claim Selections act as optional filters to specify the exact set
+      of Claims to be included in Evidence.  For example, a Verifier
+      could send a Claim Selection, among other elements, to an
       Attester.  An Attester MAY decide whether or not to provide all
-      requested Claims from a Claim Selection to the Verifier.
+      requested Claims from a Claim Selection to the Verifier.  If there
+      is no way to convey a Claim Selection in a remote attestation
+      protocol, a default Claim Selection (e.g., "all") MUST be defined
+      be the Attester and SHOULD be known to the Verifier.
 
    Collected Claims ('collectedClaims'):  _mandatory_
 
@@ -420,12 +432,12 @@ Table of Contents
   generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
-     |<--- requestAttestation(handle, authSecIDs, claimSelection) |
+     |<--- requestAttestation(handle, attKeyIDs, claimSelection)  |
      |                                                            |
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | evidence, eventLogs -------------------------------------->|
@@ -533,13 +545,13 @@ Table of Contents
      | => claims, eventLogs                 |                 |
      |                                      |                 |
      |<--------------------- requestAttestation(handle,       |
-     |                           authSecIDs, claimSelection)  |
+     |                           attKeyIDs, claimSelection)   |
      |                                      |                 |
   collectClaims(claims, claimSelection)     |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     authSecIDs, collectedClaims)           |                 |
+     attKeyIDs, collectedClaims)            |                 |
      | => evidence                          |                 |
      |                                      |                 |
      | {evidence, eventLogs} -------------->|                 |
@@ -583,7 +595,7 @@ Table of Contents
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
      |<--------------------- requestAttestation(handle,          |
-     |                           authSecIDs, claimSelection)     |
+     |                           attKeyIDs, claimSelection)      |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, eventLogs}            |                       |
@@ -593,7 +605,7 @@ Table of Contents
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     authSecIDs, collectedClaims)        |                       |
+     attKeyIDs, collectedClaims)         |                       |
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, eventLogs} ----------->|                       |
@@ -638,7 +650,7 @@ Table of Contents
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | {evidence, eventLogs} ------------------------------------>|
@@ -661,7 +673,7 @@ Table of Contents
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 |    | {evidence, eventLogsDelta} ------------------------------->|    |
@@ -740,7 +752,7 @@ Table of Contents
      |                                                generateHandle()
      |                                                   handle<= |
      |                                                            |
-     |<------------ subscribe(handle, authSecIDs, claimSelection) |
+     |<------------ subscribe(handle, attKeyIDs, claimSelection)  |
      | {handle} ------------------------------------------------->|
      |                                                            |
 =================[Evidence Generation and Conveyance]===================
@@ -751,7 +763,7 @@ Table of Contents
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
 ==========================[Evidence Appraisal]==========================
@@ -774,7 +786,7 @@ Table of Contents
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 | =====================[Delta Evidence Appraisal]===================== |
@@ -929,7 +941,7 @@ Table of Contents
 | collectClaims(claims, claimSelection)  |                        |    |
 |    | => collectedClaims                |                        |    |
 |    |                                   |                        |    |
-| generateEvidence(handle, authSecIDs,   |                        |    |
+| generateEvidence(handle, attKeyIDs,    |                        |    |
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |
@@ -1143,6 +1155,13 @@ Table of Contents
               Code: The Implementation Status Section", BCP 205,
               RFC 7942, DOI 10.17487/RFC7942, July 2016,
               <https://www.rfc-editor.org/rfc/rfc7942>.
+
+   [I-D.birkholz-rats-epoch-markers]
+              Birkholz, H., Fossati, T., Pan, W., and C. Bormann, "Epoch
+              Markers", Work in Progress, Internet-Draft, draft-
+              birkholz-rats-epoch-markers-07, 24 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-birkholz-
+              rats-epoch-markers-07>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
