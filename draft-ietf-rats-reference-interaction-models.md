@@ -52,6 +52,7 @@ normative:
   BCP205: RFC7942
   RFC8610: CDDL
   RFC9334: RATS
+  I-D.birkholz-rats-epoch-markers: epoch-markers
 
 informative:
   I-D.ietf-rats-tpm-based-network-device-attest: RIV
@@ -239,22 +240,22 @@ This section defines the information elements that are vital to all kinds intera
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
 
-Authentication Secret IDs ('authSecIDs'):
+Attestation Key IDs ('authSecIDs'):
 
-: *mandatory*
+: *optional*
 
-: A statement representing an identifier list that MUST be associated with corresponding Authentication Secrets used to protect Claims included in Evidence.
+: A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.
 
-: Each distinguishable Attesting Environment has access to a protected capability that provides an Authentication Secret associated with that Attesting Environment.
-Consequently, an Authentication Secret ID can also identify an Attesting Environment.
+: While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
+Consequently, an Attestation Key ID can also identify an Attesting Environment.
 
 Handle ('handle'):
 
 : *mandatory*
 
-: A statement that is intended to uniquely distinguish received Evidence and/or determine the freshness of Evidence.
+: A statement provided to the Attester from the outside to be included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.
 
-: A Verifier can also use a Handle as an indicator for authenticity or attestation provenance, as only Attesters and Verifiers that are intended to exchange Evidence should have knowledge of the corresponding Handles. Examples include Nonces or signed timestamps.
+: Handle is an umbrella term for existing data types that accomplish one or more of (a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include: Nonces that are used to protect from replay attacks or Epoch Markers that identify distinct periods (Epoch) of freshness {{-epoch-markers}}. Handles can also be used as an indicator for authenticity or attestation Evidence provenance, as only a select number of RATS Roles (e.g., an Attester and a Verifier in a challenge-response interaction) are intended to have knowledge of a current Handle.
 
 Claims ('claims'):
 
@@ -282,7 +283,7 @@ Claim Selection ('claimSelection'):
 
 : A (sub-)set of Claims which can be created by an Attester.
 
-: Claim Selections act as filters to specify the exact set of Claims to be included in Evidence. In a remote attestation process, a Verifier sends a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
+: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.
 
 Collected Claims ('collectedClaims'):
 
@@ -330,12 +331,12 @@ The way these handles are processed is the most prominent difference between the
   generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
-     |<--- requestAttestation(handle, authSecIDs, claimSelection) |
+     |<--- requestAttestation(handle, attKeyIDs, claimSelection)  |
      |                                                            |
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | evidence, eventLogs -------------------------------------->|
@@ -397,13 +398,13 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      | => claims, eventLogs                 |                 |
      |                                      |                 |
      |<--------------------- requestAttestation(handle,       |
-     |                           authSecIDs, claimSelection)  |
+     |                           attKeyIDs, claimSelection)   |
      |                                      |                 |
   collectClaims(claims, claimSelection)     |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     authSecIDs, collectedClaims)           |                 |
+     attKeyIDs, collectedClaims)            |                 |
      | => evidence                          |                 |
      |                                      |                 |
      | {evidence, eventLogs} -------------->|                 |
@@ -443,7 +444,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
      |<--------------------- requestAttestation(handle,          |
-     |                           authSecIDs, claimSelection)     |
+     |                           attKeyIDs, claimSelection)      |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, eventLogs}            |                       |
@@ -453,7 +454,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     authSecIDs, collectedClaims)        |                       |
+     attKeyIDs, collectedClaims)         |                       |
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, eventLogs} ----------->|                       |
@@ -500,7 +501,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
      | {evidence, eventLogs} ------------------------------------>|
@@ -523,7 +524,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 |    | {evidence, eventLogsDelta} ------------------------------->|    |
@@ -579,7 +580,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
      |                                                generateHandle()
      |                                                   handle<= |
      |                                                            |
-     |<------------ subscribe(handle, authSecIDs, claimSelection) |
+     |<------------ subscribe(handle, attKeyIDs, claimSelection)  |
      | {handle} ------------------------------------------------->|
      |                                                            |
 =================[Evidence Generation and Conveyance]===================
@@ -590,7 +591,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, authSecIDs, collectedClaims)           |
+  generateEvidence(handle, attKeyIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
 ==========================[Evidence Appraisal]==========================
@@ -613,7 +614,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, authSecIDs, collectedClaimsDelta)      |    |
+| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 | =====================[Delta Evidence Appraisal]===================== |
@@ -741,7 +742,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 | collectClaims(claims, claimSelection)  |                        |    |
 |    | => collectedClaims                |                        |    |
 |    |                                   |                        |    |
-| generateEvidence(handle, authSecIDs,   |                        |    |
+| generateEvidence(handle, attKeyIDs,    |                        |    |
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |
