@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:59:44.704424+00:00",
+  "timestamp": "2024-07-23T00:56:04.832153+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -2036,28 +2036,30 @@
       "id": "PR_kwDOEYizNM51_ox-",
       "title": "Addressing Hannes comment on Nonces",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/53",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Improved expositional text on Handles",
       "createdAt": "2024-07-20T19:28:10Z",
-      "updatedAt": "2024-07-20T20:47:26Z",
+      "updatedAt": "2024-07-22T16:44:59Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "97a4da1030b4f706b354f42da2a4f316b3d5fb49",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "review-hannes",
       "headRefOid": "0f7b79bde28a4d25573b518cd4a95d09dc2ffc18",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-07-22T16:44:59Z",
+      "mergedAt": "2024-07-22T16:44:58Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f35d027b5922c6e1d69b04ea07bf2c5c4377f322"
+      },
       "comments": [
         {
           "author": "hannestschofenig",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Looks good. Will re-read the whole document after submission.",
           "createdAt": "2024-07-20T20:28:24Z",
           "updatedAt": "2024-07-20T20:28:24Z"
@@ -2070,7 +2072,7 @@
             "abbreviatedOid": "2e56d7d"
           },
           "author": "hannestschofenig",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-07-20T20:24:51Z",
@@ -2103,6 +2105,19 @@
               "updatedAt": "2024-07-20T20:47:07Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Cjo4f",
+          "commit": {
+            "abbreviatedOid": "0f7b79b"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T18:26:45Z",
+          "updatedAt": "2024-07-21T18:26:45Z",
+          "comments": []
         }
       ]
     }
