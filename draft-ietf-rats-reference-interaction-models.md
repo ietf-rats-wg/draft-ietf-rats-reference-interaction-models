@@ -191,7 +191,7 @@ An Attester only generates Evidence about its Target Environments through its At
 Once a Target Environment is appraised as trustworthy, it may become a new Attesting Environment responsible for generating Evidence for other Target Environments.
 This is known as Layered Attestation, as explained in {{Section 3.2 of -RATS}}.
 
-Since there can't be an infinite chain of Attesting Environments {{{turtles}}, Layered Attestation has to start with an initial Attesting Environment.
+Since there can't be an infinite chain of Attesting Environments {{turtles}}, Layered Attestation has to start with an initial Attesting Environment.
 The Attesting Environments at the "rock bottom" of layered attestation are referred to as Roots of Trust (RoT).
 By design, an Attester cannot produce Evidence about its RoTs.
 Therefore, a Verifier needs trustworthy statements about this subset of Attesting Environments from a source other than the Attester itself.
