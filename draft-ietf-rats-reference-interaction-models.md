@@ -185,18 +185,6 @@ Integrity:
 Authentication:
 : The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier. This can be done through implicit authentication using a digital signature over the Attestation Evidence, which does not require additional protocol steps, or by using a confidential channel with encryption.
 
-## Endorsement of Attesting Environments
-
-An Attester only generates Evidence about its Target Environments through its Attesting Environments.
-Once a Target Environment is appraised as trustworthy, it may become a new Attesting Environment responsible for generating Evidence for other Target Environments.
-This is known as Layered Attestation, as explained in {{Section 3.2 of -RATS}}.
-
-Since there can't be an infinite chain of Attesting Environments {{turtles}}, Layered Attestation has to start with an initial Attesting Environment.
-The Attesting Environments at the "rock bottom" of layered attestation are referred to as Roots of Trust (RoT).
-By design, an Attester cannot produce Evidence about its RoTs.
-Therefore, a Verifier needs trustworthy statements about this subset of Attesting Environments from a source other than the Attester itself.
-These trustworthy statements are called Endorsements and come from external, trusted entities that act as Endorsers (for example, supply chain entities).
-
 # Normative Prerequisites
 
 In order to ensure Evidence is appropriately conveyed through the interaction models described in this document, the following prerequisites MUST be in place to support their implementation:
