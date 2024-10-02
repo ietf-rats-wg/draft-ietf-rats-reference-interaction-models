@@ -265,7 +265,7 @@ Claims (`claims`):
 
 : Claims are assertions that represent characteristics of an Attester's Target Environment.
 
-: Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.
+: Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.
 
 Event Logs (`eventLogs`):
 
