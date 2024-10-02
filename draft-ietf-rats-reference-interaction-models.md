@@ -203,7 +203,7 @@ Attester Identity:
 : The provenance of Evidence for a distinguishable Attesting Environment MUST be unambiguous.
 
 : An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
-It MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), it MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
+It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
 Attestation Evidence Authenticity:
 
