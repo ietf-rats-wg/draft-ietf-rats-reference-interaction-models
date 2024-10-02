@@ -43,13 +43,11 @@ author:
   email: evoit@cisco.com
 
 normative:
-  RFC2119:
   RFC3161: TSA
   RFC5280: X509
   RFC7049: CBOR
   RFC7252: COAP
-  RFC8174:
-  BCP205: RFC7942
+  BCP205:
   RFC8610: CDDL
   RFC9334: RATS
   I-D.birkholz-rats-epoch-markers: epoch-markers
@@ -120,6 +118,12 @@ informative:
     seriesinfo:
       DOI: 10.1145/41457.37515
     date: 1987
+  lampson06:
+    title: Practical Principles for Computer Security
+    author:
+    - ins: B. Lampson
+      name: Butler Lampson
+    date: 2006
 
 --- abstract
 
@@ -150,7 +154,7 @@ While the conveyance of other Conceptual Messages is out of scope, the methods d
 This document uses the following terms defined in {{Section 4 of -RATS}}:
 Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
 
-A PKIX Certificate is an X.509v3 certificate as specified by {{RFC5280}}.
+A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 
 {::boilerplate bcp14}
 
@@ -160,7 +164,7 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{RFC5280}}.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
 This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
-Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in {{Section 3.1 of {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
+Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in {{Section 3.1 of -RATS}} and the definition of Attestation as described in {{-RIV}}.
 
 # Scope and Intent
 
@@ -233,76 +237,77 @@ Evidence Protection:
 
 # Generic Information Elements
 
-This section defines the information elements that are vital to all kinds interaction models.
-Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
-Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
+This section describes the essential information elements for the interaction models described in {{interaction-models}}.
+These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.
 
-Attestation Key IDs ('authSecIDs'):
+Attestation Key IDs (`attKeyIDs`):
 
 : *optional*
 
-: A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.
+: One or more identifiers associated with corresponding Attestation Keys (authentication secrets) used to protect Evidence Claims produced by Attesting Environments of an Attester.
 
-: While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
-Consequently, an Attestation Key ID can also identify an Attesting Environment.
+: While a Verifier may (and typically does) not know an Attesting Environment's Attestation Key, each distinct Attesting Environment has access to a protected capability that includes an Attestation Key.
+Therefore, an Attestation Key ID can also identify an Attesting Environment.
 
-Handle ('handle'):
+Handle (`handle`):
 
 : *mandatory*
 
-: A statement provided to the Attester from the outside to be included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.
+: An information element provided to the Attester from an external source included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.
 
-: Handle is an umbrella term for existing data types that accomplish one or more of (a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include: Nonces that are used to protect from replay attacks or Epoch Markers that identify distinct periods (Epoch) of freshness {{-epoch-markers}}. Handles can also be used as an indicator for authenticity or attestation Evidence provenance, as only a select number of RATS Roles (e.g., an Attester and a Verifier in a challenge-response interaction) are intended to have knowledge of a current Handle.
+: The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
+Examples include Nonces, which protect against replay attacks, and Epoch Markers that identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
+Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
 
-Claims ('claims'):
+Claims (`claims`):
 
 : *mandatory*
 
 : Claims are assertions that represent characteristics of an Attester's Target Environment.
 
-: Claims are part of a Conceptual Message and are, for example, used to appraise the integrity of Attesters via Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.
+: Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.
 
-Event Logs ('eventLogs'):
+Event Logs (`eventLogs`):
 
 : *optional*
 
-: Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to support Claim reproducibility by providing information on how Claims originated.
+: Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.
 
-Reference Values ('refValues')
+Reference Values (`refValues`)
 
 : *mandatory*
 
-: Reference Values as defined in {{-RATS}}. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.
+: Reference Values as defined in {{Section 8.3 of -RATS}}. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.
 
-Claim Selection ('claimSelection'):
+Claim Selection (`claimSelection`):
 
 : *optional*
 
-: A (sub-)set of Claims which can be created by an Attester.
+: A (sub-)set of the Claims that can be created by an Attester.
 
-: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.
+: Claim Selections are optional filters that specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, along with other elements, to an Attester. An Attester MAY decide whether to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known to the Verifier.
 
-Collected Claims ('collectedClaims'):
+Collected Claims (`collectedClaims`):
 
 : *mandatory*
 
 : Collected Claims represent a (sub-)set of Claims created by an Attester.
 
-: Collected Claims are gathered based on the Claims selected in the Claim Selection. If a Verifier does not provide a Claim Selection, then all available Claims on the Attester are part of the Collected Claims.
+: Collected Claims are gathered based on the Claim Selection. If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.
 
-Evidence ('evidence'):
-
-: *mandatory*
-
-: A set of Claims that consists of a list of Authentication Secret IDs that each identifies an Authentication Secret in a single Attesting Environment, the Attester Identity, Claims, and a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritative.
-
-Attestation Result ('attestationResult'):
+Evidence (`evidence`):
 
 : *mandatory*
 
-: An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence. Attestation Results include condensed assertions about integrity or other characteristics of the corresponding Attester that are processible by Relying Parties.
+: A set of Claims that consists of: (a) a list of Attestation Key IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
 
-# Interaction Models
+Attestation Result (`attestationResult`):
+
+: *mandatory*
+
+: An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence generated by an Attester. Attestation Results include concise assertions about integrity or other characteristics of the appraised Attester that can be processed by Relying Parties.
+
+# Interaction Models {#interaction-models}
 
 The following subsections introduce and illustrate the interaction models:
 
