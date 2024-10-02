@@ -200,7 +200,7 @@ Attester Identity:
 
 : A statement made by an Endorser about an Attester that affirms the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)
 
-: The provenance of Evidence for a distinguishable Attesting Environment MUST be correct and unambiguous.
+: The provenance of Evidence for a distinguishable Attesting Environment MUST be unambiguous.
 
 : An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
 It MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), it MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
