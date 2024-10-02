@@ -210,7 +210,7 @@ The Authentication Secret MUST be established before RATS take place.
 
 Attester Identity:
 
-: A statement made by an Endorser about an Attester that endorses the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)
+: A statement made by an Endorser about an Attester that affirms the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)
 
 : The provenance of Evidence for a distinguishable Attesting Environment MUST be correct and unambiguous.
 
