@@ -143,7 +143,7 @@ This document aims to:
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out-of-scope, the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.
+While the conveyance of other Conceptual Messages is out of scope, the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.
 
 # Terminology
 
