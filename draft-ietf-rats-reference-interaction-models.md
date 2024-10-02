@@ -136,99 +136,96 @@ The Verifier's assessment in the form of Attestation Results is created based on
 The roles *Attester* and *Verifier*, as well as the Conceptual Messages *Evidence* and *Attestation Results* are concepts defined by the RATS Architecture {{-RATS}}.
 This document defines interaction models that can be used in specific RATS-related solution documents.
 The primary focus of this document is the conveyance of attestation Evidence. The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.
-Specific goals of this document are to:
+This document aims to:
 
-1. prevent inconsistencies in descriptions of interaction models in other documents (due to text cloning and evolution over time), and to
+1. prevent inconsistencies in descriptions of interaction models in other documents, which may occur due to text cloning and evolution over time, and to
 
-2. enable to highlight an exact delta/divergence between the core set of characteristics captured here in this document and variants of these interaction models used in other specifications or solutions.
+2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
-In summary, this document enables the specification and design of trustworthy and privacy preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out-of-scope the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.
+In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
+While the conveyance of other Conceptual Messages is out-of-scope, the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.
 
 # Terminology
 
-This document uses the following set of terms, roles, and concepts as defined in {{-RATS}}:
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment
+This document uses the following terms defined in {{Section 4 of -RATS}}:
+Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
 
-A PKIX Certificate is an X.509v3 format certificate as specified by {{RFC5280}}.
+A PKIX Certificate is an X.509v3 certificate as specified by {{RFC5280}}.
 
 {::boilerplate bcp14}
 
 ## Disambiguation
 
-The term "Remote Attestation" is a common expression and often associated or connoted with certain properties.
-The term "Remote" in this context does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
-It rather refers to decoupled systems or entities that exchange the payload of the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
-Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include: a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g. embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in Section 3.1 Two Types of Environments of an Attester in {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
+"Remote Attestation" is a common expression often associated or connoted with certain properties.
+In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
+It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
+Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in {{Section 3.1 of {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
 
 # Scope and Intent
 
-This document focuses on generic interaction models between Attesters and Verifiers in order to convey Evidence.
-Complementary procedures, functions, or services that are required for a complete semantic binding of the concepts defined in {{-RATS}} are out-of-scope of this document.
-Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.
+This document outlines the interaction models between Attesters and Verifiers to convey Evidence.
+Procedures, functions, and services needed for a complete semantic binding of the concepts defined in {{-RATS}} are not covered in this document.
+Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.
 
-Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.
+Furthermore, any processes and duties beyond conducting remote attestation procedures are out of scope.
+For example, utilizing the results of a remote attestation procedure generated by the Verifier, such as triggering remediation actions or recovery processes, as well as the remediation actions and recovery processes themselves, are also out of scope.
 
-For instance, using the results of a remote attestation procedure that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.
-
-
-The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
-Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
-Analogously, deviations from the generic model descriptions in this document can be illustrated in solutions documents to highlight distinct contributions.
+The interaction models described in this document are meant to serve as a solid foundation and reference for other solution documents within or outside the IETF.
+Solution documents of any kind can refer to these interaction models to prevent duplicating text and to avoid the risk of subtle discrepancies.
+Similarly, deviations from the generic model described in this document can be illustrated in solution documents to highlight distinct contributions.
 
 # Essential Requirements
 
-In order to ensure appropriate conveyance of Evidence, there exist essential requirements which MUST be fulfilled:
+In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:
 
 Integrity:
-
-: Information provided by an Attester MUST be integral. This may be achieved by means of a digital signature over Attestation Evidence. The signature may be symmetric, such as an HMAC, or asymmetric, such as ECDSA.
+: Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved through a digital signature over Attestation Evidencewhich may be symmetric, like an HMAC, or asymmetric, like ECDSA.
 
 Authentication:
-
-: The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.
+: The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier. This can be done through implicit authentication using a digital signature over the Attestation Evidence, which does not require additional protocol steps, or by using a confidential channel with encryption.
 
 ## Endorsement of Attesting Environments
 
-Via its Attesting Environments, an Attester only generates Evidence about its Target Environments.
-After being appraised to be trustworthy, a Target Environment may become a new Attesting Environment in charge of generating Evidence for further Target Environments.
-{{-RATS}} explains this as Layered Attestation.
-Layered Attestation has to start with an initial Attesting Environment. In essence, there cannot be turtles all the way down {{turtles}}.
-At this rock bottom of Layered Attestation, the Attesting Environments are always called Roots of Trust (RoT).
-An Attester cannot generate Evidence about its own RoTs by design.
-As a consequence, a Verifier requires trustable statements about this subset of Attesting Environments from a different source than the Attester itself.
-The corresponding trustable statements are called Endorsements and originate from external, trustable entities that take on the role of an Endorser (e.g., supply chain entities).
+An Attester only generates Evidence about its Target Environments through its Attesting Environments.
+Once a Target Environment is appraised as trustworthy, it may become a new Attesting Environment responsible for generating Evidence for other Target Environments.
+This is known as Layered Attestation, as explained in {{Section 3.2 of -RATS}}.
+
+Since there can't be an infinite chain of Attesting Environments {{{turtles}}, Layered Attestation has to start with an initial Attesting Environment.
+The Attesting Environments at the "rock bottom" of layered attestation are referred to as Roots of Trust (RoT).
+By design, an Attester cannot produce Evidence about its RoTs.
+Therefore, a Verifier needs trustworthy statements about this subset of Attesting Environments from a source other than the Attester itself.
+These trustworthy statements are called Endorsements and come from external, trusted entities that act as Endorsers (for example, supply chain entities).
 
 # Normative Prerequisites
 
-In order to ensure an appropriate conveyance of Evidence via interaction models in general, the following set of prerequisites MUST be in place to support the implementation of interaction models:
+In order to ensure Evidence is appropriately conveyed through the interaction models described in this document, the following prerequisites MUST be in place to support their implementation:
 
 Authentication Secret:
 
-: An Authentication Secret MUST be available exclusively to an Attesting Environment of an Attester.
+: An Authentication Secret MUST be exclusively available to an Attesting Environment of the Attester.
 
-: The Attester MUST protect Claims with that Authentication Secret, thereby proving the authenticity of the Claims included in Evidence.
-The Authentication Secret MUST be established before RATS can take place.
+: The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
+The Authentication Secret MUST be established before RATS take place.
 
 Attester Identity:
 
-: A statement about a distinguishable Attester made by an Endorser.
+: A statement made by an Endorser about an Attester that endorses the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)
 
-: The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.
+: The provenance of Evidence for a distinguishable Attesting Environment MUST be correct and unambiguous.
 
-: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester.
-It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
+: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+It MAY be a unique identity, it MAY be included in a zero-knowledge proof (ZKP), it MAY be part of a group signature, or it MAY be a randomized DAA credential {{DAA}}.
 
 Attestation Evidence Authenticity:
 
 : Attestation Evidence MUST be authentic.
 
-: In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.
+: In order to provide a proof of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.
 
 Evidence Freshness:
 
-: Evidence MUST include an indicator about its freshness that can be understood by a Verifier. Analogously, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.
+: Evidence MUST include an indicator about its freshness that can be understood by a Verifier. Similarly, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.
 
 Evidence Protection:
 
