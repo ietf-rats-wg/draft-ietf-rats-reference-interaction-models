@@ -209,7 +209,7 @@ Attestation Evidence Authenticity:
 
 : Attestation Evidence MUST be authentic.
 
-: In order to provide a proof of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.
+: In order to provide a proof of authenticity, Attestation Evidence can be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or could include a correct, unambiguous, and stable reference to an accessible identity document.
 
 Evidence Freshness:
 
