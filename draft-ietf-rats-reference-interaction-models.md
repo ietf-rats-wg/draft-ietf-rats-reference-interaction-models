@@ -213,7 +213,8 @@ Attestation Evidence Authenticity:
 
 Evidence Freshness:
 
-: Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also {{Section 10 of -RATS}}). Similarly, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.
+: Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also {{Section 10 of -RATS}}).
+This enables interaction models to support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.
 
 Evidence Protection:
 
