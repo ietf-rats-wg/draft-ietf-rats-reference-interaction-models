@@ -244,7 +244,7 @@ Attestation Key IDs (`attKeyIDs`):
 
 : *optional*
 
-: One or more identifiers associated with corresponding Attestation Keys (authentication secrets) used to protect Evidence Claims produced by Attesting Environments of an Attester.
+: One or more identifiers associated with corresponding attestation keys (Authentication Secrets) used to protect Evidence Claims produced by Attesting Environments of an Attester.
 
 : While a Verifier may (and typically does) not know an Attesting Environment's Attestation Key, each distinct Attesting Environment has access to a protected capability that includes an Attestation Key.
 Therefore, an Attestation Key ID can also identify an Attesting Environment.
@@ -309,19 +309,21 @@ Attestation Result (`attestationResult`):
 
 # Interaction Models {#interaction-models}
 
-The following subsections introduce and illustrate the interaction models:
+This document describes three interaction models for Remote Attestation:
 
-1. Challenge/Response Remote Attestation
-2. Uni-Directional Remote Attestation
-3. Streaming Remote Attestation
+1. Challenge/Response ({{challenge-response}}),
+2. Unidirectional ({{unidirectional}}), and
+3. Streaming ({{streaming}}).
 
-Each section starts with a sequence diagram illustrating the interactions between Attester and Verifier.
-While the presented interaction models focus on the conveyance of Evidence, the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.
+Each section starts with a sequence diagram illustrating the interactions between the involved roles: Attester, Verifier and, optionally, a Relying Party.
+The presented interaction models focus on the conveyance of Evidence and Attestation Results.
+The same interaction models may apply to the conveyance of other Conceptual Messages (Endorsements, Reference Values, or Appraisal Policies) with other roles involved.
+However, that is out of scope for the present document.
 
-All interaction models have a strong focus on the use of a handle to incorporate a type of proof of freshness and to prevent replay attacks.
-The way these handles are processed is the most prominent difference between the three interaction models.
+All interaction models have a strong focus on the use of a Handle to incorporate a proof of freshness and to prevent replay attacks.
+The way the Handle is processed is the most prominent difference between the three interaction models.
 
-## Challenge/Response Remote Attestation
+## Challenge/Response Remote Attestation {#challenge-response}
 
 ~~~~ aasvg
 .----------.                                                .----------.
@@ -331,52 +333,51 @@ The way these handles are processed is the most prominent difference between the
 =================[Evidence Generation and Conveyance]===================
      |                                                            |
   generateClaims(attestingEnvironment)                            |
-     | => claims, eventLogs                                       |
+     | => claims, ?eventLogs                                      |
      |                                                            |
-     |<--- requestAttestation(handle, attKeyIDs, claimSelection)  |
+     |<-- requestAttestation(handle, ?attKeyIDs, ?claimSelection) |
      |                                                            |
-  collectClaims(claims, claimSelection)                           |
+  collectClaims(claims, ?claimSelection)                          |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
+  generateEvidence(handle, ?attKeyIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | evidence, eventLogs -------------------------------------->|
+     | evidence, ?eventLogs ------------------------------------->|
      |                                                            |
 ==========================[Evidence Appraisal]==========================
      |                                                            |
-     |                appraiseEvidence(evidence, eventLogs, refValues)
+     |                appraiseEvidence(evidence, ?eventLogs, refValues)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
 
-The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events in a system. Claims are produced by all attesting Environments of an Attester system.
+The Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.
 
-The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, a list of Authentication Secret IDs, and a Claim Selection.
+The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.
 
-In the Challenge/Response model, the handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
+In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
 The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.
 
-The list of Authentication Secret IDs selects the attestation keys with which the Attester is requested to sign the Attestation Evidence.
+The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
-As a result, a single Authentication Secret ID identifies a single Attesting Environment.
-Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Authentication Secret IDs.
-Methods to acquire Authentication Secret IDs or mappings between Attesting Environments to Authentication Secret IDs are out-of-scope of this document.
+As a result, a single Attestation Key ID identifies a single Attesting Environment.
+Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
+Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.
 
-The Attester collects Claims based on the Claim Selection. With the Claim Selection the Verifier defines the set of Claims it requires.
-Correspondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
-If the Claim Selection is omitted, then by default all Claims that are known and available on the Attester MUST be used to create corresponding Evidence.
-For example, when performing a boot integrity evaluation, a Verifier may only be requesting a particular subset of claims about the Attester, such as Evidence about BIOS/UEFI and firmware that the Attester booted up, and not include information about all currently running software.
+The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
+The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
+If the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.
+For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.
 
-With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
+With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
+The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
 For further reference see section {{security-and-privacy-considerations}}.
 
-As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence.
-For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
-Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
-The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
+Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
+Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
+The Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.
 
 ### Models and Example Sequences of Challenge/Response Remote Attestation
 
@@ -385,9 +386,11 @@ This section highlights the information flows between the Attester, Verifier, an
 
 #### Passport Model
 
-The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
-two-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier
-then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.
+The passport model is so named because of its resemblance to how nations issue passports to their citizens.
+In this model, the attestation sequence is a two-step procedure.
+In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy.
+The Verifier then gives back an Attestation Result to the Attester, which caches it.
+In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.
 
 ~~~~ aasvg
 .----------.                          .----------.    .---------------.
@@ -397,24 +400,24 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
 =================[Evidence Generation and Conveyance]===================
      |                                      |                 |
   generateClaims(attestingEnvironment)      |                 |
-     | => claims, eventLogs                 |                 |
+     | => claims, ?eventLogs                |                 |
      |                                      |                 |
      |<--------------------- requestAttestation(handle,       |
-     |                           attKeyIDs, claimSelection)   |
+     |                           ?attKeyIDs, ?claimSelection) |
      |                                      |                 |
-  collectClaims(claims, claimSelection)     |                 |
+  collectClaims(claims, ?claimSelection)    |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     attKeyIDs, collectedClaims)            |                 |
+     ?attKeyIDs, collectedClaims)           |                 |
      | => evidence                          |                 |
      |                                      |                 |
-     | {evidence, eventLogs} -------------->|                 |
+     | {evidence, ?eventLogs} ------------->|                 |
      |                                      |                 |
 ==========================[Evidence Appraisal]==========================
      |                                      |                 |
      |                         appraiseEvidence(evidence,     |
-     |                             eventLogs, refValues)      |
+     |                             ?eventLogs, refValues)     |
      |                 attestationResult <= |                 |
      |                                      |                 |
      |<------------------ attestationResult |                 |
@@ -446,28 +449,28 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
      |<--------------------- requestAttestation(handle,          |
-     |                           attKeyIDs, claimSelection)      |
+     |                           ?attKeyIDs, ?claimSelection)    |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
-     | => {claims, eventLogs}            |                       |
+     | => {claims, ?eventLogs}           |                       |
      |                                   |                       |
   collectClaims(claims,                  |                       |
-     claimSelection)                     |                       |
+     ?claimSelection)                    |                       |
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     attKeyIDs, collectedClaims)         |                       |
+     ?attKeyIDs, collectedClaims)        |                       |
      | => evidence                       |                       |
      |                                   |                       |
-     | {evidence, eventLogs} ----------->|                       |
+     | {evidence, ?eventLogs} ---------->|                       |
      |                                   |                       |
 ==========================[Evidence Appraisal]==========================
      |                                   |                       |
      |                                   | {handle, evidence,    |
-     |                                   |  eventLogs} --------->|
+     |                                   |  ?eventLogs} -------->|
      |                                   |                       |
      |                                   |   appraiseEvidence(evidence,
-     |                                   |        eventLogs, refValues)
+     |                                   |        ?eventLogs, refValues)
      |                                   |  attestationResult <= |
      |                                   |                       |
      |                                   |<---------- {evidence, |
@@ -480,7 +483,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |                       |
 ~~~~
 
-## Uni-Directional Remote Attestation
+## Uni-Directional Remote Attestation {#unidirectional}
 
 ~~~~ aasvg
 .----------.                       .--------------------.   .----------.
@@ -563,7 +566,7 @@ These updates reflecting the differences are called "delta" in the sequence diag
 Effectively, the Uni-Directional model allows for a series of Evidence to be pushed to multiple Verifiers simultaneously.
 Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.
 
-## Streaming Remote Attestation
+## Streaming Remote Attestation {#streaming}
 
 Streaming Remote Attestation serves as the foundational concept for both the observer pattern ({{ISIS}}) and the publish-subscribe pattern ({{DesignPatterns}}).
 It entails establishing subscription states to enable continuous remote attestation.
