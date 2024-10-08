@@ -270,9 +270,9 @@ Claim Selection ('claimSelection'):
 
 : *optional*
 
-: A (sub-)set of Claims which can be created by an Attester.
+: A set of (sub-)sets of Claims which can be created by the Attesting Environments of an Attester.
 
-: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.
+: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier. In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.
 
 Collected Claims ('collectedClaims'):
 
@@ -286,7 +286,7 @@ Evidence ('evidence'):
 
 : *mandatory*
 
-: A set of Claims that consists of a list of Authentication Secret IDs that each identifies an Authentication Secret in a single Attesting Environment, the Attester Identity, Claims, and a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritative.
+: A set of Claims that consists of a list of Attestation Environment IDs that each identifies an Authentication Secret in a single Attesting Environment, the Attester Identity, Claims, and a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritative.
 
 Attestation Result ('attestationResult'):
 
@@ -337,33 +337,26 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
 ~~~~
 
-The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events in a system. Claims are produced by all attesting Environments of an Attester system.
+The Attester boots up and thereby produces Claims about its boot state and its operational state. Claims are produced by all Attesting Environments of an Attester. Event Logs can accompany produced Claims and provide an event trail of security-relevant events that can be observed or collected by Attesting Environments. 
 
-The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, a list of Authentication Secret IDs, and a Claim Selection.
+A Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.
 
-In the Challenge/Response model, the handle is typically composed of qualifying extra data in the form of, for example, a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
-The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.
+In the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of, for example, a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
+A Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.
 
-The list of Authentication Secret IDs selects the attestation keys with which the Attester is requested to sign the Attestation Evidence.
-Each selected key is uniquely associated with an Attesting Environment of the Attester.
-As a result, a single Authentication Secret ID identifies a single Attesting Environment.
-Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Authentication Secret IDs.
-Methods to acquire Authentication Secret IDs or mappings between Attesting Environments to Authentication Secret IDs are out-of-scope of this document.
+Ultimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.
+Correspondingly, a particular set of Evidence originating from certain Attesting Environments in a composite device can be requested via multiple Attesting Environment IDs.
+Methods to acquire Attesting Environment IDs or mappings between Attesting Environments to Attesting Environment IDs are out-of-scope of this document.
 
-The Attester collects Claims based on the Claim Selection. With the Claim Selection the Verifier defines the set of Claims it requires.
-Correspondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
-If the Claim Selection is omitted, then by default all Claims that are known and available on the Attester MUST be used to create corresponding Evidence.
-For example, when performing a boot integrity evaluation, a Verifier may only be requesting a particular subset of claims about the Attester, such as Evidence about BIOS/UEFI and firmware that the Attester booted up, and not include information about all currently running software.
+Based on the provided Handle, the Attesting Environment IDs, and collected Claims, an Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment. The Attester conveys signed Evidence as well as all accompanying data, such as Event Logs, back to the Verifier.
 
-With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
-
-While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
+While it is crucial that Claims, the Handle, and the Attesting Environment IDs MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
 For further reference see section {{security-and-privacy-considerations}}.
 
-As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence.
-For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
-Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
-The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.
+As soon as the Verifier receives the Evidence, it can begin the appraisal procedure.
+For this purpose, the Verifier checks the signature, the Attesting Environment ID, and the Handle, and then appraises the Claims.
+Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements, conditions that have to be met by Evidence, such as the presence of certain Claims, and the application of Appraisal Policy for Evidence.
+The final outputs of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to then assess an Attester's trustworthiness.
 
 ### Models and Example Sequences of Challenge/Response Remote Attestation
 
