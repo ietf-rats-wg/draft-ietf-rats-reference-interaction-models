@@ -261,11 +261,11 @@ Event Logs ('eventLogs'):
 
 : Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to support Claim reproducibility by providing information on how Claims originated.
 
-Reference Values ('refValues')
+Verifier Inputs ('verInputs')
 
 : *mandatory*
 
-: Reference Values as defined in {{-RATS}}. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.
+: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can takes various forms. For example, Reference Values can be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (Endorsements).
 
 Claim Selection ('claimSelection'):
 
@@ -333,7 +333,7 @@ The way these handles are processed is the most prominent difference between the
      |                                                            |
 ==========================[Evidence Appraisal]==========================
      |                                                            |
-     |                appraiseEvidence(evidence, eventLogs, refValues)
+     |                appraiseEvidence(evidence, eventLogs, verInputs)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
@@ -402,7 +402,7 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
 ==========================[Evidence Appraisal]==========================
      |                                      |                 |
      |                         appraiseEvidence(evidence,     |
-     |                             eventLogs, refValues)      |
+     |                             eventLogs, verInputs)      |
      |                 attestationResult <= |                 |
      |                                      |                 |
      |<------------------ attestationResult |                 |
@@ -455,7 +455,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |  eventLogs} --------->|
      |                                   |                       |
      |                                   |   appraiseEvidence(evidence,
-     |                                   |        eventLogs, refValues)
+     |                                   |        eventLogs, verInputs)
      |                                   |  attestationResult <= |
      |                                   |                       |
      |                                   |<---------- {evidence, |
@@ -500,7 +500,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                                            |
      |                                      appraiseEvidence(evidence,
      |                                                      eventLogs,
-     |                                                      refValues)
+     |                                                      verInputs)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -523,7 +523,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
 |    |                                                 eventLogsDelta, |
-|    |                                                      refValues) |
+|    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
 |    |                                                            |    |
  '--------------------------------------------------------------------'
@@ -590,7 +590,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
      |                                                            |
      |                                      appraiseEvidence(evidence,
      |                                                      eventLogs,
-     |                                                      refValues)
+     |                                                      verInputs)
      |                                       attestationResult <= |
      ~                                                            ~
      |                                                            |
@@ -613,7 +613,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
 |    |                                                 eventLogsDelta, |
-|    |                                                      refValues) |
+|    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
 |    |                                                            |    |
  '--------------------------------------------------------------------'
@@ -748,7 +748,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |                                   |           appraiseEvidence( |
 |    |                                   |                   evidence, |
 |    |                                   |                  eventLogs, |
-|    |                                   |                  refValues) |
+|    |                                   |                  verInputs) |
 |    |                                   |   attestationResult <= |    |
 |    |                                   |                        |    |
 | ==================[Attestation Result Generation]=================== |
