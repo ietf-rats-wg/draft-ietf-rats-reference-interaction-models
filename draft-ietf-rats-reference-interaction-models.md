@@ -143,7 +143,7 @@ This document aims to:
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out of scope, the methods described may also be applied to the conveyance of, for example, Endorsements or Attestation Results.
+While the conveyance of other Conceptual Messages is out of scope, the methods described in this document can also be applied to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.
 
 # Terminology
 
@@ -160,11 +160,15 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{RFC5280}}.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
 This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
-Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in {{Section 3.1 of {{-RATS}} and the definition of Attestation as described in {{-RIV}}.
+Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Conceptual Data/Messages flows as described in {{Section 3 of {{-RATS}} and the definition of Attestation in general as described in {{-RIV}}.
 
 # Scope and Intent
 
-This document outlines the interaction models between Attesters and Verifiers to convey Evidence.
+This document outlines three very common interaction models between RATS roles.
+In this document the interaction models illustrated focus on the conveyance of Evidence about boot-time integrity from Attesters to Verifiers.
+In the scope of Evidence conveyance not every detail is covered in this document.
+Details around Evidence about run-time integrity, for example, or not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.
+While the three interaction models (and their sub-variants) are not an exhaustive list of all potential models, they do cover a vast majority of conveyance models for Conceptual Messages implemented in the Internet.
 Procedures, functions, and services needed for a complete semantic binding of the concepts defined in {{-RATS}} are not covered in this document.
 Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.
 
@@ -300,7 +304,7 @@ The following subsections introduce and illustrate the interaction models:
 3. Streaming Remote Attestation
 
 Each section starts with a sequence diagram illustrating the interactions between Attester and Verifier.
-While the presented interaction models focus on the conveyance of Evidence, the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.
+While the presented interaction models focus on the conveyance of Evidence, the intention of this document is in support of any type of Conceptual Messages conveyance that is based on the presented models.
 
 All interaction models have a strong focus on the use of a handle to incorporate a type of proof of freshness and to prevent replay attacks.
 The way these handles are processed is the most prominent difference between the three interaction models.
