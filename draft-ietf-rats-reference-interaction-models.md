@@ -320,12 +320,12 @@ The way these handles are processed is the most prominent difference between the
   generateClaims(attestingEnvironment)                            |
      | => claims, eventLogs                                       |
      |                                                            |
-     |<--- requestAttestation(handle, attKeyIDs, claimSelection)  |
+     |<--- requestAttestation(handle, attestEIDs, claimSelection) |
      |                                                            |
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
+  generateEvidence(handle, attestEIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
      | evidence, eventLogs -------------------------------------->|
@@ -387,13 +387,13 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
      | => claims, eventLogs                 |                 |
      |                                      |                 |
      |<--------------------- requestAttestation(handle,       |
-     |                           attKeyIDs, claimSelection)   |
+     |                           attestEIDs, claimSelection)  |
      |                                      |                 |
   collectClaims(claims, claimSelection)     |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     attKeyIDs, collectedClaims)            |                 |
+     attestEIDs, collectedClaims)           |                 |
      | => evidence                          |                 |
      |                                      |                 |
      | {evidence, eventLogs} -------------->|                 |
@@ -433,7 +433,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
      |<--------------------- requestAttestation(handle,          |
-     |                           attKeyIDs, claimSelection)      |
+     |                           attestEIDs, claimSelection)     |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, eventLogs}            |                       |
@@ -443,7 +443,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     attKeyIDs, collectedClaims)         |                       |
+     attestEIDs, collectedClaims)        |                       |
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, eventLogs} ----------->|                       |
@@ -490,7 +490,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
+  generateEvidence(handle, attestEIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
      | {evidence, eventLogs} ------------------------------------>|
@@ -513,7 +513,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attestEIDs, collectedClaimsDelta)      |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 |    | {evidence, eventLogsDelta} ------------------------------->|    |
@@ -569,7 +569,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
      |                                                generateHandle()
      |                                                   handle<= |
      |                                                            |
-     |<------------ subscribe(handle, attKeyIDs, claimSelection)  |
+     |<------------ subscribe(handle, attestEIDs, claimSelection) |
      | {handle} ------------------------------------------------->|
      |                                                            |
 =================[Evidence Generation and Conveyance]===================
@@ -580,7 +580,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
   collectClaims(claims, claimSelection)                           |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
+  generateEvidence(handle, attestEIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
 ==========================[Evidence Appraisal]==========================
@@ -603,7 +603,7 @@ In the following Subsections, streaming remote attestation without a broker (obs
 | collectClaims(claimsDelta, claimSelection)                      |    |
 |    | => collectedClaimsDelta                                    |    |
 |    |                                                            |    |
-| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attestEIDs, collectedClaimsDelta)      |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
 | =====================[Delta Evidence Appraisal]===================== |
@@ -731,7 +731,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 | collectClaims(claims, claimSelection)  |                        |    |
 |    | => collectedClaims                |                        |    |
 |    |                                   |                        |    |
-| generateEvidence(handle, attKeyIDs,    |                        |    |
+| generateEvidence(handle, attestEIDs,   |                        |    |
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |
