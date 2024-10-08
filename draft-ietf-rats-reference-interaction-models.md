@@ -230,14 +230,13 @@ This section defines the information elements that are vital to all kinds intera
 Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
 Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.
 
-Attestation Key IDs ('authSecIDs'):
+Attesting Environment IDs ('attestEIDs'):
 
 : *optional*
 
-: A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.
+: A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
 
-: While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
-Consequently, an Attestation Key ID can also identify an Attesting Environment.
+: While a verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
 
 Handle ('handle'):
 
