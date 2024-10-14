@@ -341,7 +341,7 @@ The Attester boots up and thereby produces Claims about its boot state and its o
 
 A Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.
 
-In the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of, for example, a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
+In the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
 A Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.
 
 Ultimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.
