@@ -243,6 +243,8 @@ Attestation Key IDs (`attKeyIDs`):
 
 : While a Verifier may (and typically does) not know an Attesting Environment's Attestation Key, each distinct Attesting Environment has access to a protected capability that includes an Attestation Key.
 Therefore, an Attestation Key ID can also identify an Attesting Environment.
+If no attestation key identifiers are provided, a local default applies based on the Attester.
+For example, all Attesting Environments will report.
 
 Handle (`handle`):
 
