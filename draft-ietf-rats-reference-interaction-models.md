@@ -1,4 +1,6 @@
 ---
+v: 3
+
 title: Reference Interaction Models for Remote Attestation Procedures
 abbrev: REIM
 docname: draft-ietf-rats-reference-interaction-models-latest
