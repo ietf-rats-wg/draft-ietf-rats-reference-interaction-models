@@ -145,7 +145,7 @@ This document aims to:
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out of scope, the methods described in this document can also be applied to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.
+While the conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.
 
 # Terminology
 
@@ -162,14 +162,14 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{RFC5280}}.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
 This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
-Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Conceptual Data/Messages flows as described in {{Section 3 of {{-RATS}} and the definition of Attestation in general as described in {{-RIV}}.
+If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Conceptual Data/Messages flows as described in {{Section 3 of {{-RATS}} and the definition of Attestation in general as described in {{-RIV}}.
 
 # Scope and Intent
 
 This document outlines three very common interaction models between RATS roles.
 In this document the interaction models illustrated focus on the conveyance of Evidence about boot-time integrity from Attesters to Verifiers.
-In the scope of Evidence conveyance not every detail is covered in this document.
-Details around Evidence about run-time integrity, for example, or not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.
+This document does not cover every detail about Evidence conveyance.
+Details around Evidence about run-time integrity, for example, are not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.
 While the three interaction models (and their sub-variants) are not an exhaustive list of all potential models, they do cover a vast majority of conveyance models for Conceptual Messages implemented in the Internet.
 Procedures, functions, and services needed for a complete semantic binding of the concepts defined in {{-RATS}} are not covered in this document.
 Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.
@@ -238,7 +238,7 @@ Attesting Environment IDs ('attestEIDs'):
 
 : A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
 
-: While a verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
+: While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
 
 Handle ('handle'):
 
@@ -343,7 +343,7 @@ The Attester boots up and thereby produces Claims about its boot state and its o
 
 A Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.
 
-In the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of, for example, a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
+In the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.
 A Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.
 
 Ultimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.
