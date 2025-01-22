@@ -170,7 +170,7 @@ If an entity takes on two or more different roles, the functions they provide ty
 
 This document outlines common interaction models between RATS roles.
 This document illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers.
-This document does not exclude application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.
+This document does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.
 This document does not cover every detail about Evidence conveyance.
 Details around Evidence about run-time integrity, for example, are not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.
 While the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.
