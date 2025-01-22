@@ -173,7 +173,7 @@ This document illustrates interaction models focusing on conveying Evidence abou
 This document does not exclude application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.
 This document does not cover every detail about Evidence conveyance.
 Details around Evidence about run-time integrity, for example, are not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.
-While the interaction models in this document(and their sub-variants) are not an exhaustive list of all potential models, they do cover a majority of conveyance models for Conceptual Messages implemented in the Internet.
+While the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.
 
 Procedures, functions, and services needed for a complete semantic binding of the concepts defined in {{-RATS}} are not covered in this document.
 Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.
