@@ -14,22 +14,22 @@
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. 
     " name="description">
-<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-rats-reference-interaction-models-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.22.0
-    Python 3.12.3
+  xml2rfc 3.25.0
+    Python 3.12.8
     ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+    google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
-    lxml 4.9.4
-    platformdirs 4.2.2
-    pycountry 22.3.5
-    PyYAML 6.0.1
+    Jinja2 3.1.5
+    lxml 5.3.0
+    platformdirs 4.3.6
+    pycountry 24.6.1
+    PyYAML 6.0.2
     requests 2.32.3
-    setuptools 69.5.1
+    setuptools 70.3.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-rats-reference-interaction-models.xml" rel="alternate" type="application/rfc+xml">
@@ -166,31 +166,6 @@ Analogously, a general overview about the information elements typically used by
 }
 
 @font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
   font-family: 'Oxygen Mono';
   font-style: normal;
   font-weight: 400;
@@ -207,6 +182,77 @@ Analogously, a general overview about the information elements typically used by
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light dark;
   --background-color: #fff;
@@ -219,6 +265,7 @@ Analogously, a general overview about the information elements typically used by
   --pilcrow-strong: #bbb;
   --small-font-size: 14.5px;
   --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
   scrollbar-color: #bbb #eee;
 }
 body {
@@ -236,9 +283,15 @@ body {
 }
 
 /* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Cabin Condensed", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-weight: 680;
   margin: 0.8em 0 0.3em;
   font-size-adjust: 0.5;
   color: var(--title-color);
@@ -267,6 +320,7 @@ h4, h5, h6 {
 /* general structure */
 .author {
   padding-bottom: 0.3em;
+  vertical-align: top;
 }
 #abstract+p {
   font-size: 18px;
@@ -344,25 +398,26 @@ svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
 ol, ul {
   padding: 0;
   margin: 0 0 0.5em 2em;
-}
-:is(ol, ul) :is(ol, ul) {
-  margin-left: 1em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
 }
 li {
   margin: 0 0 0.25em 0;
 }
-.ulCompact li {
-  margin: 0;
-}
 ul.empty, .ulEmpty {
   list-style-type: none;
-}
-ul.empty li, .ulEmpty li {
-  margin-top: 0.5em;
+  & li {
+    margin-top: 0.5em;
+  }
 }
 :is(ul, ol).compact, .ulCompact, .olCompact {
-  line-height: 1;
   margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
 }
 
 /* definition lists */
@@ -370,38 +425,39 @@ dl {
   clear: left;
   --indent: 3ch;
   /* --indent: attr(indent ch); not supported in any browser, but we can dream */
-}
-dl.olPercent {
-  --indent: 5ch;
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
 }
 dl > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
 }
-dl.dlNewline > dt {
-  float: none;
-}
 dl > dd {
   margin-bottom: .8em;
   margin-left: var(--indent) !important; /* stupid element overrides */
   min-height: 2ex;
 }
-dl.olPercent > dt {
-  min-width: calc(var(--indent) - 2ch);
-}
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
-  margin-top: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
-  margin-bottom: 0;
-}
-dl > dd > dl {
-  margin-top: 0.5em;
-  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
 }
 :is(dd, span).break {
   display: none;
@@ -465,6 +521,7 @@ figcaption, caption {
   font-style: italic;
   margin: 0.5em 1.5em;
   text-align: left;
+  caption-side: bottom;
 }
 @media screen {
   /* Auto-collapse boilerplate. */
@@ -482,7 +539,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -519,6 +580,7 @@ cite {
 
 /* tables */
 table {
+  width: auto;
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
@@ -533,6 +595,16 @@ table.center {
 table.left {
   margin-right: auto;
 }
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
 thead, tbody {
   border: 1px solid var(--line-color);
 }
@@ -563,9 +635,11 @@ a.pilcrow {
   margin-left: 3px;
   opacity: 0.2;
   user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
 }
-a.pilcrow[href] { color: var(--pilcrow-weak); }
-a.pilcrow[href]:hover { text-decoration: none; }
 @media not print {
   :hover > a.pilcrow {
     opacity: 1;
@@ -605,26 +679,28 @@ sub, sup {
   font-size: var(--small-font-size);
   line-height: 18px;
   --identifier-width: 15ch;
-}
-#identifiers dt {
-  width: var(--identifier-width);
-  min-width: var(--identifier-width);
-  clear: left;
-  float: left;
-  text-align: right;
-  margin-right: 1ch;
-}
-#identifiers dd {
-  margin: 0;
-  margin-left: calc(1em + var(--identifier-width)) !important;
-  min-width: 5em;
-}
-#identifiers .authors .author {
-  display: inline-block;
-  margin-right: 1.5em;
-}
-#identifiers .authors .org {
-  font-style: italic;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
 }
 
 /* The prepared/rendered info at the very bottom of the page */
@@ -635,9 +711,6 @@ sub, sup {
   margin-top: 2em;
 }
 .docInfo .prepared {
-  float: left;
-}
-.docInfo .prepared {
   float: right;
 }
 
@@ -645,47 +718,48 @@ sub, sup {
 #toc {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
-}
-#toc nav ul {
-  margin: 0 0.5em 0 0;
-  padding: 0;
-  list-style: none;
-}
-#toc nav li {
-  line-height: 1.3em;
-  margin: 2px 0;
-  padding-left: 1.2em;
-  text-indent: -1.2em;
-}
-#toc a.xref {
-  white-space: normal;
-}
-/* references */
-.references dt {
-  text-align: right;
-  font-weight: bold;
-  min-width: 10ch;
-  margin-right: 1.5ch;
-}
-.references dt:target::before {
-  content: "⇒";
-  width: 15px;
-  margin: 0 10px 0 -25px;
-}
-.references dd {
-  margin-left: 12ch !important;
-  overflow: auto;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
 }
 
-.refInstance {
-  margin-bottom: 1.25em;
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
 }
 
-.references .ascii {
-  margin-bottom: 0.25em;
-}
-
-/* index */
 #rfc\.index\.index + ul {
   margin-left: 0;
 }
@@ -693,21 +767,33 @@ sub, sup {
 /* authors */
 address.vcard {
   font-style: normal;
-  margin: 1em 0;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
 }
-address.vcard .nameRole {
-  font-weight: 700;
-  margin-left: 0;
-}
-address.vcard .label {
-  margin: 0.5em 0;
-}
-address.vcard .type {
-  display: none;
-}
-.alternative-contact {
-  margin: 1.5em 0 1em;
-}
+
 hr.addr {
   border-top: 1px dashed;
   margin: 0;
@@ -729,6 +815,7 @@ hr.addr {
   }
 }
 
+/* Comments */
 .rfcEditorRemove p:first-of-type {
   font-style: italic;
 }
@@ -739,7 +826,31 @@ hr.addr {
 .crefSource {
   font-style: italic;
 }
-/* alternative layout for smaller screens */
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
 @media screen and (max-width: 929px) {
   #toc {
     position: fixed;
@@ -750,9 +861,6 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc.active {
-      opacity: 1;
   }
   #toc h2 {
     margin: 0;
@@ -765,17 +873,17 @@ hr.addr {
     background-color: #444;
     color: white;
     cursor: pointer;
-  }
-  #toc h2::before { /* css hamburger */
-    float: right;
-    position: relative;
-    width: 1em;
-    height: 1px;
-    left: -164px;
-    margin: 8px 0 0 0;
-    background: white none repeat scroll 0 0;
-    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-    content: "";
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
   }
   #toc nav {
     display: none;
@@ -786,14 +894,13 @@ hr.addr {
     height: calc(100vh - 48px);
     border-left: 1px solid #ddd;
   }
-  #toc.active nav {
-    display: block;
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
   }
   /* Make the collapsed ToC header render white on gray also when it's a link */
   #toc h2 a,
-  #toc h2 a:link,
-  #toc h2 a:focus,
-  #toc h2 a:hover,
+  #toc h2 a:is(:link, :focus, :hover),
   #toc a.toplink,
   #toc a.toplink:hover {
     color: white;
@@ -801,11 +908,11 @@ hr.addr {
     text-decoration: none;
   }
   #toc a.toplink {
-    margin-top: 2px;
+    margin: 2px 0.5em 0;
   }
 }
 
-/* alternative layout for wide screens */
+/* TOC layout for wide screens */
 @media screen and (min-width: 930px) {
   body {
     padding-right: 360px;
@@ -834,20 +941,12 @@ hr.addr {
     overscroll-behavior: contain;
     scrollbar-width: thin;
   }
-  #toc nav > ul  {
-    margin-bottom: 2em;
-  }
-  #toc ul {
-    margin: 0 0 0 4px;
-    font-size: var(--small-font-size);
-  }
-  #toc ul :is(p, li) {
-    margin: 2px 0;
-    line-height: 22px;
-  }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
   }
 }
 
@@ -890,9 +989,6 @@ hr.addr {
   td {
     border-top: 1px solid #ddd;
   }
-  .toplink {
-    display: none;
-  }
 }
 
 @page :first {
@@ -915,82 +1011,6 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-}
-
-/* Changes introduced to fix issues found during implementation */
-
-/* Separate body from document info even without intervening H1 */
-section {
-  clear: both;
-}
-
-/* Top align author divs, to avoid names without organization dropping level with org names */
-.author {
-  vertical-align: top;
-}
-
-/* Style section numbers with more space between number and title */
-.section-number {
-  padding-right: 0.5em;
-}
-
-/* Add styling for a link in the ToC that points to the top of the document */
-a.toplink {
-  float: right;
-  margin: 8px 0.5em 0;
-}
-
-/* Provide styling for table cell text alignment */
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
-}
-
-/* Make the alternative author contact information look less like just another
-   author, and group it closer with the primary author contact information */
-.alternative-contact {
-  margin: 0.5em 0 0.25em 0;
-}
-address .non-ascii {
-  margin: 0 0 0 2em;
-}
-
-/* With it being possible to set tables with alignment
-  left, center, and right, { width: 100%; } does not make sense */
-table {
-  width: auto;
-}
-
-/* Avoid reference text that sits in a block with very wide left margin,
-   because of a long floating dt label.*/
-.references dd {
-  overflow: visible;
-}
-
-/* Control caption placement */
-caption {
-  caption-side: bottom;
-}
-
-/* Limit the width of the author address vcard, so names in right-to-left
-   script don't end up on the other side of the page. */
-
-address.vcard {
-  max-width: 20em;
-  margin-right: auto;
-}
-
-/* For address alignment dependent on LTR or RTL scripts */
-address div.left {
-  text-align: left;
-}
-address div.right {
-  text-align: right;
 }
 
 /* Dark mode. */
@@ -1029,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">REIM</td>
-<td class="right">July 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 23 January 2025</td>
+<td class="center">Expires 27 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-reference-interaction-models-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-22" class="published">22 July 2024</time>
+<time datetime="2025-01-23" class="published">23 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-23">23 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-27">27 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1110,7 +1130,7 @@ Analogously, a general overview about the information elements typically used by
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1119,7 +1139,7 @@ Analogously, a general overview about the information elements typically used by
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1155,11 +1175,6 @@ Analogously, a general overview about the information elements typically used by
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-essential-requirements" class="internal xref">Essential Requirements</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-endorsement-of-attesting-en" class="internal xref">Endorsement of Attesting Environments</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-normative-prerequisites" class="internal xref">Normative Prerequisites</a></p>
@@ -1270,21 +1285,21 @@ Analogously, a general overview about the information elements typically used by
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Remote ATtestation procedureS (RATS, <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>) are workflows composed of roles and interactions, in which Verifiers create Attestation Results about the trustworthiness of an Attester's system component characteristics.
-The Verifier's assessment in the form of Attestation Results is created based on Attestation Policies and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics -- generated by an Attester.
+The Verifier's assessment in the form of Attestation Results is produced based on Endorsements, Reference Values, Attestation Policies, and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics -- generated by an Attester.
 The roles <em>Attester</em> and <em>Verifier</em>, as well as the Conceptual Messages <em>Evidence</em> and <em>Attestation Results</em> are concepts defined by the RATS Architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 This document defines interaction models that can be used in specific RATS-related solution documents.
 The primary focus of this document is the conveyance of attestation Evidence. The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.
-Specific goals of this document are to:<a href="#section-1-1" class="pilcrow">¶</a></p>
+This document aims to:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-2">
 <li id="section-1-2.1">
-          <p id="section-1-2.1.1">prevent inconsistencies in descriptions of interaction models in other documents (due to text cloning and evolution over time), and to<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.1.1">prevent inconsistencies in descriptions of interaction models in other documents, which may occur due to text cloning and evolution over time, and to<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-2.2">
-          <p id="section-1-2.2.1">enable to highlight an exact delta/divergence between the core set of characteristics captured here in this document and variants of these interaction models used in other specifications or solutions.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.2.1">highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-1-3">In summary, this document enables the specification and design of trustworthy and privacy preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out-of-scope the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
+While the conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to the conveyance of Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -1292,9 +1307,9 @@ While the conveyance of other Conceptual Messages is out-of-scope the methods de
       <h2 id="name-terminology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
       </h2>
-<p id="section-2-1">This document uses the following set of terms, roles, and concepts as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>:
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">A PKIX Certificate is an X.509v3 format certificate as specified by <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-1">This document uses the following terms defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-4" class="relref">Section 4</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>:
+Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">A PKIX Certificate is an X.509v3 certificate as specified by <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
@@ -1305,11 +1320,11 @@ appear in all capitals, as shown here.<a href="#section-2-3" class="pilcrow">¶<
         <h3 id="name-disambiguation">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-disambiguation" class="section-name selfRef">Disambiguation</a>
         </h3>
-<p id="section-2.1-1">The term "Remote Attestation" is a common expression and often associated or connoted with certain properties.
-The term "Remote" in this context does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
-It rather refers to decoupled systems or entities that exchange the payload of the Conceptual Message type called Evidence <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
-Even if an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include: a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g. embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). Readers of this document should be familiar with the concept of Layered Attestation as described in Section 3.1 Two Types of Environments of an Attester in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and the definition of Attestation as described in <span>[<a href="#I-D.ietf-rats-tpm-based-network-device-attest" class="cite xref">I-D.ietf-rats-tpm-based-network-device-attest</a>]</span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">"Remote Attestation" is a common expression often associated or connoted with certain properties.
+In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
+It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
+If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and the definition of Attestation in general as described in <span>[<a href="#I-D.ietf-rats-tpm-based-network-device-attest" class="cite xref">I-D.ietf-rats-tpm-based-network-device-attest</a>]</span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1319,14 +1334,19 @@ Even if an entity takes on two or more different roles, the functions they provi
       <h2 id="name-scope-and-intent">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-scope-and-intent" class="section-name selfRef">Scope and Intent</a>
       </h2>
-<p id="section-3-1">This document focuses on generic interaction models between Attesters and Verifiers in order to convey Evidence.
-Complementary procedures, functions, or services that are required for a complete semantic binding of the concepts defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are out-of-scope of this document.
-Examples include: identity establishment, key distribution and enrollment, time synchronization, as well as certificate revocation.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">Furthermore, any processes and duties that go beyond carrying out remote attestation procedures are out-of-scope.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">For instance, using the results of a remote attestation procedure that are created by the Verifier, e.g., how to triggering remediation actions or recovery processes, as well as such remediation actions and recovery processes themselves, are also out-of-scope.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">The interaction models illustrated in this document are intended to provide a stable basis and reference for other solutions documents inside or outside the IETF.
-Solution documents of any kind can reference the interaction models in order to avoid text clones and to avoid the danger of subtle discrepancies.
-Analogously, deviations from the generic model descriptions in this document can be illustrated in solutions documents to highlight distinct contributions.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document outlines common interaction models between RATS roles.
+This document illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers.
+This document does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.
+This document does not cover every detail about Evidence conveyance.
+While details regarding Evidence of run-time integrity are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.
+While the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Procedures, functions, and services needed for a complete semantic binding of the concepts defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are not covered in this document.
+Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Furthermore, any processes and duties beyond conducting remote attestation procedures are out of scope.
+For example, utilizing the results of a remote attestation procedure generated by the Verifier, such as triggering remediation actions or recovery processes, as well as the remediation actions and recovery processes themselves, are also out of scope.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">The interaction models described in this document are meant to serve as a solid foundation and reference for other solution documents within or outside the IETF.
+Solution documents of any kind can refer to these interaction models to prevent duplicating text and to avoid the risk of subtle discrepancies.
+Similarly, deviations from the generic model described in this document can be illustrated in solution documents to highlight distinct contributions.<a href="#section-3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="essential-requirements">
@@ -1334,34 +1354,19 @@ Analogously, deviations from the generic model descriptions in this document can
       <h2 id="name-essential-requirements">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-essential-requirements" class="section-name selfRef">Essential Requirements</a>
       </h2>
-<p id="section-4-1">In order to ensure appropriate conveyance of Evidence, there exist essential requirements which MUST be fulfilled:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4-2">
         <dt id="section-4-2.1">Integrity:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.2">
-          <p id="section-4-2.2.1">Information provided by an Attester MUST be integral. This may be achieved by means of a digital signature over Attestation Evidence. The signature may be symmetric, such as an HMAC, or asymmetric, such as ECDSA.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.2.1">Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved through a digital signature over Attestation Evidencewhich may be symmetric, like an HMAC, or asymmetric, like ECDSA.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-2.3">Authentication:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.4">
-          <p id="section-4-2.4.1">The information provided by the Attester MUST be authentic. For that purpose, the Attester should authenticate itself to the Verifier. This may be an implicit authentication by means of a digital signature over the Attestation Evidence, which does not require additional protocol steps, or may be achieved by using a confidential channel by means of encryption.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.4.1">The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier. This can be done through implicit authentication using a digital signature over the Attestation Evidence, which does not require additional protocol steps, or by using a confidential channel with encryption.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<div id="endorsement-of-attesting-environments">
-<section id="section-4.1">
-        <h3 id="name-endorsement-of-attesting-en">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-endorsement-of-attesting-en" class="section-name selfRef">Endorsement of Attesting Environments</a>
-        </h3>
-<p id="section-4.1-1">Via its Attesting Environments, an Attester only generates Evidence about its Target Environments.
-After being appraised to be trustworthy, a Target Environment may become a new Attesting Environment in charge of generating Evidence for further Target Environments.
-<span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> explains this as Layered Attestation.
-Layered Attestation has to start with an initial Attesting Environment. In essence, there cannot be turtles all the way down <span>[<a href="#turtles" class="cite xref">turtles</a>]</span>.
-At this rock bottom of Layered Attestation, the Attesting Environments are always called Roots of Trust (RoT).
-An Attester cannot generate Evidence about its own RoTs by design.
-As a consequence, a Verifier requires trustable statements about this subset of Attesting Environments from a different source than the Attester itself.
-The corresponding trustable statements are called Endorsements and originate from external, trustable entities that take on the role of an Endorser (e.g., supply chain entities).<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 </section>
 </div>
 <div id="normative-prerequisites">
@@ -1369,33 +1374,33 @@ The corresponding trustable statements are called Endorsements and originate fro
       <h2 id="name-normative-prerequisites">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-prerequisites" class="section-name selfRef">Normative Prerequisites</a>
       </h2>
-<p id="section-5-1">In order to ensure an appropriate conveyance of Evidence via interaction models in general, the following set of prerequisites MUST be in place to support the implementation of interaction models:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">In order to ensure Evidence is appropriately conveyed through the interaction models described in this document, the following prerequisites MUST be in place to support their implementation:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-5-2">
         <dt id="section-5-2.1">Authentication Secret:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.2">
-          <p id="section-5-2.2.1">An Authentication Secret MUST be available exclusively to an Attesting Environment of an Attester.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.2.1">An Authentication Secret MUST be exclusively available to an Attesting Environment of the Attester.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.3"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.4">
-          <p id="section-5-2.4.1">The Attester MUST protect Claims with that Authentication Secret, thereby proving the authenticity of the Claims included in Evidence.
-The Authentication Secret MUST be established before RATS can take place.<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.4.1">The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
+The Authentication Secret MUST be established before RATS take place.<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.5">Attester Identity:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.6">
-          <p id="section-5-2.6.1">A statement about a distinguishable Attester made by an Endorser.<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.6.1">A statement made by an Endorser about an Attester that affirms the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.7"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.8">
-          <p id="section-5-2.8.1">The provenance of Evidence with respect to a distinguishable Attesting Environment MUST be correct and unambiguous.<a href="#section-5-2.8.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.8.1">The provenance of Evidence for a distinguishable Attesting Environment MUST be unambiguous.<a href="#section-5-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.9"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.10">
-          <p id="section-5-2.10.1">An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of an Attester.
-It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MAY be part of a group signature, or it MAY be a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>.<a href="#section-5-2.10.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.10.1">An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>.<a href="#section-5-2.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.11">Attestation Evidence Authenticity:</dt>
@@ -1405,12 +1410,13 @@ It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MA
         <dd class="break"></dd>
 <dt id="section-5-2.13"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.14">
-          <p id="section-5-2.14.1">In order to provide proofs of authenticity, Attestation Evidence SHOULD be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>), or SHOULD include a correct, unambiguous and stable reference to an accessible identity document.<a href="#section-5-2.14.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.14.1">In order to provide a proof of authenticity, Attestation Evidence can be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential <span>[<a href="#DAA" class="cite xref">DAA</a>]</span>), or could include a correct, unambiguous, and stable reference to an accessible identity document.<a href="#section-5-2.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.15">Evidence Freshness:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.16">
-          <p id="section-5-2.16.1">Evidence MUST include an indicator about its freshness that can be understood by a Verifier. Analogously, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.<a href="#section-5-2.16.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.16.1">Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also <span><a href="https://rfc-editor.org/rfc/rfc9334#section-10" class="relref">Section 10</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>).
+This enables interaction models to support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.<a href="#section-5-2.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-5-2.17">Evidence Protection:</dt>
@@ -1426,42 +1432,45 @@ It MAY be a unique identity, MAY be included in a zero-knowledge proof (ZKP), MA
       <h2 id="name-generic-information-element">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-generic-information-element" class="section-name selfRef">Generic Information Elements</a>
       </h2>
-<p id="section-6-1">This section defines the information elements that are vital to all kinds interaction models.
-Varying from solution to solution, generic information elements can be either included in the scope of protocol messages (instantiating Conceptual Messages) or can be included in additional protocol parameters or payload.
-Ultimately, the following information elements are required by any kind of scalable remote attestation procedure using one or more of the interaction models provided.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section describes the essential information elements for the interaction models described in <a href="#interaction-models" class="auto internal xref">Section 7</a>.
+These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6-2">
-        <dt id="section-6-2.1">Attestation Key IDs ('authSecIDs'):</dt>
+        <dt id="section-6-2.1">Attestation Key IDs (<code>attKeyIDs</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.2">
           <p id="section-6-2.2.1"><em>optional</em><a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.3"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.4">
-          <p id="section-6-2.4.1">A statement representing an identifier list that MUST be associated with corresponding Attestation Keys (authentication secrets) used to protect Claims in Evidence produced by Attesting Environments of an Attester.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.4.1">One or more identifiers associated with corresponding attestation keys (Authentication Secrets) used to protect Evidence Claims produced by Attesting Environments of an Attester.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.5"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.6">
-          <p id="section-6-2.6.1">While a verifier does not necessarily have knowledge about an Attesting Environment's Attestation Key (ID), each distinguishable Attesting Environment has access to a protected capability that includes an Attestation Key (Authentication Secret).
-Consequently, an Attestation Key ID can also identify an Attesting Environment.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.6.1">While a Verifier may (and typically does) not know an Attesting Environment's Attestation Key, each distinct Attesting Environment has access to a protected capability that includes an Attestation Key.
+Therefore, an Attestation Key ID can also identify an Attesting Environment.
+If no attestation key identifiers are provided, a local default applies based on the Attester.
+For example, all Attesting Environments will report.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.7">Handle ('handle'):</dt>
+<dt id="section-6-2.7">Handle (<code>handle</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.8">
           <p id="section-6-2.8.1"><em>mandatory</em><a href="#section-6-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.9"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.10">
-          <p id="section-6-2.10.1">A statement provided to the Attester from the outside to be included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.<a href="#section-6-2.10.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.10.1">An information element provided to the Attester from an external source included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.<a href="#section-6-2.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.11"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.12">
-          <p id="section-6-2.12.1">Handle is an umbrella term for existing data types that accomplish one or more of (a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include: Nonces that are used to protect from replay attacks or Epoch Markers that identify distinct periods (Epoch) of freshness <span>[<a href="#I-D.birkholz-rats-epoch-markers" class="cite xref">I-D.birkholz-rats-epoch-markers</a>]</span>. Handles can also be used as an indicator for authenticity or attestation Evidence provenance, as only a select number of RATS Roles (e.g., an Attester and a Verifier in a challenge-response interaction) are intended to have knowledge of a current Handle.<a href="#section-6-2.12.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.12.1">The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
+Examples include Nonces, which protect against replay attacks, and Epoch Markers that identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.birkholz-rats-epoch-markers" class="cite xref">I-D.birkholz-rats-epoch-markers</a>]</span>.
+Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.<a href="#section-6-2.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.13">Claims ('claims'):</dt>
+<dt id="section-6-2.13">Claims (<code>claims</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.14">
           <p id="section-6-2.14.1"><em>mandatory</em><a href="#section-6-2.14.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1473,45 +1482,45 @@ Consequently, an Attestation Key ID can also identify an Attesting Environment.<
         <dd class="break"></dd>
 <dt id="section-6-2.17"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.18">
-          <p id="section-6-2.18.1">Claims are part of a Conceptual Message and are, for example, used to appraise the integrity of Attesters via Verifiers. The other information elements in this section can be expressed as Claims in any type of Conceptional Messages.<a href="#section-6-2.18.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.18.1">Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.<a href="#section-6-2.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.19">Event Logs ('eventLogs'):</dt>
+<dt id="section-6-2.19">Event Logs (<code>eventLogs</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.20">
           <p id="section-6-2.20.1"><em>optional</em><a href="#section-6-2.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.21"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.22">
-          <p id="section-6-2.22.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to support Claim reproducibility by providing information on how Claims originated.<a href="#section-6-2.22.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.22.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.<a href="#section-6-2.22.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.23">Reference Values ('refValues')</dt>
+<dt id="section-6-2.23">Reference Values (<code>refValues</code>)</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.24">
           <p id="section-6-2.24.1"><em>mandatory</em><a href="#section-6-2.24.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.25"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.26">
-          <p id="section-6-2.26.1">Reference Values as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.<a href="#section-6-2.26.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.26.1">Reference Values as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8.3" class="relref">Section 8.3</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.<a href="#section-6-2.26.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.27">Claim Selection ('claimSelection'):</dt>
+<dt id="section-6-2.27">Claim Selection (<code>claimSelection</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.28">
           <p id="section-6-2.28.1"><em>optional</em><a href="#section-6-2.28.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.29"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.30">
-          <p id="section-6-2.30.1">A (sub-)set of Claims which can be created by an Attester.<a href="#section-6-2.30.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.30.1">A (sub-)set of the Claims that can be created by an Attester.<a href="#section-6-2.30.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.31"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.32">
-          <p id="section-6-2.32.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, among other elements, to an Attester. An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined be the Attester and SHOULD be known to the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.32.1">Claim Selections are optional filters that specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, along with other elements, to an Attester. An Attester MAY decide whether to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known to the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.33">Collected Claims ('collectedClaims'):</dt>
+<dt id="section-6-2.33">Collected Claims (<code>collectedClaims</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.34">
           <p id="section-6-2.34.1"><em>mandatory</em><a href="#section-6-2.34.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1523,27 +1532,27 @@ Consequently, an Attestation Key ID can also identify an Attesting Environment.<
         <dd class="break"></dd>
 <dt id="section-6-2.37"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.38">
-          <p id="section-6-2.38.1">Collected Claims are gathered based on the Claims selected in the Claim Selection. If a Verifier does not provide a Claim Selection, then all available Claims on the Attester are part of the Collected Claims.<a href="#section-6-2.38.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.38.1">Collected Claims are gathered based on the Claim Selection. If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.<a href="#section-6-2.38.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.39">Evidence ('evidence'):</dt>
+<dt id="section-6-2.39">Evidence (<code>evidence</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.40">
           <p id="section-6-2.40.1"><em>mandatory</em><a href="#section-6-2.40.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.41"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.42">
-          <p id="section-6-2.42.1">A set of Claims that consists of a list of Authentication Secret IDs that each identifies an Authentication Secret in a single Attesting Environment, the Attester Identity, Claims, and a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritative.<a href="#section-6-2.42.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.42.1">A set of Claims that consists of: (a) a list of Attestation Key IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" <span>[<a href="#lampson06" class="cite xref">lampson06</a>]</span> the Attester.<a href="#section-6-2.42.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.43">Attestation Result ('attestationResult'):</dt>
+<dt id="section-6-2.43">Attestation Result (<code>attestationResult</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-2.44">
           <p id="section-6-2.44.1"><em>mandatory</em><a href="#section-6-2.44.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-2.45"></dt>
         <dd style="margin-left: 1.5em" id="section-6-2.46">
-          <p id="section-6-2.46.1">An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence. Attestation Results include condensed assertions about integrity or other characteristics of the corresponding Attester that are processible by Relying Parties.<a href="#section-6-2.46.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.46.1">An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence generated by an Attester. Attestation Results include concise assertions about integrity or other characteristics of the appraised Attester that can be processed by Relying Parties.<a href="#section-6-2.46.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1554,23 +1563,25 @@ Consequently, an Attestation Key ID can also identify an Attesting Environment.<
       <h2 id="name-interaction-models">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-interaction-models" class="section-name selfRef">Interaction Models</a>
       </h2>
-<p id="section-7-1">The following subsections introduce and illustrate the interaction models:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This document describes three interaction models for Remote Attestation:<a href="#section-7-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-7-2">
 <li id="section-7-2.1">
-          <p id="section-7-2.1.1">Challenge/Response Remote Attestation<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-7-2.1.1">Challenge/Response (<a href="#challenge-response" class="auto internal xref">Section 7.1</a>),<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-7-2.2">
-          <p id="section-7-2.2.1">Uni-Directional Remote Attestation<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-7-2.2.1">Unidirectional (<a href="#unidirectional" class="auto internal xref">Section 7.2</a>), and<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-7-2.3">
-          <p id="section-7-2.3.1">Streaming Remote Attestation<a href="#section-7-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-7-2.3.1">Streaming (<a href="#streaming" class="auto internal xref">Section 7.3</a>).<a href="#section-7-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-7-3">Each section starts with a sequence diagram illustrating the interactions between Attester and Verifier.
-While the presented interaction models focus on the conveyance of Evidence, the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">All interaction models have a strong focus on the use of a handle to incorporate a type of proof of freshness and to prevent replay attacks.
-The way these handles are processed is the most prominent difference between the three interaction models.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<div id="challengeresponse-remote-attestation">
+<p id="section-7-3">Each section starts with a sequence diagram illustrating the interactions between the involved roles: Attester, Verifier and, optionally, a Relying Party.
+The presented interaction models focus on the conveyance of Evidence and Attestation Results.
+The same interaction models may apply to the conveyance of other Conceptual Messages (Endorsements, Reference Values, or Appraisal Policies) with other roles involved.
+However, that is out of scope for the present document.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">All interaction models have a strong focus on the use of a Handle to incorporate a proof of freshness and to prevent replay attacks.
+The way the Handle is processed is the most prominent difference between the three interaction models.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<div id="challenge-response">
 <section id="section-7.1">
         <h3 id="name-challenge-response-remote-a">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-challenge-response-remote-a" class="section-name selfRef">Challenge/Response Remote Attestation</a>
@@ -1598,8 +1609,8 @@ The way these handles are processed is the most prominent difference between the
               <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
               <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
               <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
-              <path d="M 56,176 L 80,176" fill="none" stroke="black"></path>
-              <path d="M 224,304 L 528,304" fill="none" stroke="black"></path>
+              <path d="M 56,176 L 72,176" fill="none" stroke="black"></path>
+              <path d="M 232,304 L 528,304" fill="none" stroke="black"></path>
               <path d="M 8,334 L 208,334" fill="none" stroke="black"></path>
               <path d="M 8,338 L 208,338" fill="none" stroke="black"></path>
               <path d="M 376,334 L 576,334" fill="none" stroke="black"></path>
@@ -1617,53 +1628,52 @@ The way these handles are processed is the most prominent difference between the
                 <text x="164" y="132">generateClaims(attestingEnvironment)</text>
                 <text x="68" y="148">=&gt;</text>
                 <text x="112" y="148">claims,</text>
-                <text x="184" y="148">eventLogs</text>
-                <text x="196" y="180">requestAttestation(handle,</text>
-                <text x="348" y="180">attKeyIDs,</text>
-                <text x="456" y="180">claimSelection)</text>
+                <text x="188" y="148">?eventLogs</text>
+                <text x="188" y="180">requestAttestation(handle,</text>
+                <text x="344" y="180">?attKeyIDs,</text>
+                <text x="460" y="180">?claimSelection)</text>
                 <text x="104" y="212">collectClaims(claims,</text>
-                <text x="256" y="212">claimSelection)</text>
+                <text x="260" y="212">?claimSelection)</text>
                 <text x="68" y="228">=&gt;</text>
                 <text x="144" y="228">collectedClaims</text>
                 <text x="116" y="260">generateEvidence(handle,</text>
-                <text x="260" y="260">attKeyIDs,</text>
-                <text x="372" y="260">collectedClaims)</text>
+                <text x="264" y="260">?attKeyIDs,</text>
+                <text x="380" y="260">collectedClaims)</text>
                 <text x="68" y="276">=&gt;</text>
                 <text x="116" y="276">evidence</text>
                 <text x="96" y="308">evidence,</text>
-                <text x="176" y="308">eventLogs</text>
+                <text x="180" y="308">?eventLogs</text>
                 <text x="248" y="340">[Evidence</text>
                 <text x="332" y="340">Appraisal]</text>
                 <text x="536" y="356">|</text>
                 <text x="284" y="372">appraiseEvidence(evidence,</text>
-                <text x="436" y="372">eventLogs,</text>
-                <text x="524" y="372">refValues)</text>
+                <text x="440" y="372">?eventLogs,</text>
+                <text x="532" y="372">refValues)</text>
                 <text x="432" y="388">attestationResult</text>
                 <text x="516" y="388">&lt;=</text>
               </g>
             </svg><a href="#section-7.1-1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<p id="section-7.1-2">The Attester boots up and thereby produces claims about its boot state and its operational state. Event Logs accompany the produced claims by providing an event trail of security-critical events in a system. Claims are produced by all attesting Environments of an Attester system.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1-3">The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, a list of Authentication Secret IDs, and a Claim Selection.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.1-4">In the Challenge/Response model, the handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
+<p id="section-7.1-2">The Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
 The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
-<p id="section-7.1-5">The list of Authentication Secret IDs selects the attestation keys with which the Attester is requested to sign the Attestation Evidence.
+<p id="section-7.1-5">The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
-As a result, a single Authentication Secret ID identifies a single Attesting Environment.
-Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Authentication Secret IDs.
-Methods to acquire Authentication Secret IDs or mappings between Attesting Environments to Authentication Secret IDs are out-of-scope of this document.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
-<p id="section-7.1-6">The Attester collects Claims based on the Claim Selection. With the Claim Selection the Verifier defines the set of Claims it requires.
-Correspondingly, collected Claims can be a subset of the produced Claims. This could be all available Claims, depending on the Claim Selection.
-If the Claim Selection is omitted, then by default all Claims that are known and available on the Attester MUST be used to create corresponding Evidence.
-For example, when performing a boot integrity evaluation, a Verifier may only be requesting a particular subset of claims about the Attester, such as Evidence about BIOS/UEFI and firmware that the Attester booted up, and not include information about all currently running software.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
-<p id="section-7.1-7">With the Handle, the Authentication Secret IDs, and the collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Authentication Secret ID. This is done once per Attesting Environment which is identified by the particular Authentication Secret ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1-8">While it is crucial that Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.
+As a result, a single Attestation Key ID identifies a single Attesting Environment.
+Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
+Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1-6">The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
+The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
+If the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.
+For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
+<p id="section-7.1-7">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+<p id="section-7.1-8">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
 For further reference see section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 10</a>.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
-<p id="section-7.1-9">As soon as the Verifier receives the Evidence and the Event Logs, it appraises the Evidence.
-For this purpose, it validates the signature, the Attester Identity, and the Handle, and then appraises the Claims.
-Appraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements.
-The final output of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to assess an Attester's trustworthiness.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+<p id="section-7.1-9">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
+Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
+The Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
 <div id="models-and-example-sequences-of-challengeresponse-remote-attestation">
 <section id="section-7.1.1">
           <h4 id="name-models-and-example-sequence">
@@ -1676,9 +1686,11 @@ This section highlights the information flows between the Attester, Verifier, an
             <h5 id="name-passport-model">
 <a href="#section-7.1.1.1" class="section-number selfRef">7.1.1.1. </a><a href="#name-passport-model" class="section-name selfRef">Passport Model</a>
             </h5>
-<p id="section-7.1.1.1-1">The passport model is so named because of its resemblance to how nations issue passports to their citizens. In this model, the attestation sequence is a
-two-step procedure. In the first step, an Attester conveys Evidence to a Verifier, which compares the Evidence against its appraisal policy.  The Verifier
-then gives back an Attestation Result to the Attester, which simply caches it. In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which then compares this information against its own appraisal policy to establish the trustworthiness of the Attester.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.1.1-1">The passport model is so named because of its resemblance to how nations issue passports to their citizens.
+In this model, the attestation sequence is a two-step procedure.
+In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy.
+The Verifier then gives back an Attestation Result to the Attester, which caches it.
+In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
 <div id="section-7.1.1.1-2">
               <div class="alignLeft art-svg artwork" id="section-7.1.1.1-2.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="608" width="584" viewBox="0 0 584 608" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -1694,10 +1706,11 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
                   <path d="M 360,64 L 360,80" fill="none" stroke="black"></path>
                   <path d="M 360,112 L 360,160" fill="none" stroke="black"></path>
                   <path d="M 360,208 L 360,352" fill="none" stroke="black"></path>
-                  <path d="M 360,416 L 360,488" fill="none" stroke="black"></path>
+                  <path d="M 360,432 L 360,488" fill="none" stroke="black"></path>
                   <path d="M 360,544 L 360,592" fill="none" stroke="black"></path>
                   <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
                   <path d="M 440,32 L 440,64" fill="none" stroke="black"></path>
+                  <path d="M 456,400 L 456,408" fill="none" stroke="black"></path>
                   <path d="M 504,64 L 504,80" fill="none" stroke="black"></path>
                   <path d="M 504,112 L 504,352" fill="none" stroke="black"></path>
                   <path d="M 504,384 L 504,512" fill="none" stroke="black"></path>
@@ -1713,7 +1726,7 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
                   <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
                   <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
                   <path d="M 56,176 L 224,176" fill="none" stroke="black"></path>
-                  <path d="M 240,336 L 352,336" fill="none" stroke="black"></path>
+                  <path d="M 248,336 L 352,336" fill="none" stroke="black"></path>
                   <path d="M 8,366 L 208,366" fill="none" stroke="black"></path>
                   <path d="M 8,370 L 208,370" fill="none" stroke="black"></path>
                   <path d="M 376,366 L 576,366" fill="none" stroke="black"></path>
@@ -1741,27 +1754,27 @@ then gives back an Attestation Result to the Attester, which simply caches it. I
                     <text x="164" y="132">generateClaims(attestingEnvironment)</text>
                     <text x="68" y="148">=&gt;</text>
                     <text x="112" y="148">claims,</text>
-                    <text x="184" y="148">eventLogs</text>
+                    <text x="188" y="148">?eventLogs</text>
                     <text x="340" y="180">requestAttestation(handle,</text>
-                    <text x="308" y="196">attKeyIDs,</text>
-                    <text x="416" y="196">claimSelection)</text>
+                    <text x="312" y="196">?attKeyIDs,</text>
+                    <text x="428" y="196">?claimSelection)</text>
                     <text x="104" y="228">collectClaims(claims,</text>
-                    <text x="256" y="228">claimSelection)</text>
+                    <text x="260" y="228">?claimSelection)</text>
                     <text x="68" y="244">=&gt;</text>
                     <text x="144" y="244">collectedClaims</text>
                     <text x="116" y="276">generateEvidence(handle,</text>
-                    <text x="84" y="292">attKeyIDs,</text>
-                    <text x="196" y="292">collectedClaims)</text>
+                    <text x="88" y="292">?attKeyIDs,</text>
+                    <text x="204" y="292">collectedClaims)</text>
                     <text x="68" y="308">=&gt;</text>
                     <text x="116" y="308">evidence</text>
                     <text x="100" y="340">{evidence,</text>
-                    <text x="188" y="340">eventLogs}</text>
+                    <text x="192" y="340">?eventLogs}</text>
                     <text x="248" y="372">[Evidence</text>
                     <text x="332" y="372">Appraisal]</text>
                     <text x="360" y="388">|</text>
-                    <text x="356" y="404">appraiseEvidence(evidence,</text>
-                    <text x="320" y="420">eventLogs</text>
-                    <text x="412" y="420">refValues)</text>
+                    <text x="352" y="404">appraiseEvidence(evidence</text>
+                    <text x="328" y="420">?eventLogs,</text>
+                    <text x="420" y="420">refValues)</text>
                     <text x="256" y="436">attestationResult</text>
                     <text x="340" y="436">&lt;=</text>
                     <text x="280" y="468">attestationResult</text>
@@ -1817,7 +1830,6 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                   <path d="M 528,496 L 528,560" fill="none" stroke="black"></path>
                   <path d="M 528,592 L 528,640" fill="none" stroke="black"></path>
                   <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
-                  <path d="M 568,464 L 568,472" fill="none" stroke="black"></path>
                   <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
                   <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
                   <path d="M 480,32 L 568,32" fill="none" stroke="black"></path>
@@ -1829,12 +1841,12 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                   <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
                   <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
                   <path d="M 56,128 L 224,128" fill="none" stroke="black"></path>
-                  <path d="M 240,352 L 328,352" fill="none" stroke="black"></path>
+                  <path d="M 248,352 L 328,352" fill="none" stroke="black"></path>
                   <path d="M 8,382 L 208,382" fill="none" stroke="black"></path>
                   <path d="M 8,386 L 208,386" fill="none" stroke="black"></path>
                   <path d="M 376,382 L 576,382" fill="none" stroke="black"></path>
                   <path d="M 376,386 L 576,386" fill="none" stroke="black"></path>
-                  <path d="M 448,432 L 520,432" fill="none" stroke="black"></path>
+                  <path d="M 456,432 L 520,432" fill="none" stroke="black"></path>
                   <path d="M 344,528 L 424,528" fill="none" stroke="black"></path>
                   <path d="M 8,574 L 160,574" fill="none" stroke="black"></path>
                   <path d="M 8,578 L 160,578" fill="none" stroke="black"></path>
@@ -1855,31 +1867,31 @@ The Relying Party then checks the Attestation Result against its own appraisal p
                     <text x="384" y="100">Conveyance]</text>
                     <text x="336" y="116">|</text>
                     <text x="340" y="132">requestAttestation(handle,</text>
-                    <text x="308" y="148">attKeyIDs,</text>
-                    <text x="416" y="148">claimSelection)</text>
+                    <text x="312" y="148">?attKeyIDs,</text>
+                    <text x="428" y="148">?claimSelection)</text>
                     <text x="164" y="180">generateClaims(attestingEnvironment)</text>
                     <text x="68" y="196">=&gt;</text>
                     <text x="116" y="196">{claims,</text>
-                    <text x="196" y="196">eventLogs}</text>
+                    <text x="200" y="196">?eventLogs}</text>
                     <text x="104" y="228">collectClaims(claims,</text>
-                    <text x="104" y="244">claimSelection)</text>
+                    <text x="108" y="244">?claimSelection)</text>
                     <text x="68" y="260">=&gt;</text>
                     <text x="144" y="260">collectedClaims</text>
                     <text x="116" y="292">generateEvidence(handle,</text>
-                    <text x="84" y="308">attKeyIDs,</text>
-                    <text x="196" y="308">collectedClaims)</text>
+                    <text x="88" y="308">?attKeyIDs,</text>
+                    <text x="204" y="308">collectedClaims)</text>
                     <text x="68" y="324">=&gt;</text>
                     <text x="116" y="324">evidence</text>
                     <text x="100" y="356">{evidence,</text>
-                    <text x="188" y="356">eventLogs}</text>
+                    <text x="192" y="356">?eventLogs}</text>
                     <text x="248" y="388">[Evidence</text>
                     <text x="332" y="388">Appraisal]</text>
                     <text x="380" y="420">{handle,</text>
                     <text x="456" y="420">evidence,</text>
-                    <text x="396" y="436">eventLogs}</text>
-                    <text x="464" y="468">appraiseEvidence(evidence</text>
-                    <text x="444" y="484">eventLogs,</text>
-                    <text x="532" y="484">refValues)</text>
+                    <text x="400" y="436">?eventLogs}</text>
+                    <text x="468" y="468">appraiseEvidence(evidence,</text>
+                    <text x="448" y="484">?eventLogs,</text>
+                    <text x="540" y="484">refValues)</text>
                     <text x="424" y="500">attestationResult</text>
                     <text x="508" y="500">&lt;=</text>
                     <text x="476" y="532">{evidence,</text>
@@ -1901,7 +1913,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 </div>
 </section>
 </div>
-<div id="uni-directional-remote-attestation">
+<div id="unidirectional">
 <section id="section-7.2">
         <h3 id="name-uni-directional-remote-atte">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-uni-directional-remote-atte" class="section-name selfRef">Uni-Directional Remote Attestation</a>
@@ -2080,7 +2092,7 @@ These updates reflecting the differences are called "delta" in the sequence diag
 Methods to detect excessive time drift that would mandate a fresh Handle to be received by the Handle Distributor as well as timing of Handle distribution are out-of-scope of this document.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="streaming-remote-attestation">
+<div id="streaming">
 <section id="section-7.3">
         <h3 id="name-streaming-remote-attestatio">
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-streaming-remote-attestatio" class="section-name selfRef">Streaming Remote Attestation</a>
@@ -2843,11 +2855,15 @@ This extra information can be used to scramble the Nonce in order to counter cer
 <dl class="references">
 <dt id="BCP205">[BCP205]</dt>
         <dd>
-<span class="refAuthor">Sheffer, Y.</span> and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Improving Awareness of Running Code: The Implementation Status Section"</span>, <span class="seriesInfo">BCP 205</span>, <span class="seriesInfo">RFC 7942</span>, <span class="seriesInfo">DOI 10.17487/RFC7942</span>, <time datetime="2016-07" class="refDate">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7942">https://www.rfc-editor.org/rfc/rfc7942</a>&gt;</span>. </dd>
+<div class="refInstance">Best Current Practice 205, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp205">https://www.rfc-editor.org/info/bcp205</a>&gt;</span>.<br><span>At the time of writing, this BCP comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC7942">
+            <span class="refAuthor">Sheffer, Y.</span> and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Improving Awareness of Running Code: The Implementation Status Section"</span>, <span class="seriesInfo">BCP 205</span>, <span class="seriesInfo">RFC 7942</span>, <span class="seriesInfo">DOI 10.17487/RFC7942</span>, <time datetime="2016-07" class="refDate">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7942">https://www.rfc-editor.org/info/rfc7942</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 <dt id="I-D.birkholz-rats-epoch-markers">[I-D.birkholz-rats-epoch-markers]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-birkholz-rats-epoch-markers-07</span>, <time datetime="2024-04-24" class="refDate">24 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-birkholz-rats-epoch-markers-07">https://datatracker.ietf.org/doc/html/draft-birkholz-rats-epoch-markers-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-birkholz-rats-epoch-markers-08</span>, <time datetime="2024-07-22" class="refDate">22 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-birkholz-rats-epoch-markers-08">https://datatracker.ietf.org/doc/html/draft-birkholz-rats-epoch-markers-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2909,6 +2925,10 @@ This extra information can be used to scramble the Nonce in order to counter cer
 <dt id="ISIS">[ISIS]</dt>
         <dd>
 <span class="refAuthor">Birman, K.</span> and <span class="refAuthor">T. Joseph</span>, <span class="refTitle">"Exploiting Virtual Synchrony in Distributed Systems"</span>, <span class="seriesInfo">DOI 10.1145/41457.37515</span>, <time datetime="1987" class="refDate">1987</time>, <span>&lt;<a href="https://doi.org/10.1145/41457.37515">https://doi.org/10.1145/41457.37515</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="lampson06">[lampson06]</dt>
+        <dd>
+<span class="refAuthor">Lampson, B.</span>, <span class="refTitle">"Practical Principles for Computer Security"</span>, <time datetime="2006" class="refDate">2006</time>. </dd>
 <dd class="break"></dd>
 <dt id="MQTT">[MQTT]</dt>
         <dd>
