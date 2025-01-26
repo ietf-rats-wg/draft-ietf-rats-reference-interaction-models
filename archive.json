@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-12T01:00:03.519954+00:00",
+  "timestamp": "2025-01-26T01:04:14.401310+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -889,12 +889,62 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/51",
       "state": "OPEN",
       "author": "thomas-fossati",
-      "authorAssociation": "NONE",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).",
       "createdAt": "2023-11-05T13:15:05Z",
       "updatedAt": "2023-11-05T13:15:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 54,
+      "id": "I_kwDOEYizNM6Yo-Cy",
+      "title": "Explicitly mark optional parameters in SDs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/54",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "eckelmeckel"
+      ],
+      "labels": [],
+      "body": "It'd help the reader make explicit the mandatory and optional parameters in the sequence diagrams.\r\n\r\nI suggest using `?` to mark optional parameters. ",
+      "createdAt": "2024-10-02T07:45:47Z",
+      "updatedAt": "2024-10-02T13:08:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 58,
+      "id": "I_kwDOEYizNM6ZPE88",
+      "title": "WGLC review of draft 11",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "**General questions**: \r\n1. What is the real motivation of this draft?\r\n2. The flows represent only boot time measurements. What about runtime measurements (e.g., RTMR in TDX or REM in CCA)? \r\n3. There is no discussion on how deep the nonce goes in the Layered Attester. What is the assumption here?\r\n4. What is the exact difference between recentness and freshness?\r\n5. What is the exact difference between the Endorsements and Reference Values? \r\n6. Which certain types of relay attacks can scrambling avoid? \r\n\r\n**Specific questions/comments**:\r\n\r\n> Sec. 1 \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.\"\r\n> Sec. 1 \"the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.\"\r\n> Sec. 7 \"the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.\"\r\n\r\nThis is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\r\n\r\n> Sec. 2.1: \"This conveyance can also be \"Local\", if the Verifier role is part of the same entity as the Attester role\"\r\n\r\nSo your definition of \"Local Attestation\" is independent of where the Relying Party is?\r\n\r\n> Sec. 3: \"prevent inconsistencies ...\"\r\n> Sec 3: \"avoid text clones and to avoid the danger of subtle discrepancies\" \r\n\r\nWith some interesting stuff out of scope, is it really the only motivation to write this draft? The draft is at such a high level of abstraction, I wonder if there are really any subtle discrepancies/inconsistencies this draft can help avoid. Can you give some examples of such subtle discrepancies? \r\n\r\n> Sec. 4: \"integral\" \r\n\r\nWhat is it? Can you point me to a reference which uses \"integral\" in the sense of integrity?\r\n\r\n> Sec. 4: \"The signature may be symmetric, such as an HMAC\" \r\n\r\nMAC is not a signature! \r\n\r\n> Sec. 4: \"This (authentication) ... may be achieved by using a confidential channel by means of encryption.\" \r\n\r\nEncryption by itself does not provide authentication. \r\n\r\n> Sec. 5: \"Evidence Protection\" \r\n\r\nThis seems redundant. With \"Attestation Evidence Authenticity\", why is it required? \r\n\r\n> Sec. 6: \"(a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include:\r\n      Nonces that are used to protect from replay attacks\"\r\n\r\nWhat is the exact difference between recentness and freshness? Can you give clear examples of cases when one of them holds while the other one does not? I think nonces provide all of them. Why do you specifically mention replay protection _only_? \r\n\r\n> Sec. 6: \"This specific type of Claims is used to appraise Claims incorporated in Evidence.\"\r\n\r\nSomething seems to be missing here \r\n\r\n> Sec. 6: \"For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in [RFC9334]).\" \r\n\r\nThis seems to say that Endorsements are also Reference Values: is this what you mean here? What is the exact difference between the Endorsements and Reference Values? \r\n\r\n> Sec. 6: \"Claim Selection\" \r\n\r\nseems a misnomer as well as wrongly defined term. Isn't is something desired/requested by the Verifier?\r\n\r\n> Sec. 10: \"This extra information can be used to scramble the Nonce in order to\r\n   counter certain types of relay attacks.\" \r\n\r\nWhich certain types of relay attacks and how? Give more details. \r\n\r\n\r\n\r\n**Editorial**\r\n\r\n- Sec 1: Second paragraph is basically useless. There is no need to have a summary of a single paragraph just presented. \r\n- Introduction could already introduce the three types of Interaction Models. They are currently only introduced in Sec. 7 which is too late. ",
+      "createdAt": "2024-10-07T16:01:38Z",
+      "updatedAt": "2024-10-07T16:30:11Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOEYizNM6nKOuk",
+      "title": "Attester boot up procedure (recheck this)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/59",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The Attester boots up and thereby produces Claims about its boot state and its operational state. Claims are produced by all Attesting Environments of an Attester. Event Logs can accompany produced Claims and provide an event trail of security-relevant events that can be observed or collected by Attesting Environments. \n\nA Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.\n\nIn the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.\nA Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.\n\nUltimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.\nCorrespondingly, a particular set of Evidence originating from certain Attesting Environments in a composite device can be requested via multiple Attesting Environment IDs.\nMethods to acquire Attesting Environment IDs or mappings between Attesting Environments to Attesting Environment IDs are out-of-scope of this document.\n\nBased on the provided Handle, the Attesting Environment IDs, and collected Claims, an Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment. The Attester conveys signed Evidence as well as all accompanying data, such as Event Logs, back to the Verifier.\n\nWhile it is crucial that Claims, the Handle, and the Attesting Environment IDs MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nAs soon as the Verifier receives the Evidence, it can begin the appraisal procedure.\nFor this purpose, the Verifier checks the signature, the Attesting Environment ID, and the Handle, and then appraises the Claims.\nAppraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements, conditions that have to be met by Evidence, such as the presence of certain Claims, and the application of Appraisal Policy for Evidence.\nThe final outputs of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to then assess an Attester's trustworthiness.\n\n--------------------\n\nThe Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.\n\nThe Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.\n\nIn the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.\nThe Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.\n\nThe list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.\nEach selected key is uniquely associated with an Attesting Environment of the Attester.\nAs a result, a single Attestation Key ID identifies a single Attesting Environment.\nCorrespondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.\nMethods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.\n\nThe Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.\nThe Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.\nIf the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.\nFor example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.\n\nWith the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.\n\nThe Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nUpon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.\nClaim appraisal is driven by Policy and takes Reference Values and Endorsements as input.\nThe Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.\n",
+      "createdAt": "2025-01-22T14:01:27Z",
+      "updatedAt": "2025-01-22T14:01:27Z",
       "closedAt": null,
       "comments": []
     }
@@ -1685,7 +1735,7 @@
             "abbreviatedOid": "e918295"
           },
           "author": "thomas-fossati",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2022-01-26T17:50:32Z",
@@ -2117,6 +2167,1086 @@
           "body": "",
           "createdAt": "2024-07-21T18:26:45Z",
           "updatedAt": "2024-07-21T18:26:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOEYizNM59Xawt",
+      "title": "Editorial pass up to Section 5 (included)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/55",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-02T11:52:05Z",
+      "updatedAt": "2024-10-02T12:36:43Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "f35d027b5922c6e1d69b04ea07bf2c5c4377f322",
+      "headRepository": "thomas-fossati/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "patch-1",
+      "headRefOid": "986b94c72415f2bb19205bc123c178b64be47790",
+      "closedAt": "2024-10-02T12:36:43Z",
+      "mergedAt": "2024-10-02T12:36:43Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "535ce3534b62d0b5ff8350c6aec7cb554187433c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6LouC0",
+          "commit": {
+            "abbreviatedOid": "2633fe6"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T11:56:57Z",
+          "updatedAt": "2024-10-02T11:56:58Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nWhile the conveyance of other Conceptual Messages is out of scope, the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.\r\n```",
+              "createdAt": "2024-10-02T11:56:58Z",
+              "updatedAt": "2024-10-02T11:56:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Lo8Tg",
+          "commit": {
+            "abbreviatedOid": "91add4e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T12:21:53Z",
+          "updatedAt": "2024-10-02T12:21:53Z",
+          "comments": [
+            {
+              "originalPosition": 139,
+              "body": "```suggestion\r\n: Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also {{Section 10 of -RATS}}). Similarly, interaction models MUST support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.\r\n```",
+              "createdAt": "2024-10-02T12:21:53Z",
+              "updatedAt": "2024-10-02T12:21:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6LpBGm",
+          "commit": {
+            "abbreviatedOid": "e5b972f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T12:32:08Z",
+          "updatedAt": "2024-10-02T12:32:09Z",
+          "comments": [
+            {
+              "originalPosition": 119,
+              "body": "an Endorser that endorses?",
+              "createdAt": "2024-10-02T12:32:09Z",
+              "updatedAt": "2024-10-02T12:32:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6LpCgM",
+          "commit": {
+            "abbreviatedOid": "e5b972f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T12:35:07Z",
+          "updatedAt": "2024-10-02T12:35:07Z",
+          "comments": [
+            {
+              "originalPosition": 119,
+              "body": "s/endorses/affirms/\r\n\r\n```suggestion\r\n: A statement made by an Endorser about an Attester that affirms the Attester's distinguishability. (Note that distinguishability does not imply uniqueness.)\r\n```",
+              "createdAt": "2024-10-02T12:35:07Z",
+              "updatedAt": "2024-10-02T12:35:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6LpCw0",
+          "commit": {
+            "abbreviatedOid": "e5b972f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-02T12:35:40Z",
+          "updatedAt": "2024-10-02T12:35:41Z",
+          "comments": [
+            {
+              "originalPosition": 95,
+              "body": "```suggestion\r\nSince there can't be an infinite chain of Attesting Environments {{turtles}}, Layered Attestation has to start with an initial Attesting Environment.\r\n```",
+              "createdAt": "2024-10-02T12:35:40Z",
+              "updatedAt": "2024-10-02T12:35:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6LpDGJ",
+          "commit": {
+            "abbreviatedOid": "986b94c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "+1\r\nThank you, Thomas.",
+          "createdAt": "2024-10-02T12:36:22Z",
+          "updatedAt": "2024-10-02T12:36:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOEYizNM59X9GW",
+      "title": "Addressing Thomas' Review from list",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/56",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressing https://mailarchive.ietf.org/arch/msg/rats/3nJPexI-uG1wsIyGMsTBKoHGEL4",
+      "createdAt": "2024-10-02T13:08:54Z",
+      "updatedAt": "2025-01-22T14:00:28Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "f75e8f3dabb323414ca39d1b98c0ce5fc73fe44a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "review-thomas",
+      "headRefOid": "469c0c8c9f18be815d4a8afdb52d9faf643ec4b5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6LpggP",
+          "commit": {
+            "abbreviatedOid": "c94191b"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks awesome; thanks, @henkbirkholz !",
+          "createdAt": "2024-10-02T13:17:10Z",
+          "updatedAt": "2024-10-02T13:17:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NEZNk",
+          "commit": {
+            "abbreviatedOid": "6f67458"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T13:57:46Z",
+          "updatedAt": "2024-10-14T14:58:58Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "we should avoid unproven claims.",
+              "createdAt": "2024-10-14T13:57:47Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "* Why \"Even\"?\r\n* s/{{Section 3 of {{-RATS}}/{{Section 3 of -RATS}}/",
+              "createdAt": "2024-10-14T13:58:19Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "(same comment I made on the email reply)\r\n\r\nUnsure why run-time measurements would be ruled out.  The dynamicity and kind of the target environment seem orthogonal to the conveyance of associated evidence.",
+              "createdAt": "2024-10-14T14:27:36Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "This more nuanced description seems at odds with L146 which claims \"total and unconfined coverage\" :-)",
+              "createdAt": "2024-10-14T14:30:07Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "slightly upside-down phrasing.  What about:\r\n\r\n> _\"This document does not cover every detail about Evidence conveyance.\"_\r\n\r\ninstead?\r\n\r\n",
+              "createdAt": "2024-10-14T14:34:12Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "Unclear how the document can _\"[s]upport of any type of Conceptual Messages conveyance that is based on the presented models.\"_ without describing in practice how the models can be applied to other kinds of flows/CMs.",
+              "createdAt": "2024-10-14T14:37:48Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "* s/takes/take/\r\n* The second sentence still purports Endorsements as a kind of Reference Value.",
+              "createdAt": "2024-10-14T14:42:40Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "* s/verifier/Verifier/",
+              "createdAt": "2024-10-14T14:46:12Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "The following:\r\n\r\n> _\"In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.\"_\r\n\r\nis either stating the obvious, in which case it can be dropped without loss of information, or it's trying to state something about the need for a discovery function that is however not fully articulated.",
+              "createdAt": "2024-10-14T14:54:33Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            },
+            {
+              "originalPosition": 33,
+              "body": "* s/, for example,//",
+              "createdAt": "2024-10-14T14:57:18Z",
+              "updatedAt": "2024-10-14T14:58:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NF9vG",
+          "commit": {
+            "abbreviatedOid": "6f67458"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:37:31Z",
+          "updatedAt": "2024-10-14T16:37:31Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Well, I've seen streamed conveyance of both Endorsements as well as TST (admittedly that was not an Epoch Marker, but that is very very close), and some TUDA implementations definitely can push AR augmented Evidence and event logs around. That is actually the reason why I did not include Reference Values in the list of examples. There is no open code that I can point to, rn, but the flexibility of the interaction models is there.",
+              "createdAt": "2024-10-14T16:37:31Z",
+              "updatedAt": "2024-10-14T16:37:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NF-HM",
+          "commit": {
+            "abbreviatedOid": "6f67458"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:38:30Z",
+          "updatedAt": "2024-10-14T16:38:30Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "> * Why \"Even\"?\r\n\r\n\r\nNot the slightest clue.",
+              "createdAt": "2024-10-14T16:38:30Z",
+              "updatedAt": "2024-10-14T16:38:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NF-OV",
+          "commit": {
+            "abbreviatedOid": "6f67458"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:38:49Z",
+          "updatedAt": "2024-10-14T16:38:49Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nIf an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Conceptual Data/Messages flows as described in {{Section 3 of {{-RATS}} and the definition of Attestation in general as described in {{-RIV}}.\r\n```",
+              "createdAt": "2024-10-14T16:38:49Z",
+              "updatedAt": "2024-10-14T16:38:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NF_yp",
+          "commit": {
+            "abbreviatedOid": "e240341"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:41:50Z",
+          "updatedAt": "2024-10-14T16:41:50Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "They are not ruled out. The phrasing is off. How about:\r\n```suggestion\r\nThis document illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers.\r\nThis document does not exclude application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages. These other applications are not illustrated in this document.\r\n```",
+              "createdAt": "2024-10-14T16:41:50Z",
+              "updatedAt": "2024-10-17T09:47:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NF__m",
+          "commit": {
+            "abbreviatedOid": "e240341"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:42:17Z",
+          "updatedAt": "2024-10-14T16:42:17Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "> The dynamicity and kind of the target environment seem orthogonal to the conveyance of associated evidence.\r\n\r\nI am not sure what you are eluding to, tbh. Could you help us and elaborate a bit?",
+              "createdAt": "2024-10-14T16:42:17Z",
+              "updatedAt": "2024-10-14T16:42:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGAnZ",
+          "commit": {
+            "abbreviatedOid": "e240341"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:43:21Z",
+          "updatedAt": "2024-10-14T16:43:21Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\nDetails around Evidence about run-time integrity, for example, are not explicitly highlighted, but the included model descriptions still function as a basis to build corresponding model extensions on.\r\n```",
+              "createdAt": "2024-10-14T16:43:21Z",
+              "updatedAt": "2024-10-14T16:43:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGBTP",
+          "commit": {
+            "abbreviatedOid": "82916bb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:44:19Z",
+          "updatedAt": "2024-10-14T16:44:20Z",
+          "comments": [
+            {
+              "originalPosition": 95,
+              "body": "```suggestion\r\n: While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.\r\n```\r\n\r\nYES",
+              "createdAt": "2024-10-14T16:44:19Z",
+              "updatedAt": "2024-10-14T16:44:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGC1t",
+          "commit": {
+            "abbreviatedOid": "65c53b7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:47:54Z",
+          "updatedAt": "2024-10-14T16:47:54Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Sure! LGTM\r\n\r\n```suggestion\r\nThis document does not cover every detail about Evidence conveyance.\r\n```",
+              "createdAt": "2024-10-14T16:47:54Z",
+              "updatedAt": "2024-10-14T16:47:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGDSe",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:48:40Z",
+          "updatedAt": "2024-10-14T16:48:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I encountered your other comment below that refers to L146. I am not sure how that are at odds, but how starting with a minor change and we go from there:\r\n\r\n```suggestion\r\nWhile the conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.\r\n```",
+              "createdAt": "2024-10-14T16:48:40Z",
+              "updatedAt": "2024-10-16T08:46:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGD8Z",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:50:02Z",
+          "updatedAt": "2024-10-14T16:50:02Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I am having a hard time gleaming \"total and unconfined coverage\" from L146. Could you help me identify the offender so we can deal with it together?",
+              "createdAt": "2024-10-14T16:50:02Z",
+              "updatedAt": "2024-10-14T16:50:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGGyg",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:54:52Z",
+          "updatedAt": "2024-10-14T16:54:53Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "Yes. That does not read right. How about:\r\n\r\n```suggestion\r\n: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values that can be expressed via Reference Integrity Measurements (RIM) or Endorsements that can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.\r\n```",
+              "createdAt": "2024-10-14T16:54:53Z",
+              "updatedAt": "2024-10-14T16:54:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGH9C",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:57:11Z",
+          "updatedAt": "2024-10-14T16:57:11Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "How about:\r\n\r\n```suggestion\r\nWhile the presented interaction models are illustrated by using the conveyance of Evidence as an example, the models presented may be adapted to the conveyance of other Conceptual Messages.\r\n```\r\n\r\nShorter, more crisp, and maybe less offending?",
+              "createdAt": "2024-10-14T16:57:11Z",
+              "updatedAt": "2024-10-17T09:40:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NGIh8",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-14T16:58:04Z",
+          "updatedAt": "2024-10-14T16:58:04Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "Okay\r\n```suggestion\r\nIn the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.\r\n```",
+              "createdAt": "2024-10-14T16:58:04Z",
+              "updatedAt": "2024-10-14T16:58:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NOZfW",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T13:31:52Z",
+          "updatedAt": "2024-10-15T13:31:52Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "see comment below, failed to reply here",
+              "createdAt": "2024-10-15T13:31:52Z",
+              "updatedAt": "2024-10-15T13:31:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NOZ6K",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T13:32:17Z",
+          "updatedAt": "2024-10-15T13:32:17Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "see comment below, failed to reply here",
+              "createdAt": "2024-10-15T13:32:17Z",
+              "updatedAt": "2024-10-15T13:32:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NOaXZ",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T13:32:55Z",
+          "updatedAt": "2024-10-15T13:32:56Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/56/files#r1799830620",
+              "createdAt": "2024-10-15T13:32:55Z",
+              "updatedAt": "2024-10-15T13:32:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NOag_",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T13:33:08Z",
+          "updatedAt": "2024-10-15T13:33:09Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/56/files#r1799833686",
+              "createdAt": "2024-10-15T13:33:08Z",
+              "updatedAt": "2024-10-15T13:33:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NObzD",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T13:34:47Z",
+          "updatedAt": "2024-10-15T13:34:47Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Hm, yes this is kind of \"water is wet\" and yes it could be dropped, but we were taking great care here to avoid confusion. This is really wet water - and if we do not have to tell you that it is wet, we can drop it.",
+              "createdAt": "2024-10-15T13:34:47Z",
+              "updatedAt": "2024-10-15T13:35:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NPhMT",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T14:59:05Z",
+          "updatedAt": "2024-10-15T14:59:06Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "s/can be adapted to apply/may be adapted to apply/",
+              "createdAt": "2024-10-15T14:59:05Z",
+              "updatedAt": "2024-10-15T14:59:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NXLAt",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T08:46:47Z",
+          "updatedAt": "2024-10-16T08:46:47Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "okay!",
+              "createdAt": "2024-10-16T08:46:47Z",
+              "updatedAt": "2024-10-16T08:46:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NXoVv",
+          "commit": {
+            "abbreviatedOid": "6bcfe7e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T09:21:07Z",
+          "updatedAt": "2024-10-16T09:21:07Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "I am OK content-wise, but the phrasing is a bit awkward.  My humble editorial suggestion:\r\n\r\n> The document illustrates the interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers.\r\n> It does not exclude application to runtime integrity or other conceptual messages, but these are not illustrated.\r\n",
+              "createdAt": "2024-10-16T09:21:07Z",
+              "updatedAt": "2024-10-16T09:21:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NX-1G",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T09:52:33Z",
+          "updatedAt": "2024-10-16T09:52:34Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "The original L146 states:\r\n\r\n> _\"[t]he methods described in this document can also be applied to the conveyance of ${CONCEPTUAL_MESSAGE}\"_\r\n\r\nwhich, at least to this reader, sounds like there are no limits to the potential coverage of the described methods.\r\n\r\nThe amended version of L146 that you propose [in the comment above](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/56/files#r1799822298) makes it more in line with L171.",
+              "createdAt": "2024-10-16T09:52:33Z",
+              "updatedAt": "2024-10-16T09:52:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NYCo5",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T09:58:43Z",
+          "updatedAt": "2024-10-16T09:58:43Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "What I meant is that in the context of a framework that aims at describing the conveyance of CMs, it does seem odd to impose restrictions based on the internal details of one or more CMs.  IOW, from the point of view of a conveyance protocol, Evidence is Evidence, be it runtime or boottime, dynamic or static.",
+              "createdAt": "2024-10-16T09:58:43Z",
+              "updatedAt": "2024-10-16T09:58:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NYIHU",
+          "commit": {
+            "abbreviatedOid": "7ea9f25"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T10:07:52Z",
+          "updatedAt": "2024-10-16T10:07:52Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "Sorry to pester you but it's not about form.  It's about the content.\r\n\r\nMy disagreement is about making the claim that _\"[t]he models presented can be adapted to the conveyance of other Conceptual Messages.\"_ without describing how such _adaptation_ works in practice.  \r\n\r\nAs an example that would need to be articulated clearly in order to claim that the model fits more widely: what does Handle mean in the context of conveyance of Reference Values?",
+              "createdAt": "2024-10-16T10:07:52Z",
+              "updatedAt": "2024-10-16T12:41:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NZzZQ",
+          "commit": {
+            "abbreviatedOid": "6bcfe7e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T12:42:22Z",
+          "updatedAt": "2024-10-16T12:42:22Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "OK, it can be safely removed then.",
+              "createdAt": "2024-10-16T12:42:22Z",
+              "updatedAt": "2024-10-16T12:42:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NZ1oq",
+          "commit": {
+            "abbreviatedOid": "17f97a7"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T12:46:12Z",
+          "updatedAt": "2024-10-16T12:46:12Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "Clarifying question due to a temporary lapse of imagination.  What do you mean by:\r\n\r\n> _\"[a]ssertions cryptographically bound to the public key associated with an Attesting Environment\"_\r\n\r\nCan you provide a concrete example?",
+              "createdAt": "2024-10-16T12:46:12Z",
+              "updatedAt": "2024-10-16T12:46:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Nis5O",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:35:25Z",
+          "updatedAt": "2024-10-17T09:35:25Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "Please see the updated suggestion above. Does that work for you?",
+              "createdAt": "2024-10-17T09:35:25Z",
+              "updatedAt": "2024-10-17T09:35:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Nit6h",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:37:13Z",
+          "updatedAt": "2024-10-17T09:37:13Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "So, you are okay with the L146 as per this PR and this comment can be resolved? I mean, the intent was to address your comment, after all.",
+              "createdAt": "2024-10-17T09:37:13Z",
+              "updatedAt": "2024-10-17T09:37:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Nivqq",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:39:38Z",
+          "updatedAt": "2024-10-17T09:39:38Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "For example, you create a different message, put public key material of the associated AE into that message, then seal it via object signing.\r\n\r\nNow your message uses cryptographic binding (sign) of the AE's public key with other assertions about the AE.",
+              "createdAt": "2024-10-17T09:39:38Z",
+              "updatedAt": "2024-10-17T09:39:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6Nixms",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:42:56Z",
+          "updatedAt": "2024-10-17T09:42:56Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "Handle would mean the exact same thing. It would be a Claim value used in the interaction model to demonstrate recent response and to prevent reply attack of RVs that might change the next session, so the requester of RV is able to tell that there has been a best effort to demonstrate freshness (an assertion in a message is reflecting reality) based on recentness (use of Handle).",
+              "createdAt": "2024-10-17T09:42:56Z",
+              "updatedAt": "2024-10-17T09:43:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6NizRG",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T09:45:55Z",
+          "updatedAt": "2024-10-17T09:45:55Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "Would you be able to craft an appropriate example based on my illustration? I think it is important to get this right.",
+              "createdAt": "2024-10-17T09:45:55Z",
+              "updatedAt": "2024-10-17T09:45:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6RLqUn",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-14T10:55:22Z",
+          "updatedAt": "2024-11-14T10:55:22Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Drop it, please. Less is more :-)",
+              "createdAt": "2024-11-14T10:55:22Z",
+              "updatedAt": "2024-11-14T10:55:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6RLtWT",
+          "commit": {
+            "abbreviatedOid": "40ce188"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-14T11:00:14Z",
+          "updatedAt": "2024-11-14T11:00:14Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "> Handle would mean the exact same thing. It would be a Claim value used in the interaction model to demonstrate recent response and to prevent reply attack of RVs that might change the next session, so the requester of RV is able to tell that there has been a best effort to demonstrate freshness (an assertion in a message is reflecting reality) based on recentness (use of Handle).\r\n\r\nI don't expect freshness of RVs to be provided by handles - see CoRIM, which relies on synchronised clocks between RV provider and Verifier.",
+              "createdAt": "2024-11-14T11:00:14Z",
+              "updatedAt": "2024-11-14T11:00:14Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOEYizNM59ZPqe",
+      "title": "editorial pass over S6, S7 (intro) and S7.1",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/57",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-02T15:37:53Z",
+      "updatedAt": "2025-01-22T13:16:43Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "535ce3534b62d0b5ff8350c6aec7cb554187433c",
+      "headRepository": "thomas-fossati/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "master",
+      "headRefOid": "89cc43419d1b626fde214534e5da702323ab9b14",
+      "closedAt": "2025-01-22T13:16:43Z",
+      "mergedAt": "2025-01-22T13:16:43Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f75e8f3dabb323414ca39d1b98c0ce5fc73fe44a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6ROyoF",
+          "commit": {
+            "abbreviatedOid": "18294ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-14T16:15:13Z",
+          "updatedAt": "2024-11-14T16:15:14Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nThis document does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.\r\n```",
+              "createdAt": "2024-11-14T16:15:14Z",
+              "updatedAt": "2024-11-14T16:15:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6ROzUg",
+          "commit": {
+            "abbreviatedOid": "18294ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-14T16:16:16Z",
+          "updatedAt": "2024-11-14T16:16:17Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\nWhile details regarding Evidence of run-time integrity are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.\r\n```",
+              "createdAt": "2024-11-14T16:16:16Z",
+              "updatedAt": "2025-01-22T13:14:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6RO26m",
+          "commit": {
+            "abbreviatedOid": "18294ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-14T16:21:29Z",
+          "updatedAt": "2024-11-14T16:21:29Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\nWhile the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.\r\n```",
+              "createdAt": "2024-11-14T16:21:29Z",
+              "updatedAt": "2024-11-14T16:21:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6S6EZE",
+          "commit": {
+            "abbreviatedOid": "18294ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-27T11:02:42Z",
+          "updatedAt": "2024-11-27T11:02:42Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "```suggestion\r\nTherefore, an Attestation Key ID can also identify an Attesting Environment.\r\nIf no attestation key identifiers are provided, a local default applies based on the Attester.\r\nFor example, all Attesting Environments will report.\r\n```",
+              "createdAt": "2024-11-27T11:02:42Z",
+              "updatedAt": "2024-11-27T11:06:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6ZBAsj",
+          "commit": {
+            "abbreviatedOid": "89cc434"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-22T13:15:02Z",
+          "updatedAt": "2025-01-22T13:15:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOEYizNM6Ion9E",
+      "title": "Update files",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/60",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is just the result of running `make update-files`",
+      "createdAt": "2025-01-22T14:12:57Z",
+      "updatedAt": "2025-01-23T15:13:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "f75e8f3dabb323414ca39d1b98c0ce5fc73fe44a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "update",
+      "headRefOid": "011bec9f4188c3f411cff3bc32778194c80e2f8b",
+      "closedAt": "2025-01-23T15:13:19Z",
+      "mergedAt": "2025-01-23T15:13:19Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5a00c60b5206822695240fcfc26991e3dba4e5cc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6ZMFtu",
+          "commit": {
+            "abbreviatedOid": "011bec9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T14:48:50Z",
+          "updatedAt": "2025-01-23T14:48:50Z",
           "comments": []
         }
       ]
