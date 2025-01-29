@@ -500,57 +500,60 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 | Attester |                       | Handle Distributor |   | Verifier |
 '----+-----'                       '---------+----------'   '-----+----'
      |                                       |                    |
-==========================[Handle Generation]===========================
-     |                                    generateHandle()        |
-     |                                       | => handle          |
-     |                                       |                    |
-     |<---------------------------- {handle} | {handle} --------->|
-     |                                       |                    |
-     |                                       x                    |
-     |                                                            |
-=================[Evidence Generation and Conveyance]===================
-     |                                                            |
-  generateClaims(attestingEnvironment)                            |
-     | => claims, eventLogs                                       |
-     |                                                            |
-  collectClaims(claims, ?claimSelection)                          |
-     | => collectedClaims                                         |
-     |                                                            |
-  generateEvidence(handle, attEnvIDs, collectedClaims)            |
-     | => evidence                                                |
-     |                                                            |
-     | {evidence, eventLogs} ------------------------------------>|
-     |                                                            |
-==========================[Evidence Appraisal]==========================
-     |                                                            |
-     |                                      appraiseEvidence(evidence,
-     |                                                      eventLogs,
-     |                                                      verInputs)
-     |                                       attestationResult <= |
-     ~                                                            ~
-     |                                                            |
  .--------[loop]------------------------------------------------------.
 |    |                                                            |    |
-| =============[Delta Evidence Generation and Conveyance]============= |
+| ========================[Handle Generation]========================= |
+|    |                                    generateHandle()        |    |
+|    |                                       | => handle          |    |
+|    |                                       |                    |    |
+|    |<---------------------------- {handle} | {handle} --------->|    |
+|    |                                       |                    |    |
+|    |                                       x                    |    |
+|    |                                                            |    |
+| ===============[Evidence Generation and Conveyance]================= |
 |    |                                                            |    |
 | generateClaims(attestingEnvironment)                            |    |
-|    | => claimsDelta, eventLogsDelta                             |    |
+|    | => claims, eventLogs                                       |    |
 |    |                                                            |    |
-| collectClaims(claimsDelta, ?claimSelection)                     |    |
-|    | => collectedClaimsDelta                                    |    |
+| collectClaims(claims, ?claimSelection)                          |    |
+|    | => collectedClaims                                         |    |
 |    |                                                            |    |
-| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attEnvIDs, collectedClaims)            |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-|    | {evidence, eventLogsDelta} ------------------------------->|    |
+|    | {evidence, eventLogs} ------------------------------------>|    |
 |    |                                                            |    |
-| =====================[Delta Evidence Appraisal]===================== |
+| ========================[Evidence Appraisal]======================== |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
-|    |                                                 eventLogsDelta, |
+|    |                                                      eventLogs, |
 |    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
+|    ~                                                            ~    |
 |    |                                                            |    |
+| .-------[loop]-----------------------------------------------------. |
+||   |                                                            |   ||
+|| ============[Delta Evidence Generation and Conveyance]============ ||
+||   |                                                            |   ||
+|| generateClaims(attestingEnvironment)                           |   ||
+||   | => claimsDelta, eventLogsDelta                             |   ||
+||   |                                                            |   ||
+|| collectClaims(claimsDelta, ?claimSelection)                    |   ||
+||   | => collectedClaimsDelta                                    |   ||
+||   |                                                            |   ||
+|| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)      |   ||
+||   | => evidence                                                |   ||
+||   |                                                            |   ||
+||   | {evidence, eventLogsDelta} ------------------------------->|   ||
+||   |                                                            |   ||
+|| ====================[Delta Evidence Appraisal]==================== ||
+||   |                                                            |   ||
+||   |                                     appraiseEvidence(evidence, ||
+||   |                                                eventLogsDelta, ||
+||   |                                                     verInputs) ||
+||   |                                       attestationResult <= |   ||
+||   |                                                            |   ||
+| '------------------------------------------------------------------' |
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
@@ -562,7 +565,8 @@ Initiation by the Verifier always results in solicited pushes to the Verifier.
 The Uni-Directional model uses the same information elements as the Challenge/Response model.
 In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation).
 While a request of Evidence from the Verifier would result in a sequence diagram more similar to the Challenge/Response model (comparable with a RESTful GET operation).
-The specific manner how Handles are generated is not in scope of this document. One example of a specific handle representation is {{-epoch-markers}}. 
+The specific manner how Handles are generated is not in scope of this document.
+One example of a specific handle representation is {{-epoch-markers}}.
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
@@ -612,57 +616,60 @@ In the observer pattern, observers are directly connected to target resources wi
 | Attester |                                                | Verifier |
 '----+-----'                                                '-----+----'
      |                                                            |
-==========================[Handle Generation]===========================
-     |                                                            |
-     |                                                generateHandle()
-     |                                                   handle<= |
-     |                                                            |
-     |<------------ subscribe(handle, attEnvIDs, ?claimSelection) |
-     | {handle} ------------------------------------------------->|
-     |                                                            |
-=================[Evidence Generation and Conveyance]===================
-     |                                                            |
-  generateClaims(attestingEnvironment)                            |
-     | => claims, eventLogs                                       |
-     |                                                            |
-  collectClaims(claims, ?claimSelection)                          |
-     | => collectedClaims                                         |
-     |                                                            |
-  generateEvidence(handle, attEnvIDs, collectedClaims)            |
-     | => evidence                                                |
-     |                                                            |
-     | {handle, evidence, eventLogs} ---------------------------->|
-     |                                                            |
-==========================[Evidence Appraisal]==========================
-     |                                                            |
-     |                                      appraiseEvidence(evidence,
-     |                                                      eventLogs,
-     |                                                      verInputs)
-     |                                       attestationResult <= |
-     ~                                                            ~
-     |                                                            |
  .--------[loop]------------------------------------------------------.
 |    |                                                            |    |
-| =============[Delta Evidence Generation and Conveyance]============= |
+| ========================[Handle Generation]========================= |
+|    |                                                            |    |
+|    |                                                generateHandle() |
+|    |                                                   handle<= |    |
+|    |                                                            |    |
+|    |<------------ subscribe(handle, attEnvIDs, ?claimSelection) |    |
+|    | {handle} ------------------------------------------------->|    |
+|    |                                                            |    |
+| ===============[Evidence Generation and Conveyance]================= |
 |    |                                                            |    |
 | generateClaims(attestingEnvironment)                            |    |
-|    | => claimsDelta, eventLogsDelta                             |    |
+|    | => claims, eventLogs                                       |    |
 |    |                                                            |    |
-| collectClaims(claimsDelta, ?claimSelection)                     |    |
-|    | => collectedClaimsDelta                                    |    |
+| collectClaims(claims, ?claimSelection)                          |    |
+|    | => collectedClaims                                         |    |
 |    |                                                            |    |
-| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attEnvIDs, collectedClaims)            |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-|    | {evidence, eventLogsDelta} ------------------------------->|    |
+|    | {handle, evidence, eventLogs} ---------------------------->|    |
 |    |                                                            |    |
-| =====================[Delta Evidence Appraisal]===================== |
+| ========================[Evidence Appraisal]======================== |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
-|    |                                                 eventLogsDelta, |
+|    |                                                      eventLogs, |
 |    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
+|    ~                                                            ~    |
 |    |                                                            |    |
+| .--------[loop]----------------------------------------------------. |
+||   |                                                            |   ||
+|| ============[Delta Evidence Generation and Conveyance]============ ||
+||   |                                                            |   ||
+|| generateClaims(attestingEnvironment)                           |   ||
+||   | => claimsDelta, eventLogsDelta                             |   ||
+||   |                                                            |   ||
+|| collectClaims(claimsDelta, ?claimSelection)                    |   ||
+||   | => collectedClaimsDelta                                    |   ||
+||   |                                                            |   ||
+|| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)      |   ||
+||   | => evidence                                                |   ||
+||   |                                                            |   ||
+||   | {evidence, eventLogsDelta} ------------------------------->|   ||
+||   |                                                            |   ||
+|| ====================[Delta Evidence Appraisal]==================== ||
+||   |                                                            |   ||
+||   |                                     appraiseEvidence(evidence, ||
+||   |                                                eventLogsDelta, ||
+||   |                                                     verInputs) ||
+||   |                                       attestationResult <= |   ||
+||   |                                                            |   ||
+| '------------------------------------------------------------------' |
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
