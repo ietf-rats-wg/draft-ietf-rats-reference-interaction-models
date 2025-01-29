@@ -747,8 +747,7 @@ The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server f
      ~                                   ~                        ~
 ~~~~
 
-The *Uni-Directional Remote Attestation over Publish-Subscribe* model uses the same information elements as the Uni-Directional Remote Attestation model.
-Accordingly, Handles are created by a 3rd party, the Handle Distributor.
+Handles are created by a 3rd party, the Handle Distributor.
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
 When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them during Handle Generation.
 
