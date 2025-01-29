@@ -644,9 +644,11 @@ In the observer pattern, observers are directly connected to target resources wi
      |                                                            |
 ~~~~
 
-The observer pattern is employed in scenarios where message delivery does not involve a central broker.
-Instead, an observer directly subscribes to observed resources via a dedicated mechanism.
-Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining subscription state.
+
+In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for attestation purposes.
+This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
+It handles the complexities of managing these connections, including the maintenance of pertinent information about the observer's preferences and security requirements, ensuring that the transmission of attestation data remains both secure and relevant to the observer’s specific context.
+
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
 The subscribe operation is used to convey Handles required for Evidence generation.
 Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
