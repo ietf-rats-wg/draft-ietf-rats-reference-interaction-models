@@ -664,7 +664,7 @@ Methods to detect excessive time drift that would render Handles stale and manda
 ### Streaming Remote Attestation with a Broker
 
 The publish-subscribe messaging pattern is widely used for communication in different areas.
-Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters do not (need to) be aware of corresponding Verifiers.
+Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
 
 With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server or Broker).
