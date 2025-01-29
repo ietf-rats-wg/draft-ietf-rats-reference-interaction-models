@@ -563,7 +563,7 @@ While a request of Evidence from the Verifier would result in a sequence diagram
 The specific manner how Handles are generated is not in scope of this document. One example of a specific handle representation is {{-epoch-markers}}. 
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
-The Handles are created by an external 3rd entity -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
+The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.
