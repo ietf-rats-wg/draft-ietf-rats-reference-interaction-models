@@ -792,11 +792,6 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |                                   |                  verInputs) |
 |    |                                   |   attestationResult <= |    |
 |    |                                   |                        |    |
-| ==================[Attestation Result Generation]=================== |
-|    |                                   |                        |    |
-|    |                                   |<--------- pub(topic=AttRes, |
-|    |                                   |          attestationResult) |
-|    |                                   |                        |    |
  '--------------------------------------------------------------------'
      |                                   |                        |
      ~                                   ~                        ~
