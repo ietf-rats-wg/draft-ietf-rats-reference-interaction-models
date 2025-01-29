@@ -52,6 +52,7 @@ normative:
   BCP205:
   RFC8610: CDDL
   RFC9334: RATS
+  RFC9683: RIV
   I-D.ietf-rats-epoch-markers: epoch-markers
 
 informative:
@@ -130,7 +131,7 @@ informative:
 
 --- abstract
 
-This document describes interaction models for remote attestation procedures (RATS).
+This document describes interaction models for remote attestation procedures (RATS) {{-RATS}}.
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.
 
@@ -835,22 +836,6 @@ Attestation Result Generation is the same for both publish-subscribe models,*Cha
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
 
-# Additional Application-Specific Requirements
-
-Depending on the use cases covered, there can be additional requirements. An exemplary subset is illustrated in this section.
-
-## Confidentiality
-
-Confidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality protection. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.
-
-## Mutual Authentication
-
-In particular use cases, mutual authentication may be desirable in such a way that a Verifier also needs to prove its identity to the Attester, instead of only the Attester proving its identity to the Verifier.
-
-## Hardware-Enforcement/Support
-
-Depending on given usage scenarios, hardware support for secure storage of cryptographic keys, crypto accelerators, as well as protected or isolated execution environments can be mandatory requirements. Well-known technologies in support of these requirements are roots of trusts, such as Hardware Security Modules (HSM), Physically Unclonable Functions (PUFs), Shielded Secrets, or Trusted Executions Environments (TEEs).
-
 # Implementation Status
 
 Note to RFC Editor: Please remove this section as well as references to {{BCP205}} before AUTH48.
@@ -904,12 +889,18 @@ Michael Eckel (michael.eckel@sit.fraunhofer.de)
 {: #security-and-privacy-considerations}
 # Security and Privacy Considerations
 
-In a remote attestation procedure the Verifier or the Attester MAY want to cryptographically blind several attributes.
-For instance, information can be part of the signature after applying a one-way function (e. g., a hash function).
+This document outlines three interaction models for remote attestation procedures (RATS) {{-RATS}}.
+While the subsequent sections address additional security and privacy considerations, the security considerations from {{Section 12 of -RATS}} must also be adhered to.
+Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
-There is also a possibility to scramble the Nonce or Attester Identity with other information that is known to both the Verifier and Attester.
-A prominent example is the IP address of the Attester that usually is known by the Attester itself as well as the Verifier.
-This extra information can be used to scramble the Nonce in order to counter certain types of relay attacks.
+## Cryptographic Blinding and Scrambling
+
+In a remote attestation procedure, both the Verifier and the Attester may choose to cryptographically blind certain attributes to enhance privacy.
+For example, specific information can be included in the signature after being processed through a one-way function, such as a hash function.
+
+Additionally, there is an option to scramble the Nonce or Attester Identity using other information that is known to both parties.
+A common example is the IP address of the Attester, which is typically accessible to both the Attester and the Verifier.
+This additional information can be utilized to scramble the Nonce, thereby mitigating certain types of relay attacks.
 
 ## Security Considerations for Brokers in Remote Attestation
 
@@ -938,6 +929,28 @@ To mitigate these risks, it is essential to implement robust security measures:
 
 By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
 It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.
+
+## Additional Application-Specific Security Considerations
+
+The following application-specific security considerations are relevant to the use cases covered in this document:
+
+### Confidentiality
+
+Confidentiality of exchanged attestation information is crucial, especially when communication occurs over insecure channels, such as the public Internet.
+In these scenarios, using TLS as a communication protocol is recommended to ensure confidentiality protection.
+In private networks, such as carrier management networks, it is essential to evaluate whether the transport medium is considered confidential.
+
+### Mutual Authentication
+
+In certain use cases, mutual authentication may be necessary, requiring the Verifier to also prove its identity to the Attester.
+This two-way authentication enhances trust and security in the attestation process.
+
+### Hardware Enforcement/Support
+
+Depending on specific usage scenarios, hardware support for secure storage of cryptographic keys, cryptographic accelerators, and protected or isolated execution environments may be mandatory.
+Technologies that support these requirements include roots of trust, such as Hardware Security Modules (HSM), Physically Unclonable Functions (PUFs), Shielded Secrets, or Trusted Execution Environments (TEEs).
+
+These considerations should be applied according to the specific context of implementation, ensuring that the attestation process remains secure and trustworthy.
 
 # Acknowledgments
 
