@@ -607,9 +607,9 @@ In the following Subsections, streaming remote attestation without a broker (obs
   generateEvidence(handle, attEnvIDs, collectedClaims)            |
      | => evidence                                                |
      |                                                            |
-==========================[Evidence Appraisal]==========================
-     |                                                            |
      | {handle, evidence, eventLogs} ---------------------------->|
+     |                                                            |
+==========================[Evidence Appraisal]==========================
      |                                                            |
      |                                      appraiseEvidence(evidence,
      |                                                      eventLogs,
@@ -630,9 +630,9 @@ In the following Subsections, streaming remote attestation without a broker (obs
 | generateEvidence(handle, attEnvIDs, collectedClaimsDelta)       |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-| =====================[Delta Evidence Appraisal]===================== |
-|    |                                                            |    |
 |    | {evidence, eventLogsDelta} ------------------------------->|    |
+|    |                                                            |    |
+| =====================[Delta Evidence Appraisal]===================== |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
 |    |                                                 eventLogsDelta, |
