@@ -833,13 +833,6 @@ Attestation Result Generation is the same for both publish-subscribe models,*Cha
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
 
-#### Publish/Subscribe Topics
-
-Many publish-subscribe models provide hierarchical organization of topics.
-This way, subscribers can subscribe to either all attestations (topic `AttRes`), or, for example, to topic `AttRes/DbServers/Germany` to receive only attestations from database servers in Germany.
-Further, it may be required to distinguish between uni-directional and challenge-response attestation evidence.
-<!--For this purpose a wildcard subscription may be useful, for example `AttRes/DbServers/Germany/\*\*/uni` (to receive only uni-directional attestation evidence) or `AttRes/DbServers/Germany/\*\*/cr` (to receive only challenge-response attestation Evidence).-->
-
 # Additional Application-Specific Requirements
 
 Depending on the use cases covered, there can be additional requirements. An exemplary subset is illustrated in this section.
