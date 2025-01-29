@@ -663,6 +663,8 @@ Methods to detect excessive time drift that would render Handles stale and manda
 
 ### Streaming Remote Attestation with a Broker
 
+This model employs a Broker to facilitate the distribution of messages between Attesters and Verifiers.
+The Broker acts as an intermediary that ensures messages are securely and reliably transmitted across parties.
 The publish-subscribe messaging pattern is widely used for communication in different areas.
 Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
@@ -670,7 +672,16 @@ In scenarios with large numbers of Attesters and Verifiers, the publish-subscrib
 With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server or Broker).
 Clients may *publish* data in the form of a *message* under a certain *topic*.
 *Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
-Depending on the particular  publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
+Depending on the particular publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
+
+The Broker and Handle Distributor are considered to be Trusted Third Parties (TTPs) for all participating entities, including Attesters and Verifiers.
+These entities must establish a trust relationship with the broker and handle distributor, as these components are responsible for the secure and reliable dissemination of critical protocol information such as Handles and Attestation Results.
+
+The trustworthiness of the broker and handle distributor is essential, as they manage the flow of sensitive attestation data and are pivotal in maintaining the integrity and confidentiality of the attestation process.
+This trust can be established through mechanisms such as pre-shared keys, certificates issued by a trusted certificate authority, or through a secure registration process that validates their authenticity and reliability.
+
+Ensuring the security of these entities is vital, as any compromise could undermine the entire attestation process.
+Therefore, the deployment of Brokers and Handle Distributors should include stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the attestation framework.
 
 In the following sections, the interaction models *Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe* are described.
 There are different phases that both models go through:
