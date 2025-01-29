@@ -558,7 +558,7 @@ Initiation by the Attester can result in unsolicited pushes of Evidence to the V
 Initiation by the Verifier always results in solicited pushes to the Verifier.
 
 The Uni-Directional model uses the same information elements as the Challenge/Response model.
-In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation or the emission of a beacon).
+In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation).
 While a request of Evidence from the Verifier would result in a sequence diagram more similar to the Challenge/Response model (comparable with a RESTful GET operation).
 The specific manner how Handles are created and used always remains as the distinguishing quality of this model.
 
