@@ -652,7 +652,11 @@ It handles the complexities of managing these connections, including the mainten
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
 The subscribe operation is used to convey Handles required for Evidence generation.
 Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
-While a Handle Distributor is not mandatory in this model, the model is also limited to bi-lateral subscription relationships, in which each Verifier has to create and provide Handles individually.
+In the observer pattern, the utilization of a Handle Distributor is optional.
+While the model is typically employed for direct, bi-lateral subscription relationships where the Verifier generates and provides Handles directly, it is possible to integrate a separate third-party Handle Distributor under certain conditions.
+This would involve the Handle Distributor independently managing the creation and distribution of Handles, thus extending the model to support scenarios beyond simple bi-lateral interactions.
+However, in its basic form, the model assumes direct interaction between the Attester and the Verifier, with the Verifier taking on the responsibilities of Handle generation and distribution to maintain the integrity and security of the attestation process.
+
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
 The streaming model without a broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
 Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.
