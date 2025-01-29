@@ -343,7 +343,7 @@ The way the Handle is processed is the most prominent difference between the thr
   generateClaims(attestingEnvironment)                            |
      | => claims, ?eventLogs                                      |
      |                                                            |
-     |<-- requestAttestation(handle, ?attEnvIDs, ?claimSelection) |
+     |<----- requestEvidence(handle, ?attEnvIDs, ?claimSelection) |
      |                                                            |
   collectClaims(claims, ?claimSelection)                          |
      | => collectedClaims                                         |
@@ -351,7 +351,7 @@ The way the Handle is processed is the most prominent difference between the thr
   generateEvidence(handle, ?attEnvIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | evidence, ?eventLogs ------------------------------------->|
+     | {evidence, ?eventLogs}------------------------------------>|
      |                                                            |
 ==========================[Evidence Appraisal]==========================
      |                                                            |
@@ -410,7 +410,7 @@ In the second step, the Attester presents the Attestation Result (and possibly a
   generateClaims(attestingEnvironment)      |                 |
      | => claims, ?eventLogs                |                 |
      |                                      |                 |
-     |<--------------------- requestAttestation(handle,       |
+     |<------------------------ requestEvidence(handle,       |
      |                           ?attEnvIDs, ?claimSelection) |
      |                                      |                 |
   collectClaims(claims, ?claimSelection)    |                 |
@@ -428,7 +428,7 @@ In the second step, the Attester presents the Attestation Result (and possibly a
      |                             ?eventLogs, verInputs)     |
      |                 attestationResult <= |                 |
      |                                      |                 |
-     |<------------------ attestationResult |                 |
+     |<---------------- {attestationResult} |                 |
      |                                      |                 |
      | {evidence, attestationResult} ------------------------>|
      |                                      |                 |
@@ -456,7 +456,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |                       |
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
-     |<--------------------- requestAttestation(handle,          |
+     |<------------------------ requestEvidence(handle,          |
      |                           ?attEnvIDs, ?claimSelection)    |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
