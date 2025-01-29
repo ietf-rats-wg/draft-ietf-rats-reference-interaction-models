@@ -916,7 +916,7 @@ There is also a possibility to scramble the Nonce or Attester Identity with othe
 A prominent example is the IP address of the Attester that usually is known by the Attester itself as well as the Verifier.
 This extra information can be used to scramble the Nonce in order to counter certain types of relay attacks.
 
-# Security Considerations for Brokers in Remote Attestation
+## Security Considerations for Brokers in Remote Attestation
 
 The role of the Broker in the "Streaming Remote Attestation with a Broker model" introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating handles and topics.
 To mitigate these risks, it is essential to implement robust security measures:
