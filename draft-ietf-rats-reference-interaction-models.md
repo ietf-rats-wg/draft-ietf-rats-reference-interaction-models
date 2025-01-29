@@ -577,7 +577,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 ## Streaming Remote Attestation {#streaming}
 
-Streaming Remote Attestation serves as the foundational concept for both the observer pattern ({{ISIS}}) and the publish-subscribe pattern ({{DesignPatterns}}).
+Streaming Remote Attestation serves as the foundational concept for both the observer pattern {{ISIS}} and the publish-subscribe pattern {{DesignPatterns}}.
 It entails establishing subscription states to enable continuous remote attestation.
 In the observer pattern, observers are directly connected to target resources without a broker, while the publish-subscribe pattern involves a central broker for message distribution.
 In the following Subsections, streaming remote attestation without a broker (observer pattern) as well as with a broker (publish-subscribe pattern) are illustrated.
