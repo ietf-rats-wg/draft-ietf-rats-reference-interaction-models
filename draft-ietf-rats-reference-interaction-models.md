@@ -52,7 +52,7 @@ normative:
   BCP205:
   RFC8610: CDDL
   RFC9334: RATS
-  I-D.birkholz-rats-epoch-markers: epoch-markers
+  I-D.ietf-rats-epoch-markers: epoch-markers
 
 informative:
   I-D.ietf-rats-tpm-based-network-device-attest: RIV
@@ -560,7 +560,7 @@ Initiation by the Verifier always results in solicited pushes to the Verifier.
 The Uni-Directional model uses the same information elements as the Challenge/Response model.
 In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation).
 While a request of Evidence from the Verifier would result in a sequence diagram more similar to the Challenge/Response model (comparable with a RESTful GET operation).
-The specific manner how Handles are created and used always remains as the distinguishing quality of this model.
+The specific manner how Handles are generated is not in scope of this document. One example of a specific handle representation is {{-epoch-markers}}. 
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
 The Handles are created by an external 3rd entity -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
