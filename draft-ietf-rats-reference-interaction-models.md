@@ -166,7 +166,7 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system.
 If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in {{Section 3.1 of -RATS}} and the definition of Attestation in general as described in {{-RIV}}.
 
 # Scope and Intent
@@ -580,7 +580,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 Streaming Remote Attestation serves as the foundational concept for both the observer pattern {{ISIS}} and the publish-subscribe pattern {{DesignPatterns}}.
 It entails establishing subscription states to enable continuous remote attestation.
-In the observer pattern, observers are directly connected to target resources without a broker, while the publish-subscribe pattern involves a central broker for message distribution.
+In the observer pattern, observers are directly connected to target resources without a Broker, while the publish-subscribe pattern involves a central Broker for message distribution.
 
 ### Streaming Remote Attestation without a Broker
 
@@ -658,7 +658,7 @@ This would involve the Handle Distributor independently managing the creation an
 However, in its basic form, the model assumes direct interaction between the Attester and the Verifier, with the Verifier taking on the responsibilities of Handle generation and distribution to maintain the integrity and security of the attestation process.
 
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
-The streaming model without a broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
+The streaming model without a Broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
 Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.
 
 ### Streaming Remote Attestation with a Broker
@@ -674,10 +674,10 @@ Clients may *publish* data in the form of a *message* under a certain *topic*.
 *Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
 Depending on the particular publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
 
-The Broker and Handle Distributor are considered to be Trusted Third Parties (TTPs) for all participating entities, including Attesters and Verifiers.
-These entities must establish a trust relationship with the broker and handle distributor, as these components are responsible for the secure and reliable dissemination of critical protocol information such as Handles and Attestation Results.
+The Broker and Handle Distributor are considered to be Trusted Third Parties (TTPs) for all participating entities, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
+These entities must establish a trust relationship with the Broker and handle distributor, as these components are responsible for the secure and reliable dissemination of critical protocol information such as Handles and Attestation Results.
 
-The trustworthiness of the broker and handle distributor is essential, as they manage the flow of sensitive attestation data and are pivotal in maintaining the integrity and confidentiality of the attestation process.
+The trustworthiness of the Broker and handle distributor is essential, as they manage the flow of sensitive attestation data and are pivotal in maintaining the integrity and confidentiality of the attestation process.
 This trust can be established through mechanisms such as pre-shared keys, certificates issued by a trusted certificate authority, or through a secure registration process that validates their authenticity and reliability.
 
 Ensuring the security of these entities is vital, as any compromise could undermine the entire attestation process.
@@ -921,6 +921,34 @@ For instance, information can be part of the signature after applying a one-way 
 There is also a possibility to scramble the Nonce or Attester Identity with other information that is known to both the Verifier and Attester.
 A prominent example is the IP address of the Attester that usually is known by the Attester itself as well as the Verifier.
 This extra information can be used to scramble the Nonce in order to counter certain types of relay attacks.
+
+# Security Considerations for Brokers in Remote Attestation
+
+The role of the Broker in the "Streaming Remote Attestation with a Broker model" introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating handles and topics.
+To mitigate these risks, it is essential to implement robust security measures:
+
+* *End-to-End Authentication:*
+  Establishing end-to-end authenticated channels between Attesters and Verifiers ensures that data integrity and authenticity are preserved across the communication process.
+  This measure prevents the Broker from altering the content of the messages, including Handles and other sensitive data.
+
+* *Strong Isolation of Topics:*
+  Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
+  This includes using secure naming conventions and access controls that restrict the Broker's ability to manipulate topic subscriptions.
+
+* *Trusted Association Verification:*
+  To further safeguard against confusion attacks where the Broker might misroute notifications, mechanisms should be in place to verify the trust association between senders and receivers continuously.
+  This can be facilitated by cryptographic assurances, such as digital signatures and trusted certificates that validate the sender's identity and the integrity of the message content.
+
+* *Audit and Monitoring:*
+  Regular audits and real-time monitoring of Broker activities can detect and respond to anomalous behavior that might indicate security breaches or manipulation attempts.
+  Logging all actions performed by the Broker provides an audit trail that can be critical for forensic analysis.
+
+* *Broker as a Trusted Third Party (TTP):*
+  Recognizing the Broker as a TTP necessitates stringent security certifications and compliance with security standards to ensure that they operate under strict governance and security protocols.
+  This includes regular security assessments and certifications that validate the Broker's security practices.
+
+By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
+It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.
 
 # Acknowledgments
 
