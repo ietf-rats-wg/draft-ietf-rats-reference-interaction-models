@@ -280,7 +280,7 @@ Verifier Inputs ('verInputs')
 
 : *mandatory*
 
-: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can takes various forms. For example, Reference Values can be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (Endorsements).
+: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values that can be expressed via Reference Integrity Measurements (RIM) or Endorsements that can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Claim Selection (`claimSelection`):
 
