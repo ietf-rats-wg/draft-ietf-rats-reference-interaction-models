@@ -676,7 +676,7 @@ In the observer pattern, observers are directly connected to target resources wi
 ~~~~
 
 
-In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for attestation purposes.
+In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.
 This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
 It handles the complexities of managing these connections, including the maintenance of pertinent information about the observer's preferences and security requirements, ensuring that the transmission of attestation data remains both secure and relevant to the observer’s specific context.
 
