@@ -694,8 +694,8 @@ Methods to detect excessive time drift that would render Handles stale and manda
 
 ### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
-This model employs a Broker to facilitate the distribution of messages between Attesters and Verifiers.
-The Broker acts as an intermediary that ensures messages are securely and reliably transmitted across parties.
+This model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.
+The Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.
 The publish-subscribe messaging pattern is widely used for communication in different areas.
 Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
