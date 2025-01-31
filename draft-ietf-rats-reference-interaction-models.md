@@ -780,7 +780,7 @@ This mechanism ensures that each handle is uniquely associated with a specific a
      ~                                   ~                        ~
 ~~~~
 
-Handles are created by a 3rd party, the Handle Distributor (see {{security-and-privacy-considerations}}).
+Handles are created by a trusted third party, the Handle Distributor (see {{security-and-privacy-considerations}}).
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
 When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them during Handle Generation.
 
