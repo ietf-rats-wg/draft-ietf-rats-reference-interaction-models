@@ -174,7 +174,7 @@ If an entity takes on two or more different roles, the functions they provide ty
 
 This document:
 
-* outlines common interaction models between RATS roles;l
+* outlines common interaction models between RATS roles;
 * illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers;
 * does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages;
 * does not cover every detail about Evidence conveyance.
