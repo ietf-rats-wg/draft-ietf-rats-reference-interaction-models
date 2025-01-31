@@ -572,7 +572,8 @@ In the Uni-Directional model, handles are composed of cryptographically signed t
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
-Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at the specific point in time when the handle was generated during the Handle Generation phase.
+This model provides proof that Evidence generation happened after the Handle generation phase.
+The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.
 
 ### Handle Lifecycle and Propagation Delays
 
