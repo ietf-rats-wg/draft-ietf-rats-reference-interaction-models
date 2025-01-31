@@ -682,10 +682,11 @@ It handles the complexities of managing these connections, including the mainten
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
 The subscribe operation is used to convey Handles required for Evidence generation.
 Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
-In the observer pattern, the utilization of a Handle Distributor is optional.
-While the model is typically employed for direct, bi-lateral subscription relationships where the Verifier generates and provides Handles directly, it is possible to integrate a separate third-party Handle Distributor under certain conditions.
-This would involve the Handle Distributor independently managing the creation and distribution of Handles, thus extending the model to support scenarios beyond simple bi-lateral interactions.
-However, in its basic form, the model assumes direct interaction between the Attester and the Verifier, with the Verifier taking on the responsibilities of Handle generation and distribution to maintain the integrity and security of the attestation process.
+In the observer pattern, the Handle Distributor role is optional.
+While the model is typically used for direct, bi-lateral subscription relationships where the Verifier generates and provides Handles directly, it is also possible to include the trusted third party that is a Handle Distributor.
+A Handle Distributor independently manages the generation and distribution of Handles to other RATS roles.
+As a result, scenarios involving more than bi-lateral interactions are enabled.
+However, in its basic form, the model assumes direct interaction between an Attester and a Verifier, where the Handle generation is a responsibility taken on by the Verifier roles.
 
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
 The streaming model without a Broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
