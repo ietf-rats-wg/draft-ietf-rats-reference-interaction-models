@@ -56,7 +56,6 @@ normative:
   I-D.ietf-rats-epoch-markers: epoch-markers
 
 informative:
-  I-D.ietf-rats-tpm-based-network-device-attest: RIV
   I-D.birkholz-rats-tuda: TUDA
   DAA:
     title: Direct Anonymous Attestation
