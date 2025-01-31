@@ -285,7 +285,7 @@ Claim Selection (`claimSelection`):
 
 : *optional*
 
-: A set of (sub-)sets of Claims which can be created by the Attesting Environments of an Attester.
+: A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.
 
 : Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
 For example, a Verifier could send a Claim Selection, among other elements, to an Attester.
