@@ -1,4 +1,6 @@
 ---
+v: 3
+
 title: Reference Interaction Models for Remote Attestation Procedures
 abbrev: REIM
 docname: draft-ietf-rats-reference-interaction-models-latest
@@ -50,10 +52,10 @@ normative:
   BCP205:
   RFC8610: CDDL
   RFC9334: RATS
-  I-D.birkholz-rats-epoch-markers: epoch-markers
+  RFC9683: RIV
+  I-D.ietf-rats-epoch-markers: epoch-markers
 
 informative:
-  I-D.ietf-rats-tpm-based-network-device-attest: RIV
   I-D.birkholz-rats-tuda: TUDA
   DAA:
     title: Direct Anonymous Attestation
@@ -124,10 +126,11 @@ informative:
     - ins: B. Lampson
       name: Butler Lampson
     date: 2006
+...
 
 --- abstract
 
-This document describes interaction models for remote attestation procedures (RATS).
+This document describes interaction models for remote attestation procedures (RATS) {{-RATS}}.
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.
 
@@ -147,7 +150,7 @@ This document aims to:
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for attestation Evidence from an Attester to a Verifier.
-While the conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to the conveyance of Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers or stand-alone event logs.
+While the conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
 
 # Terminology
 
@@ -163,15 +166,18 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system.
 If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in {{Section 3.1 of -RATS}} and the definition of Attestation in general as described in {{-RIV}}.
 
 # Scope and Intent
 
-This document outlines common interaction models between RATS roles.
-This document illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers.
-This document does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages.
-This document does not cover every detail about Evidence conveyance.
+This document:
+
+* outlines common interaction models between RATS roles;
+* illustrates interaction models focusing on conveying Evidence about boot-time integrity from Attesters to Verifiers;
+* does not exclude the application of those interaction models to runtime integrity or the conveyance of other RATS Conceptual Messages;
+* does not cover every detail about Evidence conveyance.
+
 While details regarding Evidence of run-time integrity are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.
 While the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.
 
@@ -235,16 +241,15 @@ Evidence Protection:
 This section describes the essential information elements for the interaction models described in {{interaction-models}}.
 These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.
 
-Attestation Key IDs (`attKeyIDs`):
+Attesting Environment IDs ('attEnvIDs'):
 
 : *optional*
 
-: One or more identifiers associated with corresponding attestation keys (Authentication Secrets) used to protect Evidence Claims produced by Attesting Environments of an Attester.
+: A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
 
-: While a Verifier may (and typically does) not know an Attesting Environment's Attestation Key, each distinct Attesting Environment has access to a protected capability that includes an Attestation Key.
-Therefore, an Attestation Key ID can also identify an Attesting Environment.
-If no attestation key identifiers are provided, a local default applies based on the Attester.
-For example, all Attesting Environments will report.
+: While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
+If no Attesting Environment IDs are provided, a local default applies based on the Attester.
+For example, all Attesting Environments will provide Evidence.
 
 Handle (`handle`):
 
@@ -270,19 +275,23 @@ Event Logs (`eventLogs`):
 
 : Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.
 
-Reference Values (`refValues`)
+Verifier Inputs ('verInputs')
 
 : *mandatory*
 
-: Reference Values as defined in {{Section 8.3 of -RATS}}. This specific type of Claims is used to appraise Claims incorporated in Evidence. For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in {{-RATS}}). Reference Values typically represent (trusted) Claim sets about an Attester's intended platform operational state.
+: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values that can be expressed via Reference Integrity Measurements (RIM) or Endorsements that can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Claim Selection (`claimSelection`):
 
 : *optional*
 
-: A (sub-)set of the Claims that can be created by an Attester.
+: A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.
 
-: Claim Selections are optional filters that specify the exact set of Claims to be included in Evidence. For example, a Verifier could send a Claim Selection, along with other elements, to an Attester. An Attester MAY decide whether to provide all requested Claims from a Claim Selection to the Verifier. If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known to the Verifier.
+: Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
+For example, a Verifier could send a Claim Selection, among other elements, to an Attester.
+An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
+If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier.
+In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.
 
 Collected Claims (`collectedClaims`):
 
@@ -296,7 +305,10 @@ Evidence (`evidence`):
 
 : *mandatory*
 
-: A set of Claims that consists of: (a) a list of Attestation Key IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle. Attestation Evidence MUST cryptographically bind all of these information elements. Evidence MUST be protected via an Authentication Secret. The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
+: A set of Claims that can include: (a) a list of Attestation Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
+Attestation Evidence MUST cryptographically bind all of these information elements.
+Evidence MUST be protected via an Authentication Secret.
+The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
 
 Attestation Result (`attestationResult`):
 
@@ -332,19 +344,19 @@ The way the Handle is processed is the most prominent difference between the thr
   generateClaims(attestingEnvironment)                            |
      | => claims, ?eventLogs                                      |
      |                                                            |
-     |<-- requestAttestation(handle, ?attKeyIDs, ?claimSelection) |
+     |<----- requestEvidence(handle, ?attEnvIDs, ?claimSelection) |
      |                                                            |
   collectClaims(claims, ?claimSelection)                          |
      | => collectedClaims                                         |
      |                                                            |
-  generateEvidence(handle, ?attKeyIDs, collectedClaims)           |
+  generateEvidence(handle, ?attEnvIDs, collectedClaims)           |
      | => evidence                                                |
      |                                                            |
-     | evidence, ?eventLogs ------------------------------------->|
+     | {evidence, ?eventLogs}------------------------------------>|
      |                                                            |
 ==========================[Evidence Appraisal]==========================
      |                                                            |
-     |                appraiseEvidence(evidence, ?eventLogs, refValues)
+     |                appraiseEvidence(evidence, ?eventLogs, verInputs)
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
@@ -399,14 +411,14 @@ In the second step, the Attester presents the Attestation Result (and possibly a
   generateClaims(attestingEnvironment)      |                 |
      | => claims, ?eventLogs                |                 |
      |                                      |                 |
-     |<--------------------- requestAttestation(handle,       |
-     |                           ?attKeyIDs, ?claimSelection) |
+     |<------------------------ requestEvidence(handle,       |
+     |                           ?attEnvIDs, ?claimSelection) |
      |                                      |                 |
   collectClaims(claims, ?claimSelection)    |                 |
      | => collectedClaims                   |                 |
      |                                      |                 |
   generateEvidence(handle,                  |                 |
-     ?attKeyIDs, collectedClaims)           |                 |
+     ?attEnvIDs, collectedClaims)           |                 |
      | => evidence                          |                 |
      |                                      |                 |
      | {evidence, ?eventLogs} ------------->|                 |
@@ -414,10 +426,10 @@ In the second step, the Attester presents the Attestation Result (and possibly a
 ==========================[Evidence Appraisal]==========================
      |                                      |                 |
      |                         appraiseEvidence(evidence,     |
-     |                             ?eventLogs, refValues)     |
+     |                             ?eventLogs, verInputs)     |
      |                 attestationResult <= |                 |
      |                                      |                 |
-     |<------------------ attestationResult |                 |
+     |<---------------- {attestationResult} |                 |
      |                                      |                 |
      | {evidence, attestationResult} ------------------------>|
      |                                      |                 |
@@ -445,8 +457,8 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |                       |
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
-     |<--------------------- requestAttestation(handle,          |
-     |                           ?attKeyIDs, ?claimSelection)    |
+     |<------------------------ requestEvidence(handle,          |
+     |                           ?attEnvIDs, ?claimSelection)    |
      |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, ?eventLogs}           |                       |
@@ -456,7 +468,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      | => collectedClaims                |                       |
      |                                   |                       |
   generateEvidence(handle,               |                       |
-     ?attKeyIDs, collectedClaims)        |                       |
+     ?attEnvIDs, collectedClaims)        |                       |
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, ?eventLogs} ---------->|                       |
@@ -467,7 +479,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                                   |  ?eventLogs} -------->|
      |                                   |                       |
      |                                   |   appraiseEvidence(evidence,
-     |                                   |        ?eventLogs, refValues)
+     |                                   |        ?eventLogs, verInputs)
      |                                   |  attestationResult <= |
      |                                   |                       |
      |                                   |<---------- {evidence, |
@@ -487,57 +499,60 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 | Attester |                       | Handle Distributor |   | Verifier |
 '----+-----'                       '---------+----------'   '-----+----'
      |                                       |                    |
-==========================[Handle Generation]===========================
-     |                                    generateHandle()        |
-     |                                       | => handle          |
-     |                                       |                    |
-     |<---------------------------- {handle} | {handle} --------->|
-     |                                       |                    |
-     |                                       x                    |
-     |                                                            |
-=================[Evidence Generation and Conveyance]===================
-     |                                                            |
-  generateClaims(attestingEnvironment)                            |
-     | => claims, eventLogs                                       |
-     |                                                            |
-  collectClaims(claims, claimSelection)                           |
-     | => collectedClaims                                         |
-     |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
-     | => evidence                                                |
-     |                                                            |
-     | {evidence, eventLogs} ------------------------------------>|
-     |                                                            |
-==========================[Evidence Appraisal]==========================
-     |                                                            |
-     |                                      appraiseEvidence(evidence,
-     |                                                      eventLogs,
-     |                                                      refValues)
-     |                                       attestationResult <= |
-     ~                                                            ~
-     |                                                            |
  .--------[loop]------------------------------------------------------.
 |    |                                                            |    |
-| =============[Delta Evidence Generation and Conveyance]============= |
+| ========================[Handle Generation]========================= |
+|    |                                    generateHandle()        |    |
+|    |                                       | => handle          |    |
+|    |                                       |                    |    |
+|    |<---------------------------- {handle} | {handle} --------->|    |
+|    |                                       |                    |    |
+|    |                                       x                    |    |
+|    |                                                            |    |
+| ===============[Evidence Generation and Conveyance]================= |
 |    |                                                            |    |
 | generateClaims(attestingEnvironment)                            |    |
-|    | => claimsDelta, eventLogsDelta                             |    |
+|    | => claims, eventLogs                                       |    |
 |    |                                                            |    |
-| collectClaims(claimsDelta, claimSelection)                      |    |
-|    | => collectedClaimsDelta                                    |    |
+| collectClaims(claims, ?claimSelection)                          |    |
+|    | => collectedClaims                                         |    |
 |    |                                                            |    |
-| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attEnvIDs, collectedClaims)            |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-|    | {evidence, eventLogsDelta} ------------------------------->|    |
+|    | {evidence, eventLogs} ------------------------------------>|    |
 |    |                                                            |    |
-| =====================[Delta Evidence Appraisal]===================== |
+| ========================[Evidence Appraisal]======================== |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
-|    |                                                 eventLogsDelta, |
-|    |                                                      refValues) |
+|    |                                                      eventLogs, |
+|    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
+|    ~                                                            ~    |
 |    |                                                            |    |
+| .-------[loop]-----------------------------------------------------. |
+||   |                                                            |   ||
+|| ============[Delta Evidence Generation and Conveyance]============ ||
+||   |                                                            |   ||
+|| generateClaims(attestingEnvironment)                           |   ||
+||   | => claimsDelta, eventLogsDelta                             |   ||
+||   |                                                            |   ||
+|| collectClaims(claimsDelta, ?claimSelection)                    |   ||
+||   | => collectedClaimsDelta                                    |   ||
+||   |                                                            |   ||
+|| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)      |   ||
+||   | => evidence                                                |   ||
+||   |                                                            |   ||
+||   | {evidence, eventLogsDelta} ------------------------------->|   ||
+||   |                                                            |   ||
+|| ====================[Delta Evidence Appraisal]==================== ||
+||   |                                                            |   ||
+||   |                                     appraiseEvidence(evidence, ||
+||   |                                                eventLogsDelta, ||
+||   |                                                     verInputs) ||
+||   |                                       attestationResult <= |   ||
+||   |                                                            |   ||
+| '------------------------------------------------------------------' |
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
@@ -547,15 +562,40 @@ Initiation by the Attester can result in unsolicited pushes of Evidence to the V
 Initiation by the Verifier always results in solicited pushes to the Verifier.
 
 The Uni-Directional model uses the same information elements as the Challenge/Response model.
-In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation or the emission of a beacon).
+In the sequence diagram above, the Attester initiates the conveyance of Evidence (comparable with a RESTful POST operation).
 While a request of Evidence from the Verifier would result in a sequence diagram more similar to the Challenge/Response model (comparable with a RESTful GET operation).
-The specific manner how Handles are created and used always remains as the distinguishing quality of this model.
+The specific manner how Handles are generated is not in scope of this document.
+One example of a specific handle representation is {{-epoch-markers}}.
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
-The Handles are created by an external 3rd entity -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
+The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
-Correspondingly, conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.
+This model provides proof that Evidence generation happened after the Handle generation phase.
+The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.
+
+### Handle Lifecycle and Propagation Delays
+
+The lifecycle of a handle is a critical aspect of ensuring the freshness and validity of attestation Evidence.
+When a new handle is generated by the Handle Distributor, it effectively supersedes the previous handle.
+However, due to network latencies and propagation delays, there may be a period during which both the old and new handles are in circulation.
+This "grey zone" can potentially lead to situations where Evidence may be associated with an outdated handle yet still appear to be valid.
+
+To manage this complexity, it is essential to define a clear policy for handle validity and expiration:
+
+* *Handle Expiry*:
+  Each handle should have a well-defined expiration time, after which it is considered invalid.
+  This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.
+
+* *Synchronization Checks*:
+  Implement periodic synchronization checks between the Handle Distributor and both Attesters and Verifiers to ensure that handles are updated consistently across all participants.
+
+* *Grace Periods*:
+  Define grace periods during which a newly issued handle starts being accepted, and the old handle stops being valid.
+  This period should be long enough to account for the maximum expected propagation delay across the network.
+
+Implementing these measures will help mitigate the risks associated with the handle lifecycle, particularly in environments where propagation delays are significant.
+This careful management ensures that the integrity and trustworthiness of the attestation process are maintained.
 
 While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance.
 These updates reflecting the differences are called "delta" in the sequence diagram above.
@@ -565,94 +605,111 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 ## Streaming Remote Attestation {#streaming}
 
-Streaming Remote Attestation serves as the foundational concept for both the observer pattern ({{ISIS}}) and the publish-subscribe pattern ({{DesignPatterns}}).
+Streaming Remote Attestation serves as the foundational concept for both the observer pattern {{ISIS}} and the publish-subscribe pattern {{DesignPatterns}}.
 It entails establishing subscription states to enable continuous remote attestation.
-The observer pattern directly connects observers to subjects without a broker, while the publish-subscribe pattern involves a central broker for message distribution.
-In the following Subsections, streaming remote attestation without a broker (observer pattern) as well as with a broker (publish-subscribe pattern) are illustrated.
+In the observer pattern, observers are directly connected to target resources without a Broker, while the publish-subscribe pattern involves a central Broker for message distribution.
 
-### Streaming Remote Attestation without a Broker
+### Streaming Remote Attestation without a Broker {#streaming-without-broker}
 
 ~~~~ aasvg
 .----------.                                                .----------.
 | Attester |                                                | Verifier |
 '----+-----'                                                '-----+----'
      |                                                            |
-==========================[Handle Generation]===========================
-     |                                                            |
-     |                                                generateHandle()
-     |                                                   handle<= |
-     |                                                            |
-     |<------------ subscribe(handle, attKeyIDs, claimSelection)  |
-     | {handle} ------------------------------------------------->|
-     |                                                            |
-=================[Evidence Generation and Conveyance]===================
-     |                                                            |
-  generateClaims(attestingEnvironment)                            |
-     | => claims, eventLogs                                       |
-     |                                                            |
-  collectClaims(claims, claimSelection)                           |
-     | => collectedClaims                                         |
-     |                                                            |
-  generateEvidence(handle, attKeyIDs, collectedClaims)            |
-     | => evidence                                                |
-     |                                                            |
-==========================[Evidence Appraisal]==========================
-     |                                                            |
-     | {handle, evidence, eventLogs} ---------------------------->|
-     |                                                            |
-     |                                      appraiseEvidence(evidence,
-     |                                                      eventLogs,
-     |                                                      refValues)
-     |                                       attestationResult <= |
-     ~                                                            ~
-     |                                                            |
  .--------[loop]------------------------------------------------------.
 |    |                                                            |    |
-| =============[Delta Evidence Generation and Conveyance]============= |
+| ========================[Handle Generation]========================= |
+|    |                                                            |    |
+|    |                                                generateHandle() |
+|    |                                                   handle<= |    |
+|    |                                                            |    |
+|    |<------------ subscribe(handle, attEnvIDs, ?claimSelection) |    |
+|    | {handle} ------------------------------------------------->|    |
+|    |                                                            |    |
+| ===============[Evidence Generation and Conveyance]================= |
 |    |                                                            |    |
 | generateClaims(attestingEnvironment)                            |    |
-|    | => claimsDelta, eventLogsDelta                             |    |
+|    | => claims, eventLogs                                       |    |
 |    |                                                            |    |
-| collectClaims(claimsDelta, claimSelection)                      |    |
-|    | => collectedClaimsDelta                                    |    |
+| collectClaims(claims, ?claimSelection)                          |    |
+|    | => collectedClaims                                         |    |
 |    |                                                            |    |
-| generateEvidence(handle, attKeyIDs, collectedClaimsDelta)       |    |
+| generateEvidence(handle, attEnvIDs, collectedClaims)            |    |
 |    | => evidence                                                |    |
 |    |                                                            |    |
-| =====================[Delta Evidence Appraisal]===================== |
+|    | {handle, evidence, eventLogs} ---------------------------->|    |
 |    |                                                            |    |
-|    | {evidence, eventLogsDelta} ------------------------------->|    |
+| ========================[Evidence Appraisal]======================== |
 |    |                                                            |    |
 |    |                                      appraiseEvidence(evidence, |
-|    |                                                 eventLogsDelta, |
-|    |                                                      refValues) |
+|    |                                                      eventLogs, |
+|    |                                                      verInputs) |
 |    |                                       attestationResult <= |    |
+|    ~                                                            ~    |
 |    |                                                            |    |
+| .--------[loop]----------------------------------------------------. |
+||   |                                                            |   ||
+|| ============[Delta Evidence Generation and Conveyance]============ ||
+||   |                                                            |   ||
+|| generateClaims(attestingEnvironment)                           |   ||
+||   | => claimsDelta, eventLogsDelta                             |   ||
+||   |                                                            |   ||
+|| collectClaims(claimsDelta, ?claimSelection)                    |   ||
+||   | => collectedClaimsDelta                                    |   ||
+||   |                                                            |   ||
+|| generateEvidence(handle, attEnvIDs, collectedClaimsDelta)      |   ||
+||   | => evidence                                                |   ||
+||   |                                                            |   ||
+||   | {evidence, eventLogsDelta} ------------------------------->|   ||
+||   |                                                            |   ||
+|| ====================[Delta Evidence Appraisal]==================== ||
+||   |                                                            |   ||
+||   |                                     appraiseEvidence(evidence, ||
+||   |                                                eventLogsDelta, ||
+||   |                                                     verInputs) ||
+||   |                                       attestationResult <= |   ||
+||   |                                                            |   ||
+| '------------------------------------------------------------------' |
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
 
-The observer pattern is employed in scenarios where message delivery does not involve a central broker.
-Instead, an observer directly subscribes to observed resources via a dedicated mechanism.
-Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining subscription state.
+
+In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.
+This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
+It handles the complexities of managing these connections, including the maintenance of pertinent information about the observer's preferences and security requirements, ensuring that the transmission of attestation data remains both secure and relevant to the observer’s specific context.
+
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
 The subscribe operation is used to convey Handles required for Evidence generation.
 Effectively, this allows for a series of Evidence to be pushed to a Verifier, similar to the Uni-Directional model.
-While a Handle Distributor is not mandatory in this model, the model is also limited to bi-lateral subscription relationships, in which each Verifier has to create and provide Handles individually.
+In the observer pattern, the Handle Distributor role is optional.
+While the model is typically used for direct, bi-lateral subscription relationships where the Verifier generates and provides Handles directly, it is also possible to include the trusted third party that is a Handle Distributor.
+A Handle Distributor independently manages the generation and distribution of Handles to other RATS roles.
+As a result, scenarios involving more than bi-lateral interactions are enabled.
+However, in its basic form, the model assumes direct interaction between an Attester and a Verifier, where the Handle generation is a responsibility taken on by the Verifier roles.
+
 Handles provided by a specific subscribing Verifier MUST be used in Evidence generation for that specific Verifier.
-The streaming model without a broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
+The streaming model without a Broker uses the same information elements as the Challenge/Response and the Uni-Directional model.
 Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.
 
-### Streaming Remote Attestation with a Broker
+### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
+This model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.
+The Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.
 The publish-subscribe messaging pattern is widely used for communication in different areas.
-Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters do not (need to) be aware of corresponding Verifiers.
+Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
 
 With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server or Broker).
 Clients may *publish* data in the form of a *message* under a certain *topic*.
 *Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
-Depending on the particular  publish-subscribe model and implementation, clients can be either publishers or subscribers or both.
+Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers or both.
+
+The Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
+All roles must establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
+
+Ensuring the security of these trusted third parties is vital, as any compromise could undermine the entire remote attestation procedure.
+Therefore, the deployment of Brokers and Handle Distributors requires stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the remote attestation framework.
 
 In the following sections, the interaction models *Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe* are described.
 There are different phases that both models go through:
@@ -668,25 +725,27 @@ From a remote attestations procedure's point of view Evidence Generation, Convey
 #### Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe
 
 ~~~~ aasvg
-
-.----------.                  .---------------.             .----------.
-| Attester |                  | PubSub Server |             | Verifier |
-'----+-----'                  '-------+-------'             '-----+----'
-     |                                |                           |
+.----------.                     .---------------.          .----------.
+| Attester |                     | PubSub Server |          | Verifier |
+'----+-----'                     '-------+-------'          '-----+----'
+     |                                   |                        |
 ==========================[Handle Generation]===========================
-     |                                |                           |
-   sub(topic=AttReq) ---------------->|                           |
-     |                                |<------------ pub(topic=AttReq,
-     |                                |                        handle)
-     |<------------------- notify(topic=AttReq, handle)           |
-     |                                |                           |
-     ~                                ~                           ~
+     |                                   |                        |
+     |                                   |             generateHandle()
+     |                                   |              handle <= |
+   sub(topic=AttReq) ------------------->|                        |
+     |                                   |<--------- pub(topic=AttReq,
+     |                                   |                     handle)
+     |<---------------------- notify(topic=AttReq, handle)        |
+     |                                   |                        |
+     ~                                   ~                        ~
 ~~~~
 
 The *Challenge/Response Remote Attestation over Publish-Subscribe* interaction model uses the same information elements as the *Challenge/Response Remote Attestation* interaction model.
-Handles are provided by a Verifier on a per-request basis.
-In the sequence diagram above, an Attester subscribes to the "AttReq" (= Attestation Request) topic on the PubSub server.
-The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server forwards to the Attester by notifying it.
+Handles are generated by the Verifier on a per-request basis.
+In the sequence diagram above, the Verifier initiates an attestation by generating a new handle and publishing it to the "AttReq" (= Attestation Request) topic on the PubSub server.
+The PubSub server then forwards this handle to the Attester by notifying it.
+This mechanism ensures that each handle is uniquely associated with a specific attestation request, thereby enhancing security by preventing replay attacks.
 
 #### Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe
 
@@ -718,8 +777,7 @@ The Verifier publishes a Handle to the "AttReq" topic, which the PubSub server f
      ~                                   ~                        ~
 ~~~~
 
-The *Uni-Directional Remote Attestation over Publish-Subscribe* model uses the same information elements as the Uni-Directional Remote Attestation model.
-Accordingly, Handles are created by a 3rd party, the Handle Distributor.
+Handles are created by a trusted third party, the Handle Distributor (see {{security-and-privacy-considerations}}).
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
 When the Handle Distributor generates and publishes a Handle to the "Handle" topic on the PubSub server, the PubSub server notifies the subscribers, Attester and Verifier, and forwards ("notify") the Handle to them during Handle Generation.
 
@@ -741,10 +799,10 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 | generateClaims(attestingEnvironment)   |                        |    |
 |    | => claims, eventLogs              |                        |    |
 |    |                                   |                        |    |
-| collectClaims(claims, claimSelection)  |                        |    |
+| collectClaims(claims, ?claimSelection) |                        |    |
 |    | => collectedClaims                |                        |    |
 |    |                                   |                        |    |
-| generateEvidence(handle, attKeyIDs,    |                        |    |
+| generateEvidence(handle, attEnvIDs,    |                        |    |
 |    |             collectedClaims)      |                        |    |
 |    | => evidence                       |                        |    |
 |    |                                   |                        |    |
@@ -760,13 +818,8 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 |    |                                   |           appraiseEvidence( |
 |    |                                   |                   evidence, |
 |    |                                   |                  eventLogs, |
-|    |                                   |                  refValues) |
+|    |                                   |                  verInputs) |
 |    |                                   |   attestationResult <= |    |
-|    |                                   |                        |    |
-| ==================[Attestation Result Generation]=================== |
-|    |                                   |                        |    |
-|    |                                   |<--------- pub(topic=AttRes, |
-|    |                                   |          attestationResult) |
 |    |                                   |                        |    |
  '--------------------------------------------------------------------'
      |                                   |                        |
@@ -790,7 +843,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
 ====================[Attestation Result Generation]=====================
      |          |                        |                        |
-     |     sub(topic=AttRes)             |                        |
+     |     sub(topic=AttRes,            |                        |
      |         handle) ----------------->|                        |
      |          |                        |                        |
  .--------[loop]------------------------------------------------------.
@@ -798,7 +851,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
 |    |          |                        |<--------- pub(topic=AttRes, |
 |    |          |                        |          attestationResult) |
 |    |          |                        |                        |    |
-|    |          |<----------------- notify(topic=AttRes           |    |
+|    |          |<----------------- notify(topic=AttRes,          |    |
 |    |          |                        | attestationResult)     |    |
 |    |          |                        |                        |    |
  '--------------------------------------------------------------------'
@@ -809,29 +862,6 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
 Attestation Result Generation is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
-
-#### Publish/Subscribe Topics
-
-Many publish-subscribe models provide hierarchical organization of topics.
-This way, subscribers can subscribe to either all attestations (topic `AttRes`), or, for example, to topic `AttRes/DbServers/Germany` to receive only attestations from database servers in Germany.
-Further, it may be required to distinguish between uni-directional and challenge-response attestation evidence.
-<!--For this purpose a wildcard subscription may be useful, for example `AttRes/DbServers/Germany/\*\*/uni` (to receive only uni-directional attestation evidence) or `AttRes/DbServers/Germany/\*\*/cr` (to receive only challenge-response attestation Evidence).-->
-
-# Additional Application-Specific Requirements
-
-Depending on the use cases covered, there can be additional requirements. An exemplary subset is illustrated in this section.
-
-## Confidentiality
-
-Confidentiality of exchanged attestation information may be desirable. This requirement usually is present when communication takes place over insecure channels, such as the public Internet. In such cases, TLS may be used as a suitable communication protocol which provides confidentiality protection. In private networks, such as carrier management networks, it must be evaluated whether or not the transport medium is considered confidential.
-
-## Mutual Authentication
-
-In particular use cases, mutual authentication may be desirable in such a way that a Verifier also needs to prove its identity to the Attester, instead of only the Attester proving its identity to the Verifier.
-
-## Hardware-Enforcement/Support
-
-Depending on given usage scenarios, hardware support for secure storage of cryptographic keys, crypto accelerators, as well as protected or isolated execution environments can be mandatory requirements. Well-known technologies in support of these requirements are roots of trusts, such as Hardware Security Modules (HSM), Physically Unclonable Functions (PUFs), Shielded Secrets, or Trusted Executions Environments (TEEs).
 
 # Implementation Status
 
@@ -886,12 +916,112 @@ Michael Eckel (michael.eckel@sit.fraunhofer.de)
 {: #security-and-privacy-considerations}
 # Security and Privacy Considerations
 
-In a remote attestation procedure the Verifier or the Attester MAY want to cryptographically blind several attributes.
-For instance, information can be part of the signature after applying a one-way function (e. g., a hash function).
+This document outlines three interaction models for remote attestation procedures (RATS) {{-RATS}}.
+While the subsequent sections address additional security and privacy considerations, the security considerations from {{Section 12 of -RATS}} must also be adhered to.
+Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
-There is also a possibility to scramble the Nonce or Attester Identity with other information that is known to both the Verifier and Attester.
-A prominent example is the IP address of the Attester that usually is known by the Attester itself as well as the Verifier.
-This extra information can be used to scramble the Nonce in order to counter certain types of relay attacks.
+## Cryptographic Blinding and Scrambling
+
+In a remote attestation procedure, both the Verifier and the Attester may choose to cryptographically blind certain attributes to enhance privacy.
+For example, specific information can be included in the signature after being processed through a one-way function, such as a hash function.
+
+Additionally, there is an option to scramble the Nonce or Attester Identity using other information that is known to both parties.
+A common example is the IP address of the Attester, which is typically accessible to both the Attester and the Verifier.
+This additional information can be utilized to scramble the Nonce, thereby mitigating certain types of relay attacks.
+
+## Trust Assumptions on the Handle Distributor
+
+The handle distributor, as a third party in remote attestation scenarios, holds a critical position similar to that of a Trusted Third Party (TTP).
+Given its role in generating handles, it has the potential to influence the attestation process significantly.
+The integrity and reliability of the handles it produces are pivotal for ensuring that the attestation evidence remains trustworthy and that the attestation process is not susceptible to manipulation or interference.
+
+### Security Assumptions
+
+* *Integrity and Authenticity*:
+  It is assumed that the handle distributor operates with high levels of integrity and authenticity.
+  Handles generated by the distributor must be secure, unique, and verifiable.
+  This ensures that they cannot be forged or reused maliciously.
+
+* *Isolation and Protection*:
+  The handle distributor must be isolated and protected from unauthorized access and attacks.
+  This includes physical security measures for hardware that might house the handle distributor's operations, as well as cybersecurity measures to protect against online threats.
+
+* *Auditability*:
+  The operations of the handle distributor should be auditable.
+  This allows for the verification of its compliance with security policies and the integrity of its operations.
+  Regular audits help to ensure that the handle distributor is functioning as expected and has not been compromised.
+
+* *Transparency*:
+  While maintaining security and confidentiality, the processes by which handles are generated and distributed should be as transparent as possible to authorized parties.
+  This helps in building trust and verifying that handles are distributed in a fair and unbiased manner.
+
+### Mitigating Risks
+
+To mitigate risks associated with the handle distributor being a central point of potential failure or attack, several measures should be implemented:
+
+* *Redundancy*:
+  Deploying multiple, geographically dispersed handle distributors can ensure continuity of service even if one distributor is compromised or fails.
+
+* *Cryptographic Security*:
+  Using strong cryptographic techniques to protect the generation and transmission of handles ensures that they cannot be tampered with during distribution.
+
+* *Certification and Compliance*:
+  The handle distributor should comply with relevant security standards and undergo regular security certifications.
+  This ensures that they meet industry-wide security benchmarks and maintain high levels of trust.
+
+By defining and adhering to these security assumptions, the role of the handle distributor in remote attestation procedures can be securely managed, minimizing risks and enhancing the overall trust in the attestation process.
+
+## Security Considerations for Brokers in Remote Attestation
+
+The role of the Broker in the "Streaming Remote Attestation with a Broker model" introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating handles and topics.
+To mitigate these risks, it is essential to implement robust security measures:
+
+* *End-to-End Authentication:*
+  Establishing end-to-end authenticated channels between Attesters and Verifiers ensures that data integrity and authenticity are preserved across the communication process.
+  This measure prevents the Broker from altering the content of the messages, including Handles and other sensitive data.
+
+* *Strong Isolation of Topics:*
+  Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
+  This includes using secure naming conventions and access controls that restrict the Broker's ability to manipulate topic subscriptions.
+
+* *Trusted Association Verification:*
+  To further safeguard against confusion attacks where the Broker might misroute notifications, mechanisms should be in place to verify the trust association between senders and receivers continuously.
+  This can be facilitated by cryptographic assurances, such as digital signatures and trusted certificates that validate the sender's identity and the integrity of the message content.
+
+* *Audit and Monitoring:*
+  Regular audits and real-time monitoring of Broker activities can detect and respond to anomalous behavior that might indicate security breaches or manipulation attempts.
+  Logging all actions performed by the Broker provides an audit trail that can be critical for forensic analysis.
+
+* *Broker as a Trusted Third Party (TTP):*
+  Recognizing the Broker as a TTP necessitates stringent security certifications and compliance with security standards to ensure that they operate under strict governance and security protocols.
+  This includes regular security assessments and certifications that validate the Broker's security practices.
+
+By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
+It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.
+
+## Additional Application-Specific Security Considerations
+
+The security and privacy requirements for remote attestation can vary significantly based on the deployment environment, the nature of the attestation mechanisms used, and the specific threats each scenario faces.
+This section details additional security considerations that are pertinent to the interaction models discussed in this document.
+
+### Confidentiality
+
+The need for confidentiality in the transmission of attestation information is critical, particularly when exchanges occur over public or untrusted networks, such as the public Internet.
+For instance, in the *Streaming Remote Attestation with a Broker* model (cf.{{streaming-with-broker}}), where data might traverse multiple nodes, employing TLS can provide necessary confidentiality protections.
+Similarly, for scenarios involving sensitive environments like carrier management networks, evaluating the confidentiality of the transport medium is crucial to ensure that attestation data remains secure against interception or eavesdropping.
+
+### Mutual Authentication
+
+Mutual authentication is particularly relevant in models such as the *Challenge/Response Remote Attestation* (cf. {{challenge-response}}) where both the Attester and the Verifier engage in bidirectional exchanges of sensitive information.
+Ensuring that both parties can authenticate each other prevents impersonation attacks, enhancing the trustworthiness of the attestation results.
+
+### Hardware Enforcement/Support
+
+In environments where the integrity and security of attestation evidence are paramount, hardware-based security features play a critical role.
+Technologies like Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide robust protections against tampering and unauthorized access.
+These are especially important in high-security settings such as financial services or military applications, where attestation processes must rely on physically secure and tamper-resistant components to meet stringent regulatory and security standards.
+
+By addressing these application-specific security requirements within the context of defined interaction models, security strategies can be tailored to fit the unique challenges and operational contexts of different attestation scenarios.
 
 # Acknowledgments
 
