@@ -843,7 +843,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
 ====================[Attestation Result Generation]=====================
      |          |                        |                        |
-     |     sub(topic=AttRes,)            |                        |
+     |     sub(topic=AttRes,            |                        |
      |         handle) ----------------->|                        |
      |          |                        |                        |
  .--------[loop]------------------------------------------------------.
