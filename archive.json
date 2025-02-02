@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:01:17.483668+00:00",
+  "timestamp": "2025-02-02T01:05:32.135522+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -2354,24 +2354,26 @@
       "id": "PR_kwDOEYizNM59X9GW",
       "title": "Addressing Thomas' Review from list",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/56",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Addressing https://mailarchive.ietf.org/arch/msg/rats/3nJPexI-uG1wsIyGMsTBKoHGEL4",
       "createdAt": "2024-10-02T13:08:54Z",
-      "updatedAt": "2025-01-29T22:24:56Z",
+      "updatedAt": "2025-02-01T19:48:18Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "5a00c60b5206822695240fcfc26991e3dba4e5cc",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "review-thomas",
-      "headRefOid": "87df7b793446b3920d18dfac2f90a874d2612825",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "38804c8010304a413e20275c482cc24806a4ccf4",
+      "closedAt": "2025-02-01T19:48:18Z",
+      "mergedAt": "2025-02-01T19:48:18Z",
+      "mergedBy": "eckelmeckel",
+      "mergeCommit": {
+        "oid": "92e0621f8d6e2e45dfd9e5fe21040d26379c9680"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3118,6 +3120,259 @@
               "body": "> Handle would mean the exact same thing. It would be a Claim value used in the interaction model to demonstrate recent response and to prevent reply attack of RVs that might change the next session, so the requester of RV is able to tell that there has been a best effort to demonstrate freshness (an assertion in a message is reflecting reality) based on recentness (use of Handle).\r\n\r\nI don't expect freshness of RVs to be provided by handles - see CoRIM, which relies on synchronised clocks between RV provider and Verifier.",
               "createdAt": "2024-11-14T11:00:14Z",
               "updatedAt": "2024-11-14T11:00:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJGqW",
+          "commit": {
+            "abbreviatedOid": "6bcfe7e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T09:19:17Z",
+          "updatedAt": "2025-01-31T09:19:18Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "@thomas-fossati does the updated suggestion work for you?",
+              "createdAt": "2025-01-31T09:19:18Z",
+              "updatedAt": "2025-01-31T09:19:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJSEk",
+          "commit": {
+            "abbreviatedOid": "e575656"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T09:41:16Z",
+          "updatedAt": "2025-01-31T09:41:16Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@thomas-fossati could you double check this please and maybe add a change suggestion?\r\n",
+              "createdAt": "2025-01-31T09:41:16Z",
+              "updatedAt": "2025-01-31T09:41:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJddX",
+          "commit": {
+            "abbreviatedOid": "e575656"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:01:04Z",
+          "updatedAt": "2025-01-31T10:01:05Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I don't think the current phrasing is 100% correct.\r\nThis model provides proof that evidence generation _happened after_ the handle generation phase.\r\n",
+              "createdAt": "2025-01-31T10:01:04Z",
+              "updatedAt": "2025-01-31T10:01:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJeIn",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:02:18Z",
+          "updatedAt": "2025-01-31T10:02:19Z",
+          "comments": [
+            {
+              "originalPosition": 471,
+              "body": "```suggestion\r\nIn the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.\r\n```",
+              "createdAt": "2025-01-31T10:02:18Z",
+              "updatedAt": "2025-01-31T10:02:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJfz2",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:05:22Z",
+          "updatedAt": "2025-01-31T10:05:23Z",
+          "comments": [
+            {
+              "originalPosition": 325,
+              "body": "```suggestion\r\nThis model provides proof that Evidence generation happened after the Handle generation phase.\r\nThe Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.\r\n```",
+              "createdAt": "2025-01-31T10:05:23Z",
+              "updatedAt": "2025-01-31T10:07:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJhaZ",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:08:25Z",
+          "updatedAt": "2025-01-31T10:08:26Z",
+          "comments": [
+            {
+              "originalPosition": 325,
+              "body": "@henkbirkholz I have added another small bit to account for \"the other side.\"",
+              "createdAt": "2025-01-31T10:08:26Z",
+              "updatedAt": "2025-01-31T10:08:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJjtp",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:13:04Z",
+          "updatedAt": "2025-01-31T10:13:04Z",
+          "comments": [
+            {
+              "originalPosition": 483,
+              "body": "```suggestion\r\nIn the observer pattern, the Handle Distributor role is optional.\r\nWhile the model is typically used for direct, bi-lateral subscription relationships where the Verifier generates and provides Handles directly, it is also possible to include the trusted third party that is a Handle Distributor.\r\nA Handle Distributor independently manages the generation and distribution of Handles to other RATS roles.\r\nAs a result, scenarios involving more than bi-lateral interactions are enabled.\r\nHowever, in its basic form, the model assumes direct interaction between an Attester and a Verifier, where the Handle generation is a responsibility taken on by the Verifier roles.\r\n\r\n```",
+              "createdAt": "2025-01-31T10:13:04Z",
+              "updatedAt": "2025-01-31T10:13:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJoxM",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:23:26Z",
+          "updatedAt": "2025-01-31T10:23:26Z",
+          "comments": [
+            {
+              "originalPosition": 493,
+              "body": "```suggestion\r\nThis model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.\r\nThe Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.\r\n```",
+              "createdAt": "2025-01-31T10:23:26Z",
+              "updatedAt": "2025-01-31T10:23:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJs_6",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:31:54Z",
+          "updatedAt": "2025-01-31T10:31:55Z",
+          "comments": [
+            {
+              "originalPosition": 512,
+              "body": "```suggestion\r\nDepending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers or both.\r\n\r\nThe Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).\r\nAll roles must establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.\r\n\r\nEnsuring the security of these trusted third parties is vital, as any compromise could undermine the entire remote attestation procedure.\r\nTherefore, the deployment of Brokers and Handle Distributors requires stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the remote attestation framework.\r\n```",
+              "createdAt": "2025-01-31T10:31:54Z",
+              "updatedAt": "2025-01-31T10:31:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aJvxy",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T10:37:39Z",
+          "updatedAt": "2025-01-31T10:37:39Z",
+          "comments": [
+            {
+              "originalPosition": 565,
+              "body": "```suggestion\r\nHandles are created by a trusted third party, the Handle Distributor (see {{security-and-privacy-considerations}}).\r\n```",
+              "createdAt": "2025-01-31T10:37:39Z",
+              "updatedAt": "2025-01-31T10:37:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aNwcK",
+          "commit": {
+            "abbreviatedOid": "652bc73"
+          },
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good, thanks.",
+          "createdAt": "2025-01-31T16:57:02Z",
+          "updatedAt": "2025-01-31T16:57:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aRrs0",
+          "commit": {
+            "abbreviatedOid": "b1416cf"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-01T12:03:49Z",
+          "updatedAt": "2025-02-01T12:03:50Z",
+          "comments": [
+            {
+              "originalPosition": 604,
+              "body": "```suggestion\r\n     |     sub(topic=AttRes,            |                        |\r\n```",
+              "createdAt": "2025-02-01T12:03:50Z",
+              "updatedAt": "2025-02-01T12:03:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6aRsQh",
+          "commit": {
+            "abbreviatedOid": "e575656"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-01T12:20:59Z",
+          "updatedAt": "2025-02-01T12:20:59Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "yes",
+              "createdAt": "2025-02-01T12:20:59Z",
+              "updatedAt": "2025-02-01T12:20:59Z"
             }
           ]
         }
