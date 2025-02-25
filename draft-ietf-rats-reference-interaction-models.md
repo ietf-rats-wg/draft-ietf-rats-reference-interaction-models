@@ -10,6 +10,7 @@ ipr: trust200902
 area: Security
 kw: Internet-Draft
 cat: info
+submissionType: IETF
 pi:
   toc: yes
   sortrefs: yes
@@ -50,7 +51,6 @@ normative:
   RFC7049: CBOR
   RFC7252: COAP
   BCP205:
-  RFC8610: CDDL
   RFC9334: RATS
   RFC9683: RIV
   I-D.ietf-rats-epoch-markers: epoch-markers
@@ -82,14 +82,6 @@ informative:
       The Faulkner Journal: 25.2
       DOI: 10.1353/fau.2010.0002
     date: 2010
-  TNC:
-    title: TCG Trusted Network Communications TNC Architecture for Interoperability
-    author:
-    - ins: TCG
-      name: Trusted Computing Group
-    seriesinfo:
-      Specification: Version 2.0 Revision 13
-    date: 2017
   MQTT:
     title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
     author:
@@ -128,6 +120,7 @@ informative:
     - ins: B. Lampson
       name: Butler Lampson
     date: 2006
+  I-D.ietf-rats-endorsements: rats-endorsements
 ...
 
 --- abstract
@@ -173,8 +166,9 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system (see {{Section 6 of -RATS}} for more details.
-If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in {{Section 3.1 of -RATS}} and the definition of Attestation in general as described in {{-RIV}}.
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system (see {{Section 6 of -RATS}} for more details).
+If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity.
+Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).
 
 # Scope and Intent
 
@@ -702,6 +696,7 @@ Methods to detect excessive time drift that would render Handles stale and manda
 This model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.
 The Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.
 The publish-subscribe messaging pattern is widely used for communication in different areas.
+An example for a publish-subscribe model with a Broker is the Message Queuing Telemetry Transport {{MQTT}}.
 Unlike the *Streaming Remote Attestation without a Broker* interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.
 
