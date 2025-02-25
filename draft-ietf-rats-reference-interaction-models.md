@@ -923,14 +923,10 @@ This document outlines three interaction models for remote attestation procedure
 While the subsequent sections address additional security and privacy considerations, the security considerations from {{Section 12 of -RATS}} must also be adhered to.
 Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
-## Cryptographic Blinding and Scrambling
+## Cryptographic Blinding
 
 In a remote attestation procedure, both the Verifier and the Attester may choose to cryptographically blind certain attributes to enhance privacy.
 For example, specific information can be included in the signature after being processed through a one-way function, such as a hash function.
-
-Additionally, there is an option to scramble the Nonce or Attester Identity using other information that is known to both parties.
-A common example is the IP address of the Attester, which is typically accessible to both the Attester and the Verifier.
-This additional information can be utilized to scramble the Nonce, thereby mitigating certain types of relay attacks.
 
 ## Trust Assumptions on the Handle Distributor
 
