@@ -57,6 +57,7 @@ normative:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
+  I-D.tschofenig-rats-psa-token
   DAA:
     title: Direct Anonymous Attestation
     author:
@@ -155,7 +156,7 @@ This document aims to:
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving conveyance methods for RATS Conceptual Messages; specifically attestation Evidence conveyed from an Attester to a Verifier.
-While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document can be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
+While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
 
 # Terminology
 
