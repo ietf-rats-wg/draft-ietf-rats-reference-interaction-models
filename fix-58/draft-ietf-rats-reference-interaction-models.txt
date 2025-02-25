@@ -95,7 +95,7 @@ Table of Contents
      8.7.  Implementation Dependencies
      8.8.  Contact
    9.  Security and Privacy Considerations
-     9.1.  Cryptographic Blinding and Scrambling
+     9.1.  Cryptographic Blinding
      9.2.  Trust Assumptions on the Handle Distributor
        9.2.1.  Security Assumptions
        9.2.2.  Mitigating Risks
@@ -1192,20 +1192,13 @@ Table of Contents
    security considerations outlined in Section 5 of [RFC9683] should be
    taken into account.
 
-9.1.  Cryptographic Blinding and Scrambling
+9.1.  Cryptographic Blinding
 
    In a remote attestation procedure, both the Verifier and the Attester
    may choose to cryptographically blind certain attributes to enhance
    privacy.  For example, specific information can be included in the
    signature after being processed through a one-way function, such as a
    hash function.
-
-   Additionally, there is an option to scramble the Nonce or Attester
-   Identity using other information that is known to both parties.  A
-   common example is the IP address of the Attester, which is typically
-   accessible to both the Attester and the Verifier.  This additional
-   information can be utilized to scramble the Nonce, thereby mitigating
-   certain types of relay attacks.
 
 9.2.  Trust Assumptions on the Handle Distributor
 

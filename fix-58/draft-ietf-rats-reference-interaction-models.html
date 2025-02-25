@@ -1247,7 +1247,7 @@ Analogously, a general overview about the information elements typically used by
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-and-privacy-consid" class="internal xref">Security and Privacy Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-cryptographic-blinding-and-" class="internal xref">Cryptographic Blinding and Scrambling</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-cryptographic-blinding" class="internal xref">Cryptographic Blinding</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-trust-assumptions-on-the-ha" class="internal xref">Trust Assumptions on the Handle Distributor</a></p>
@@ -2898,16 +2898,13 @@ The corresponding project resources (code and data) for Linux-based operating sy
 <p id="section-9-1">This document outlines three interaction models for remote attestation procedures (RATS) <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 While the subsequent sections address additional security and privacy considerations, the security considerations from <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12" class="relref">Section 12</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> must also be adhered to.
 Additionally, for TPM-based remote attestation, the security considerations outlined in <span><a href="https://rfc-editor.org/rfc/rfc9683#section-5" class="relref">Section 5</a> of [<a href="#RFC9683" class="cite xref">RFC9683</a>]</span> should be taken into account.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<div id="cryptographic-blinding-and-scrambling">
+<div id="cryptographic-blinding">
 <section id="section-9.1">
-        <h3 id="name-cryptographic-blinding-and-">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-cryptographic-blinding-and-" class="section-name selfRef">Cryptographic Blinding and Scrambling</a>
+        <h3 id="name-cryptographic-blinding">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-cryptographic-blinding" class="section-name selfRef">Cryptographic Blinding</a>
         </h3>
 <p id="section-9.1-1">In a remote attestation procedure, both the Verifier and the Attester may choose to cryptographically blind certain attributes to enhance privacy.
 For example, specific information can be included in the signature after being processed through a one-way function, such as a hash function.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">Additionally, there is an option to scramble the Nonce or Attester Identity using other information that is known to both parties.
-A common example is the IP address of the Attester, which is typically accessible to both the Attester and the Verifier.
-This additional information can be utilized to scramble the Nonce, thereby mitigating certain types of relay attacks.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="trust-assumptions-on-the-handle-distributor">
