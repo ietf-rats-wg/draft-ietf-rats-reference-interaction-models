@@ -57,7 +57,7 @@ normative:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
-  I-D.tschofenig-rats-psa-tokeni: psa-token
+  I-D.tschofenig-rats-psa-token: psa-token
   DAA:
     title: Direct Anonymous Attestation
     author:
