@@ -254,7 +254,7 @@ Table of Contents
       the Verifier.  This can be done through implicit authentication
       using a digital signature over the Attestation Evidence, which
       does not require additional protocol steps, or by using a secure
-      channel including authentication.
+      channel (see [I-D.ietf-rats-uccs]) including authentication.
 
 5.  Normative Prerequisites
 
@@ -1449,6 +1449,13 @@ Table of Contents
               ietf-rats-endorsements-05, 8 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               endorsements-05>.
+
+   [I-D.ietf-rats-uccs]
+              Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
+              Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
+              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
+              3 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-uccs-12>.
 
    [I-D.tschofenig-rats-psa-token]
               Tschofenig, H., Frost, S., Brossard, M., Shaw, A. L., and
