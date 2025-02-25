@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-23T01:08:51.509820+00:00",
+  "timestamp": "2025-02-25T01:05:39.745943+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -928,9 +928,52 @@
       "labels": [],
       "body": "**General questions**: \r\n1. What is the real motivation of this draft?\r\n2. The flows represent only boot time measurements. What about runtime measurements (e.g., RTMR in TDX or REM in CCA)? \r\n3. There is no discussion on how deep the nonce goes in the Layered Attester. What is the assumption here?\r\n4. What is the exact difference between recentness and freshness?\r\n5. What is the exact difference between the Endorsements and Reference Values? \r\n6. Which certain types of relay attacks can scrambling avoid? \r\n\r\n**Specific questions/comments**:\r\n\r\n> Sec. 1 \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.\"\r\n> Sec. 1 \"the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.\"\r\n> Sec. 7 \"the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.\"\r\n\r\nThis is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\r\n\r\n> Sec. 2.1: \"This conveyance can also be \"Local\", if the Verifier role is part of the same entity as the Attester role\"\r\n\r\nSo your definition of \"Local Attestation\" is independent of where the Relying Party is?\r\n\r\n> Sec. 3: \"prevent inconsistencies ...\"\r\n> Sec 3: \"avoid text clones and to avoid the danger of subtle discrepancies\" \r\n\r\nWith some interesting stuff out of scope, is it really the only motivation to write this draft? The draft is at such a high level of abstraction, I wonder if there are really any subtle discrepancies/inconsistencies this draft can help avoid. Can you give some examples of such subtle discrepancies? \r\n\r\n> Sec. 4: \"integral\" \r\n\r\nWhat is it? Can you point me to a reference which uses \"integral\" in the sense of integrity?\r\n\r\n> Sec. 4: \"The signature may be symmetric, such as an HMAC\" \r\n\r\nMAC is not a signature! \r\n\r\n> Sec. 4: \"This (authentication) ... may be achieved by using a confidential channel by means of encryption.\" \r\n\r\nEncryption by itself does not provide authentication. \r\n\r\n> Sec. 5: \"Evidence Protection\" \r\n\r\nThis seems redundant. With \"Attestation Evidence Authenticity\", why is it required? \r\n\r\n> Sec. 6: \"(a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include:\r\n      Nonces that are used to protect from replay attacks\"\r\n\r\nWhat is the exact difference between recentness and freshness? Can you give clear examples of cases when one of them holds while the other one does not? I think nonces provide all of them. Why do you specifically mention replay protection _only_? \r\n\r\n> Sec. 6: \"This specific type of Claims is used to appraise Claims incorporated in Evidence.\"\r\n\r\nSomething seems to be missing here \r\n\r\n> Sec. 6: \"For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in [RFC9334]).\" \r\n\r\nThis seems to say that Endorsements are also Reference Values: is this what you mean here? What is the exact difference between the Endorsements and Reference Values? \r\n\r\n> Sec. 6: \"Claim Selection\" \r\n\r\nseems a misnomer as well as wrongly defined term. Isn't is something desired/requested by the Verifier?\r\n\r\n> Sec. 10: \"This extra information can be used to scramble the Nonce in order to\r\n   counter certain types of relay attacks.\" \r\n\r\nWhich certain types of relay attacks and how? Give more details. \r\n\r\n\r\n\r\n**Editorial**\r\n\r\n- Sec 1: Second paragraph is basically useless. There is no need to have a summary of a single paragraph just presented. \r\n- Introduction could already introduce the three types of Interaction Models. They are currently only introduced in Sec. 7 which is too late. ",
       "createdAt": "2024-10-07T16:01:38Z",
-      "updatedAt": "2024-10-07T16:30:11Z",
+      "updatedAt": "2025-02-24T18:02:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\n\n    Sec. 1 \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.\"\n    Sec. 1 \"the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.\"\n    Sec. 7 \"the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.\"\n\nThis is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\n```\n\nThis has been reduced to an initial description in Section 1 and only very lightweight reference later on.",
+          "createdAt": "2025-02-24T16:16:47Z",
+          "updatedAt": "2025-02-24T16:16:47Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 2.1: \"This conveyance can also be \"Local\", if the Verifier role is part of the same entity as the Attester role\"\n\nSo your definition of \"Local Attestation\" is independent of where the Relying Party is?\n```\n\nNo. This is not about \"local attestation\" this is about the _relativity_ of what \"remote\" means. We added a reference to RATS Section 6 to make it clearer that very \"close\" things still might need conveyance protocols.",
+          "createdAt": "2025-02-24T16:23:28Z",
+          "updatedAt": "2025-02-24T16:23:28Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 3: \"prevent inconsistencies ...\"\nSec 3: \"avoid text clones and to avoid the danger of subtle discrepancies\"\n\nWith some interesting stuff out of scope, is it really the only motivation to write this draft? The draft is at such a high level of abstraction, I wonder if there are really any subtle discrepancies/inconsistencies this draft can help avoid. Can you give some examples of such subtle discrepancies?\n```\n\nYes, that is the reason. A subtle difference is, for example, the difference between a nonce and an epoch marker including a nonce like structure. Another example would be the difference between an unsolicited push (as can be facilitated by time-based remote attestation) and a solicited push (as can be facilitated by streamed attestation).",
+          "createdAt": "2025-02-24T16:26:21Z",
+          "updatedAt": "2025-02-24T16:26:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 4: \"integral\"\n\nWhat is it? Can you point me to a reference which uses \"integral\" in the sense of integrity?\n```\n\nThat was some awkward phrasing that has been improved since the last update. Thanks!",
+          "createdAt": "2025-02-24T16:36:38Z",
+          "updatedAt": "2025-02-24T16:36:38Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 4: \"The signature may be symmetric, such as an HMAC\"\n\nMAC is not a signature!\n```\nAdmittedly, not the best example. Moving the example to PSA TF-M.",
+          "createdAt": "2025-02-24T16:53:05Z",
+          "updatedAt": "2025-02-24T16:53:05Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "Thanks for considering the comments. \n> This is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\n>> This has been reduced to an initial description in Section 1 and only very lightweight reference later on.\n\nMy thought here was that if the plan is to use the same models for Endorsements and Ref Values, it may make sense to put them in the same draft. If not, they may need a separate draft. ",
+          "createdAt": "2025-02-24T18:02:53Z",
+          "updatedAt": "2025-02-24T18:02:53Z"
+        }
+      ]
     },
     {
       "number": 59,
