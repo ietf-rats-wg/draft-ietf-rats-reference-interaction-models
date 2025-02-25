@@ -152,7 +152,7 @@ Table of Contents
    Conceptual Messages; specifically attestation Evidence conveyed from
    an Attester to a Verifier.  While the exact details for conveyance of
    other Conceptual Messages is out of scope, the models described in
-   this document can be adapted to apply to the conveyance of other
+   this document may be adapted to apply to the conveyance of other
    Conceptual Messages, such as Endorsements or Attestation Results, or
    supplemental messages, such as Epoch Markers
    [I-D.ietf-rats-epoch-markers] or stand-alone event logs.
@@ -247,9 +247,10 @@ Table of Contents
    requirements MUST be fulfilled:
 
    Integrity:  Information provided by an Attester MUST NOT have been
-      altered since it was created.  This may be achieved through by
-      symmetric signature, e.g., PSA TF-M profile, or asymmetric, like
-      ECDSA.
+      altered since it was created.  This may be achieved via symmetric
+      cryptography, e.g., using COSE Mac0 as in PSA TF-M profile
+      (Section 5.2 of [I-D.tschofenig-rats-psa-token]), or asymmetric,
+      like ECDSA.
 
    Authentication:  The information provided by the Attester MUST be
       authentic.  To do this, the Attester should authenticate itself to
@@ -1448,6 +1449,14 @@ Table of Contents
               Progress, Internet-Draft, draft-birkholz-rats-tuda-07, 10
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-tuda-07>.
+
+   [I-D.tschofenig-rats-psa-token]
+              Tschofenig, H., Frost, S., Brossard, M., Shaw, A. L., and
+              T. Fossati, "Arm's Platform Security Architecture (PSA)
+              Attestation Token", Work in Progress, Internet-Draft,
+              draft-tschofenig-rats-psa-token-24, 23 September 2024,
+              <https://datatracker.ietf.org/doc/html/draft-tschofenig-
+              rats-psa-token-24>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
