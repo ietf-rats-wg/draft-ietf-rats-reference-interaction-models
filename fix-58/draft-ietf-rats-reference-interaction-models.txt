@@ -185,17 +185,14 @@ Table of Contents
    e.g., separate system components of the same Composite Device (a
    single RATS entity), or the Verifier and Relying Party roles are
    hosted by the same entity, for example in a cryptographic key Broker
-   system (see Section 6 of [RFC9334] for more details.  If an entity
+   system (see Section 6 of [RFC9334] for more details).  If an entity
    takes on two or more different roles, the functions they provide
    typically reside in isolated environments that are components of the
    same entity.  Examples of such isolated environments include a
    Trusted Execution Environment (TEE), Baseboard Management Controllers
    (BMCs), as well as other physical or logical protected/isolated/
    shielded Computing Environments (e.g., embedded Secure Elements (eSE)
-   or Trusted Platform Modules (TPM)).  It is useful but not necessary
-   for readers of this document to be familiar with the Concept Data/
-   Message flows as described in Section 3.1 of [RFC9334] and the
-   definition of Attestation in general as described in [RFC9683].
+   or Trusted Platform Modules (TPM)).
 
 3.  Scope and Intent
 
@@ -907,11 +904,13 @@ Table of Contents
    Broker is a trusted third party and acts as an intermediary that
    ensures messages are securely and reliably conveyed between involved
    RATS roles.  The publish-subscribe messaging pattern is widely used
-   for communication in different areas.  Unlike the _Streaming Remote
-   Attestation without a Broker_ interaction model, Attesters are not
-   required to be aware of corresponding Verifiers.  In scenarios with
-   large numbers of Attesters and Verifiers, the publish-subscribe
-   pattern may reduce interdependencies and improve scalability.
+   for communication in different areas.  An example for a publish-
+   subscribe model with a Broker is the Message Queuing Telemetry
+   Transport [MQTT].  Unlike the _Streaming Remote Attestation without a
+   Broker_ interaction model, Attesters are not required to be aware of
+   corresponding Verifiers.  In scenarios with large numbers of
+   Attesters and Verifiers, the publish-subscribe pattern may reduce
+   interdependencies and improve scalability.
 
    With publish-subscribe, clients typically _connect_ to (or _register_
    with) a publish-subscribe server (PubSub server or Broker).  Clients
@@ -1414,12 +1413,6 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
-              Definition Language (CDDL): A Notational Convention to
-              Express Concise Binary Object Representation (CBOR) and
-              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
-              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
-
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
@@ -1450,6 +1443,13 @@ Table of Contents
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-tuda-07>.
 
+   [I-D.ietf-rats-endorsements]
+              Thaler, D., Birkholz, H., and T. Fossati, "RATS
+              Endorsements", Work in Progress, Internet-Draft, draft-
+              ietf-rats-endorsements-05, 8 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              endorsements-05>.
+
    [I-D.tschofenig-rats-psa-token]
               Tschofenig, H., Frost, S., Brossard, M., Shaw, A. L., and
               T. Fossati, "Arm's Platform Security Architecture (PSA)
@@ -1469,10 +1469,6 @@ Table of Contents
    [MQTT]     OASIS, "Message Queuing Telemetry Transport (MQTT) Version
               5.0 Committee Specification 02", Specification Version
               5.0, 2018.
-
-   [TNC]      TCG, "TCG Trusted Network Communications TNC Architecture
-              for Interoperability", Specification Version 2.0 Revision
-              13, 2017.
 
    [turtles]  Rudnicki, R., "Turtles All the Way Down: Foundation,
               Edifice, and Ruin in Faulkner and McCarthy", The Faulkner
