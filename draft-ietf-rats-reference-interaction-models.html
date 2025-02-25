@@ -14,12 +14,12 @@
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. 
     " name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.27.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-rats-reference-interaction-models-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
-    Python 3.12.8
+  xml2rfc 3.27.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -440,7 +440,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1053,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 5 August 2025</td>
+<td class="center">Expires 29 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-reference-interaction-models-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-01" class="published">1 February 2025</time>
+<time datetime="2025-02-25" class="published">25 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-05">5 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-29">29 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1130,7 +1130,7 @@ Analogously, a general overview about the information elements typically used by
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1348,7 +1348,7 @@ appear in all capitals, as shown here.<a href="#section-2-3" class="pilcrow">¶<
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system.
-If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and the definition of Attestation in general as described in <span>[<a href="#RFC9683" class="cite xref">RFC9683</a>]</span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity. Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)). It is useful but not necessary for readers of this document to be familiar with the Concept Data/Message flows as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and the definition of Attestation in general as described in <span>[<a href="#RFC9683" class="cite xref">RFC9683</a>]</span>. For the example of Evidence generation, it is also useful to be familiar the fact that Attesting Environment are layered (see <span>[<a href="#turtles" class="cite xref">turtles</a>]</span> and Figure 1 in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-05#section-2.1" class="relref">Section 2.1</a> of [<a href="#I-D.ietf-rats-endorsements" class="cite xref">I-D.ietf-rats-endorsements</a>]</span>) and that the initial Attesting Environment ("layer 0") requires Endorsement from a trusted third party.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2376,6 +2376,7 @@ Methods to detect excessive time drift that would render Handles stale and manda
 <p id="section-7.3.2-1">This model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.
 The Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.
 The publish-subscribe messaging pattern is widely used for communication in different areas.
+An example for a publish-subscribe model with a Broker is the Message Queuing Telemetry Transport <span>[<a href="#MQTT" class="cite xref">MQTT</a>]</span>.
 Unlike the <em>Streaming Remote Attestation without a Broker</em> interaction model, Attesters are not required to be aware of corresponding Verifiers.
 In scenarios with large numbers of Attesters and Verifiers, the publish-subscribe pattern may reduce interdependencies and improve scalability.<a href="#section-7.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.3.2-2">With publish-subscribe, clients typically <em>connect</em> to (or <em>register</em> with) a publish-subscribe server (PubSub server or Broker).
@@ -3097,10 +3098,6 @@ These are especially important in high-security settings such as financial servi
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8610">[RFC8610]</dt>
-        <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
@@ -3130,6 +3127,10 @@ These are especially important in high-security settings such as financial servi
         <dd>
 <span class="refAuthor">Fuchs, A.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">McDonald, I.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Time-Based Uni-Directional Attestation"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-birkholz-rats-tuda-07</span>, <time datetime="2022-07-10" class="refDate">10 July 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-birkholz-rats-tuda-07">https://datatracker.ietf.org/doc/html/draft-birkholz-rats-tuda-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-rats-endorsements">[I-D.ietf-rats-endorsements]</dt>
+        <dd>
+<span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"RATS Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-endorsements-05</span>, <time datetime="2024-11-08" class="refDate">8 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ISIS">[ISIS]</dt>
         <dd>
 <span class="refAuthor">Birman, K.</span> and <span class="refAuthor">T. Joseph</span>, <span class="refTitle">"Exploiting Virtual Synchrony in Distributed Systems"</span>, <span class="seriesInfo">DOI 10.1145/41457.37515</span>, <time datetime="1987" class="refDate">1987</time>, <span>&lt;<a href="https://doi.org/10.1145/41457.37515">https://doi.org/10.1145/41457.37515</a>&gt;</span>. </dd>
@@ -3141,10 +3142,6 @@ These are especially important in high-security settings such as financial servi
 <dt id="MQTT">[MQTT]</dt>
         <dd>
 <span class="refAuthor">OASIS</span>, <span class="refTitle">"Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02"</span>, <span class="seriesInfo">Specification Version 5.0</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
-<dd class="break"></dd>
-<dt id="TNC">[TNC]</dt>
-        <dd>
-<span class="refAuthor">TCG</span>, <span class="refTitle">"TCG Trusted Network Communications TNC Architecture for Interoperability"</span>, <span class="seriesInfo">Specification Version 2.0 Revision 13</span>, <time datetime="2017" class="refDate">2017</time>. </dd>
 <dd class="break"></dd>
 <dt id="turtles">[turtles]</dt>
       <dd>

@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 5 August 2025                                            W. Pan
+Expires: 29 August 2025                                           W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                         1 February 2025
+                                                        25 February 2025
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 August 2025.
+   This Internet-Draft will expire on 29 August 2025.
 
 Copyright Notice
 
@@ -185,7 +185,12 @@ Table of Contents
    useful but not necessary for readers of this document to be familiar
    with the Concept Data/Message flows as described in Section 3.1 of
    [RFC9334] and the definition of Attestation in general as described
-   in [RFC9683].
+   in [RFC9683].  For the example of Evidence generation, it is also
+   useful to be familiar the fact that Attesting Environment are layered
+   (see [turtles] and Figure 1 in Section 2.1 of
+   [I-D.ietf-rats-endorsements]) and that the initial Attesting
+   Environment ("layer 0") requires Endorsement from a trusted third
+   party.
 
 3.  Scope and Intent
 
@@ -895,11 +900,13 @@ Table of Contents
    Broker is a trusted third party and acts as an intermediary that
    ensures messages are securely and reliably conveyed between involved
    RATS roles.  The publish-subscribe messaging pattern is widely used
-   for communication in different areas.  Unlike the _Streaming Remote
-   Attestation without a Broker_ interaction model, Attesters are not
-   required to be aware of corresponding Verifiers.  In scenarios with
-   large numbers of Attesters and Verifiers, the publish-subscribe
-   pattern may reduce interdependencies and improve scalability.
+   for communication in different areas.  An example for a publish-
+   subscribe model with a Broker is the Message Queuing Telemetry
+   Transport [MQTT].  Unlike the _Streaming Remote Attestation without a
+   Broker_ interaction model, Attesters are not required to be aware of
+   corresponding Verifiers.  In scenarios with large numbers of
+   Attesters and Verifiers, the publish-subscribe pattern may reduce
+   interdependencies and improve scalability.
 
    With publish-subscribe, clients typically _connect_ to (or _register_
    with) a publish-subscribe server (PubSub server or Broker).  Clients
@@ -1332,7 +1339,7 @@ Table of Contents
 9.4.2.  Mutual Authentication
 
    Mutual authentication is particularly relevant in models such as the
-   _Challenge/Response Remote Attestation_ (cf.  Section 7.1) where both
+   _Challenge/Response Remote Attestation_ (cf. Section 7.1) where both
    the Attester and the Verifier engage in bidirectional exchanges of
    sensitive information.  Ensuring that both parties can authenticate
    each other prevents impersonation attacks, enhancing the
@@ -1409,12 +1416,6 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
-              Definition Language (CDDL): A Notational Convention to
-              Express Concise Binary Object Representation (CBOR) and
-              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
-              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
-
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
@@ -1445,6 +1446,13 @@ Table of Contents
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-tuda-07>.
 
+   [I-D.ietf-rats-endorsements]
+              Thaler, D., Birkholz, H., and T. Fossati, "RATS
+              Endorsements", Work in Progress, Internet-Draft, draft-
+              ietf-rats-endorsements-05, 8 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              endorsements-05>.
+
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
               <https://doi.org/10.1145/41457.37515>.
@@ -1456,10 +1464,6 @@ Table of Contents
    [MQTT]     OASIS, "Message Queuing Telemetry Transport (MQTT) Version
               5.0 Committee Specification 02", Specification Version
               5.0, 2018.
-
-   [TNC]      TCG, "TCG Trusted Network Communications TNC Architecture
-              for Interoperability", Specification Version 2.0 Revision
-              13, 2017.
 
    [turtles]  Rudnicki, R., "Turtles All the Way Down: Foundation,
               Edifice, and Ruin in Faulkner and McCarthy", The Faulkner
