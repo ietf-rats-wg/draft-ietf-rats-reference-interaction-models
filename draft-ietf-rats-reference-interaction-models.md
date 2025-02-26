@@ -274,7 +274,7 @@ Event Logs (`eventLogs`):
 
 : Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.
 
-Verifier Inputs ('verInputs')
+Verifier Inputs (`verInputs`)
 
 : *mandatory*
 
@@ -843,7 +843,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
 ====================[Attestation Result Generation]=====================
      |          |                        |                        |
-     |     sub(topic=AttRes,            |                        |
+     |     sub(topic=AttRes,             |                        |
      |         handle) ----------------->|                        |
      |          |                        |                        |
  .--------[loop]------------------------------------------------------.
