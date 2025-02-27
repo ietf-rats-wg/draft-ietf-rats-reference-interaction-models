@@ -240,7 +240,7 @@ This enables interaction models to support the conveyance of proofs of freshness
 This section describes the essential information elements for the interaction models described in {{interaction-models}}.
 These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.
 
-Attesting Environment IDs ('attEnvIDs'):
+Attesting Environment IDs (`attEnvIDs`):
 
 : *optional*
 
