@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 30 August 2025                                           W. Pan
+Expires: 31 August 2025                                           W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                        26 February 2025
+                                                        27 February 2025
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 31 August 2025.
 
 Copyright Notice
 
@@ -310,7 +310,7 @@ Table of Contents
    or may be added as protocol parameters, depending on the specific
    solution.
 
-   Attesting Environment IDs ('attEnvIDs'):  _optional_
+   Attesting Environment IDs (attEnvIDs):  _optional_
 
       A statement representing one or more identifiers that MUST be
       associated with a corresponding Attestation Environment's keys
