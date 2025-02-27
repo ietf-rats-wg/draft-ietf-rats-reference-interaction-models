@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T01:05:39.745943+00:00",
+  "timestamp": "2025-02-27T01:05:17.190838+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -887,23 +887,31 @@
       "id": "I_kwDOEYizNM514pgQ",
       "title": "Nonce handling considerations",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/51",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).",
       "createdAt": "2023-11-05T13:15:05Z",
-      "updatedAt": "2023-11-05T13:15:05Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-02-26T17:42:02Z",
+      "closedAt": "2025-02-26T17:42:01Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "included in Thomas' review",
+          "createdAt": "2025-02-26T17:42:01Z",
+          "updatedAt": "2025-02-26T17:42:01Z"
+        }
+      ]
     },
     {
       "number": 54,
       "id": "I_kwDOEYizNM6Yo-Cy",
       "title": "Explicitly mark optional parameters in SDs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -912,24 +920,32 @@
       "labels": [],
       "body": "It'd help the reader make explicit the mandatory and optional parameters in the sequence diagrams.\r\n\r\nI suggest using `?` to mark optional parameters. ",
       "createdAt": "2024-10-02T07:45:47Z",
-      "updatedAt": "2024-10-02T13:08:32Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-02-25T12:59:15Z",
+      "closedAt": "2025-02-25T12:59:13Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "done",
+          "createdAt": "2025-02-25T12:59:13Z",
+          "updatedAt": "2025-02-25T12:59:13Z"
+        }
+      ]
     },
     {
       "number": 58,
       "id": "I_kwDOEYizNM6ZPE88",
       "title": "WGLC review of draft 11",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "muhammad-usama-sardar",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "**General questions**: \r\n1. What is the real motivation of this draft?\r\n2. The flows represent only boot time measurements. What about runtime measurements (e.g., RTMR in TDX or REM in CCA)? \r\n3. There is no discussion on how deep the nonce goes in the Layered Attester. What is the assumption here?\r\n4. What is the exact difference between recentness and freshness?\r\n5. What is the exact difference between the Endorsements and Reference Values? \r\n6. Which certain types of relay attacks can scrambling avoid? \r\n\r\n**Specific questions/comments**:\r\n\r\n> Sec. 1 \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS.\"\r\n> Sec. 1 \"the methods described can also be applied to the conveyance of, for example, Endorsements or Attestation Results.\"\r\n> Sec. 7 \"the intention of this document is in support of future work that applies the presented models to the conveyance of other Conceptual Messages, namely Attestation Results, Endorsements, Reference Values, or Appraisal Policies.\"\r\n\r\nThis is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\r\n\r\n> Sec. 2.1: \"This conveyance can also be \"Local\", if the Verifier role is part of the same entity as the Attester role\"\r\n\r\nSo your definition of \"Local Attestation\" is independent of where the Relying Party is?\r\n\r\n> Sec. 3: \"prevent inconsistencies ...\"\r\n> Sec 3: \"avoid text clones and to avoid the danger of subtle discrepancies\" \r\n\r\nWith some interesting stuff out of scope, is it really the only motivation to write this draft? The draft is at such a high level of abstraction, I wonder if there are really any subtle discrepancies/inconsistencies this draft can help avoid. Can you give some examples of such subtle discrepancies? \r\n\r\n> Sec. 4: \"integral\" \r\n\r\nWhat is it? Can you point me to a reference which uses \"integral\" in the sense of integrity?\r\n\r\n> Sec. 4: \"The signature may be symmetric, such as an HMAC\" \r\n\r\nMAC is not a signature! \r\n\r\n> Sec. 4: \"This (authentication) ... may be achieved by using a confidential channel by means of encryption.\" \r\n\r\nEncryption by itself does not provide authentication. \r\n\r\n> Sec. 5: \"Evidence Protection\" \r\n\r\nThis seems redundant. With \"Attestation Evidence Authenticity\", why is it required? \r\n\r\n> Sec. 6: \"(a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include:\r\n      Nonces that are used to protect from replay attacks\"\r\n\r\nWhat is the exact difference between recentness and freshness? Can you give clear examples of cases when one of them holds while the other one does not? I think nonces provide all of them. Why do you specifically mention replay protection _only_? \r\n\r\n> Sec. 6: \"This specific type of Claims is used to appraise Claims incorporated in Evidence.\"\r\n\r\nSomething seems to be missing here \r\n\r\n> Sec. 6: \"For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in [RFC9334]).\" \r\n\r\nThis seems to say that Endorsements are also Reference Values: is this what you mean here? What is the exact difference between the Endorsements and Reference Values? \r\n\r\n> Sec. 6: \"Claim Selection\" \r\n\r\nseems a misnomer as well as wrongly defined term. Isn't is something desired/requested by the Verifier?\r\n\r\n> Sec. 10: \"This extra information can be used to scramble the Nonce in order to\r\n   counter certain types of relay attacks.\" \r\n\r\nWhich certain types of relay attacks and how? Give more details. \r\n\r\n\r\n\r\n**Editorial**\r\n\r\n- Sec 1: Second paragraph is basically useless. There is no need to have a summary of a single paragraph just presented. \r\n- Introduction could already introduce the three types of Interaction Models. They are currently only introduced in Sec. 7 which is too late. ",
       "createdAt": "2024-10-07T16:01:38Z",
-      "updatedAt": "2025-02-24T18:02:56Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-26T15:56:49Z",
+      "closedAt": "2025-02-26T15:56:49Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -972,6 +988,97 @@
           "body": "Thanks for considering the comments. \n> This is repeated at least 3 times in the draft. Can you justify this claim by presenting at least one example for each of those?\n>> This has been reduced to an initial description in Section 1 and only very lightweight reference later on.\n\nMy thought here was that if the plan is to use the same models for Endorsements and Ref Values, it may make sense to put them in the same draft. If not, they may need a separate draft. ",
           "createdAt": "2025-02-24T18:02:53Z",
           "updatedAt": "2025-02-24T18:02:53Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 4: \"This (authentication) ... may be achieved by using a confidential channel by means of encryption.\"\n\nEncryption by itself does not provide authentication.\n```\nYes. Secure Channel (as in UCCS) + an extra mentioning of authentication (in an authentication section...) is now in.",
+          "createdAt": "2025-02-25T11:54:33Z",
+          "updatedAt": "2025-02-25T11:54:33Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 5: \"Evidence Protection\"\n\nThis seems redundant. With \"Attestation Evidence Authenticity\", why is it required?\n```\nThanks. Merged Evidence Protection into Attestation Evidence Authenticity.",
+          "createdAt": "2025-02-25T12:01:21Z",
+          "updatedAt": "2025-02-25T12:01:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 6: \"(a) determining recentness, (b) determining freshness, or (c) provide replay protection. Examples include:\nNonces that are used to protect from replay attacks\"\n\nWhat is the exact difference between recentness and freshness? Can you give clear examples of cases when one of them holds while the other one does not? I think nonces provide all of them. Why do you specifically mention replay protection only?\n```\nThe Handle Section underwent a significant rewrite, which should also address this comment.",
+          "createdAt": "2025-02-25T12:07:29Z",
+          "updatedAt": "2025-02-25T12:07:29Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 6: \"This specific type of Claims is used to appraise Claims incorporated in Evidence.\"\n\nSomething seems to be missing here\n```\nThe Reference Value Section underwent significant re-write and is now the Verifier Inputs Section, which should also address this comment.\n",
+          "createdAt": "2025-02-25T12:12:46Z",
+          "updatedAt": "2025-02-25T12:12:46Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 6: \"For example, Reference Values MAY be Reference Integrity Measurements (RIM) or assertions that are implicitly trusted because they are signed by a trusted authority (see Endorsements in [RFC9334]).\"\n\nThis seems to say that Endorsements are also Reference Values: is this what you mean here? What is the exact difference between the Endorsements and Reference Values?\n```\nSame as [above](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58#issuecomment-2681759195).",
+          "createdAt": "2025-02-25T12:22:10Z",
+          "updatedAt": "2025-02-25T12:22:10Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 6: \"Claim Selection\"\n\nseems a misnomer as well as wrongly defined term. Isn't is something desired/requested by the Verifier?\n```\nThe description includes your proposal already: `For example, a Verifier could send a Claim Selection, among other elements, to an Attester.` Not sure how to take this comment into account.",
+          "createdAt": "2025-02-25T12:24:45Z",
+          "updatedAt": "2025-02-25T12:24:45Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec. 10: \"This extra information can be used to scramble the Nonce in order to\ncounter certain types of relay attacks.\"\n\nWhich certain types of relay attacks and how? Give more details.\n```\nThere is now a more detailed subsection. I am trying to trace back where the \"scrambling\" part comes from and am leaning towards removing that paragraph as I am also uncertain what it brings to the table, tbh. Maybe during WGLC?",
+          "createdAt": "2025-02-25T12:39:49Z",
+          "updatedAt": "2025-02-25T12:39:49Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nSec 1: Second paragraph is basically useless. There is no need to have a summary of a single paragraph just presented\n```\nShould already addressed by previous re-writes. Some minor redundancy remains for the sake of readability.",
+          "createdAt": "2025-02-25T12:52:30Z",
+          "updatedAt": "2025-02-25T12:52:30Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "```\nIntroduction could already introduce the three types of Interaction Models. They are currently only introduced in Sec. 7 which is too late.\n```\nDone! Thanks",
+          "createdAt": "2025-02-25T12:52:52Z",
+          "updatedAt": "2025-02-25T12:52:52Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "> ```\n> Sec. 10: \"This extra information can be used to scramble the Nonce in order to\n> counter certain types of relay attacks.\"\n> \n> Which certain types of relay attacks and how? Give more details.\n> ```\n> \n> There is now a more detailed subsection. I am trying to trace back where the \"scrambling\" part comes from and am leaning towards removing that paragraph as I am also uncertain what it brings to the table, tbh. Maybe during WGLC?\n\nAnd it's gone.",
+          "createdAt": "2025-02-25T13:13:23Z",
+          "updatedAt": "2025-02-25T13:13:23Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "@muhammad-usama-sardar, could you review #63?",
+          "createdAt": "2025-02-25T13:27:54Z",
+          "updatedAt": "2025-02-25T13:27:54Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> [@muhammad-usama-sardar](https://github.com/muhammad-usama-sardar), could you review [#63](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/63)?\n\nThanks for all the updates. There seems to be several other changes beyond PR 63 since my last review, which makes it difficult to judge whether all comments have been addressed. Unfortunately, this week is very busy for me. I have three presentations as well as meetings, and we are trying to get two new I-Ds before cut-off. Review seems unlikely before the cutoff but I will try my best. If I don't get to it, feel free to merge and I will go through the whole draft once again. \n\nTo avoid another cycle, one general comment I have is that the figures with 3 parties are very hard to read. I am not sure if you fixed them already in your updates. Particularly, in some figures with 3 parties, it was unclear who is the originator of the message (I think this was in Sec. 7.1). Please consider clarifying that by using a consistent mechanism throughout the draft and writing it out explicitly for the readers. Also, please make sure all symbols used in figures are defined in the text.",
+          "createdAt": "2025-02-25T13:56:37Z",
+          "updatedAt": "2025-02-25T13:56:37Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "We can fix the remaining issues via a WGLC, I think. The Figures went through quite some polish, but I think the readability issue that your bring up is a new one. I'll submit and start the process and we can fix remaining issues along the way.",
+          "createdAt": "2025-02-26T14:43:13Z",
+          "updatedAt": "2025-02-26T14:43:13Z"
         }
       ]
     },
@@ -983,29 +1090,47 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "The Attester boots up and thereby produces Claims about its boot state and its operational state. Claims are produced by all Attesting Environments of an Attester. Event Logs can accompany produced Claims and provide an event trail of security-relevant events that can be observed or collected by Attesting Environments. \n\nA Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.\n\nIn the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.\nA Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.\n\nUltimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.\nCorrespondingly, a particular set of Evidence originating from certain Attesting Environments in a composite device can be requested via multiple Attesting Environment IDs.\nMethods to acquire Attesting Environment IDs or mappings between Attesting Environments to Attesting Environment IDs are out-of-scope of this document.\n\nBased on the provided Handle, the Attesting Environment IDs, and collected Claims, an Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment. The Attester conveys signed Evidence as well as all accompanying data, such as Event Logs, back to the Verifier.\n\nWhile it is crucial that Claims, the Handle, and the Attesting Environment IDs MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nAs soon as the Verifier receives the Evidence, it can begin the appraisal procedure.\nFor this purpose, the Verifier checks the signature, the Attesting Environment ID, and the Handle, and then appraises the Claims.\nAppraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements, conditions that have to be met by Evidence, such as the presence of certain Claims, and the application of Appraisal Policy for Evidence.\nThe final outputs of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to then assess an Attester's trustworthiness.\n\n--------------------\n\nThe Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.\n\nThe Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.\n\nIn the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.\nThe Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.\n\nThe list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.\nEach selected key is uniquely associated with an Attesting Environment of the Attester.\nAs a result, a single Attestation Key ID identifies a single Attesting Environment.\nCorrespondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.\nMethods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.\n\nThe Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.\nThe Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.\nIf the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.\nFor example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.\n\nWith the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.\n\nThe Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nUpon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.\nClaim appraisal is driven by Policy and takes Reference Values and Endorsements as input.\nThe Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.\n",
       "createdAt": "2025-01-22T14:01:27Z",
-      "updatedAt": "2025-01-22T14:01:27Z",
+      "updatedAt": "2025-02-26T17:42:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "@thomas-fossati what are we to do with this?",
+          "createdAt": "2025-02-26T17:42:29Z",
+          "updatedAt": "2025-02-26T17:42:29Z"
+        }
+      ]
     },
     {
       "number": 61,
       "id": "I_kwDOEYizNM6n8Bbk",
       "title": "abbreviation consistency",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/61",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "mainly Attesting Environment ID",
       "createdAt": "2025-01-29T08:18:51Z",
-      "updatedAt": "2025-01-29T08:18:51Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-02-25T12:58:59Z",
+      "closedAt": "2025-02-25T12:58:57Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "done",
+          "createdAt": "2025-02-25T12:58:57Z",
+          "updatedAt": "2025-02-25T12:58:57Z"
+        }
+      ]
     },
     {
       "number": 62,
@@ -1021,11 +1146,19 @@
         "documentation",
         "enhancement"
       ],
-      "body": "Addressing Thomas' review from <https://mailarchive.ietf.org/arch/msg/rats/Fd5POktGez_YEtuGXpULtMb2SpI>.\n\nHi Henk, Michael,\n\nthis is the follow-up to my previous (partial) review of the RIM document.\n\nThanks for addressing my comments in -12, and see another batch of comments.\n\nFor those marked with {PR}, I'll try to pack them in a PR soon.\n\ncheers!\n\n# S7.2 unidirectional RA\n\n## sequence diagrams\n\n* [x] The diagram needs to be updated to align with those in the previous sections. {@henkbirkholz}\n  For example:\n  * [x] IEs optionality\n  * [x] `s/refValues and eventLogs/verInput/`\n  * [x] `s/attKeyIDs/attEnvIDs/`\n\n## handle lifecycle\n\n* [x] It'd be good to be clear about the handle's lifecycle. {@eckelmeckel}\n  I get in principle that a handle is overwritten by the new handle.\n  However, in reality, the situation is slightly complicated by propagation delays which create a grey zone.\n  Some words around that would be great.\n\n  *\u2b50 Comment from Michael: Explained \"Handle Lifecycle and Propagation Delays\".*\n\n* [ ] ## 1st para, slight rewording {@thomas-fossati}\n  > Uni-Directional Remote Attestation procedures can be initiated by both the Attester and the Verifier.\n  > When initiated by the Attester, this may lead to unsolicited Evidence being sent to the Verifier.\n  > Conversely, when initiated by the Verifier, this always results in solicited Evidence being pushed to the Verifier.\n\n## beacon\n\n* [x] I am not sure what this means: {@henkbirkholz}\n  \"emission of a beacon\"\n  Could you clarify?  (Or drop if it doesn't provide additional semantics.)\n\n## mysterious sentence\n\n* [x] I am not sure what this means: {@henkbirkholz}\n  \"The specific manner how Handles are created and used always remains as the distinguishing quality of this model.\"\n\n## \"3rd entity\"\n\n* [x] The noun \"3rd entity\" sounds slightly funny. {@henkbirkholz}\n  What about the more old-school \"3rd party\"?\n  Besides, given the inclusion of a TSA, isn't it effectively a \"trusted 3rd party\"?\n\n## clarification around freshness\n\n* [x] The sentence: {@eckelmeckel}\n  > \"conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.\"\n\n  could be made a bit more precise about which \"[...] certain point in time\" it refers to.\n\n# S7.3 streaming RA\n\n* [x] ## remove extra parentheses \"([ISIS])\" {@thomas-fossati, @eckelmeckel}\n\n## use of \"subject\"\n\n* [x] The noun \"subject\" in this context seems wrong: it looks more like an object to me. {@eckelmeckel}\n  What about `s/subject/target resource/`?\n\n## observer pattern\n\n* [x] The sentence {@eckelmeckel}\n  > \"The observer pattern directly connects\"\n\n  looks imprecise. The pattern does not connect, the pattern models the relationships.\n\n* [x] ## `s/Subsections/subsections/` {@thomas-fossati, @eckelmeckel}\n\n* [x] ## remove redundancy {@eckelmeckel}\n  This sentence \"streaming remote attestation without a broker (observer pattern)\" is redundant.\n  Since you have just introduced the aliasing, why not use it?\n  Besides, you could use references to point to the relevant subsections.\n\n# S7.3.1\n\n## sequence diagrams\n\n* [x] Similar to S7.2, the diagram needs updating {@henkbirkholz}\n* [x] While you are at it, you could also fix the \"appraisal phase\" which spuriously includes conveyance. {@henkbirkholz}\n\n## dedicated mechanisms\n\n* [x] The sentence: {@eckelmeckel}\n  > \"an observer directly subscribes to observed resources via a dedicated mechanism. Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining the subscription state.\"\n\n  is not a very informative description of what is going on here. My suggestion is to either improve it or bin it.\n\n  *\u2b50 Comment from Michael: Improved it.*\n\n## handle or handles?\n\n* [x] The prose mentions \"Handles\" (plural) but in the diagram and the surrounding text I can only see one handle. {@eckelmeckel}\n  Can you clarify if multiple handles can be used and, if so, how?\n\n  * [x] *\u2b50 Action Item from Michael: Update diagram(s) by putting a loop also around the Handle Generation phase, and that contains the entire rest of the diagram, i.e., also the the loop around \"Delta Evidence Generation and Conveyance\".* {@eckelmeckel}\n  * [x] *\u2b50 Action Item from Michael: Put loop for both uni-directional and streaming models.* {@eckelmeckel}\n\n  * [ ] *\u2b50 Question from Michael: It still says \"Handles\", but the loop an explanatory text are there. Does it resolve the issue?* {@thomas-fossati}\n\n## Handle Distributor yes or no?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"While a Handle Distributor is not mandatory in this model\"\n\n  seems to imply that the presence of a Handle Distributor is also possible, but then the prose continues with\n\n  > \"[...] limited to bi-lateral subscriptions\"\n\n  which seems to imply a Handle Distributor cannot be instantiated as a separate 3rd party, and needs to be the same as the Verifier always.\n\n  *\u2b50 Comment from Michael: Introduced explanatory text.*\n  * [ ] *\u2b50 Question from Michael: Does it resolve the issue?* {@thomas-fossati}\n\n# S7.3.2\n\n## redundancy\n\n* [x] There is a bit of redundancy-induced awkwardness in the prose. {@eckelmeckel}\n  For example, you could refer to the relevant sections rather than repeating their (very long) titles.\n  *\u2b50 Comment from Michael: I removed the whole sentence since it's clear that both of the patterns are described in the next sections.*\n* [x] Besides, you can use pointers to sections in \"In the following sections, ...\" {@eckelmeckel}\n  *\u2b50 Comment from Michael: Now obsolete; at least here.*\n  * [ ] *\u2b50 Question from Michael: Are there any other parts of the document where this is relevant?* {@thomas-fossati}\n\n* [x] ## grammar {@thomas-fossati, @eckelmeckel}\n  > \"do not (need to) be aware\"\n\n## trust relationships\n\n* [x] The trust relationship between the broker and the RATS roles is unspecified. {@eckelmeckel}\n  It seems to me that the broker (and also the handle distributor) is a TTP for all protocol actors.\n\n  *\u2b50 Comment from Michael: Added explanatory text.*\n\n  * [ ] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n  * [ ] *\u2b50 Question from Michael: Do we need to mention it in the \"Security Considerations\" section at the end?* {@thomas-fossati, @henkbirkholz, @eckelmeckel}\n\n# S7.3.2.1\n\n* [x] ## the broker attacks {@eckelmeckel}\n  This comment is a follow-up to the previous one: the broker is in the position to do cross-application attacks by manipulating handles and topics.\n  This probably means one needs an end-to-end authenticated channel between Attester and Verifier.\n  But the broker could still route notify's to whoever it likes, and as long the receiver has a trust association with the sender, there's a potential confusion attack.\n  In short, it seems that brokers are TTPs or the interactions are NSFW.\n\n  *\u2b50 Comment from Michael: Added section in \"Security and Privacy Considerations\" section and referred to it.*\n\n## incorrect sentence?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"Handles are provided by a Verifier on a per-request basis.\"\n\n  but from the picture, I gather they look per-topic.\n\n  *\u2b50 Comment from Michael: It should be on a \"per-request\" basis. I need to think that through, again.*\n  *\u2b50 Comment from Michael: (~6 hours later) Done thinking. Adjusted diagram and text to make it clear (for the reader).*\n# S7.3.2.2\n\n## redundancy\n\n* [x] The title already says it all, why repeat these long sentences in the section body? {@eckelmeckel}\n\n  *\u2b50 Comment from Michael: Removed the whole sentence.*\n\n## accordingly\n\n* [x] You can drop the \"accordingly\" without problems. {@eckelmeckel}\n  Information elements and interaction models have only weak consequentiality.\n\n* [x] ## moar trust\n  The noun \"3rd party\" triggers the question: What are the trust assumptions on the handle distributor?\n  It'd seem to me that this too is a TTP in the protocol, similar to S7.3.2.1, and even moreso, given it generates the handles itself and can therefore mix and match messages at will.\n\n  *\u2b50 Comment from Michael: Perhaps add a section in security considerations, too.*\n  *\u2b50 Comment from Michael: Added a section \"Trust Assumptions on the Handle Distributor\" in security considerations section and referred to it in the text.*\n\n* [x] ## broker == RP? {@eckelmeckel}\n  From the diagram, I gather that the broker is the final receiver of the AR from the Verifier.\n  In a literal reading of RFC 9334, it looks like the broker plays the RP role.\n  Is it that or just a proxy for the RP?\n  If the latter, please say so.\n\n  *\u2b50 Comment from Michael: It's definitely just a proxy for the RP.*\n  *\u2b50 Comment from Michael: In Section 7.3.2.4 \"Attestation Result Generation\" I think it is clearly shown that the the AttRes (AR) is forwarded to the RP using `notify(topic=AttRes, attestationResult)` (some commas were missing in the diagram, though; thanks!).*\n\n# S7.3.2.3\n\n## sequence diagrams\n\n* [x] Similar to S7.2 and S7.3.1, the diagram needs updating. {@henkbirkholz}\n\n# out of scope phase in diagram\n\n* [x] The diagram contains AR generation, which is the topic of S7.3.2.4 {@eckelmeckel}\n  Is it on purpose? If so, please explain why it's there, otherwise kill it.\n\n  *\u2b50 Comment from Michael: Killed it.*\n\n# S7.3.2.4\n\n* [x] ok\n\n# S7.3.2.5\n\n## maybe remove?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"it may be required to distinguish...\"\n\n  leaves the reader confused about the how?\n\n  *\u2b50 Comment from Michael: Removed whole sebsection.*\n\n* [x]  In general, though, it seems to me that this subsection could go without relevant information loss. {@eckelmeckel}\n\n# S8\n\n## reroute content?\n\n* [x] I find this section not well anchored with the rest of the document. {@eckelmeckel}\n  In particular, it doesn't say in which situation the stated requirements apply.\n  My suggestion is to rework this material in the security consideration section.\n\n  *\u2b50 Comment from Michael: Made it a subsection of the security and privacy considerations and rephrased it for more clarity.*\n  *\u2b50 Comment from Michael: Also referred to the security considerations of RFC 9334 and RFC 9683 (for TPM-based attestation).*\n\n# S8.2\n\n# authentication direction\n\n* [x] The sentence: {@eckelmeckel}\n  > \"a Verifier also needs to prove its identity to the Attester, instead of only the Attester proving its identity to the Verifier\"\n\n  seems backwards. It's the other way around, no?\n\n  *\u2b50 Comment from Michael: Hope I improved clarity.*\n\n  * [ ] *\u2b50 Question from Michael: Is is issued resolved by rephrasing it?* {@thomas-fossati}\n\n# S9 implementation status\n\n* [x] Great! {@eckelmeckel}\n\n# S10 (sec cons)\n\n## needs tlc\n\nThis section needs work.\n\nAt least, I'd like to see some discussion about:\n\n* [x] Trust model deltas from 9334 given the introduction of the handle\ndistributor and the broker. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Added explanatory text.*\n  * [ ] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n* [x] Any new threats to privacy and security not covered in 9334. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Added explanatory text for the Broker and the Handle Distributor.*\n  * [ ] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n* [x] As noted above, some of the material in S8 can be repurposed and expanded. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Also addressed.*\n  * [ ] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}",
+      "body": "Addressing Thomas' review from <https://mailarchive.ietf.org/arch/msg/rats/Fd5POktGez_YEtuGXpULtMb2SpI>.\n\nHi Henk, Michael,\n\nthis is the follow-up to my previous (partial) review of the RIM document.\n\nThanks for addressing my comments in -12, and see another batch of comments.\n\nFor those marked with {PR}, I'll try to pack them in a PR soon.\n\ncheers!\n\n# S7.2 unidirectional RA\n\n## sequence diagrams\n\n* [x] The diagram needs to be updated to align with those in the previous sections. {@henkbirkholz}\n  For example:\n  * [x] IEs optionality\n  * [x] `s/refValues and eventLogs/verInput/`\n  * [x] `s/attKeyIDs/attEnvIDs/`\n\n## handle lifecycle\n\n* [x] It'd be good to be clear about the handle's lifecycle. {@eckelmeckel}\n  I get in principle that a handle is overwritten by the new handle.\n  However, in reality, the situation is slightly complicated by propagation delays which create a grey zone.\n  Some words around that would be great.\n\n  *\u2b50 Comment from Michael: Explained \"Handle Lifecycle and Propagation Delays\".*\n\n* [x] ## 1st para, slight rewording {@thomas-fossati}\n  > Uni-Directional Remote Attestation procedures can be initiated by both the Attester and the Verifier.\n  > When initiated by the Attester, this may lead to unsolicited Evidence being sent to the Verifier.\n  > Conversely, when initiated by the Verifier, this always results in solicited Evidence being pushed to the Verifier.\n\n## beacon\n\n* [x] I am not sure what this means: {@henkbirkholz}\n  \"emission of a beacon\"\n  Could you clarify?  (Or drop if it doesn't provide additional semantics.)\n\n## mysterious sentence\n\n* [x] I am not sure what this means: {@henkbirkholz}\n  \"The specific manner how Handles are created and used always remains as the distinguishing quality of this model.\"\n\n## \"3rd entity\"\n\n* [x] The noun \"3rd entity\" sounds slightly funny. {@henkbirkholz}\n  What about the more old-school \"3rd party\"?\n  Besides, given the inclusion of a TSA, isn't it effectively a \"trusted 3rd party\"?\n\n## clarification around freshness\n\n* [x] The sentence: {@eckelmeckel}\n  > \"conveyed Evidence in this model provides a proof that it was fresh at a certain point in time.\"\n\n  could be made a bit more precise about which \"[...] certain point in time\" it refers to.\n\n# S7.3 streaming RA\n\n* [x] ## remove extra parentheses \"([ISIS])\" {@thomas-fossati, @eckelmeckel}\n\n## use of \"subject\"\n\n* [x] The noun \"subject\" in this context seems wrong: it looks more like an object to me. {@eckelmeckel}\n  What about `s/subject/target resource/`?\n\n## observer pattern\n\n* [x] The sentence {@eckelmeckel}\n  > \"The observer pattern directly connects\"\n\n  looks imprecise. The pattern does not connect, the pattern models the relationships.\n\n* [x] ## `s/Subsections/subsections/` {@thomas-fossati, @eckelmeckel}\n\n* [x] ## remove redundancy {@eckelmeckel}\n  This sentence \"streaming remote attestation without a broker (observer pattern)\" is redundant.\n  Since you have just introduced the aliasing, why not use it?\n  Besides, you could use references to point to the relevant subsections.\n\n# S7.3.1\n\n## sequence diagrams\n\n* [x] Similar to S7.2, the diagram needs updating {@henkbirkholz}\n* [x] While you are at it, you could also fix the \"appraisal phase\" which spuriously includes conveyance. {@henkbirkholz}\n\n## dedicated mechanisms\n\n* [x] The sentence: {@eckelmeckel}\n  > \"an observer directly subscribes to observed resources via a dedicated mechanism. Consequently, these dedicated mechanisms contain information about the observer and are responsible for maintaining the subscription state.\"\n\n  is not a very informative description of what is going on here. My suggestion is to either improve it or bin it.\n\n  *\u2b50 Comment from Michael: Improved it.*\n\n## handle or handles?\n\n* [x] The prose mentions \"Handles\" (plural) but in the diagram and the surrounding text I can only see one handle. {@eckelmeckel}\n  Can you clarify if multiple handles can be used and, if so, how?\n\n  * [x] *\u2b50 Action Item from Michael: Update diagram(s) by putting a loop also around the Handle Generation phase, and that contains the entire rest of the diagram, i.e., also the the loop around \"Delta Evidence Generation and Conveyance\".* {@eckelmeckel}\n  * [x] *\u2b50 Action Item from Michael: Put loop for both uni-directional and streaming models.* {@eckelmeckel}\n\n  * [x] *\u2b50 Question from Michael: It still says \"Handles\", but the loop an explanatory text are there. Does it resolve the issue?* {@thomas-fossati}\n\n## Handle Distributor yes or no?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"While a Handle Distributor is not mandatory in this model\"\n\n  seems to imply that the presence of a Handle Distributor is also possible, but then the prose continues with\n\n  > \"[...] limited to bi-lateral subscriptions\"\n\n  which seems to imply a Handle Distributor cannot be instantiated as a separate 3rd party, and needs to be the same as the Verifier always.\n\n  *\u2b50 Comment from Michael: Introduced explanatory text.*\n  * [x] *\u2b50 Question from Michael: Does it resolve the issue?* {@thomas-fossati}\n\n# S7.3.2\n\n## redundancy\n\n* [x] There is a bit of redundancy-induced awkwardness in the prose. {@eckelmeckel}\n  For example, you could refer to the relevant sections rather than repeating their (very long) titles.\n  *\u2b50 Comment from Michael: I removed the whole sentence since it's clear that both of the patterns are described in the next sections.*\n* [x] Besides, you can use pointers to sections in \"In the following sections, ...\" {@eckelmeckel}\n  *\u2b50 Comment from Michael: Now obsolete; at least here.*\n  * [x] *\u2b50 Question from Michael: Are there any other parts of the document where this is relevant?* {@thomas-fossati}\n\n* [x] ## grammar {@thomas-fossati, @eckelmeckel}\n  > \"do not (need to) be aware\"\n\n## trust relationships\n\n* [x] The trust relationship between the broker and the RATS roles is unspecified. {@eckelmeckel}\n  It seems to me that the broker (and also the handle distributor) is a TTP for all protocol actors.\n\n  *\u2b50 Comment from Michael: Added explanatory text.*\n\n  * [x] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n  * [ ] *\u2b50 Question from Michael: Do we need to mention it in the \"Security Considerations\" section at the end?* {@thomas-fossati, @henkbirkholz, @eckelmeckel}\n\n# S7.3.2.1\n\n* [x] ## the broker attacks {@eckelmeckel}\n  This comment is a follow-up to the previous one: the broker is in the position to do cross-application attacks by manipulating handles and topics.\n  This probably means one needs an end-to-end authenticated channel between Attester and Verifier.\n  But the broker could still route notify's to whoever it likes, and as long the receiver has a trust association with the sender, there's a potential confusion attack.\n  In short, it seems that brokers are TTPs or the interactions are NSFW.\n\n  *\u2b50 Comment from Michael: Added section in \"Security and Privacy Considerations\" section and referred to it.*\n\n## incorrect sentence?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"Handles are provided by a Verifier on a per-request basis.\"\n\n  but from the picture, I gather they look per-topic.\n\n  *\u2b50 Comment from Michael: It should be on a \"per-request\" basis. I need to think that through, again.*\n  *\u2b50 Comment from Michael: (~6 hours later) Done thinking. Adjusted diagram and text to make it clear (for the reader).*\n# S7.3.2.2\n\n## redundancy\n\n* [x] The title already says it all, why repeat these long sentences in the section body? {@eckelmeckel}\n\n  *\u2b50 Comment from Michael: Removed the whole sentence.*\n\n## accordingly\n\n* [x] You can drop the \"accordingly\" without problems. {@eckelmeckel}\n  Information elements and interaction models have only weak consequentiality.\n\n* [x] ## moar trust\n  The noun \"3rd party\" triggers the question: What are the trust assumptions on the handle distributor?\n  It'd seem to me that this too is a TTP in the protocol, similar to S7.3.2.1, and even moreso, given it generates the handles itself and can therefore mix and match messages at will.\n\n  *\u2b50 Comment from Michael: Perhaps add a section in security considerations, too.*\n  *\u2b50 Comment from Michael: Added a section \"Trust Assumptions on the Handle Distributor\" in security considerations section and referred to it in the text.*\n\n* [x] ## broker == RP? {@eckelmeckel}\n  From the diagram, I gather that the broker is the final receiver of the AR from the Verifier.\n  In a literal reading of RFC 9334, it looks like the broker plays the RP role.\n  Is it that or just a proxy for the RP?\n  If the latter, please say so.\n\n  *\u2b50 Comment from Michael: It's definitely just a proxy for the RP.*\n  *\u2b50 Comment from Michael: In Section 7.3.2.4 \"Attestation Result Generation\" I think it is clearly shown that the the AttRes (AR) is forwarded to the RP using `notify(topic=AttRes, attestationResult)` (some commas were missing in the diagram, though; thanks!).*\n\n# S7.3.2.3\n\n## sequence diagrams\n\n* [x] Similar to S7.2 and S7.3.1, the diagram needs updating. {@henkbirkholz}\n\n# out of scope phase in diagram\n\n* [x] The diagram contains AR generation, which is the topic of S7.3.2.4 {@eckelmeckel}\n  Is it on purpose? If so, please explain why it's there, otherwise kill it.\n\n  *\u2b50 Comment from Michael: Killed it.*\n\n# S7.3.2.4\n\n* [x] ok\n\n# S7.3.2.5\n\n## maybe remove?\n\n* [x] The sentence: {@eckelmeckel}\n  > \"it may be required to distinguish...\"\n\n  leaves the reader confused about the how?\n\n  *\u2b50 Comment from Michael: Removed whole sebsection.*\n\n* [x]  In general, though, it seems to me that this subsection could go without relevant information loss. {@eckelmeckel}\n\n# S8\n\n## reroute content?\n\n* [x] I find this section not well anchored with the rest of the document. {@eckelmeckel}\n  In particular, it doesn't say in which situation the stated requirements apply.\n  My suggestion is to rework this material in the security consideration section.\n\n  *\u2b50 Comment from Michael: Made it a subsection of the security and privacy considerations and rephrased it for more clarity.*\n  *\u2b50 Comment from Michael: Also referred to the security considerations of RFC 9334 and RFC 9683 (for TPM-based attestation).*\n\n# S8.2\n\n# authentication direction\n\n* [x] The sentence: {@eckelmeckel}\n  > \"a Verifier also needs to prove its identity to the Attester, instead of only the Attester proving its identity to the Verifier\"\n\n  seems backwards. It's the other way around, no?\n\n  *\u2b50 Comment from Michael: Hope I improved clarity.*\n\n  * [x] *\u2b50 Question from Michael: Is is issued resolved by rephrasing it?* {@thomas-fossati}\n\n# S9 implementation status\n\n* [x] Great! {@eckelmeckel}\n\n# S10 (sec cons)\n\n## needs tlc\n\nThis section needs work.\n\nAt least, I'd like to see some discussion about:\n\n* [x] Trust model deltas from 9334 given the introduction of the handle\ndistributor and the broker. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Added explanatory text.*\n  * [x] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n* [x] Any new threats to privacy and security not covered in 9334. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Added explanatory text for the Broker and the Handle Distributor.*\n  * [x] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}\n\n* [x] As noted above, some of the material in S8 can be repurposed and expanded. {@eckelmeckel}\n  *\u2b50 Comment from Michael: Also addressed.*\n  * [x] *\u2b50 Question from Michael: Can this issue be considered resolved?* {@thomas-fossati}",
       "createdAt": "2025-01-29T10:32:17Z",
-      "updatedAt": "2025-01-29T22:22:24Z",
+      "updatedAt": "2025-02-26T18:01:50Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks very much for all the work.  \ud83d\udea2 it!",
+          "createdAt": "2025-02-26T18:01:49Z",
+          "updatedAt": "2025-02-26T18:01:49Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3581,6 +3714,134 @@
           "body": "",
           "createdAt": "2025-01-23T14:48:50Z",
           "updatedAt": "2025-01-23T14:48:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOEYizNM6Md5da",
+      "title": "Addressing Usama's review from issue #56",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/63",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #58 ",
+      "createdAt": "2025-02-25T12:57:44Z",
+      "updatedAt": "2025-02-26T15:56:48Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "61a08d49ef31214304ba8166875b8dafbcf26d2a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "fix-58",
+      "headRefOid": "ebbcef9bf0e07e953fa01c9580ca4816eaf0df00",
+      "closedAt": "2025-02-26T15:56:47Z",
+      "mergedAt": "2025-02-26T15:56:47Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "b18da555c9f7107cf87b2065f06b583f54a6f349"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM6daq9F",
+          "commit": {
+            "abbreviatedOid": "6801d1c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T13:09:06Z",
+          "updatedAt": "2025-02-25T13:09:06Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I like the \"may\" better than \"can\"",
+              "createdAt": "2025-02-25T13:09:06Z",
+              "updatedAt": "2025-02-25T13:09:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6dasx9",
+          "commit": {
+            "abbreviatedOid": "6801d1c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T13:12:00Z",
+          "updatedAt": "2025-02-25T13:12:00Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\n: Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in PSA TF-M profile ({{Section 5.2 of I-D.tschofenig-rats-psa-token}}), or asymmetric, like ECDSA.\r\n```",
+              "createdAt": "2025-02-25T13:12:00Z",
+              "updatedAt": "2025-02-25T13:12:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6datX7",
+          "commit": {
+            "abbreviatedOid": "6801d1c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM, left a couple of comments inline.",
+          "createdAt": "2025-02-25T13:12:55Z",
+          "updatedAt": "2025-02-25T13:12:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM6dax_H",
+          "commit": {
+            "abbreviatedOid": "6801d1c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-25T13:19:26Z",
+          "updatedAt": "2025-02-25T13:19:26Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "done",
+              "createdAt": "2025-02-25T13:19:26Z",
+              "updatedAt": "2025-02-25T13:19:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM6da1ec",
+          "commit": {
+            "abbreviatedOid": "d61514c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2025-02-25T13:22:44Z",
+          "updatedAt": "2025-02-25T13:22:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM6dpwoD",
+          "commit": {
+            "abbreviatedOid": "ebbcef9"
+          },
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good to me. Thanks a lot! :-)",
+          "createdAt": "2025-02-26T15:40:23Z",
+          "updatedAt": "2025-02-26T15:40:23Z",
           "comments": []
         }
       ]
