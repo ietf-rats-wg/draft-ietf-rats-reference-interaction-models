@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:17:01.308958+00:00",
+  "timestamp": "2025-04-13T02:37:27.873296+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1159,6 +1159,22 @@
           "updatedAt": "2025-02-26T18:01:49Z"
         }
       ]
+    },
+    {
+      "number": 64,
+      "id": "I_kwDOEYizNM6yNKkO",
+      "title": "Review of draft-13 (solicited by chairs at IETF 122)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/64",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and **defined**. \n- They are illustrated but I could not find any definitions. Please define three main interaction models very early (in introduction or terminology). A reader should not wait until Sec. 7 to know what they mean. \n\n---\n> does not exclude the application of those interaction models to **runtime integrity** or the conveyance of other RATS Conceptual Messages;\n\nand\n\n> While details regarding Evidence of **run-time integrity** are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.\n- Editorial: Use either run-time or runtime but not both \n- Define what is boot time integrity: e.g., boot of device or boot of VM?\n- Define what is runtime integrity.\n- What event marks the exact boundary between boot time and runtime?\n- Give me one convincing example of how the models for bootime integrity for challenge-response model can be extended for runtime integrity\n---\n> The Attester boots up and thereby produces Claims about its boot state and its operational state.\n- What is operational state? It is not defined or explained. \n---\n> The Challenge/Response remote attestation procedure is **initiated by the Verifier** by sending a remote attestation request to the Attester. \n- This is not always the case. \n> The **Verifier-generated nonce** is intended to guarantee Evidence freshness and to prevent replay attacks.\n- This is not always the case. It can also be Relying Party-generated nonce. \n---\n> The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.\n- Is there any scenario in which Collected Claims are not a subset of available Claims? \n---\n> Figure in 7.1.1.2.\n- requestEvidence: Please draw the figure such that it is clear that this message comes from RP and not Verifier.\n- Why does Attestation Result Generation happen at the Relying Party and not Verifier? \n- Attestation Result Generation \nappraiseEvidence(evidence,?eventLogs, verInputs) => attestationResult\nThe notations are quite combursome (and most likely wrong). Isn't this Attestation Result Generation already? If yes, then why does Attestation Result Generation come after this?\n---\n- Some questions marks (?) have been added since last review but it is never mentioned what do they mean. \n- Sec. 4: The whole document seems to be about providing freshness mechanisms and surprisingly, evidence freshness is not listed as essential requirement. Please justify why it is not an essential requirement.\n- Figure in Sec. 7.1: Why Verifier? I think it should be Verifyier + Relying Party. \n- Editorial: Please add figure numbers so that they can be easily referred. \n\nTo be continued.",
+      "createdAt": "2025-04-11T21:48:21Z",
+      "updatedAt": "2025-04-11T21:48:21Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
