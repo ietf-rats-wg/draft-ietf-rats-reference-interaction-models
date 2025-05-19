@@ -364,7 +364,7 @@ The Attester boots up and thereby produces Claims about its boot state and its o
 
 The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.
 
-In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
+In the Challenge/Response model, the Handle is composed of qualifying data in the form of a nonce {{?RFC4949}}.
 The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.
 
 The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
