@@ -197,7 +197,7 @@ Similarly, deviations from the generic model described in this document can be i
 In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:
 
 Integrity:
-: Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in PSA TF-M profile ({{Section 5.2 of -psa-token}}), or asymmetric, like ECDSA.
+: Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in PSA TF-M profile ({{Section 5.2 of -psa-token}}), or asymmetric, such as a COSE Sign algorithm like ECDSA.
 
 Authentication:
 : The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier. This can be done through implicit authentication using a digital signature over the Attestation Evidence, which does not require additional protocol steps, or by using a secure channel (see {{-uccs}}) including authentication.
