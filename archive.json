@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T01:14:41.834033+00:00",
+  "timestamp": "2025-05-22T01:13:39.028299+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1204,6 +1204,22 @@
           "updatedAt": "2025-05-19T07:37:21Z"
         }
       ]
+    },
+    {
+      "number": 66,
+      "id": "I_kwDOEYizNM63XlB4",
+      "title": "Review of Latest Draft: IETF RATS Reference Interaction Models",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/66",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the Abstract, please provide reference to the three conveying mechanisms.\n\n**Introduction** Line 2:\n\nVerifier instead of Verifiers, create Attestation Results.\n\nAppraisal Policies instead of Attestation Policies.\n\nI would state the last sentence in the paragraph clearly as:\n\nThis document, illustrates three main models of interaction between various RATS roles, namely\nAttester, Verifier and Relying Party that can be used in specific RATS-related solution documents.\n\nPlease add examples in the statement below:\n\n The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS, give examples, here...\n\nSection 5:\n\nThe Authentication Secret MUST be established before RATS interaction takes place..\n\nAttester Identity: Not clear to me, what are we trying to say here>>>\n\nThe first sentence needs to be clear what we mean by Identity\n\nAlso, Provenance of Evidence, could be any abstract thing much more than\n\nWho build the claim, so I would not use the term Provenance here,\nBut it can be watered down to \nThe Evidence from an Attesting Environment should be distinguishable \n\nand MUST be UNAMBIGUOUS\n\n=============================\n\nSection 6:\n\nThe below sentence, seems ambiguous and confusing to me:\n\nWhile a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID. If no Attesting Environment IDs are provided, a local default applies based on the Attester. For example, all Attesting Environments will provide Evidence\n\nPlease clarify, what is the intent and simplify??\n\nWe need to state that Attesting Env ID may be implicit or explicit, but I do not understand, how it can be optional?\n\n\n=============================================\n\nSection 7:\n\nThe conveyance paragraph is Out of Sync with the Section 3:Scope and Intent\n\nIn Section 3: We say conveying ONLY Evidence, while in Section 7:\nWe say scope is both Evidence and RP\n\nPicture should clearly show Self Referential Arrows to Indicate Internal Activity\nAs against sending External Message..\n \nEnd of Section 7:\nAttestation Results may create new Claim Sets about the properties and characteristics of an Attester\n\nSection 7.2.1 :\n\nThe grey zone may lead to Attestation Failures due to Handle Mismatch and suitable protocols\nshould take care to recover from the scenario...\n\nAlso Mention that in Unidirectional Remote Attestation, the role of Handle Distribution may be delegated to the RP..\n\nSection 7.3: Streaming Remote Attestation:\n\nSection 7.3.2 ==> How the Broker is trusted by all parties, Attester and Verifier is Outside the scope of this document.\n\n==============\n\nSection 8: Implementation Status:\n\nOne can also Include Project Veraison which implements Section 7.1 of this draft\n\n============================================",
+      "createdAt": "2025-05-20T09:53:11Z",
+      "updatedAt": "2025-05-20T10:10:35Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
