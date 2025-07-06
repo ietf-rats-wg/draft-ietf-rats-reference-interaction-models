@@ -353,7 +353,7 @@ The way the Handle is processed is the most prominent difference between the thr
 
 ## Challenge/Response Remote Attestation {#challenge-response}
 
-Note: In the following diagrams, a leading `?` indicates that a parameter is optional.
+Note: In the following diagrams, a leading `?` indicates that an information element is optional.
 
 ~~~~ aasvg
 .----------.                                                .----------.
