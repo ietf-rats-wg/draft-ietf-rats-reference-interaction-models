@@ -383,7 +383,7 @@ Note: In the following diagrams, a leading `?` indicates that an information ele
 ~~~~
 {: #fig-challenge-response title="Figure 1: Challenge/Response Remote Attestation"}
 
-The Attester boots up and thereby produces Claims about its boot state and its runtime state (cf. {{terminology}}), e.g., loaded applications, configurations, and environment variables.
+The Attester boots up and thereby produces Claims about its boot state and its operational state during runtime (cf. {{terminology}}), e.g., loaded applications, configurations, and environment variables.
 Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
