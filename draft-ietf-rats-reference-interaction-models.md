@@ -177,7 +177,7 @@ Examples of such isolated environments include a Trusted Execution Environment (
 
 ## Boot Time Integrity
 
-Boot time integrity refers to the trustworthiness of the platform during its boot sequence, typically covering firmware, BIOS/UEFI, initial bootloaders, and core operating system components up until a stable runtime environment is reached.
+Boot time integrity refers to the trustworthiness of the platform during its boot sequence, typically covering firmware, BIOS/UEFI, initial bootloaders, and core operating system components up until a stable runtime environment is reached (typically via layered attestation).
 This may apply equally to physical devices and virtual machines.
 
 ## Runtime Integrity
