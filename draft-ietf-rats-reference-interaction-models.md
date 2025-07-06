@@ -387,7 +387,7 @@ The Attester boots up and thereby produces Claims about its boot state and its o
 Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
-Alternative initiation flows, e.g., via an intermediary or through pre-configured requests, are out of scope for this document.
+Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
 A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.
 
 In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce, such as a cryptographically strong random number.
