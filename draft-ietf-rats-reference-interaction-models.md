@@ -905,7 +905,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
      ~          ~                        ~                        ~
 ~~~~
-{: #fig-streaming-with-broker-evidence-gen title="Figure 9: Attestation Result Generation for Remote Attestation over Publish-Subscribe"}
+{: #fig-streaming-with-broker-ar-gen title="Figure 9: Attestation Result Generation for Remote Attestation over Publish-Subscribe"}
 
 
 Attestation Result Generation is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
