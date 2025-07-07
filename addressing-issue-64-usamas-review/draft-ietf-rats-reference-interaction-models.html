@@ -11,25 +11,25 @@
 <meta content="Eric Voit" name="author">
 <meta content="
        This document describes interaction models for remote attestation procedures (RATS)  .
-Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
+Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. 
     " name="description">
-<meta content="xml2rfc 3.27.0" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-rats-reference-interaction-models-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.27.0
-    Python 3.12.9
+  xml2rfc 3.29.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
-    lxml 5.3.0
-    platformdirs 4.3.6
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
+    requests 2.32.4
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-rats-reference-interaction-models.xml" rel="alternate" type="application/rfc+xml">
@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">REIM</td>
-<td class="right">February 2025</td>
+<td class="right">July 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 29 August 2025</td>
+<td class="center">Expires 8 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-reference-interaction-models-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-25" class="published">25 February 2025</time>
+<time datetime="2025-07-07" class="published">7 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-29">29 August 2025</time></dd>
+<dd class="expires"><time datetime="2026-01-08">8 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes interaction models for remote attestation procedures (RATS) <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
-Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation  -- are illustrated and defined.
+Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
 Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1130,7 +1130,7 @@ Analogously, a general overview about the information elements typically used by
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1163,10 +1163,19 @@ Analogously, a general overview about the information elements typically used by
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
                 <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-disambiguation" class="internal xref">Disambiguation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-boot-time-integrity" class="internal xref">Boot Time Integrity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-runtime-integrity" class="internal xref">Runtime Integrity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-boot-to-runtime-boundary" class="internal xref">Boot-to-Runtime Boundary</a></p>
 </li>
             </ul>
 </li>
@@ -1314,13 +1323,16 @@ The roles <em>Attester</em> and <em>Verifier</em>, as well as the Conceptual Mes
 This document illustrates three main interaction models that can be used in specific RATS-related solution documents:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-2">
 <li id="section-1-2.1">
-          <p id="section-1-2.1.1">Challenge/Response Remote Attestation<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.1.1"><em>Challenge/Response Remote Attestation</em>:
+A Verifier actively challenges an Attester and receives time-fresh Evidence in response.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-2.2">
-          <p id="section-1-2.2.1">Uni-Directional Remote Attestation<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.2.1"><em>Uni-Directional Remote Attestation</em>:
+An Attester sends Evidence proactively to a Verifier, often using externally generated freshness indicators.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-1-2.3">
-          <p id="section-1-2.3.1">Streaming Remote Attestation<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.3.1"><em>Streaming Remote Attestation</em>:
+A persistent subscription-based model where Evidence is pushed continuously to interested Verifiers, optionally via a Broker.<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <p id="section-1-3">As a basis to describe the interaction models is this document, the example of attestation Evidence conveyance is used to illustrate the usage scenarios.
@@ -1364,6 +1376,33 @@ If an entity takes on two or more different roles, the functions they provide ty
 Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="boot-time-integrity">
+<section id="section-2.2">
+        <h3 id="name-boot-time-integrity">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-boot-time-integrity" class="section-name selfRef">Boot Time Integrity</a>
+        </h3>
+<p id="section-2.2-1">Boot time integrity refers to the trustworthiness of the platform during its boot sequence, typically covering firmware, BIOS/UEFI, initial bootloaders, and core operating system components up until a stable runtime environment is reached (typically via layered attestation).
+This may apply equally to physical devices and virtual machines.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="runtime-integrity">
+<section id="section-2.3">
+        <h3 id="name-runtime-integrity">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-runtime-integrity" class="section-name selfRef">Runtime Integrity</a>
+        </h3>
+<p id="section-2.3-1">Runtime integrity refers to the ongoing trustworthiness of a platform during normal operation, after the boot sequence completes.
+It encompasses the integrity of dynamic system state, including loaded applications, kernel modules, and active configurations.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="boot-to-runtime-boundary">
+<section id="section-2.4">
+        <h3 id="name-boot-to-runtime-boundary">
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-boot-to-runtime-boundary" class="section-name selfRef">Boot-to-Runtime Boundary</a>
+        </h3>
+<p id="section-2.4-1">The exact boundary between boot time and runtime may vary between systems.
+Generally, it is marked by the handoff from the final bootloader or initial OS kernel to a fully operational environment capable of executing arbitrary applications or services.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="scope-and-intent">
@@ -1386,7 +1425,7 @@ Examples of such isolated environments include a Trusted Execution Environment (
           <p id="section-3-2.4.1">does not cover every detail about Evidence conveyance.<a href="#section-3-2.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-3-3">While details regarding Evidence of run-time integrity are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.
+<p id="section-3-3">While details regarding Evidence of runtime integrity are not explicitly highlighted, the provided model descriptions serve as a foundation for developing corresponding model extensions.
 While the interaction models described in this document, including their variants, cover many relevant conveyance models for Conceptual Messages implemented on the Internet, they do not represent an exhaustive list of all possible models.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">Procedures, functions, and services needed for a complete semantic binding of the concepts defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are not covered in this document.
 Examples of such procedures include: identity establishment, key distribution and enrollment, time synchronization, and certificate revocation.<a href="#section-3-4" class="pilcrow">¶</a></p>
@@ -1640,94 +1679,107 @@ The way the Handle is processed is the most prominent difference between the thr
         <h3 id="name-challenge-response-remote-a">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-challenge-response-remote-a" class="section-name selfRef">Challenge/Response Remote Attestation</a>
         </h3>
-<div id="section-7.1-1">
-          <div class="alignLeft art-svg artwork" id="section-7.1-1.1">
+<p id="section-7.1-1">Note: In the following diagrams, a leading <code>?</code> indicates that an information element is optional.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<span id="name-figure-1-challenge-response"></span><div id="fig-challenge-response">
+<figure id="figure-1">
+          <div id="section-7.1-2.1">
+            <div class="alignLeft art-svg artwork" id="section-7.1-2.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="416" width="584" viewBox="0 0 584 416" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-              <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
-              <path d="M 48,144 L 48,192" fill="none" stroke="black"></path>
-              <path d="M 48,224 L 48,240" fill="none" stroke="black"></path>
-              <path d="M 48,272 L 48,320" fill="none" stroke="black"></path>
-              <path d="M 48,352 L 48,400" fill="none" stroke="black"></path>
-              <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-              <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
-              <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
-              <path d="M 536,112 L 536,320" fill="none" stroke="black"></path>
-              <path d="M 536,384 L 536,400" fill="none" stroke="black"></path>
-              <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
-              <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-              <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
-              <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-              <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-              <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
-              <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
-              <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
-              <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
-              <path d="M 56,176 L 96,176" fill="none" stroke="black"></path>
-              <path d="M 240,304 L 528,304" fill="none" stroke="black"></path>
-              <path d="M 8,334 L 208,334" fill="none" stroke="black"></path>
-              <path d="M 8,338 L 208,338" fill="none" stroke="black"></path>
-              <path d="M 376,334 L 576,334" fill="none" stroke="black"></path>
-              <path d="M 376,338 L 576,338" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="536,304 524,298.4 524,309.6" fill="black" transform="rotate(0,528,304)"></polygon>
-              <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
-              <g class="text">
-                <text x="52" y="52">Attester</text>
-                <text x="532" y="52">Verifier</text>
-                <text x="176" y="100">[Evidence</text>
-                <text x="260" y="100">Generation</text>
-                <text x="320" y="100">and</text>
-                <text x="384" y="100">Conveyance]</text>
-                <text x="48" y="116">|</text>
-                <text x="164" y="132">generateClaims(attestingEnvironment)</text>
-                <text x="68" y="148">=&gt;</text>
-                <text x="112" y="148">claims,</text>
-                <text x="188" y="148">?eventLogs</text>
-                <text x="200" y="180">requestEvidence(handle,</text>
-                <text x="344" y="180">?attEnvIDs,</text>
-                <text x="460" y="180">?claimSelection)</text>
-                <text x="104" y="212">collectClaims(claims,</text>
-                <text x="260" y="212">?claimSelection)</text>
-                <text x="68" y="228">=&gt;</text>
-                <text x="144" y="228">collectedClaims</text>
-                <text x="116" y="260">generateEvidence(handle,</text>
-                <text x="264" y="260">?attEnvIDs,</text>
-                <text x="380" y="260">collectedClaims)</text>
-                <text x="68" y="276">=&gt;</text>
-                <text x="116" y="276">evidence</text>
-                <text x="100" y="308">{evidence,</text>
-                <text x="192" y="308">?eventLogs}</text>
-                <text x="248" y="340">[Evidence</text>
-                <text x="332" y="340">Appraisal]</text>
-                <text x="536" y="356">|</text>
-                <text x="284" y="372">appraiseEvidence(evidence,</text>
-                <text x="440" y="372">?eventLogs,</text>
-                <text x="532" y="372">verInputs)</text>
-                <text x="432" y="388">attestationResult</text>
-                <text x="516" y="388">&lt;=</text>
-              </g>
-            </svg><a href="#section-7.1-1.1" class="pilcrow">¶</a>
+                <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                <path d="M 48,144 L 48,192" fill="none" stroke="black"></path>
+                <path d="M 48,224 L 48,240" fill="none" stroke="black"></path>
+                <path d="M 48,272 L 48,320" fill="none" stroke="black"></path>
+                <path d="M 48,352 L 48,400" fill="none" stroke="black"></path>
+                <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+                <path d="M 536,112 L 536,320" fill="none" stroke="black"></path>
+                <path d="M 536,384 L 536,400" fill="none" stroke="black"></path>
+                <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+                <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+                <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+                <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+                <path d="M 56,176 L 96,176" fill="none" stroke="black"></path>
+                <path d="M 240,304 L 528,304" fill="none" stroke="black"></path>
+                <path d="M 8,334 L 208,334" fill="none" stroke="black"></path>
+                <path d="M 8,338 L 208,338" fill="none" stroke="black"></path>
+                <path d="M 376,334 L 576,334" fill="none" stroke="black"></path>
+                <path d="M 376,338 L 576,338" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="536,304 524,298.4 524,309.6" fill="black" transform="rotate(0,528,304)"></polygon>
+                <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                <g class="text">
+                  <text x="52" y="52">Attester</text>
+                  <text x="532" y="52">Verifier</text>
+                  <text x="176" y="100">[Evidence</text>
+                  <text x="260" y="100">Generation</text>
+                  <text x="320" y="100">and</text>
+                  <text x="384" y="100">Conveyance]</text>
+                  <text x="48" y="116">|</text>
+                  <text x="164" y="132">generateClaims(attestingEnvironment)</text>
+                  <text x="68" y="148">=&gt;</text>
+                  <text x="112" y="148">claims,</text>
+                  <text x="188" y="148">?eventLogs</text>
+                  <text x="200" y="180">requestEvidence(handle,</text>
+                  <text x="344" y="180">?attEnvIDs,</text>
+                  <text x="460" y="180">?claimSelection)</text>
+                  <text x="104" y="212">collectClaims(claims,</text>
+                  <text x="260" y="212">?claimSelection)</text>
+                  <text x="68" y="228">=&gt;</text>
+                  <text x="144" y="228">collectedClaims</text>
+                  <text x="116" y="260">generateEvidence(handle,</text>
+                  <text x="264" y="260">?attEnvIDs,</text>
+                  <text x="380" y="260">collectedClaims)</text>
+                  <text x="68" y="276">=&gt;</text>
+                  <text x="116" y="276">evidence</text>
+                  <text x="100" y="308">{evidence,</text>
+                  <text x="192" y="308">?eventLogs}</text>
+                  <text x="248" y="340">[Evidence</text>
+                  <text x="332" y="340">Appraisal]</text>
+                  <text x="536" y="356">|</text>
+                  <text x="284" y="372">appraiseEvidence(evidence,</text>
+                  <text x="440" y="372">?eventLogs,</text>
+                  <text x="532" y="372">verInputs)</text>
+                  <text x="432" y="388">attestationResult</text>
+                  <text x="516" y="388">&lt;=</text>
+                </g>
+              </svg><a href="#section-7.1-2.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<p id="section-7.1-2">The Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1-3">The Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.1-4">In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.
-The Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
-<p id="section-7.1-5">The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-figure-1-challenge-response" class="selfRef">Figure 1: Challenge/Response Remote Attestation</a>
+          </figcaption></figure>
+</div>
+<p id="section-7.1-3">The Attester boots up and thereby produces Claims about its boot state and its operational state during runtime (cf. <a href="#terminology" class="auto internal xref">Section 2</a>), e.g., loaded applications, configurations, and environment variables.
+Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-4">The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
+Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
+A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1-5">In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce, such as a cryptographically strong random number.
+This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks; however, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+<p id="section-7.1-6">The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
 As a result, a single Attestation Key ID identifies a single Attesting Environment.
 Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
-Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
-<p id="section-7.1-6">The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
+Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
+<p id="section-7.1-7">The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
 The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
 If the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.
-For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
-<p id="section-7.1-7">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1-8">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
-For further reference see section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
-<p id="section-7.1-9">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
+For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+<p id="section-7.1-8">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1-9">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
+For further reference see section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+<p id="section-7.1-10">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
 Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
-The Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+The Verifier outputs Attestation Results.
+Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.<a href="#section-7.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1-11">Note: This diagram illustrates the canonical Challenge/Response interaction between Attester and Verifier.
+Variants that include a Relying Party (e.g., Passport or Background-Check models) are shown in subsequent sections.<a href="#section-7.1-11" class="pilcrow">¶</a></p>
 <div id="models-and-example-sequences-of-challengeresponse-remote-attestation">
 <section id="section-7.1.1">
           <h4 id="name-models-and-example-sequence">
@@ -1745,106 +1797,118 @@ In this model, the attestation sequence is a two-step procedure.
 In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy.
 The Verifier then gives back an Attestation Result to the Attester, which caches it.
 In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
-<div id="section-7.1.1.1-2">
-              <div class="alignLeft art-svg artwork" id="section-7.1.1.1-2.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="608" width="584" viewBox="0 0 584 608" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
-                  <path d="M 48,144 L 48,208" fill="none" stroke="black"></path>
-                  <path d="M 48,240 L 48,256" fill="none" stroke="black"></path>
-                  <path d="M 48,304 L 48,352" fill="none" stroke="black"></path>
-                  <path d="M 48,384 L 48,512" fill="none" stroke="black"></path>
-                  <path d="M 48,544 L 48,592" fill="none" stroke="black"></path>
-                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 312,32 L 312,64" fill="none" stroke="black"></path>
-                  <path d="M 360,64 L 360,80" fill="none" stroke="black"></path>
-                  <path d="M 360,112 L 360,160" fill="none" stroke="black"></path>
-                  <path d="M 360,208 L 360,352" fill="none" stroke="black"></path>
-                  <path d="M 360,432 L 360,488" fill="none" stroke="black"></path>
-                  <path d="M 360,544 L 360,592" fill="none" stroke="black"></path>
-                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 440,32 L 440,64" fill="none" stroke="black"></path>
-                  <path d="M 456,400 L 456,408" fill="none" stroke="black"></path>
-                  <path d="M 504,64 L 504,80" fill="none" stroke="black"></path>
-                  <path d="M 504,112 L 504,352" fill="none" stroke="black"></path>
-                  <path d="M 504,384 L 504,512" fill="none" stroke="black"></path>
-                  <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
-                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-                  <path d="M 312,32 L 400,32" fill="none" stroke="black"></path>
-                  <path d="M 440,32 L 568,32" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 312,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 440,64 L 568,64" fill="none" stroke="black"></path>
-                  <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
-                  <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
-                  <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
-                  <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
-                  <path d="M 56,176 L 248,176" fill="none" stroke="black"></path>
-                  <path d="M 248,336 L 352,336" fill="none" stroke="black"></path>
-                  <path d="M 8,366 L 208,366" fill="none" stroke="black"></path>
-                  <path d="M 8,370 L 208,370" fill="none" stroke="black"></path>
-                  <path d="M 376,366 L 576,366" fill="none" stroke="black"></path>
-                  <path d="M 376,370 L 576,370" fill="none" stroke="black"></path>
-                  <path d="M 56,464 L 184,464" fill="none" stroke="black"></path>
-                  <path d="M 304,496 L 496,496" fill="none" stroke="black"></path>
-                  <path d="M 8,526 L 160,526" fill="none" stroke="black"></path>
-                  <path d="M 8,530 L 160,530" fill="none" stroke="black"></path>
-                  <path d="M 416,526 L 576,526" fill="none" stroke="black"></path>
-                  <path d="M 416,530 L 576,530" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="504,496 492,490.4 492,501.6" fill="black" transform="rotate(0,496,496)"></polygon>
-                  <polygon class="arrowhead" points="360,336 348,330.4 348,341.6" fill="black" transform="rotate(0,352,336)"></polygon>
-                  <polygon class="arrowhead" points="64,464 52,458.4 52,469.6" fill="black" transform="rotate(180,56,464)"></polygon>
-                  <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
-                  <g class="text">
-                    <text x="52" y="52">Attester</text>
-                    <text x="356" y="52">Verifier</text>
-                    <text x="480" y="52">Relying</text>
-                    <text x="536" y="52">Party</text>
-                    <text x="176" y="100">[Evidence</text>
-                    <text x="260" y="100">Generation</text>
-                    <text x="320" y="100">and</text>
-                    <text x="384" y="100">Conveyance]</text>
-                    <text x="48" y="116">|</text>
-                    <text x="164" y="132">generateClaims(attestingEnvironment)</text>
-                    <text x="68" y="148">=&gt;</text>
-                    <text x="112" y="148">claims,</text>
-                    <text x="188" y="148">?eventLogs</text>
-                    <text x="352" y="180">requestEvidence(handle,</text>
-                    <text x="312" y="196">?attEnvIDs,</text>
-                    <text x="428" y="196">?claimSelection)</text>
-                    <text x="104" y="228">collectClaims(claims,</text>
-                    <text x="260" y="228">?claimSelection)</text>
-                    <text x="68" y="244">=&gt;</text>
-                    <text x="144" y="244">collectedClaims</text>
-                    <text x="116" y="276">generateEvidence(handle,</text>
-                    <text x="88" y="292">?attEnvIDs,</text>
-                    <text x="204" y="292">collectedClaims)</text>
-                    <text x="68" y="308">=&gt;</text>
-                    <text x="116" y="308">evidence</text>
-                    <text x="100" y="340">{evidence,</text>
-                    <text x="192" y="340">?eventLogs}</text>
-                    <text x="248" y="372">[Evidence</text>
-                    <text x="332" y="372">Appraisal]</text>
-                    <text x="360" y="388">|</text>
-                    <text x="352" y="404">appraiseEvidence(evidence</text>
-                    <text x="328" y="420">?eventLogs,</text>
-                    <text x="420" y="420">verInputs)</text>
-                    <text x="256" y="436">attestationResult</text>
-                    <text x="340" y="436">&lt;=</text>
-                    <text x="272" y="468">{attestationResult}</text>
-                    <text x="100" y="500">{evidence,</text>
-                    <text x="220" y="500">attestationResult}</text>
-                    <text x="360" y="516">|</text>
-                    <text x="212" y="532">[Attestation</text>
-                    <text x="292" y="532">Result</text>
-                    <text x="368" y="532">Generation]</text>
-                    <text x="504" y="548">|</text>
-                    <text x="484" y="564">appraiseResult(policy,</text>
-                    <text x="492" y="580">attestationResult)</text>
-                    <text x="504" y="596">|</text>
-                  </g>
-                </svg><a href="#section-7.1.1.1-2.1" class="pilcrow">¶</a>
+<span id="name-figure-2-passport-model-for"></span><div id="fig-passport">
+<figure id="figure-2">
+              <div id="section-7.1.1.1-2.1">
+                <div class="alignLeft art-svg artwork" id="section-7.1.1.1-2.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="704" width="584" viewBox="0 0 584 704" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                    <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                    <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                    <path d="M 48,144 L 48,224" fill="none" stroke="black"></path>
+                    <path d="M 48,272 L 48,288" fill="none" stroke="black"></path>
+                    <path d="M 48,336 L 48,384" fill="none" stroke="black"></path>
+                    <path d="M 48,416 L 48,512" fill="none" stroke="black"></path>
+                    <path d="M 48,544 L 48,688" fill="none" stroke="black"></path>
+                    <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                    <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
+                    <path d="M 336,112 L 336,168" fill="none" stroke="black"></path>
+                    <path d="M 336,184 L 336,360" fill="none" stroke="black"></path>
+                    <path d="M 336,416 L 336,512" fill="none" stroke="black"></path>
+                    <path d="M 336,568 L 336,624" fill="none" stroke="black"></path>
+                    <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 480,32 L 480,64" fill="none" stroke="black"></path>
+                    <path d="M 528,64 L 528,80" fill="none" stroke="black"></path>
+                    <path d="M 528,112 L 528,160" fill="none" stroke="black"></path>
+                    <path d="M 528,240 L 528,384" fill="none" stroke="black"></path>
+                    <path d="M 528,496 L 528,512" fill="none" stroke="black"></path>
+                    <path d="M 528,544 L 528,688" fill="none" stroke="black"></path>
+                    <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
+                    <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                    <path d="M 480,32 L 568,32" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 480,64 L 568,64" fill="none" stroke="black"></path>
+                    <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+                    <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+                    <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+                    <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+                    <path d="M 56,176 L 424,176" fill="none" stroke="black"></path>
+                    <path d="M 248,368 L 520,368" fill="none" stroke="black"></path>
+                    <path d="M 8,398 L 208,398" fill="none" stroke="black"></path>
+                    <path d="M 8,402 L 208,402" fill="none" stroke="black"></path>
+                    <path d="M 376,398 L 576,398" fill="none" stroke="black"></path>
+                    <path d="M 376,402 L 576,402" fill="none" stroke="black"></path>
+                    <path d="M 8,526 L 104,526" fill="none" stroke="black"></path>
+                    <path d="M 8,530 L 104,530" fill="none" stroke="black"></path>
+                    <path d="M 472,526 L 576,526" fill="none" stroke="black"></path>
+                    <path d="M 472,530 L 576,530" fill="none" stroke="black"></path>
+                    <path d="M 64,560 L 352,560" fill="none" stroke="black"></path>
+                    <path d="M 304,608 L 328,608" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="528,368 516,362.4 516,373.6" fill="black" transform="rotate(0,520,368)"></polygon>
+                    <polygon class="arrowhead" points="336,608 324,602.4 324,613.6" fill="black" transform="rotate(0,328,608)"></polygon>
+                    <polygon class="arrowhead" points="72,560 60,554.4 60,565.6" fill="black" transform="rotate(180,64,560)"></polygon>
+                    <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                    <g class="text">
+                      <text x="52" y="52">Attester</text>
+                      <text x="312" y="52">Relying</text>
+                      <text x="368" y="52">Party</text>
+                      <text x="524" y="52">Verifier</text>
+                      <text x="176" y="100">[Evidence</text>
+                      <text x="260" y="100">Generation</text>
+                      <text x="320" y="100">and</text>
+                      <text x="384" y="100">Conveyance]</text>
+                      <text x="48" y="116">|</text>
+                      <text x="164" y="132">generateClaims(attestingEnvironment)</text>
+                      <text x="68" y="148">=&gt;</text>
+                      <text x="116" y="148">{claims,</text>
+                      <text x="200" y="148">?eventLogs}</text>
+                      <text x="500" y="180">requestEvidence(</text>
+                      <text x="480" y="196">handle,</text>
+                      <text x="496" y="212">?attEnvIDs,</text>
+                      <text x="516" y="228">?claimSelection)</text>
+                      <text x="104" y="244">collectClaims(claims,</text>
+                      <text x="108" y="260">?claimSelection)</text>
+                      <text x="68" y="276">=&gt;</text>
+                      <text x="144" y="276">collectedClaims</text>
+                      <text x="116" y="308">generateEvidence(handle,</text>
+                      <text x="88" y="324">?attEnvIDs,</text>
+                      <text x="204" y="324">collectedClaims)</text>
+                      <text x="68" y="340">=&gt;</text>
+                      <text x="116" y="340">evidence</text>
+                      <text x="100" y="372">{evidence,</text>
+                      <text x="192" y="372">?eventLogs}</text>
+                      <text x="336" y="388">|</text>
+                      <text x="248" y="404">[Evidence</text>
+                      <text x="332" y="404">Appraisal]</text>
+                      <text x="528" y="420">|</text>
+                      <text x="496" y="436">appraiseEvidence(</text>
+                      <text x="480" y="452">evidence,</text>
+                      <text x="488" y="468">?eventLogs,</text>
+                      <text x="484" y="484">verInputs)</text>
+                      <text x="424" y="500">attestationResult</text>
+                      <text x="508" y="500">&lt;=</text>
+                      <text x="156" y="532">[Attestation</text>
+                      <text x="236" y="532">Result</text>
+                      <text x="308" y="532">Conveyance</text>
+                      <text x="368" y="532">and</text>
+                      <text x="428" y="532">Appraisal]</text>
+                      <text x="336" y="548">|</text>
+                      <text x="440" y="564">{attestationResult}</text>
+                      <text x="100" y="612">{evidence,</text>
+                      <text x="220" y="612">attestationResult}</text>
+                      <text x="336" y="644">appraiseResult(</text>
+                      <text x="320" y="660">policy,</text>
+                      <text x="364" y="676">attestationResult)</text>
+                      <text x="336" y="692">|</text>
+                    </g>
+                  </svg><a href="#section-7.1.1.1-2.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-figure-2-passport-model-for" class="selfRef">Figure 2: Passport Model for Challenge/Response Remote Attestation</a>
+              </figcaption></figure>
 </div>
 </section>
 </div>
@@ -1860,106 +1924,114 @@ Upon receiving the Evidence, the Relying Party initiates a session with the Veri
 Once the session is established, it forwards the received Evidence to the Verifier.
 The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party.
 The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.<a href="#section-7.1.1.2-1" class="pilcrow">¶</a></p>
-<div id="section-7.1.1.2-2">
-              <div class="alignLeft art-svg artwork" id="section-7.1.1.2-2.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="656" width="584" viewBox="0 0 584 656" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
-                  <path d="M 48,112 L 48,160" fill="none" stroke="black"></path>
-                  <path d="M 48,192 L 48,208" fill="none" stroke="black"></path>
-                  <path d="M 48,256 L 48,272" fill="none" stroke="black"></path>
-                  <path d="M 48,320 L 48,368" fill="none" stroke="black"></path>
-                  <path d="M 48,400 L 48,560" fill="none" stroke="black"></path>
-                  <path d="M 48,592 L 48,640" fill="none" stroke="black"></path>
-                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
-                  <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
-                  <path d="M 336,160 L 336,368" fill="none" stroke="black"></path>
-                  <path d="M 336,400 L 336,560" fill="none" stroke="black"></path>
-                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 480,32 L 480,64" fill="none" stroke="black"></path>
-                  <path d="M 528,64 L 528,80" fill="none" stroke="black"></path>
-                  <path d="M 528,112 L 528,368" fill="none" stroke="black"></path>
-                  <path d="M 528,400 L 528,448" fill="none" stroke="black"></path>
-                  <path d="M 528,496 L 528,560" fill="none" stroke="black"></path>
-                  <path d="M 528,592 L 528,640" fill="none" stroke="black"></path>
-                  <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
-                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
-                  <path d="M 480,32 L 568,32" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 480,64 L 568,64" fill="none" stroke="black"></path>
-                  <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
-                  <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
-                  <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
-                  <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
-                  <path d="M 56,128 L 248,128" fill="none" stroke="black"></path>
-                  <path d="M 248,352 L 328,352" fill="none" stroke="black"></path>
-                  <path d="M 8,382 L 208,382" fill="none" stroke="black"></path>
-                  <path d="M 8,386 L 208,386" fill="none" stroke="black"></path>
-                  <path d="M 376,382 L 576,382" fill="none" stroke="black"></path>
-                  <path d="M 376,386 L 576,386" fill="none" stroke="black"></path>
-                  <path d="M 456,432 L 520,432" fill="none" stroke="black"></path>
-                  <path d="M 344,528 L 424,528" fill="none" stroke="black"></path>
-                  <path d="M 8,574 L 160,574" fill="none" stroke="black"></path>
-                  <path d="M 8,578 L 160,578" fill="none" stroke="black"></path>
-                  <path d="M 416,574 L 576,574" fill="none" stroke="black"></path>
-                  <path d="M 416,578 L 576,578" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="528,432 516,426.4 516,437.6" fill="black" transform="rotate(0,520,432)"></polygon>
-                  <polygon class="arrowhead" points="352,528 340,522.4 340,533.6" fill="black" transform="rotate(180,344,528)"></polygon>
-                  <polygon class="arrowhead" points="336,352 324,346.4 324,357.6" fill="black" transform="rotate(0,328,352)"></polygon>
-                  <polygon class="arrowhead" points="64,128 52,122.4 52,133.6" fill="black" transform="rotate(180,56,128)"></polygon>
-                  <g class="text">
-                    <text x="52" y="52">Attester</text>
-                    <text x="312" y="52">Relying</text>
-                    <text x="368" y="52">Party</text>
-                    <text x="524" y="52">Verifier</text>
-                    <text x="176" y="100">[Evidence</text>
-                    <text x="260" y="100">Generation</text>
-                    <text x="320" y="100">and</text>
-                    <text x="384" y="100">Conveyance]</text>
-                    <text x="336" y="116">|</text>
-                    <text x="352" y="132">requestEvidence(handle,</text>
-                    <text x="312" y="148">?attEnvIDs,</text>
-                    <text x="428" y="148">?claimSelection)</text>
-                    <text x="164" y="180">generateClaims(attestingEnvironment)</text>
-                    <text x="68" y="196">=&gt;</text>
-                    <text x="116" y="196">{claims,</text>
-                    <text x="200" y="196">?eventLogs}</text>
-                    <text x="104" y="228">collectClaims(claims,</text>
-                    <text x="108" y="244">?claimSelection)</text>
-                    <text x="68" y="260">=&gt;</text>
-                    <text x="144" y="260">collectedClaims</text>
-                    <text x="116" y="292">generateEvidence(handle,</text>
-                    <text x="88" y="308">?attEnvIDs,</text>
-                    <text x="204" y="308">collectedClaims)</text>
-                    <text x="68" y="324">=&gt;</text>
-                    <text x="116" y="324">evidence</text>
-                    <text x="100" y="356">{evidence,</text>
-                    <text x="192" y="356">?eventLogs}</text>
-                    <text x="248" y="388">[Evidence</text>
-                    <text x="332" y="388">Appraisal]</text>
-                    <text x="380" y="420">{handle,</text>
-                    <text x="456" y="420">evidence,</text>
-                    <text x="400" y="436">?eventLogs}</text>
-                    <text x="468" y="468">appraiseEvidence(evidence,</text>
-                    <text x="448" y="484">?eventLogs,</text>
-                    <text x="540" y="484">verInputs)</text>
-                    <text x="424" y="500">attestationResult</text>
-                    <text x="508" y="500">&lt;=</text>
-                    <text x="476" y="532">{evidence,</text>
-                    <text x="444" y="548">attestationResult}</text>
-                    <text x="212" y="580">[Attestation</text>
-                    <text x="292" y="580">Result</text>
-                    <text x="368" y="580">Generation]</text>
-                    <text x="336" y="596">|</text>
-                    <text x="332" y="612">appraiseResult(policy,</text>
-                    <text x="332" y="628">attestationResult)</text>
-                    <text x="336" y="644">|</text>
-                  </g>
-                </svg><a href="#section-7.1.1.2-2.1" class="pilcrow">¶</a>
+<span id="name-figure-3-background-check-m"></span><div id="fig-background-check">
+<figure id="figure-3">
+              <div id="section-7.1.1.2-2.1">
+                <div class="alignLeft art-svg artwork" id="section-7.1.1.2-2.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="688" width="584" viewBox="0 0 584 688" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                    <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                    <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                    <path d="M 48,144 L 48,240" fill="none" stroke="black"></path>
+                    <path d="M 48,288 L 48,304" fill="none" stroke="black"></path>
+                    <path d="M 48,352 L 48,432" fill="none" stroke="black"></path>
+                    <path d="M 48,464 L 48,560" fill="none" stroke="black"></path>
+                    <path d="M 48,592 L 48,672" fill="none" stroke="black"></path>
+                    <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                    <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
+                    <path d="M 336,112 L 336,160" fill="none" stroke="black"></path>
+                    <path d="M 336,240 L 336,432" fill="none" stroke="black"></path>
+                    <path d="M 336,464 L 336,560" fill="none" stroke="black"></path>
+                    <path d="M 336,592 L 336,624" fill="none" stroke="black"></path>
+                    <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 480,32 L 480,64" fill="none" stroke="black"></path>
+                    <path d="M 528,64 L 528,80" fill="none" stroke="black"></path>
+                    <path d="M 528,112 L 528,432" fill="none" stroke="black"></path>
+                    <path d="M 528,544 L 528,560" fill="none" stroke="black"></path>
+                    <path d="M 528,592 L 528,672" fill="none" stroke="black"></path>
+                    <path d="M 568,32 L 568,64" fill="none" stroke="black"></path>
+                    <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                    <path d="M 480,32 L 568,32" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 480,64 L 568,64" fill="none" stroke="black"></path>
+                    <path d="M 8,94 L 136,94" fill="none" stroke="black"></path>
+                    <path d="M 8,98 L 136,98" fill="none" stroke="black"></path>
+                    <path d="M 432,94 L 576,94" fill="none" stroke="black"></path>
+                    <path d="M 432,98 L 576,98" fill="none" stroke="black"></path>
+                    <path d="M 56,176 L 264,176" fill="none" stroke="black"></path>
+                    <path d="M 248,384 L 328,384" fill="none" stroke="black"></path>
+                    <path d="M 456,416 L 520,416" fill="none" stroke="black"></path>
+                    <path d="M 8,446 L 208,446" fill="none" stroke="black"></path>
+                    <path d="M 8,450 L 208,450" fill="none" stroke="black"></path>
+                    <path d="M 376,446 L 576,446" fill="none" stroke="black"></path>
+                    <path d="M 376,450 L 576,450" fill="none" stroke="black"></path>
+                    <path d="M 8,574 L 104,574" fill="none" stroke="black"></path>
+                    <path d="M 8,578 L 104,578" fill="none" stroke="black"></path>
+                    <path d="M 472,574 L 576,574" fill="none" stroke="black"></path>
+                    <path d="M 472,578 L 576,578" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="528,416 516,410.4 516,421.6" fill="black" transform="rotate(0,520,416)"></polygon>
+                    <polygon class="arrowhead" points="336,384 324,378.4 324,389.6" fill="black" transform="rotate(0,328,384)"></polygon>
+                    <polygon class="arrowhead" points="64,176 52,170.4 52,181.6" fill="black" transform="rotate(180,56,176)"></polygon>
+                    <g class="text">
+                      <text x="52" y="52">Attester</text>
+                      <text x="312" y="52">Relying</text>
+                      <text x="368" y="52">Party</text>
+                      <text x="524" y="52">Verifier</text>
+                      <text x="176" y="100">[Evidence</text>
+                      <text x="260" y="100">Generation</text>
+                      <text x="320" y="100">and</text>
+                      <text x="384" y="100">Conveyance]</text>
+                      <text x="48" y="116">|</text>
+                      <text x="164" y="132">generateClaims(attestingEnvironment)</text>
+                      <text x="68" y="148">=&gt;</text>
+                      <text x="116" y="148">{claims,</text>
+                      <text x="200" y="148">?eventLogs}</text>
+                      <text x="340" y="180">requestEvidence(</text>
+                      <text x="320" y="196">handle,</text>
+                      <text x="336" y="212">?attEnvIDs,</text>
+                      <text x="356" y="228">?claimSelection)</text>
+                      <text x="104" y="260">collectClaims(claims,</text>
+                      <text x="108" y="276">?claimSelection)</text>
+                      <text x="68" y="292">=&gt;</text>
+                      <text x="144" y="292">collectedClaims</text>
+                      <text x="116" y="324">generateEvidence(handle,</text>
+                      <text x="88" y="340">?attEnvIDs,</text>
+                      <text x="204" y="340">collectedClaims)</text>
+                      <text x="68" y="356">=&gt;</text>
+                      <text x="116" y="356">evidence</text>
+                      <text x="100" y="388">{evidence,</text>
+                      <text x="192" y="388">?eventLogs}</text>
+                      <text x="380" y="404">{handle,</text>
+                      <text x="456" y="404">evidence,</text>
+                      <text x="400" y="420">?eventLogs}</text>
+                      <text x="248" y="452">[Evidence</text>
+                      <text x="332" y="452">Appraisal]</text>
+                      <text x="528" y="468">|</text>
+                      <text x="496" y="484">appraiseEvidence(</text>
+                      <text x="480" y="500">evidence,</text>
+                      <text x="488" y="516">?eventLogs,</text>
+                      <text x="484" y="532">verInputs)</text>
+                      <text x="424" y="548">attestationResult</text>
+                      <text x="508" y="548">&lt;=</text>
+                      <text x="156" y="580">[Attestation</text>
+                      <text x="236" y="580">Result</text>
+                      <text x="308" y="580">Conveyance</text>
+                      <text x="368" y="580">and</text>
+                      <text x="428" y="580">Appraisal]</text>
+                      <text x="348" y="612">&lt;-</text>
+                      <text x="440" y="612">{attestationResult}</text>
+                      <text x="332" y="644">appraiseResult(policy,</text>
+                      <text x="332" y="660">attestationResult)</text>
+                      <text x="336" y="676">|</text>
+                    </g>
+                  </svg><a href="#section-7.1.1.2-2.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-figure-3-background-check-m" class="selfRef">Figure 3: Background-Check Model for Challenge/Response Remote Attestation</a>
+              </figcaption></figure>
 </div>
 </section>
 </div>
@@ -1972,173 +2044,179 @@ The Relying Party then checks the Attestation Result against its own appraisal p
         <h3 id="name-uni-directional-remote-atte">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-uni-directional-remote-atte" class="section-name selfRef">Uni-Directional Remote Attestation</a>
         </h3>
-<div id="section-7.2-1">
-          <div class="alignLeft art-svg artwork" id="section-7.2-1.1">
+<span id="name-figure-4-uni-directional-re"></span><div id="fig-unidirectional">
+<figure id="figure-4">
+          <div id="section-7.2-1.1">
+            <div class="alignLeft art-svg artwork" id="section-7.2-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="992" width="584" viewBox="0 0 584 992" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-              <path d="M 8,112 L 8,944" fill="none" stroke="black"></path>
-              <path d="M 16,608 L 16,928" fill="none" stroke="black"></path>
-              <path d="M 48,64 L 48,88" fill="none" stroke="black"></path>
-              <path d="M 48,144 L 48,240" fill="none" stroke="black"></path>
-              <path d="M 48,304 L 48,320" fill="none" stroke="black"></path>
-              <path d="M 48,352 L 48,368" fill="none" stroke="black"></path>
-              <path d="M 48,400 L 48,448" fill="none" stroke="black"></path>
-              <path d="M 48,480 L 48,544" fill="none" stroke="black"></path>
-              <path d="M 48,672 L 48,688" fill="none" stroke="black"></path>
-              <path d="M 48,720 L 48,736" fill="none" stroke="black"></path>
-              <path d="M 48,768 L 48,816" fill="none" stroke="black"></path>
-              <path d="M 48,848 L 48,936" fill="none" stroke="black"></path>
-              <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-              <path d="M 288,32 L 288,64" fill="none" stroke="black"></path>
-              <path d="M 368,64 L 368,88" fill="none" stroke="black"></path>
-              <path d="M 368,160 L 368,208" fill="none" stroke="black"></path>
-              <path d="M 456,32 L 456,64" fill="none" stroke="black"></path>
-              <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
-              <path d="M 536,64 L 536,88" fill="none" stroke="black"></path>
-              <path d="M 536,144 L 536,240" fill="none" stroke="black"></path>
-              <path d="M 536,272 L 536,448" fill="none" stroke="black"></path>
-              <path d="M 536,640 L 536,816" fill="none" stroke="black"></path>
-              <path d="M 536,912 L 536,936" fill="none" stroke="black"></path>
-              <path d="M 552,880 L 552,888" fill="none" stroke="black"></path>
-              <path d="M 560,512 L 560,520" fill="none" stroke="black"></path>
-              <path d="M 568,608 L 568,928" fill="none" stroke="black"></path>
-              <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
-              <path d="M 576,112 L 576,944" fill="none" stroke="black"></path>
-              <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-              <path d="M 288,32 L 456,32" fill="none" stroke="black"></path>
-              <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
-              <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-              <path d="M 288,64 L 456,64" fill="none" stroke="black"></path>
-              <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-              <path d="M 24,96 L 80,96" fill="none" stroke="black"></path>
-              <path d="M 136,96 L 560,96" fill="none" stroke="black"></path>
-              <path d="M 24,126 L 208,126" fill="none" stroke="black"></path>
-              <path d="M 24,130 L 208,130" fill="none" stroke="black"></path>
-              <path d="M 368,126 L 560,126" fill="none" stroke="black"></path>
-              <path d="M 368,130 L 560,130" fill="none" stroke="black"></path>
-              <path d="M 56,192 L 280,192" fill="none" stroke="black"></path>
-              <path d="M 456,192 L 528,192" fill="none" stroke="black"></path>
-              <path d="M 24,254 L 136,254" fill="none" stroke="black"></path>
-              <path d="M 24,258 L 136,258" fill="none" stroke="black"></path>
-              <path d="M 432,254 L 560,254" fill="none" stroke="black"></path>
-              <path d="M 432,258 L 560,258" fill="none" stroke="black"></path>
-              <path d="M 240,432 L 528,432" fill="none" stroke="black"></path>
-              <path d="M 24,462 L 208,462" fill="none" stroke="black"></path>
-              <path d="M 24,466 L 208,466" fill="none" stroke="black"></path>
-              <path d="M 376,462 L 560,462" fill="none" stroke="black"></path>
-              <path d="M 376,466 L 560,466" fill="none" stroke="black"></path>
-              <path d="M 32,592 L 80,592" fill="none" stroke="black"></path>
-              <path d="M 136,592 L 552,592" fill="none" stroke="black"></path>
-              <path d="M 32,622 L 120,622" fill="none" stroke="black"></path>
-              <path d="M 32,626 L 120,626" fill="none" stroke="black"></path>
-              <path d="M 464,622 L 552,622" fill="none" stroke="black"></path>
-              <path d="M 464,626 L 552,626" fill="none" stroke="black"></path>
-              <path d="M 280,800 L 528,800" fill="none" stroke="black"></path>
-              <path d="M 32,830 L 184,830" fill="none" stroke="black"></path>
-              <path d="M 32,834 L 184,834" fill="none" stroke="black"></path>
-              <path d="M 400,830 L 552,830" fill="none" stroke="black"></path>
-              <path d="M 400,834 L 552,834" fill="none" stroke="black"></path>
-              <path d="M 32,944 L 552,944" fill="none" stroke="black"></path>
-              <path d="M 24,960 L 560,960" fill="none" stroke="black"></path>
-              <path d="M 24,96 C 15.16936,96 8,103.16936 8,112" fill="none" stroke="black"></path>
-              <path d="M 560,96 C 568.83064,96 576,103.16936 576,112" fill="none" stroke="black"></path>
-              <path d="M 32,592 C 23.16936,592 16,599.16936 16,608" fill="none" stroke="black"></path>
-              <path d="M 552,592 C 560.83064,592 568,599.16936 568,608" fill="none" stroke="black"></path>
-              <path d="M 32,944 C 23.16936,944 16,936.83064 16,928" fill="none" stroke="black"></path>
-              <path d="M 552,944 C 560.83064,944 568,936.83064 568,928" fill="none" stroke="black"></path>
-              <path d="M 24,960 C 15.16936,960 8,952.83064 8,944" fill="none" stroke="black"></path>
-              <path d="M 560,960 C 568.83064,960 576,952.83064 576,944" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="536,800 524,794.4 524,805.6" fill="black" transform="rotate(0,528,800)"></polygon>
-              <polygon class="arrowhead" points="536,432 524,426.4 524,437.6" fill="black" transform="rotate(0,528,432)"></polygon>
-              <polygon class="arrowhead" points="536,192 524,186.4 524,197.6" fill="black" transform="rotate(0,528,192)"></polygon>
-              <polygon class="arrowhead" points="64,192 52,186.4 52,197.6" fill="black" transform="rotate(180,56,192)"></polygon>
-              <g class="text">
-                <text x="52" y="52">Attester</text>
-                <text x="324" y="52">Handle</text>
-                <text x="400" y="52">Distributor</text>
-                <text x="532" y="52">Verifier</text>
-                <text x="108" y="100">[loop]</text>
-                <text x="48" y="116">|</text>
-                <text x="536" y="116">|</text>
-                <text x="240" y="132">[Handle</text>
-                <text x="320" y="132">Generation]</text>
-                <text x="404" y="148">generateHandle()</text>
-                <text x="388" y="164">=&gt;</text>
-                <text x="428" y="164">handle</text>
-                <text x="324" y="196">{handle}</text>
-                <text x="412" y="196">{handle}</text>
-                <text x="368" y="228">x</text>
-                <text x="176" y="260">[Evidence</text>
-                <text x="260" y="260">Generation</text>
-                <text x="320" y="260">and</text>
-                <text x="384" y="260">Conveyance]</text>
-                <text x="48" y="276">|</text>
-                <text x="164" y="292">generateClaims(attestingEnvironment)</text>
-                <text x="68" y="308">=&gt;</text>
-                <text x="112" y="308">claims,</text>
-                <text x="184" y="308">eventLogs</text>
-                <text x="104" y="340">collectClaims(claims,</text>
-                <text x="260" y="340">?claimSelection)</text>
-                <text x="68" y="356">=&gt;</text>
-                <text x="144" y="356">collectedClaims</text>
-                <text x="116" y="388">generateEvidence(handle,</text>
-                <text x="260" y="388">attEnvIDs,</text>
-                <text x="372" y="388">collectedClaims)</text>
-                <text x="68" y="404">=&gt;</text>
-                <text x="116" y="404">evidence</text>
-                <text x="100" y="436">{evidence,</text>
-                <text x="188" y="436">eventLogs}</text>
-                <text x="248" y="468">[Evidence</text>
-                <text x="332" y="468">Appraisal]</text>
-                <text x="536" y="484">|</text>
-                <text x="460" y="500">appraiseEvidence(evidence,</text>
-                <text x="520" y="516">eventLogs</text>
-                <text x="524" y="532">verInputs)</text>
-                <text x="432" y="548">attestationResult</text>
-                <text x="516" y="548">&lt;=</text>
-                <text x="536" y="548">|</text>
-                <text x="48" y="564">~</text>
-                <text x="536" y="564">~</text>
-                <text x="48" y="580">|</text>
-                <text x="536" y="580">|</text>
-                <text x="108" y="596">[loop]</text>
-                <text x="48" y="612">|</text>
-                <text x="536" y="612">|</text>
-                <text x="148" y="628">[Delta</text>
-                <text x="212" y="628">Evidence</text>
-                <text x="292" y="628">Generation</text>
-                <text x="352" y="628">and</text>
-                <text x="416" y="628">Conveyance]</text>
-                <text x="48" y="644">|</text>
-                <text x="172" y="660">generateClaims(attestingEnvironment)</text>
-                <text x="68" y="676">=&gt;</text>
-                <text x="132" y="676">claimsDelta,</text>
-                <text x="244" y="676">eventLogsDelta</text>
-                <text x="132" y="708">collectClaims(claimsDelta,</text>
-                <text x="308" y="708">?claimSelection)</text>
-                <text x="68" y="724">=&gt;</text>
-                <text x="164" y="724">collectedClaimsDelta</text>
-                <text x="124" y="756">generateEvidence(handle,</text>
-                <text x="268" y="756">attEnvIDs,</text>
-                <text x="400" y="756">collectedClaimsDelta)</text>
-                <text x="68" y="772">=&gt;</text>
-                <text x="116" y="772">evidence</text>
-                <text x="100" y="804">{evidence,</text>
-                <text x="208" y="804">eventLogsDelta}</text>
-                <text x="212" y="836">[Delta</text>
-                <text x="276" y="836">Evidence</text>
-                <text x="356" y="836">Appraisal]</text>
-                <text x="536" y="852">|</text>
-                <text x="452" y="868">appraiseEvidence(evidence,</text>
-                <text x="492" y="884">eventLogsDelta</text>
-                <text x="516" y="900">verInputs)</text>
-                <text x="432" y="916">attestationResult</text>
-                <text x="516" y="916">&lt;=</text>
-                <text x="48" y="980">|</text>
-                <text x="536" y="980">|</text>
-              </g>
-            </svg><a href="#section-7.2-1.1" class="pilcrow">¶</a>
+                <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                <path d="M 8,112 L 8,944" fill="none" stroke="black"></path>
+                <path d="M 16,608 L 16,928" fill="none" stroke="black"></path>
+                <path d="M 48,64 L 48,88" fill="none" stroke="black"></path>
+                <path d="M 48,144 L 48,240" fill="none" stroke="black"></path>
+                <path d="M 48,304 L 48,320" fill="none" stroke="black"></path>
+                <path d="M 48,352 L 48,368" fill="none" stroke="black"></path>
+                <path d="M 48,400 L 48,448" fill="none" stroke="black"></path>
+                <path d="M 48,480 L 48,544" fill="none" stroke="black"></path>
+                <path d="M 48,672 L 48,688" fill="none" stroke="black"></path>
+                <path d="M 48,720 L 48,736" fill="none" stroke="black"></path>
+                <path d="M 48,768 L 48,816" fill="none" stroke="black"></path>
+                <path d="M 48,848 L 48,936" fill="none" stroke="black"></path>
+                <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 288,32 L 288,64" fill="none" stroke="black"></path>
+                <path d="M 368,64 L 368,88" fill="none" stroke="black"></path>
+                <path d="M 368,160 L 368,208" fill="none" stroke="black"></path>
+                <path d="M 456,32 L 456,64" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                <path d="M 536,64 L 536,88" fill="none" stroke="black"></path>
+                <path d="M 536,144 L 536,240" fill="none" stroke="black"></path>
+                <path d="M 536,272 L 536,448" fill="none" stroke="black"></path>
+                <path d="M 536,640 L 536,816" fill="none" stroke="black"></path>
+                <path d="M 536,912 L 536,936" fill="none" stroke="black"></path>
+                <path d="M 552,880 L 552,888" fill="none" stroke="black"></path>
+                <path d="M 560,512 L 560,520" fill="none" stroke="black"></path>
+                <path d="M 568,608 L 568,928" fill="none" stroke="black"></path>
+                <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 576,112 L 576,944" fill="none" stroke="black"></path>
+                <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                <path d="M 288,32 L 456,32" fill="none" stroke="black"></path>
+                <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                <path d="M 288,64 L 456,64" fill="none" stroke="black"></path>
+                <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                <path d="M 24,96 L 80,96" fill="none" stroke="black"></path>
+                <path d="M 136,96 L 560,96" fill="none" stroke="black"></path>
+                <path d="M 24,126 L 208,126" fill="none" stroke="black"></path>
+                <path d="M 24,130 L 208,130" fill="none" stroke="black"></path>
+                <path d="M 368,126 L 560,126" fill="none" stroke="black"></path>
+                <path d="M 368,130 L 560,130" fill="none" stroke="black"></path>
+                <path d="M 56,192 L 280,192" fill="none" stroke="black"></path>
+                <path d="M 456,192 L 528,192" fill="none" stroke="black"></path>
+                <path d="M 24,254 L 136,254" fill="none" stroke="black"></path>
+                <path d="M 24,258 L 136,258" fill="none" stroke="black"></path>
+                <path d="M 432,254 L 560,254" fill="none" stroke="black"></path>
+                <path d="M 432,258 L 560,258" fill="none" stroke="black"></path>
+                <path d="M 240,432 L 528,432" fill="none" stroke="black"></path>
+                <path d="M 24,462 L 208,462" fill="none" stroke="black"></path>
+                <path d="M 24,466 L 208,466" fill="none" stroke="black"></path>
+                <path d="M 376,462 L 560,462" fill="none" stroke="black"></path>
+                <path d="M 376,466 L 560,466" fill="none" stroke="black"></path>
+                <path d="M 32,592 L 80,592" fill="none" stroke="black"></path>
+                <path d="M 136,592 L 552,592" fill="none" stroke="black"></path>
+                <path d="M 32,622 L 120,622" fill="none" stroke="black"></path>
+                <path d="M 32,626 L 120,626" fill="none" stroke="black"></path>
+                <path d="M 464,622 L 552,622" fill="none" stroke="black"></path>
+                <path d="M 464,626 L 552,626" fill="none" stroke="black"></path>
+                <path d="M 280,800 L 528,800" fill="none" stroke="black"></path>
+                <path d="M 32,830 L 184,830" fill="none" stroke="black"></path>
+                <path d="M 32,834 L 184,834" fill="none" stroke="black"></path>
+                <path d="M 400,830 L 552,830" fill="none" stroke="black"></path>
+                <path d="M 400,834 L 552,834" fill="none" stroke="black"></path>
+                <path d="M 32,944 L 552,944" fill="none" stroke="black"></path>
+                <path d="M 24,960 L 560,960" fill="none" stroke="black"></path>
+                <path d="M 24,96 C 15.16936,96 8,103.16936 8,112" fill="none" stroke="black"></path>
+                <path d="M 560,96 C 568.83064,96 576,103.16936 576,112" fill="none" stroke="black"></path>
+                <path d="M 32,592 C 23.16936,592 16,599.16936 16,608" fill="none" stroke="black"></path>
+                <path d="M 552,592 C 560.83064,592 568,599.16936 568,608" fill="none" stroke="black"></path>
+                <path d="M 32,944 C 23.16936,944 16,936.83064 16,928" fill="none" stroke="black"></path>
+                <path d="M 552,944 C 560.83064,944 568,936.83064 568,928" fill="none" stroke="black"></path>
+                <path d="M 24,960 C 15.16936,960 8,952.83064 8,944" fill="none" stroke="black"></path>
+                <path d="M 560,960 C 568.83064,960 576,952.83064 576,944" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="536,800 524,794.4 524,805.6" fill="black" transform="rotate(0,528,800)"></polygon>
+                <polygon class="arrowhead" points="536,432 524,426.4 524,437.6" fill="black" transform="rotate(0,528,432)"></polygon>
+                <polygon class="arrowhead" points="536,192 524,186.4 524,197.6" fill="black" transform="rotate(0,528,192)"></polygon>
+                <polygon class="arrowhead" points="64,192 52,186.4 52,197.6" fill="black" transform="rotate(180,56,192)"></polygon>
+                <g class="text">
+                  <text x="52" y="52">Attester</text>
+                  <text x="324" y="52">Handle</text>
+                  <text x="400" y="52">Distributor</text>
+                  <text x="532" y="52">Verifier</text>
+                  <text x="108" y="100">[loop]</text>
+                  <text x="48" y="116">|</text>
+                  <text x="536" y="116">|</text>
+                  <text x="240" y="132">[Handle</text>
+                  <text x="320" y="132">Generation]</text>
+                  <text x="404" y="148">generateHandle()</text>
+                  <text x="388" y="164">=&gt;</text>
+                  <text x="428" y="164">handle</text>
+                  <text x="324" y="196">{handle}</text>
+                  <text x="412" y="196">{handle}</text>
+                  <text x="368" y="228">x</text>
+                  <text x="176" y="260">[Evidence</text>
+                  <text x="260" y="260">Generation</text>
+                  <text x="320" y="260">and</text>
+                  <text x="384" y="260">Conveyance]</text>
+                  <text x="48" y="276">|</text>
+                  <text x="164" y="292">generateClaims(attestingEnvironment)</text>
+                  <text x="68" y="308">=&gt;</text>
+                  <text x="112" y="308">claims,</text>
+                  <text x="184" y="308">eventLogs</text>
+                  <text x="104" y="340">collectClaims(claims,</text>
+                  <text x="260" y="340">?claimSelection)</text>
+                  <text x="68" y="356">=&gt;</text>
+                  <text x="144" y="356">collectedClaims</text>
+                  <text x="116" y="388">generateEvidence(handle,</text>
+                  <text x="260" y="388">attEnvIDs,</text>
+                  <text x="372" y="388">collectedClaims)</text>
+                  <text x="68" y="404">=&gt;</text>
+                  <text x="116" y="404">evidence</text>
+                  <text x="100" y="436">{evidence,</text>
+                  <text x="188" y="436">eventLogs}</text>
+                  <text x="248" y="468">[Evidence</text>
+                  <text x="332" y="468">Appraisal]</text>
+                  <text x="536" y="484">|</text>
+                  <text x="460" y="500">appraiseEvidence(evidence,</text>
+                  <text x="520" y="516">eventLogs</text>
+                  <text x="524" y="532">verInputs)</text>
+                  <text x="432" y="548">attestationResult</text>
+                  <text x="516" y="548">&lt;=</text>
+                  <text x="536" y="548">|</text>
+                  <text x="48" y="564">~</text>
+                  <text x="536" y="564">~</text>
+                  <text x="48" y="580">|</text>
+                  <text x="536" y="580">|</text>
+                  <text x="108" y="596">[loop]</text>
+                  <text x="48" y="612">|</text>
+                  <text x="536" y="612">|</text>
+                  <text x="148" y="628">[Delta</text>
+                  <text x="212" y="628">Evidence</text>
+                  <text x="292" y="628">Generation</text>
+                  <text x="352" y="628">and</text>
+                  <text x="416" y="628">Conveyance]</text>
+                  <text x="48" y="644">|</text>
+                  <text x="172" y="660">generateClaims(attestingEnvironment)</text>
+                  <text x="68" y="676">=&gt;</text>
+                  <text x="132" y="676">claimsDelta,</text>
+                  <text x="244" y="676">eventLogsDelta</text>
+                  <text x="132" y="708">collectClaims(claimsDelta,</text>
+                  <text x="308" y="708">?claimSelection)</text>
+                  <text x="68" y="724">=&gt;</text>
+                  <text x="164" y="724">collectedClaimsDelta</text>
+                  <text x="124" y="756">generateEvidence(handle,</text>
+                  <text x="268" y="756">attEnvIDs,</text>
+                  <text x="400" y="756">collectedClaimsDelta)</text>
+                  <text x="68" y="772">=&gt;</text>
+                  <text x="116" y="772">evidence</text>
+                  <text x="100" y="804">{evidence,</text>
+                  <text x="208" y="804">eventLogsDelta}</text>
+                  <text x="212" y="836">[Delta</text>
+                  <text x="276" y="836">Evidence</text>
+                  <text x="356" y="836">Appraisal]</text>
+                  <text x="536" y="852">|</text>
+                  <text x="452" y="868">appraiseEvidence(evidence,</text>
+                  <text x="492" y="884">eventLogsDelta</text>
+                  <text x="516" y="900">verInputs)</text>
+                  <text x="432" y="916">attestationResult</text>
+                  <text x="516" y="916">&lt;=</text>
+                  <text x="48" y="980">|</text>
+                  <text x="536" y="980">|</text>
+                </g>
+              </svg><a href="#section-7.2-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-figure-4-uni-directional-re" class="selfRef">Figure 4: Uni-Directional Remote Attestation</a>
+          </figcaption></figure>
 </div>
 <p id="section-7.2-2">Uni-Directional Remote Attestation procedures can be initiated both by the Attester and by the Verifier.
 Initiation by the Attester can result in unsolicited pushes of Evidence to the Verifier.
@@ -2203,167 +2281,173 @@ In the observer pattern, observers are directly connected to target resources wi
           <h4 id="name-streaming-remote-attestation">
 <a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-streaming-remote-attestation" class="section-name selfRef">Streaming Remote Attestation without a Broker</a>
           </h4>
-<div id="section-7.3.1-1">
-            <div class="alignLeft art-svg artwork" id="section-7.3.1-1.1">
+<span id="name-figure-5-streaming-remote-a"></span><div id="fig-streaming-without-broker">
+<figure id="figure-5">
+            <div id="section-7.3.1-1.1">
+              <div class="alignLeft art-svg artwork" id="section-7.3.1-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="992" width="584" viewBox="0 0 584 992" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-                <path d="M 8,112 L 8,944" fill="none" stroke="black"></path>
-                <path d="M 16,608 L 16,928" fill="none" stroke="black"></path>
-                <path d="M 48,64 L 48,88" fill="none" stroke="black"></path>
-                <path d="M 48,144 L 48,240" fill="none" stroke="black"></path>
-                <path d="M 48,304 L 48,320" fill="none" stroke="black"></path>
-                <path d="M 48,352 L 48,368" fill="none" stroke="black"></path>
-                <path d="M 48,400 L 48,448" fill="none" stroke="black"></path>
-                <path d="M 48,480 L 48,544" fill="none" stroke="black"></path>
-                <path d="M 48,672 L 48,688" fill="none" stroke="black"></path>
-                <path d="M 48,720 L 48,736" fill="none" stroke="black"></path>
-                <path d="M 48,768 L 48,816" fill="none" stroke="black"></path>
-                <path d="M 48,848 L 48,936" fill="none" stroke="black"></path>
-                <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-                <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
-                <path d="M 536,64 L 536,88" fill="none" stroke="black"></path>
-                <path d="M 536,176 L 536,240" fill="none" stroke="black"></path>
-                <path d="M 536,272 L 536,448" fill="none" stroke="black"></path>
-                <path d="M 536,640 L 536,816" fill="none" stroke="black"></path>
-                <path d="M 536,912 L 536,936" fill="none" stroke="black"></path>
-                <path d="M 552,880 L 552,888" fill="none" stroke="black"></path>
-                <path d="M 560,512 L 560,520" fill="none" stroke="black"></path>
-                <path d="M 568,608 L 568,928" fill="none" stroke="black"></path>
-                <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
-                <path d="M 576,112 L 576,944" fill="none" stroke="black"></path>
-                <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-                <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
-                <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-                <path d="M 24,96 L 80,96" fill="none" stroke="black"></path>
-                <path d="M 136,96 L 560,96" fill="none" stroke="black"></path>
-                <path d="M 24,126 L 208,126" fill="none" stroke="black"></path>
-                <path d="M 24,130 L 208,130" fill="none" stroke="black"></path>
-                <path d="M 368,126 L 560,126" fill="none" stroke="black"></path>
-                <path d="M 368,130 L 560,130" fill="none" stroke="black"></path>
-                <path d="M 56,208 L 152,208" fill="none" stroke="black"></path>
-                <path d="M 136,224 L 528,224" fill="none" stroke="black"></path>
-                <path d="M 24,254 L 136,254" fill="none" stroke="black"></path>
-                <path d="M 24,258 L 136,258" fill="none" stroke="black"></path>
-                <path d="M 432,254 L 560,254" fill="none" stroke="black"></path>
-                <path d="M 432,258 L 560,258" fill="none" stroke="black"></path>
-                <path d="M 304,432 L 528,432" fill="none" stroke="black"></path>
-                <path d="M 24,462 L 208,462" fill="none" stroke="black"></path>
-                <path d="M 24,466 L 208,466" fill="none" stroke="black"></path>
-                <path d="M 376,462 L 560,462" fill="none" stroke="black"></path>
-                <path d="M 376,466 L 560,466" fill="none" stroke="black"></path>
-                <path d="M 32,592 L 88,592" fill="none" stroke="black"></path>
-                <path d="M 144,592 L 552,592" fill="none" stroke="black"></path>
-                <path d="M 32,622 L 120,622" fill="none" stroke="black"></path>
-                <path d="M 32,626 L 120,626" fill="none" stroke="black"></path>
-                <path d="M 464,622 L 552,622" fill="none" stroke="black"></path>
-                <path d="M 464,626 L 552,626" fill="none" stroke="black"></path>
-                <path d="M 280,800 L 528,800" fill="none" stroke="black"></path>
-                <path d="M 32,830 L 184,830" fill="none" stroke="black"></path>
-                <path d="M 32,834 L 184,834" fill="none" stroke="black"></path>
-                <path d="M 400,830 L 552,830" fill="none" stroke="black"></path>
-                <path d="M 400,834 L 552,834" fill="none" stroke="black"></path>
-                <path d="M 32,944 L 552,944" fill="none" stroke="black"></path>
-                <path d="M 24,960 L 560,960" fill="none" stroke="black"></path>
-                <path d="M 24,96 C 15.16936,96 8,103.16936 8,112" fill="none" stroke="black"></path>
-                <path d="M 560,96 C 568.83064,96 576,103.16936 576,112" fill="none" stroke="black"></path>
-                <path d="M 32,592 C 23.16936,592 16,599.16936 16,608" fill="none" stroke="black"></path>
-                <path d="M 552,592 C 560.83064,592 568,599.16936 568,608" fill="none" stroke="black"></path>
-                <path d="M 32,944 C 23.16936,944 16,936.83064 16,928" fill="none" stroke="black"></path>
-                <path d="M 552,944 C 560.83064,944 568,936.83064 568,928" fill="none" stroke="black"></path>
-                <path d="M 24,960 C 15.16936,960 8,952.83064 8,944" fill="none" stroke="black"></path>
-                <path d="M 560,960 C 568.83064,960 576,952.83064 576,944" fill="none" stroke="black"></path>
-                <polygon class="arrowhead" points="536,800 524,794.4 524,805.6" fill="black" transform="rotate(0,528,800)"></polygon>
-                <polygon class="arrowhead" points="536,432 524,426.4 524,437.6" fill="black" transform="rotate(0,528,432)"></polygon>
-                <polygon class="arrowhead" points="536,224 524,218.4 524,229.6" fill="black" transform="rotate(0,528,224)"></polygon>
-                <polygon class="arrowhead" points="64,208 52,202.4 52,213.6" fill="black" transform="rotate(180,56,208)"></polygon>
-                <g class="text">
-                  <text x="52" y="52">Attester</text>
-                  <text x="532" y="52">Verifier</text>
-                  <text x="108" y="100">[loop]</text>
-                  <text x="48" y="116">|</text>
-                  <text x="536" y="116">|</text>
-                  <text x="240" y="132">[Handle</text>
-                  <text x="320" y="132">Generation]</text>
-                  <text x="536" y="148">|</text>
-                  <text x="500" y="164">generateHandle()</text>
-                  <text x="492" y="180">handle&lt;=</text>
-                  <text x="232" y="212">subscribe(handle,</text>
-                  <text x="348" y="212">attEnvIDs,</text>
-                  <text x="460" y="212">?claimSelection)</text>
-                  <text x="92" y="228">{handle}</text>
-                  <text x="176" y="260">[Evidence</text>
-                  <text x="260" y="260">Generation</text>
-                  <text x="320" y="260">and</text>
-                  <text x="384" y="260">Conveyance]</text>
-                  <text x="48" y="276">|</text>
-                  <text x="164" y="292">generateClaims(attestingEnvironment)</text>
-                  <text x="68" y="308">=&gt;</text>
-                  <text x="112" y="308">claims,</text>
-                  <text x="184" y="308">eventLogs</text>
-                  <text x="104" y="340">collectClaims(claims,</text>
-                  <text x="260" y="340">?claimSelection)</text>
-                  <text x="68" y="356">=&gt;</text>
-                  <text x="144" y="356">collectedClaims</text>
-                  <text x="116" y="388">generateEvidence(handle,</text>
-                  <text x="260" y="388">attEnvIDs,</text>
-                  <text x="372" y="388">collectedClaims)</text>
-                  <text x="68" y="404">=&gt;</text>
-                  <text x="116" y="404">evidence</text>
-                  <text x="92" y="436">{handle,</text>
-                  <text x="168" y="436">evidence,</text>
-                  <text x="252" y="436">eventLogs}</text>
-                  <text x="248" y="468">[Evidence</text>
-                  <text x="332" y="468">Appraisal]</text>
-                  <text x="536" y="484">|</text>
-                  <text x="460" y="500">appraiseEvidence(evidence,</text>
-                  <text x="520" y="516">eventLogs</text>
-                  <text x="524" y="532">verInputs)</text>
-                  <text x="432" y="548">attestationResult</text>
-                  <text x="516" y="548">&lt;=</text>
-                  <text x="536" y="548">|</text>
-                  <text x="48" y="564">~</text>
-                  <text x="536" y="564">~</text>
-                  <text x="48" y="580">|</text>
-                  <text x="536" y="580">|</text>
-                  <text x="116" y="596">[loop]</text>
-                  <text x="48" y="612">|</text>
-                  <text x="536" y="612">|</text>
-                  <text x="148" y="628">[Delta</text>
-                  <text x="212" y="628">Evidence</text>
-                  <text x="292" y="628">Generation</text>
-                  <text x="352" y="628">and</text>
-                  <text x="416" y="628">Conveyance]</text>
-                  <text x="48" y="644">|</text>
-                  <text x="172" y="660">generateClaims(attestingEnvironment)</text>
-                  <text x="68" y="676">=&gt;</text>
-                  <text x="132" y="676">claimsDelta,</text>
-                  <text x="244" y="676">eventLogsDelta</text>
-                  <text x="132" y="708">collectClaims(claimsDelta,</text>
-                  <text x="308" y="708">?claimSelection)</text>
-                  <text x="68" y="724">=&gt;</text>
-                  <text x="164" y="724">collectedClaimsDelta</text>
-                  <text x="124" y="756">generateEvidence(handle,</text>
-                  <text x="268" y="756">attEnvIDs,</text>
-                  <text x="400" y="756">collectedClaimsDelta)</text>
-                  <text x="68" y="772">=&gt;</text>
-                  <text x="116" y="772">evidence</text>
-                  <text x="100" y="804">{evidence,</text>
-                  <text x="208" y="804">eventLogsDelta}</text>
-                  <text x="212" y="836">[Delta</text>
-                  <text x="276" y="836">Evidence</text>
-                  <text x="356" y="836">Appraisal]</text>
-                  <text x="536" y="852">|</text>
-                  <text x="452" y="868">appraiseEvidence(evidence,</text>
-                  <text x="492" y="884">eventLogsDelta</text>
-                  <text x="516" y="900">verInputs)</text>
-                  <text x="432" y="916">attestationResult</text>
-                  <text x="516" y="916">&lt;=</text>
-                  <text x="48" y="980">|</text>
-                  <text x="536" y="980">|</text>
-                </g>
-              </svg><a href="#section-7.3.1-1.1" class="pilcrow">¶</a>
+                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                  <path d="M 8,112 L 8,944" fill="none" stroke="black"></path>
+                  <path d="M 16,608 L 16,928" fill="none" stroke="black"></path>
+                  <path d="M 48,64 L 48,88" fill="none" stroke="black"></path>
+                  <path d="M 48,144 L 48,240" fill="none" stroke="black"></path>
+                  <path d="M 48,304 L 48,320" fill="none" stroke="black"></path>
+                  <path d="M 48,352 L 48,368" fill="none" stroke="black"></path>
+                  <path d="M 48,400 L 48,448" fill="none" stroke="black"></path>
+                  <path d="M 48,480 L 48,544" fill="none" stroke="black"></path>
+                  <path d="M 48,672 L 48,688" fill="none" stroke="black"></path>
+                  <path d="M 48,720 L 48,736" fill="none" stroke="black"></path>
+                  <path d="M 48,768 L 48,816" fill="none" stroke="black"></path>
+                  <path d="M 48,848 L 48,936" fill="none" stroke="black"></path>
+                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                  <path d="M 536,64 L 536,88" fill="none" stroke="black"></path>
+                  <path d="M 536,176 L 536,240" fill="none" stroke="black"></path>
+                  <path d="M 536,272 L 536,448" fill="none" stroke="black"></path>
+                  <path d="M 536,640 L 536,816" fill="none" stroke="black"></path>
+                  <path d="M 536,912 L 536,936" fill="none" stroke="black"></path>
+                  <path d="M 552,880 L 552,888" fill="none" stroke="black"></path>
+                  <path d="M 560,512 L 560,520" fill="none" stroke="black"></path>
+                  <path d="M 568,608 L 568,928" fill="none" stroke="black"></path>
+                  <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 576,112 L 576,944" fill="none" stroke="black"></path>
+                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                  <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                  <path d="M 24,96 L 80,96" fill="none" stroke="black"></path>
+                  <path d="M 136,96 L 560,96" fill="none" stroke="black"></path>
+                  <path d="M 24,126 L 208,126" fill="none" stroke="black"></path>
+                  <path d="M 24,130 L 208,130" fill="none" stroke="black"></path>
+                  <path d="M 368,126 L 560,126" fill="none" stroke="black"></path>
+                  <path d="M 368,130 L 560,130" fill="none" stroke="black"></path>
+                  <path d="M 56,208 L 152,208" fill="none" stroke="black"></path>
+                  <path d="M 136,224 L 528,224" fill="none" stroke="black"></path>
+                  <path d="M 24,254 L 136,254" fill="none" stroke="black"></path>
+                  <path d="M 24,258 L 136,258" fill="none" stroke="black"></path>
+                  <path d="M 432,254 L 560,254" fill="none" stroke="black"></path>
+                  <path d="M 432,258 L 560,258" fill="none" stroke="black"></path>
+                  <path d="M 304,432 L 528,432" fill="none" stroke="black"></path>
+                  <path d="M 24,462 L 208,462" fill="none" stroke="black"></path>
+                  <path d="M 24,466 L 208,466" fill="none" stroke="black"></path>
+                  <path d="M 376,462 L 560,462" fill="none" stroke="black"></path>
+                  <path d="M 376,466 L 560,466" fill="none" stroke="black"></path>
+                  <path d="M 32,592 L 88,592" fill="none" stroke="black"></path>
+                  <path d="M 144,592 L 552,592" fill="none" stroke="black"></path>
+                  <path d="M 32,622 L 120,622" fill="none" stroke="black"></path>
+                  <path d="M 32,626 L 120,626" fill="none" stroke="black"></path>
+                  <path d="M 464,622 L 552,622" fill="none" stroke="black"></path>
+                  <path d="M 464,626 L 552,626" fill="none" stroke="black"></path>
+                  <path d="M 280,800 L 528,800" fill="none" stroke="black"></path>
+                  <path d="M 32,830 L 184,830" fill="none" stroke="black"></path>
+                  <path d="M 32,834 L 184,834" fill="none" stroke="black"></path>
+                  <path d="M 400,830 L 552,830" fill="none" stroke="black"></path>
+                  <path d="M 400,834 L 552,834" fill="none" stroke="black"></path>
+                  <path d="M 32,944 L 552,944" fill="none" stroke="black"></path>
+                  <path d="M 24,960 L 560,960" fill="none" stroke="black"></path>
+                  <path d="M 24,96 C 15.16936,96 8,103.16936 8,112" fill="none" stroke="black"></path>
+                  <path d="M 560,96 C 568.83064,96 576,103.16936 576,112" fill="none" stroke="black"></path>
+                  <path d="M 32,592 C 23.16936,592 16,599.16936 16,608" fill="none" stroke="black"></path>
+                  <path d="M 552,592 C 560.83064,592 568,599.16936 568,608" fill="none" stroke="black"></path>
+                  <path d="M 32,944 C 23.16936,944 16,936.83064 16,928" fill="none" stroke="black"></path>
+                  <path d="M 552,944 C 560.83064,944 568,936.83064 568,928" fill="none" stroke="black"></path>
+                  <path d="M 24,960 C 15.16936,960 8,952.83064 8,944" fill="none" stroke="black"></path>
+                  <path d="M 560,960 C 568.83064,960 576,952.83064 576,944" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="536,800 524,794.4 524,805.6" fill="black" transform="rotate(0,528,800)"></polygon>
+                  <polygon class="arrowhead" points="536,432 524,426.4 524,437.6" fill="black" transform="rotate(0,528,432)"></polygon>
+                  <polygon class="arrowhead" points="536,224 524,218.4 524,229.6" fill="black" transform="rotate(0,528,224)"></polygon>
+                  <polygon class="arrowhead" points="64,208 52,202.4 52,213.6" fill="black" transform="rotate(180,56,208)"></polygon>
+                  <g class="text">
+                    <text x="52" y="52">Attester</text>
+                    <text x="532" y="52">Verifier</text>
+                    <text x="108" y="100">[loop]</text>
+                    <text x="48" y="116">|</text>
+                    <text x="536" y="116">|</text>
+                    <text x="240" y="132">[Handle</text>
+                    <text x="320" y="132">Generation]</text>
+                    <text x="536" y="148">|</text>
+                    <text x="500" y="164">generateHandle()</text>
+                    <text x="492" y="180">handle&lt;=</text>
+                    <text x="232" y="212">subscribe(handle,</text>
+                    <text x="348" y="212">attEnvIDs,</text>
+                    <text x="460" y="212">?claimSelection)</text>
+                    <text x="92" y="228">{handle}</text>
+                    <text x="176" y="260">[Evidence</text>
+                    <text x="260" y="260">Generation</text>
+                    <text x="320" y="260">and</text>
+                    <text x="384" y="260">Conveyance]</text>
+                    <text x="48" y="276">|</text>
+                    <text x="164" y="292">generateClaims(attestingEnvironment)</text>
+                    <text x="68" y="308">=&gt;</text>
+                    <text x="112" y="308">claims,</text>
+                    <text x="184" y="308">eventLogs</text>
+                    <text x="104" y="340">collectClaims(claims,</text>
+                    <text x="260" y="340">?claimSelection)</text>
+                    <text x="68" y="356">=&gt;</text>
+                    <text x="144" y="356">collectedClaims</text>
+                    <text x="116" y="388">generateEvidence(handle,</text>
+                    <text x="260" y="388">attEnvIDs,</text>
+                    <text x="372" y="388">collectedClaims)</text>
+                    <text x="68" y="404">=&gt;</text>
+                    <text x="116" y="404">evidence</text>
+                    <text x="92" y="436">{handle,</text>
+                    <text x="168" y="436">evidence,</text>
+                    <text x="252" y="436">eventLogs}</text>
+                    <text x="248" y="468">[Evidence</text>
+                    <text x="332" y="468">Appraisal]</text>
+                    <text x="536" y="484">|</text>
+                    <text x="460" y="500">appraiseEvidence(evidence,</text>
+                    <text x="520" y="516">eventLogs</text>
+                    <text x="524" y="532">verInputs)</text>
+                    <text x="432" y="548">attestationResult</text>
+                    <text x="516" y="548">&lt;=</text>
+                    <text x="536" y="548">|</text>
+                    <text x="48" y="564">~</text>
+                    <text x="536" y="564">~</text>
+                    <text x="48" y="580">|</text>
+                    <text x="536" y="580">|</text>
+                    <text x="116" y="596">[loop]</text>
+                    <text x="48" y="612">|</text>
+                    <text x="536" y="612">|</text>
+                    <text x="148" y="628">[Delta</text>
+                    <text x="212" y="628">Evidence</text>
+                    <text x="292" y="628">Generation</text>
+                    <text x="352" y="628">and</text>
+                    <text x="416" y="628">Conveyance]</text>
+                    <text x="48" y="644">|</text>
+                    <text x="172" y="660">generateClaims(attestingEnvironment)</text>
+                    <text x="68" y="676">=&gt;</text>
+                    <text x="132" y="676">claimsDelta,</text>
+                    <text x="244" y="676">eventLogsDelta</text>
+                    <text x="132" y="708">collectClaims(claimsDelta,</text>
+                    <text x="308" y="708">?claimSelection)</text>
+                    <text x="68" y="724">=&gt;</text>
+                    <text x="164" y="724">collectedClaimsDelta</text>
+                    <text x="124" y="756">generateEvidence(handle,</text>
+                    <text x="268" y="756">attEnvIDs,</text>
+                    <text x="400" y="756">collectedClaimsDelta)</text>
+                    <text x="68" y="772">=&gt;</text>
+                    <text x="116" y="772">evidence</text>
+                    <text x="100" y="804">{evidence,</text>
+                    <text x="208" y="804">eventLogsDelta}</text>
+                    <text x="212" y="836">[Delta</text>
+                    <text x="276" y="836">Evidence</text>
+                    <text x="356" y="836">Appraisal]</text>
+                    <text x="536" y="852">|</text>
+                    <text x="452" y="868">appraiseEvidence(evidence,</text>
+                    <text x="492" y="884">eventLogsDelta</text>
+                    <text x="516" y="900">verInputs)</text>
+                    <text x="432" y="916">attestationResult</text>
+                    <text x="516" y="916">&lt;=</text>
+                    <text x="48" y="980">|</text>
+                    <text x="536" y="980">|</text>
+                  </g>
+                </svg><a href="#section-7.3.1-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-figure-5-streaming-remote-a" class="selfRef">Figure 5: Streaming Remote Attestation without a Broker</a>
+            </figcaption></figure>
 </div>
 <p id="section-7.3.1-2">In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.
 This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
@@ -2423,63 +2507,69 @@ From a remote attestations procedure's point of view Evidence Generation, Convey
             <h5 id="name-handle-generation-for-chall">
 <a href="#section-7.3.2.1" class="section-number selfRef">7.3.2.1. </a><a href="#name-handle-generation-for-chall" class="section-name selfRef">Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
             </h5>
-<div id="section-7.3.2.1-1">
-              <div class="alignLeft art-svg artwork" id="section-7.3.2.1-1.1">
+<span id="name-figure-6-handle-generation-"></span><div id="fig-streaming-with-broker-cr-handle-gen">
+<figure id="figure-6">
+              <div id="section-7.3.2.1-1.1">
+                <div class="alignLeft art-svg artwork" id="section-7.3.2.1-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="256" width="584" viewBox="0 0 584 256" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-                  <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
-                  <path d="M 48,112 L 48,144" fill="none" stroke="black"></path>
-                  <path d="M 48,176 L 48,224" fill="none" stroke="black"></path>
-                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
-                  <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
-                  <path d="M 336,112 L 336,192" fill="none" stroke="black"></path>
-                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
-                  <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
-                  <path d="M 536,144 L 536,160" fill="none" stroke="black"></path>
-                  <path d="M 536,208 L 536,224" fill="none" stroke="black"></path>
-                  <path d="M 560,176 L 560,184" fill="none" stroke="black"></path>
-                  <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
-                  <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 8,94 L 208,94" fill="none" stroke="black"></path>
-                  <path d="M 8,98 L 208,98" fill="none" stroke="black"></path>
-                  <path d="M 368,94 L 576,94" fill="none" stroke="black"></path>
-                  <path d="M 368,98 L 576,98" fill="none" stroke="black"></path>
-                  <path d="M 176,160 L 328,160" fill="none" stroke="black"></path>
-                  <path d="M 344,176 L 416,176" fill="none" stroke="black"></path>
-                  <path d="M 56,208 L 232,208" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="352,176 340,170.4 340,181.6" fill="black" transform="rotate(180,344,176)"></polygon>
-                  <polygon class="arrowhead" points="336,160 324,154.4 324,165.6" fill="black" transform="rotate(0,328,160)"></polygon>
-                  <polygon class="arrowhead" points="64,208 52,202.4 52,213.6" fill="black" transform="rotate(180,56,208)"></polygon>
-                  <g class="text">
-                    <text x="52" y="52">Attester</text>
-                    <text x="308" y="52">PubSub</text>
-                    <text x="364" y="52">Server</text>
-                    <text x="532" y="52">Verifier</text>
-                    <text x="240" y="100">[Handle</text>
-                    <text x="320" y="100">Generation]</text>
-                    <text x="536" y="116">|</text>
-                    <text x="508" y="132">generateHandle()</text>
-                    <text x="476" y="148">handle</text>
-                    <text x="516" y="148">&lt;=</text>
-                    <text x="96" y="164">sub(topic=AttReq)</text>
-                    <text x="492" y="180">pub(topic=AttReq</text>
-                    <text x="536" y="196">handle)</text>
-                    <text x="324" y="212">notify(topic=AttReq,</text>
-                    <text x="440" y="212">handle)</text>
-                    <text x="336" y="228">|</text>
-                    <text x="48" y="244">~</text>
-                    <text x="336" y="244">~</text>
-                    <text x="536" y="244">~</text>
-                  </g>
-                </svg><a href="#section-7.3.2.1-1.1" class="pilcrow">¶</a>
+                    <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                    <path d="M 48,64 L 48,80" fill="none" stroke="black"></path>
+                    <path d="M 48,112 L 48,144" fill="none" stroke="black"></path>
+                    <path d="M 48,176 L 48,224" fill="none" stroke="black"></path>
+                    <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                    <path d="M 336,64 L 336,80" fill="none" stroke="black"></path>
+                    <path d="M 336,112 L 336,192" fill="none" stroke="black"></path>
+                    <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                    <path d="M 536,64 L 536,80" fill="none" stroke="black"></path>
+                    <path d="M 536,144 L 536,160" fill="none" stroke="black"></path>
+                    <path d="M 536,208 L 536,224" fill="none" stroke="black"></path>
+                    <path d="M 560,176 L 560,184" fill="none" stroke="black"></path>
+                    <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                    <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 8,94 L 208,94" fill="none" stroke="black"></path>
+                    <path d="M 8,98 L 208,98" fill="none" stroke="black"></path>
+                    <path d="M 368,94 L 576,94" fill="none" stroke="black"></path>
+                    <path d="M 368,98 L 576,98" fill="none" stroke="black"></path>
+                    <path d="M 176,160 L 328,160" fill="none" stroke="black"></path>
+                    <path d="M 344,176 L 416,176" fill="none" stroke="black"></path>
+                    <path d="M 56,208 L 232,208" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="352,176 340,170.4 340,181.6" fill="black" transform="rotate(180,344,176)"></polygon>
+                    <polygon class="arrowhead" points="336,160 324,154.4 324,165.6" fill="black" transform="rotate(0,328,160)"></polygon>
+                    <polygon class="arrowhead" points="64,208 52,202.4 52,213.6" fill="black" transform="rotate(180,56,208)"></polygon>
+                    <g class="text">
+                      <text x="52" y="52">Attester</text>
+                      <text x="308" y="52">PubSub</text>
+                      <text x="364" y="52">Server</text>
+                      <text x="532" y="52">Verifier</text>
+                      <text x="240" y="100">[Handle</text>
+                      <text x="320" y="100">Generation]</text>
+                      <text x="536" y="116">|</text>
+                      <text x="508" y="132">generateHandle()</text>
+                      <text x="476" y="148">handle</text>
+                      <text x="516" y="148">&lt;=</text>
+                      <text x="96" y="164">sub(topic=AttReq)</text>
+                      <text x="492" y="180">pub(topic=AttReq</text>
+                      <text x="536" y="196">handle)</text>
+                      <text x="324" y="212">notify(topic=AttReq,</text>
+                      <text x="440" y="212">handle)</text>
+                      <text x="336" y="228">|</text>
+                      <text x="48" y="244">~</text>
+                      <text x="336" y="244">~</text>
+                      <text x="536" y="244">~</text>
+                    </g>
+                  </svg><a href="#section-7.3.2.1-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-figure-6-handle-generation-" class="selfRef">Figure 6: Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
+              </figcaption></figure>
 </div>
 <p id="section-7.3.2.1-2">The <em>Challenge/Response Remote Attestation over Publish-Subscribe</em> interaction model uses the same information elements as the <em>Challenge/Response Remote Attestation</em> interaction model.
 Handles are generated by the Verifier on a per-request basis.
@@ -2493,81 +2583,87 @@ This mechanism ensures that each handle is uniquely associated with a specific a
             <h5 id="name-handle-generation-for-uni-d">
 <a href="#section-7.3.2.2" class="section-number selfRef">7.3.2.2. </a><a href="#name-handle-generation-for-uni-d" class="section-name selfRef">Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
             </h5>
-<div id="section-7.3.2.2-1">
-              <div class="alignLeft art-svg artwork" id="section-7.3.2.2-1.1">
+<span id="name-figure-7-handle-generation-"></span><div id="fig-streaming-with-broker-ud-handle-gen">
+<figure id="figure-7">
+              <div id="section-7.3.2.2-1.1">
+                <div class="alignLeft art-svg artwork" id="section-7.3.2.2-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="432" width="584" viewBox="0 0 584 432" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-                  <path d="M 48,64 L 48,96" fill="none" stroke="black"></path>
-                  <path d="M 48,128 L 48,144" fill="none" stroke="black"></path>
-                  <path d="M 48,176 L 48,400" fill="none" stroke="black"></path>
-                  <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 120,32 L 120,80" fill="none" stroke="black"></path>
-                  <path d="M 176,80 L 176,96" fill="none" stroke="black"></path>
-                  <path d="M 176,128 L 176,152" fill="none" stroke="black"></path>
-                  <path d="M 176,168 L 176,224" fill="none" stroke="black"></path>
-                  <path d="M 176,256 L 176,272" fill="none" stroke="black"></path>
-                  <path d="M 232,32 L 232,80" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
-                  <path d="M 336,64 L 336,96" fill="none" stroke="black"></path>
-                  <path d="M 336,128 L 336,336" fill="none" stroke="black"></path>
-                  <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
-                  <path d="M 536,64 L 536,96" fill="none" stroke="black"></path>
-                  <path d="M 536,128 L 536,176" fill="none" stroke="black"></path>
-                  <path d="M 536,208 L 536,400" fill="none" stroke="black"></path>
-                  <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
-                  <path d="M 120,32 L 232,32" fill="none" stroke="black"></path>
-                  <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
-                  <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 120,80 L 232,80" fill="none" stroke="black"></path>
-                  <path d="M 8,110 L 208,110" fill="none" stroke="black"></path>
-                  <path d="M 8,114 L 208,114" fill="none" stroke="black"></path>
-                  <path d="M 368,110 L 576,110" fill="none" stroke="black"></path>
-                  <path d="M 368,114 L 576,114" fill="none" stroke="black"></path>
-                  <path d="M 176,160 L 328,160" fill="none" stroke="black"></path>
-                  <path d="M 344,192 L 416,192" fill="none" stroke="black"></path>
-                  <path d="M 256,304 L 328,304" fill="none" stroke="black"></path>
-                  <path d="M 56,352 L 224,352" fill="none" stroke="black"></path>
-                  <path d="M 472,384 L 528,384" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="536,384 524,378.4 524,389.6" fill="black" transform="rotate(0,528,384)"></polygon>
-                  <polygon class="arrowhead" points="352,192 340,186.4 340,197.6" fill="black" transform="rotate(180,344,192)"></polygon>
-                  <polygon class="arrowhead" points="336,304 324,298.4 324,309.6" fill="black" transform="rotate(0,328,304)"></polygon>
-                  <polygon class="arrowhead" points="336,160 324,154.4 324,165.6" fill="black" transform="rotate(0,328,160)"></polygon>
-                  <polygon class="arrowhead" points="64,352 52,346.4 52,357.6" fill="black" transform="rotate(180,56,352)"></polygon>
-                  <g class="text">
-                    <text x="52" y="52">Attester</text>
-                    <text x="172" y="52">Handle</text>
-                    <text x="308" y="52">PubSub</text>
-                    <text x="364" y="52">Server</text>
-                    <text x="532" y="52">Verifier</text>
-                    <text x="176" y="68">Distributor</text>
-                    <text x="240" y="116">[Handle</text>
-                    <text x="320" y="116">Generation]</text>
-                    <text x="96" y="164">sub(topic=Handle)</text>
-                    <text x="496" y="196">sub(topic=Handle)</text>
-                    <text x="204" y="244">generateHandle()</text>
-                    <text x="196" y="260">=&gt;</text>
-                    <text x="236" y="260">handle</text>
-                    <text x="224" y="292">pub(topic=Handle,</text>
-                    <text x="176" y="308">|</text>
-                    <text x="216" y="308">handle)</text>
-                    <text x="176" y="324">x</text>
-                    <text x="316" y="356">notify(topic=Handle,</text>
-                    <text x="432" y="356">handle)</text>
-                    <text x="336" y="372">|</text>
-                    <text x="316" y="388">notify(topic=Handle,</text>
-                    <text x="432" y="388">handle)</text>
-                    <text x="336" y="404">|</text>
-                    <text x="48" y="420">~</text>
-                    <text x="336" y="420">~</text>
-                    <text x="536" y="420">~</text>
-                  </g>
-                </svg><a href="#section-7.3.2.2-1.1" class="pilcrow">¶</a>
+                    <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+                    <path d="M 48,64 L 48,96" fill="none" stroke="black"></path>
+                    <path d="M 48,128 L 48,144" fill="none" stroke="black"></path>
+                    <path d="M 48,176 L 48,400" fill="none" stroke="black"></path>
+                    <path d="M 96,32 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 120,32 L 120,80" fill="none" stroke="black"></path>
+                    <path d="M 176,80 L 176,96" fill="none" stroke="black"></path>
+                    <path d="M 176,128 L 176,152" fill="none" stroke="black"></path>
+                    <path d="M 176,168 L 176,224" fill="none" stroke="black"></path>
+                    <path d="M 176,256 L 176,272" fill="none" stroke="black"></path>
+                    <path d="M 232,32 L 232,80" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 272,64" fill="none" stroke="black"></path>
+                    <path d="M 336,64 L 336,96" fill="none" stroke="black"></path>
+                    <path d="M 336,128 L 336,336" fill="none" stroke="black"></path>
+                    <path d="M 400,32 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,32 L 488,64" fill="none" stroke="black"></path>
+                    <path d="M 536,64 L 536,96" fill="none" stroke="black"></path>
+                    <path d="M 536,128 L 536,176" fill="none" stroke="black"></path>
+                    <path d="M 536,208 L 536,400" fill="none" stroke="black"></path>
+                    <path d="M 576,32 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 8,32 L 96,32" fill="none" stroke="black"></path>
+                    <path d="M 120,32 L 232,32" fill="none" stroke="black"></path>
+                    <path d="M 272,32 L 400,32" fill="none" stroke="black"></path>
+                    <path d="M 488,32 L 576,32" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 120,80 L 232,80" fill="none" stroke="black"></path>
+                    <path d="M 8,110 L 208,110" fill="none" stroke="black"></path>
+                    <path d="M 8,114 L 208,114" fill="none" stroke="black"></path>
+                    <path d="M 368,110 L 576,110" fill="none" stroke="black"></path>
+                    <path d="M 368,114 L 576,114" fill="none" stroke="black"></path>
+                    <path d="M 176,160 L 328,160" fill="none" stroke="black"></path>
+                    <path d="M 344,192 L 416,192" fill="none" stroke="black"></path>
+                    <path d="M 256,304 L 328,304" fill="none" stroke="black"></path>
+                    <path d="M 56,352 L 224,352" fill="none" stroke="black"></path>
+                    <path d="M 472,384 L 528,384" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="536,384 524,378.4 524,389.6" fill="black" transform="rotate(0,528,384)"></polygon>
+                    <polygon class="arrowhead" points="352,192 340,186.4 340,197.6" fill="black" transform="rotate(180,344,192)"></polygon>
+                    <polygon class="arrowhead" points="336,304 324,298.4 324,309.6" fill="black" transform="rotate(0,328,304)"></polygon>
+                    <polygon class="arrowhead" points="336,160 324,154.4 324,165.6" fill="black" transform="rotate(0,328,160)"></polygon>
+                    <polygon class="arrowhead" points="64,352 52,346.4 52,357.6" fill="black" transform="rotate(180,56,352)"></polygon>
+                    <g class="text">
+                      <text x="52" y="52">Attester</text>
+                      <text x="172" y="52">Handle</text>
+                      <text x="308" y="52">PubSub</text>
+                      <text x="364" y="52">Server</text>
+                      <text x="532" y="52">Verifier</text>
+                      <text x="176" y="68">Distributor</text>
+                      <text x="240" y="116">[Handle</text>
+                      <text x="320" y="116">Generation]</text>
+                      <text x="96" y="164">sub(topic=Handle)</text>
+                      <text x="496" y="196">sub(topic=Handle)</text>
+                      <text x="204" y="244">generateHandle()</text>
+                      <text x="196" y="260">=&gt;</text>
+                      <text x="236" y="260">handle</text>
+                      <text x="224" y="292">pub(topic=Handle,</text>
+                      <text x="176" y="308">|</text>
+                      <text x="216" y="308">handle)</text>
+                      <text x="176" y="324">x</text>
+                      <text x="316" y="356">notify(topic=Handle,</text>
+                      <text x="432" y="356">handle)</text>
+                      <text x="336" y="372">|</text>
+                      <text x="316" y="388">notify(topic=Handle,</text>
+                      <text x="432" y="388">handle)</text>
+                      <text x="336" y="404">|</text>
+                      <text x="48" y="420">~</text>
+                      <text x="336" y="420">~</text>
+                      <text x="536" y="420">~</text>
+                    </g>
+                  </svg><a href="#section-7.3.2.2-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-figure-7-handle-generation-" class="selfRef">Figure 7: Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
+              </figcaption></figure>
 </div>
 <p id="section-7.3.2.2-2">Handles are created by a trusted third party, the Handle Distributor (see <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>).
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
@@ -2579,117 +2675,123 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
             <h5 id="name-evidence-generation-and-app">
 <a href="#section-7.3.2.3" class="section-number selfRef">7.3.2.3. </a><a href="#name-evidence-generation-and-app" class="section-name selfRef">Evidence Generation and Appraisal</a>
             </h5>
-<div id="section-7.3.2.3-1">
-              <div class="alignLeft art-svg artwork" id="section-7.3.2.3-1.1">
+<span id="name-figure-8-evidence-generatio"></span><div id="fig-streaming-with-broker-evidence-gen">
+<figure id="figure-8">
+              <div id="section-7.3.2.3-1.1">
+                <div class="alignLeft art-svg artwork" id="section-7.3.2.3-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="672" width="584" viewBox="0 0 584 672" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
-                  <path d="M 8,176 L 8,608" fill="none" stroke="black"></path>
-                  <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
-                  <path d="M 48,96 L 48,152" fill="none" stroke="black"></path>
-                  <path d="M 48,240 L 48,256" fill="none" stroke="black"></path>
-                  <path d="M 48,288 L 48,304" fill="none" stroke="black"></path>
-                  <path d="M 48,336 L 48,368" fill="none" stroke="black"></path>
-                  <path d="M 48,400 L 48,480" fill="none" stroke="black"></path>
-                  <path d="M 48,512 L 48,616" fill="none" stroke="black"></path>
-                  <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
-                  <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
-                  <path d="M 336,96 L 336,152" fill="none" stroke="black"></path>
-                  <path d="M 336,208 L 336,416" fill="none" stroke="black"></path>
-                  <path d="M 336,448 L 336,480" fill="none" stroke="black"></path>
-                  <path d="M 336,512 L 336,616" fill="none" stroke="black"></path>
-                  <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
-                  <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
-                  <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
-                  <path d="M 536,208 L 536,480" fill="none" stroke="black"></path>
-                  <path d="M 536,592 L 536,616" fill="none" stroke="black"></path>
-                  <path d="M 560,560 L 560,568" fill="none" stroke="black"></path>
-                  <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
-                  <path d="M 576,176 L 576,608" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
-                  <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
-                  <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
-                  <path d="M 344,128 L 424,128" fill="none" stroke="black"></path>
-                  <path d="M 24,160 L 80,160" fill="none" stroke="black"></path>
-                  <path d="M 136,160 L 560,160" fill="none" stroke="black"></path>
-                  <path d="M 24,190 L 136,190" fill="none" stroke="black"></path>
-                  <path d="M 24,194 L 136,194" fill="none" stroke="black"></path>
-                  <path d="M 432,190 L 560,190" fill="none" stroke="black"></path>
-                  <path d="M 432,194 L 560,194" fill="none" stroke="black"></path>
-                  <path d="M 232,400 L 328,400" fill="none" stroke="black"></path>
-                  <path d="M 448,464 L 528,464" fill="none" stroke="black"></path>
-                  <path d="M 24,494 L 208,494" fill="none" stroke="black"></path>
-                  <path d="M 24,498 L 208,498" fill="none" stroke="black"></path>
-                  <path d="M 376,494 L 560,494" fill="none" stroke="black"></path>
-                  <path d="M 376,498 L 560,498" fill="none" stroke="black"></path>
-                  <path d="M 24,624 L 560,624" fill="none" stroke="black"></path>
-                  <path d="M 24,160 C 15.16936,160 8,167.16936 8,176" fill="none" stroke="black"></path>
-                  <path d="M 560,160 C 568.83064,160 576,167.16936 576,176" fill="none" stroke="black"></path>
-                  <path d="M 24,624 C 15.16936,624 8,616.83064 8,608" fill="none" stroke="black"></path>
-                  <path d="M 560,624 C 568.83064,624 576,616.83064 576,608" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="536,464 524,458.4 524,469.6" fill="black" transform="rotate(0,528,464)"></polygon>
-                  <polygon class="arrowhead" points="352,128 340,122.4 340,133.6" fill="black" transform="rotate(180,344,128)"></polygon>
-                  <polygon class="arrowhead" points="336,400 324,394.4 324,405.6" fill="black" transform="rotate(0,328,400)"></polygon>
-                  <g class="text">
-                    <text x="48" y="36">~</text>
-                    <text x="336" y="36">~</text>
-                    <text x="536" y="36">~</text>
-                    <text x="52" y="84">Attester</text>
-                    <text x="308" y="84">PubSub</text>
-                    <text x="364" y="84">Server</text>
-                    <text x="532" y="84">Verifier</text>
-                    <text x="500" y="132">sub(topic=AttEv)</text>
-                    <text x="536" y="148">|</text>
-                    <text x="108" y="164">[loop]</text>
-                    <text x="48" y="180">|</text>
-                    <text x="336" y="180">|</text>
-                    <text x="536" y="180">|</text>
-                    <text x="176" y="196">[Evidence</text>
-                    <text x="260" y="196">Generation</text>
-                    <text x="320" y="196">and</text>
-                    <text x="384" y="196">Conveyance]</text>
-                    <text x="48" y="212">|</text>
-                    <text x="164" y="228">generateClaims(attestingEnvironment)</text>
-                    <text x="68" y="244">=&gt;</text>
-                    <text x="112" y="244">claims,</text>
-                    <text x="184" y="244">eventLogs</text>
-                    <text x="104" y="276">collectClaims(claims,</text>
-                    <text x="260" y="276">?claimSelection)</text>
-                    <text x="68" y="292">=&gt;</text>
-                    <text x="144" y="292">collectedClaims</text>
-                    <text x="116" y="324">generateEvidence(handle,</text>
-                    <text x="260" y="324">attEnvIDs,</text>
-                    <text x="220" y="340">collectedClaims)</text>
-                    <text x="68" y="356">=&gt;</text>
-                    <text x="116" y="356">evidence</text>
-                    <text x="92" y="388">pub(topic=AttEv,</text>
-                    <text x="96" y="404">evidence,</text>
-                    <text x="180" y="404">eventLogs)</text>
-                    <text x="376" y="436">notify(topic=AttEv,</text>
-                    <text x="392" y="452">evidence,</text>
-                    <text x="396" y="468">eventLogs)</text>
-                    <text x="248" y="500">[Evidence</text>
-                    <text x="332" y="500">Appraisal]</text>
-                    <text x="536" y="516">|</text>
-                    <text x="496" y="532">appraiseEvidence(</text>
-                    <text x="528" y="548">evidence,</text>
-                    <text x="520" y="564">eventLogs</text>
-                    <text x="524" y="580">verInputs)</text>
-                    <text x="432" y="596">attestationResult</text>
-                    <text x="516" y="596">&lt;=</text>
-                    <text x="48" y="644">|</text>
-                    <text x="336" y="644">|</text>
-                    <text x="536" y="644">|</text>
-                    <text x="48" y="660">~</text>
-                    <text x="336" y="660">~</text>
-                    <text x="536" y="660">~</text>
-                  </g>
-                </svg><a href="#section-7.3.2.3-1.1" class="pilcrow">¶</a>
+                    <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
+                    <path d="M 8,176 L 8,608" fill="none" stroke="black"></path>
+                    <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
+                    <path d="M 48,96 L 48,152" fill="none" stroke="black"></path>
+                    <path d="M 48,240 L 48,256" fill="none" stroke="black"></path>
+                    <path d="M 48,288 L 48,304" fill="none" stroke="black"></path>
+                    <path d="M 48,336 L 48,368" fill="none" stroke="black"></path>
+                    <path d="M 48,400 L 48,480" fill="none" stroke="black"></path>
+                    <path d="M 48,512 L 48,616" fill="none" stroke="black"></path>
+                    <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
+                    <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
+                    <path d="M 336,96 L 336,152" fill="none" stroke="black"></path>
+                    <path d="M 336,208 L 336,416" fill="none" stroke="black"></path>
+                    <path d="M 336,448 L 336,480" fill="none" stroke="black"></path>
+                    <path d="M 336,512 L 336,616" fill="none" stroke="black"></path>
+                    <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
+                    <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
+                    <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
+                    <path d="M 536,208 L 536,480" fill="none" stroke="black"></path>
+                    <path d="M 536,592 L 536,616" fill="none" stroke="black"></path>
+                    <path d="M 560,560 L 560,568" fill="none" stroke="black"></path>
+                    <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
+                    <path d="M 576,176 L 576,608" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
+                    <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
+                    <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
+                    <path d="M 344,128 L 424,128" fill="none" stroke="black"></path>
+                    <path d="M 24,160 L 80,160" fill="none" stroke="black"></path>
+                    <path d="M 136,160 L 560,160" fill="none" stroke="black"></path>
+                    <path d="M 24,190 L 136,190" fill="none" stroke="black"></path>
+                    <path d="M 24,194 L 136,194" fill="none" stroke="black"></path>
+                    <path d="M 432,190 L 560,190" fill="none" stroke="black"></path>
+                    <path d="M 432,194 L 560,194" fill="none" stroke="black"></path>
+                    <path d="M 232,400 L 328,400" fill="none" stroke="black"></path>
+                    <path d="M 448,464 L 528,464" fill="none" stroke="black"></path>
+                    <path d="M 24,494 L 208,494" fill="none" stroke="black"></path>
+                    <path d="M 24,498 L 208,498" fill="none" stroke="black"></path>
+                    <path d="M 376,494 L 560,494" fill="none" stroke="black"></path>
+                    <path d="M 376,498 L 560,498" fill="none" stroke="black"></path>
+                    <path d="M 24,624 L 560,624" fill="none" stroke="black"></path>
+                    <path d="M 24,160 C 15.16936,160 8,167.16936 8,176" fill="none" stroke="black"></path>
+                    <path d="M 560,160 C 568.83064,160 576,167.16936 576,176" fill="none" stroke="black"></path>
+                    <path d="M 24,624 C 15.16936,624 8,616.83064 8,608" fill="none" stroke="black"></path>
+                    <path d="M 560,624 C 568.83064,624 576,616.83064 576,608" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="536,464 524,458.4 524,469.6" fill="black" transform="rotate(0,528,464)"></polygon>
+                    <polygon class="arrowhead" points="352,128 340,122.4 340,133.6" fill="black" transform="rotate(180,344,128)"></polygon>
+                    <polygon class="arrowhead" points="336,400 324,394.4 324,405.6" fill="black" transform="rotate(0,328,400)"></polygon>
+                    <g class="text">
+                      <text x="48" y="36">~</text>
+                      <text x="336" y="36">~</text>
+                      <text x="536" y="36">~</text>
+                      <text x="52" y="84">Attester</text>
+                      <text x="308" y="84">PubSub</text>
+                      <text x="364" y="84">Server</text>
+                      <text x="532" y="84">Verifier</text>
+                      <text x="500" y="132">sub(topic=AttEv)</text>
+                      <text x="536" y="148">|</text>
+                      <text x="108" y="164">[loop]</text>
+                      <text x="48" y="180">|</text>
+                      <text x="336" y="180">|</text>
+                      <text x="536" y="180">|</text>
+                      <text x="176" y="196">[Evidence</text>
+                      <text x="260" y="196">Generation</text>
+                      <text x="320" y="196">and</text>
+                      <text x="384" y="196">Conveyance]</text>
+                      <text x="48" y="212">|</text>
+                      <text x="164" y="228">generateClaims(attestingEnvironment)</text>
+                      <text x="68" y="244">=&gt;</text>
+                      <text x="112" y="244">claims,</text>
+                      <text x="184" y="244">eventLogs</text>
+                      <text x="104" y="276">collectClaims(claims,</text>
+                      <text x="260" y="276">?claimSelection)</text>
+                      <text x="68" y="292">=&gt;</text>
+                      <text x="144" y="292">collectedClaims</text>
+                      <text x="116" y="324">generateEvidence(handle,</text>
+                      <text x="260" y="324">attEnvIDs,</text>
+                      <text x="220" y="340">collectedClaims)</text>
+                      <text x="68" y="356">=&gt;</text>
+                      <text x="116" y="356">evidence</text>
+                      <text x="92" y="388">pub(topic=AttEv,</text>
+                      <text x="96" y="404">evidence,</text>
+                      <text x="180" y="404">eventLogs)</text>
+                      <text x="376" y="436">notify(topic=AttEv,</text>
+                      <text x="392" y="452">evidence,</text>
+                      <text x="396" y="468">eventLogs)</text>
+                      <text x="248" y="500">[Evidence</text>
+                      <text x="332" y="500">Appraisal]</text>
+                      <text x="536" y="516">|</text>
+                      <text x="496" y="532">appraiseEvidence(</text>
+                      <text x="528" y="548">evidence,</text>
+                      <text x="520" y="564">eventLogs</text>
+                      <text x="524" y="580">verInputs)</text>
+                      <text x="432" y="596">attestationResult</text>
+                      <text x="516" y="596">&lt;=</text>
+                      <text x="48" y="644">|</text>
+                      <text x="336" y="644">|</text>
+                      <text x="536" y="644">|</text>
+                      <text x="48" y="660">~</text>
+                      <text x="336" y="660">~</text>
+                      <text x="536" y="660">~</text>
+                    </g>
+                  </svg><a href="#section-7.3.2.3-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-figure-8-evidence-generatio" class="selfRef">Figure 8: Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe</a>
+              </figcaption></figure>
 </div>
 <p id="section-7.3.2.3-2">Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
@@ -2703,100 +2805,106 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
             <h5 id="name-attestation-result-generati">
 <a href="#section-7.3.2.4" class="section-number selfRef">7.3.2.4. </a><a href="#name-attestation-result-generati" class="section-name selfRef">Attestation Result Generation</a>
             </h5>
-<div id="section-7.3.2.4-1">
-              <div class="alignLeft art-svg artwork" id="section-7.3.2.4-1.1">
+<span id="name-figure-9-attestation-result"></span><div id="fig-streaming-with-broker-ar-gen">
+<figure id="figure-9">
+              <div id="section-7.3.2.4-1.1">
+                <div class="alignLeft art-svg artwork" id="section-7.3.2.4-1.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="584" viewBox="0 0 584 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
-                  <path d="M 8,224 L 8,320" fill="none" stroke="black"></path>
-                  <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
-                  <path d="M 48,96 L 48,112" fill="none" stroke="black"></path>
-                  <path d="M 48,144 L 48,200" fill="none" stroke="black"></path>
-                  <path d="M 48,216 L 48,328" fill="none" stroke="black"></path>
-                  <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
-                  <path d="M 112,64 L 112,96" fill="none" stroke="black"></path>
-                  <path d="M 136,48 L 136,64" fill="none" stroke="black"></path>
-                  <path d="M 136,96 L 136,112" fill="none" stroke="black"></path>
-                  <path d="M 136,216 L 136,328" fill="none" stroke="black"></path>
-                  <path d="M 240,64 L 240,96" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
-                  <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
-                  <path d="M 336,96 L 336,112" fill="none" stroke="black"></path>
-                  <path d="M 336,176 L 336,200" fill="none" stroke="black"></path>
-                  <path d="M 336,216 L 336,272" fill="none" stroke="black"></path>
-                  <path d="M 336,304 L 336,328" fill="none" stroke="black"></path>
-                  <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
-                  <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
-                  <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
-                  <path d="M 536,176 L 536,200" fill="none" stroke="black"></path>
-                  <path d="M 536,272 L 536,328" fill="none" stroke="black"></path>
-                  <path d="M 560,240 L 560,248" fill="none" stroke="black"></path>
-                  <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
-                  <path d="M 576,224 L 576,320" fill="none" stroke="black"></path>
-                  <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
-                  <path d="M 112,64 L 240,64" fill="none" stroke="black"></path>
-                  <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
-                  <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
-                  <path d="M 112,96 L 240,96" fill="none" stroke="black"></path>
-                  <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
-                  <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
-                  <path d="M 8,126 L 160,126" fill="none" stroke="black"></path>
-                  <path d="M 8,130 L 160,130" fill="none" stroke="black"></path>
-                  <path d="M 416,126 L 576,126" fill="none" stroke="black"></path>
-                  <path d="M 416,130 L 576,130" fill="none" stroke="black"></path>
-                  <path d="M 192,176 L 328,176" fill="none" stroke="black"></path>
-                  <path d="M 24,208 L 80,208" fill="none" stroke="black"></path>
-                  <path d="M 136,208 L 560,208" fill="none" stroke="black"></path>
-                  <path d="M 344,240 L 416,240" fill="none" stroke="black"></path>
-                  <path d="M 144,288 L 280,288" fill="none" stroke="black"></path>
-                  <path d="M 24,336 L 560,336" fill="none" stroke="black"></path>
-                  <path d="M 24,208 C 15.16936,208 8,215.16936 8,224" fill="none" stroke="black"></path>
-                  <path d="M 560,208 C 568.83064,208 576,215.16936 576,224" fill="none" stroke="black"></path>
-                  <path d="M 24,336 C 15.16936,336 8,328.83064 8,320" fill="none" stroke="black"></path>
-                  <path d="M 560,336 C 568.83064,336 576,328.83064 576,320" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="352,240 340,234.4 340,245.6" fill="black" transform="rotate(180,344,240)"></polygon>
-                  <polygon class="arrowhead" points="336,176 324,170.4 324,181.6" fill="black" transform="rotate(0,328,176)"></polygon>
-                  <polygon class="arrowhead" points="152,288 140,282.4 140,293.6" fill="black" transform="rotate(180,144,288)"></polygon>
-                  <g class="text">
-                    <text x="48" y="36">~</text>
-                    <text x="136" y="36">~</text>
-                    <text x="336" y="36">~</text>
-                    <text x="536" y="36">~</text>
-                    <text x="52" y="84">Attester</text>
-                    <text x="152" y="84">Relying</text>
-                    <text x="208" y="84">Party</text>
-                    <text x="308" y="84">PubSub</text>
-                    <text x="364" y="84">Server</text>
-                    <text x="532" y="84">Verifier</text>
-                    <text x="212" y="132">[Attestation</text>
-                    <text x="292" y="132">Result</text>
-                    <text x="368" y="132">Generation]</text>
-                    <text x="136" y="148">|</text>
-                    <text x="336" y="148">|</text>
-                    <text x="536" y="148">|</text>
-                    <text x="160" y="164">sub(topic=AttRes,</text>
-                    <text x="328" y="164">|</text>
-                    <text x="528" y="164">|</text>
-                    <text x="152" y="180">handle)</text>
-                    <text x="136" y="196">|</text>
-                    <text x="108" y="212">[loop]</text>
-                    <text x="536" y="228">|</text>
-                    <text x="492" y="244">pub(topic=AttRes</text>
-                    <text x="492" y="260">attestationResult)</text>
-                    <text x="372" y="292">notify(topic=AttRes,</text>
-                    <text x="420" y="308">attestationResult)</text>
-                    <text x="48" y="356">|</text>
-                    <text x="136" y="356">|</text>
-                    <text x="336" y="356">|</text>
-                    <text x="536" y="356">|</text>
-                    <text x="48" y="372">~</text>
-                    <text x="136" y="372">~</text>
-                    <text x="336" y="372">~</text>
-                    <text x="536" y="372">~</text>
-                  </g>
-                </svg><a href="#section-7.3.2.4-1.1" class="pilcrow">¶</a>
+                    <path d="M 8,64 L 8,96" fill="none" stroke="black"></path>
+                    <path d="M 8,224 L 8,320" fill="none" stroke="black"></path>
+                    <path d="M 48,48 L 48,64" fill="none" stroke="black"></path>
+                    <path d="M 48,96 L 48,112" fill="none" stroke="black"></path>
+                    <path d="M 48,144 L 48,200" fill="none" stroke="black"></path>
+                    <path d="M 48,216 L 48,328" fill="none" stroke="black"></path>
+                    <path d="M 96,64 L 96,96" fill="none" stroke="black"></path>
+                    <path d="M 112,64 L 112,96" fill="none" stroke="black"></path>
+                    <path d="M 136,48 L 136,64" fill="none" stroke="black"></path>
+                    <path d="M 136,96 L 136,112" fill="none" stroke="black"></path>
+                    <path d="M 136,216 L 136,328" fill="none" stroke="black"></path>
+                    <path d="M 240,64 L 240,96" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 272,96" fill="none" stroke="black"></path>
+                    <path d="M 336,48 L 336,64" fill="none" stroke="black"></path>
+                    <path d="M 336,96 L 336,112" fill="none" stroke="black"></path>
+                    <path d="M 336,176 L 336,200" fill="none" stroke="black"></path>
+                    <path d="M 336,216 L 336,272" fill="none" stroke="black"></path>
+                    <path d="M 336,304 L 336,328" fill="none" stroke="black"></path>
+                    <path d="M 400,64 L 400,96" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 488,96" fill="none" stroke="black"></path>
+                    <path d="M 536,48 L 536,64" fill="none" stroke="black"></path>
+                    <path d="M 536,96 L 536,112" fill="none" stroke="black"></path>
+                    <path d="M 536,176 L 536,200" fill="none" stroke="black"></path>
+                    <path d="M 536,272 L 536,328" fill="none" stroke="black"></path>
+                    <path d="M 560,240 L 560,248" fill="none" stroke="black"></path>
+                    <path d="M 576,64 L 576,96" fill="none" stroke="black"></path>
+                    <path d="M 576,224 L 576,320" fill="none" stroke="black"></path>
+                    <path d="M 8,64 L 96,64" fill="none" stroke="black"></path>
+                    <path d="M 112,64 L 240,64" fill="none" stroke="black"></path>
+                    <path d="M 272,64 L 400,64" fill="none" stroke="black"></path>
+                    <path d="M 488,64 L 576,64" fill="none" stroke="black"></path>
+                    <path d="M 8,96 L 96,96" fill="none" stroke="black"></path>
+                    <path d="M 112,96 L 240,96" fill="none" stroke="black"></path>
+                    <path d="M 272,96 L 400,96" fill="none" stroke="black"></path>
+                    <path d="M 488,96 L 576,96" fill="none" stroke="black"></path>
+                    <path d="M 8,126 L 160,126" fill="none" stroke="black"></path>
+                    <path d="M 8,130 L 160,130" fill="none" stroke="black"></path>
+                    <path d="M 416,126 L 576,126" fill="none" stroke="black"></path>
+                    <path d="M 416,130 L 576,130" fill="none" stroke="black"></path>
+                    <path d="M 192,176 L 328,176" fill="none" stroke="black"></path>
+                    <path d="M 24,208 L 80,208" fill="none" stroke="black"></path>
+                    <path d="M 136,208 L 560,208" fill="none" stroke="black"></path>
+                    <path d="M 344,240 L 416,240" fill="none" stroke="black"></path>
+                    <path d="M 144,288 L 280,288" fill="none" stroke="black"></path>
+                    <path d="M 24,336 L 560,336" fill="none" stroke="black"></path>
+                    <path d="M 24,208 C 15.16936,208 8,215.16936 8,224" fill="none" stroke="black"></path>
+                    <path d="M 560,208 C 568.83064,208 576,215.16936 576,224" fill="none" stroke="black"></path>
+                    <path d="M 24,336 C 15.16936,336 8,328.83064 8,320" fill="none" stroke="black"></path>
+                    <path d="M 560,336 C 568.83064,336 576,328.83064 576,320" fill="none" stroke="black"></path>
+                    <polygon class="arrowhead" points="352,240 340,234.4 340,245.6" fill="black" transform="rotate(180,344,240)"></polygon>
+                    <polygon class="arrowhead" points="336,176 324,170.4 324,181.6" fill="black" transform="rotate(0,328,176)"></polygon>
+                    <polygon class="arrowhead" points="152,288 140,282.4 140,293.6" fill="black" transform="rotate(180,144,288)"></polygon>
+                    <g class="text">
+                      <text x="48" y="36">~</text>
+                      <text x="136" y="36">~</text>
+                      <text x="336" y="36">~</text>
+                      <text x="536" y="36">~</text>
+                      <text x="52" y="84">Attester</text>
+                      <text x="152" y="84">Relying</text>
+                      <text x="208" y="84">Party</text>
+                      <text x="308" y="84">PubSub</text>
+                      <text x="364" y="84">Server</text>
+                      <text x="532" y="84">Verifier</text>
+                      <text x="212" y="132">[Attestation</text>
+                      <text x="292" y="132">Result</text>
+                      <text x="368" y="132">Generation]</text>
+                      <text x="136" y="148">|</text>
+                      <text x="336" y="148">|</text>
+                      <text x="536" y="148">|</text>
+                      <text x="160" y="164">sub(topic=AttRes,</text>
+                      <text x="328" y="164">|</text>
+                      <text x="528" y="164">|</text>
+                      <text x="152" y="180">handle)</text>
+                      <text x="136" y="196">|</text>
+                      <text x="108" y="212">[loop]</text>
+                      <text x="536" y="228">|</text>
+                      <text x="492" y="244">pub(topic=AttRes</text>
+                      <text x="492" y="260">attestationResult)</text>
+                      <text x="372" y="292">notify(topic=AttRes,</text>
+                      <text x="420" y="308">attestationResult)</text>
+                      <text x="48" y="356">|</text>
+                      <text x="136" y="356">|</text>
+                      <text x="336" y="356">|</text>
+                      <text x="536" y="356">|</text>
+                      <text x="48" y="372">~</text>
+                      <text x="136" y="372">~</text>
+                      <text x="336" y="372">~</text>
+                      <text x="536" y="372">~</text>
+                    </g>
+                  </svg><a href="#section-7.3.2.4-1.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-figure-9-attestation-result" class="selfRef">Figure 9: Attestation Result Generation for Remote Attestation over Publish-Subscribe</a>
+              </figcaption></figure>
 </div>
 <p id="section-7.3.2.4-2">Attestation Result Generation is the same for both publish-subscribe models,<em>Challenge/Response Remote Attestation over Publish-Subscribe</em> and <em>Uni-Directional Remote Attestation over Publish-Subscribe</em>.
 Relying Parties subscribe to topic <code>AttRes</code> (= Attestation Result) on the PubSub server.
@@ -3082,7 +3190,7 @@ These are especially important in high-security settings such as financial servi
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-epoch-markers">[I-D.ietf-rats-epoch-markers]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-epoch-markers-00</span>, <time datetime="2024-10-10" class="refDate">10 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-00">https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-epoch-markers-01</span>, <time datetime="2025-04-11" class="refDate">11 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-01">https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -3139,7 +3247,7 @@ These are especially important in high-security settings such as financial servi
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-endorsements">[I-D.ietf-rats-endorsements]</dt>
         <dd>
-<span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"RATS Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-endorsements-05</span>, <time datetime="2024-11-08" class="refDate">8 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"RATS Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-endorsements-06</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-06">https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-uccs">[I-D.ietf-rats-uccs]</dt>
         <dd>
