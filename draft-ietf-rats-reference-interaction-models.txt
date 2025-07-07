@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 30 August 2025                                           W. Pan
+Expires: 8 January 2026                                           W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                        26 February 2025
+                                                             7 July 2025
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -72,6 +72,9 @@ Table of Contents
    1.  Introduction
    2.  Terminology
      2.1.  Disambiguation
+     2.2.  Boot Time Integrity
+     2.3.  Runtime Integrity
+     2.4.  Boot-to-Runtime Boundary
    3.  Scope and Intent
    4.  Essential Requirements
    5.  Normative Prerequisites
@@ -127,11 +130,17 @@ Table of Contents
    [RFC9334].  This document illustrates three main interaction models
    that can be used in specific RATS-related solution documents:
 
-   1.  Challenge/Response Remote Attestation
+   1.  _Challenge/Response Remote Attestation_: A Verifier actively
+       challenges an Attester and receives time-fresh Evidence in
+       response.
 
-   2.  Uni-Directional Remote Attestation
+   2.  _Uni-Directional Remote Attestation_: An Attester sends Evidence
+       proactively to a Verifier, often using externally generated
+       freshness indicators.
 
-   3.  Streaming Remote Attestation
+   3.  _Streaming Remote Attestation_: A persistent subscription-based
+       model where Evidence is pushed continuously to interested
+       Verifiers, optionally via a Broker.
 
    As a basis to describe the interaction models is this document, the
    example of attestation Evidence conveyance is used to illustrate the
@@ -194,6 +203,29 @@ Table of Contents
    shielded Computing Environments (e.g., embedded Secure Elements (eSE)
    or Trusted Platform Modules (TPM)).
 
+2.2.  Boot Time Integrity
+
+   Boot time integrity refers to the trustworthiness of the platform
+   during its boot sequence, typically covering firmware, BIOS/UEFI,
+   initial bootloaders, and core operating system components up until a
+   stable runtime environment is reached (typically via layered
+   attestation).  This may apply equally to physical devices and virtual
+   machines.
+
+2.3.  Runtime Integrity
+
+   Runtime integrity refers to the ongoing trustworthiness of a platform
+   during normal operation, after the boot sequence completes.  It
+   encompasses the integrity of dynamic system state, including loaded
+   applications, kernel modules, and active configurations.
+
+2.4.  Boot-to-Runtime Boundary
+
+   The exact boundary between boot time and runtime may vary between
+   systems.  Generally, it is marked by the handoff from the final
+   bootloader or initial OS kernel to a fully operational environment
+   capable of executing arbitrary applications or services.
+
 3.  Scope and Intent
 
    This document:
@@ -209,7 +241,7 @@ Table of Contents
 
    *  does not cover every detail about Evidence conveyance.
 
-   While details regarding Evidence of run-time integrity are not
+   While details regarding Evidence of runtime integrity are not
    explicitly highlighted, the provided model descriptions serve as a
    foundation for developing corresponding model extensions.  While the
    interaction models described in this document, including their
@@ -445,6 +477,9 @@ Table of Contents
 
 7.1.  Challenge/Response Remote Attestation
 
+   Note: In the following diagrams, a leading ? indicates that an
+   information element is optional.
+
 .----------.                                                .----------.
 | Attester |                                                | Verifier |
 '----+-----'                                                '-----+----'
@@ -470,22 +505,29 @@ Table of Contents
      |                                       attestationResult <= |
      |                                                            |
 
-   The Attester boots up and thereby produces Claims about its boot
-   state and its operational state.  Event Logs may accompany the
-   produced Claims and provide an event trail of security-critical
-   events in the system.  Claims are produced by all Attesting
-   Environments of an Attester system.
+      Figure 1: Figure 1: Challenge/Response Remote Attestation
 
-   The Challenge/Response remote attestation procedure is initiated by
-   the Verifier by sending a remote attestation request to the Attester.
-   A request includes a Handle, an optional list of Attestation Key IDs,
-   and an optional Claim Selection.
+   The Attester boots up and thereby produces Claims about its boot
+   state and its operational state during runtime (cf. Section 2), e.g.,
+   loaded applications, configurations, and environment variables.
+   Event Logs may accompany the produced Claims and provide an event
+   trail of security-critical events in the system.  Claims are produced
+   by all Attesting Environments of an Attester system.
+
+   The Challenge/Response remote attestation procedure is typically
+   initiated by the Verifier by sending a remote attestation request to
+   the Attester.  Alternative initiation flows, e.g., via an
+   intermediary or through pre-configured requests (e.g., Call-Home
+   procedures or trusted trigger events from Relying Parties), are out
+   of scope for this document.  A request includes a Handle, an optional
+   list of Attestation Key IDs, and an optional Claim Selection.
 
    In the Challenge/Response model, the Handle is composed of qualifying
-   data in the form of a practically infeasible to guess nonce, such as
-   a cryptographically strong random number.  The Verifier-generated
-   nonce is intended to guarantee Evidence freshness and to prevent
-   replay attacks.
+   data in the form of a practically infeasible-to-guess nonce, such as
+   a cryptographically strong random number.  This nonce is typically
+   generated by the Verifier to guarantee Evidence freshness and prevent
+   replay attacks; however, depending on deployment context, it may also
+   be generated by another trusted role, such as a Relying Party.
 
    The list of Attestation Key IDs selects the attestation keys with
    which the Attester is requested to sign the attestation Evidence.
@@ -530,6 +572,11 @@ Table of Contents
    properties and characteristics of an Attester, which enable Relying
    Parties to assess an Attester's trustworthiness.
 
+   Note: This diagram illustrates the canonical Challenge/Response
+   interaction between Attester and Verifier.  Variants that include a
+   Relying Party (e.g., Passport or Background-Check models) are shown
+   in subsequent sections.
+
 7.1.1.  Models and Example Sequences of Challenge/Response Remote
         Attestation
 
@@ -552,42 +599,51 @@ Table of Contents
    information according to its own Appraisal Policy to establish the
    trustworthiness of the Attester.
 
-.----------.                          .----------.    .---------------.
-| Attester |                          | Verifier |    | Relying Party |
-'----+-----'                          '-----+----'    '-------+-------'
-     |                                      |                 |
+.----------.                     .---------------.         .----------.
+| Attester |                     | Relying Party |         | Verifier |
+'----+-----'                     '-------+-------'         '-----+----'
+     |                                   |                       |
 =================[Evidence Generation and Conveyance]===================
-     |                                      |                 |
-  generateClaims(attestingEnvironment)      |                 |
-     | => claims, ?eventLogs                |                 |
-     |                                      |                 |
-     |<------------------------ requestEvidence(handle,       |
-     |                           ?attEnvIDs, ?claimSelection) |
-     |                                      |                 |
-  collectClaims(claims, ?claimSelection)    |                 |
-     | => collectedClaims                   |                 |
-     |                                      |                 |
-  generateEvidence(handle,                  |                 |
-     ?attEnvIDs, collectedClaims)           |                 |
-     | => evidence                          |                 |
-     |                                      |                 |
-     | {evidence, ?eventLogs} ------------->|                 |
-     |                                      |                 |
+     |                                   |                       |
+  generateClaims(attestingEnvironment)   |                       |
+     | => {claims, ?eventLogs}           |                       |
+     |                                   |                       |
+     |<---------------------------------------------- requestEvidence(
+     |                                   |              handle,
+     |                                   |              ?attEnvIDs,
+     |                                   |              ?claimSelection)
+  collectClaims(claims,                  |                       |
+     ?claimSelection)                    |                       |
+     | => collectedClaims                |                       |
+     |                                   |                       |
+  generateEvidence(handle,               |                       |
+     ?attEnvIDs, collectedClaims)        |                       |
+     | => evidence                       |                       |
+     |                                   |                       |
+     | {evidence, ?eventLogs} ---------------------------------->|
+     |                                   |                       |
 ==========================[Evidence Appraisal]==========================
-     |                                      |                 |
-     |                         appraiseEvidence(evidence,     |
-     |                             ?eventLogs, verInputs)     |
-     |                 attestationResult <= |                 |
-     |                                      |                 |
-     |<---------------- {attestationResult} |                 |
-     |                                      |                 |
-     | {evidence, attestationResult} ------------------------>|
-     |                                      |                 |
-====================[Attestation Result Generation]=====================
-     |                                      |                 |
-     |                                      |    appraiseResult(policy,
-     |                                      |       attestationResult)
-     |                                      |                 |
+     |                                   |                       |
+     |                                   |           appraiseEvidence(
+     |                                   |             evidence,
+     |                                   |             ?eventLogs,
+     |                                   |             verInputs)
+     |                                   |  attestationResult <= |
+     |                                   |                       |
+=============[Attestation Result Conveyance and Appraisal]==============
+     |                                   |                       |
+     | <------------------------------------ {attestationResult} |
+     |                                   |                       |
+     |                                   |                       |
+     | {evidence, attestationResult} --->|                       |
+     |                                   |                       |
+     |                            appraiseResult(                |
+     |                              policy,                      |
+     |                              attestationResult)           |
+     |                                   |                       |
+
+   Figure 2: Figure 2: Passport Model for Challenge/Response Remote
+                             Attestation
 
 7.1.1.2.  Background-Check Model
 
@@ -611,11 +667,13 @@ Table of Contents
      |                                   |                       |
 =================[Evidence Generation and Conveyance]===================
      |                                   |                       |
-     |<------------------------ requestEvidence(handle,          |
-     |                           ?attEnvIDs, ?claimSelection)    |
-     |                                   |                       |
   generateClaims(attestingEnvironment)   |                       |
      | => {claims, ?eventLogs}           |                       |
+     |                                   |                       |
+     |<-------------------------- requestEvidence(               |
+     |                              handle,                      |
+     |                              ?attEnvIDs,                  |
+     |                              ?claimSelection)             |
      |                                   |                       |
   collectClaims(claims,                  |                       |
      ?claimSelection)                    |                       |
@@ -626,24 +684,27 @@ Table of Contents
      | => evidence                       |                       |
      |                                   |                       |
      | {evidence, ?eventLogs} ---------->|                       |
-     |                                   |                       |
-==========================[Evidence Appraisal]==========================
-     |                                   |                       |
      |                                   | {handle, evidence,    |
      |                                   |  ?eventLogs} -------->|
      |                                   |                       |
-     |                                   |   appraiseEvidence(evidence,
-     |                                   |        ?eventLogs, verInputs)
+==========================[Evidence Appraisal]==========================
+     |                                   |                       |
+     |                                   |           appraiseEvidence(
+     |                                   |             evidence,
+     |                                   |             ?eventLogs,
+     |                                   |             verInputs)
      |                                   |  attestationResult <= |
      |                                   |                       |
-     |                                   |<---------- {evidence, |
-     |                                   |    attestationResult} |
+=============[Attestation Result Conveyance and Appraisal]==============
      |                                   |                       |
-====================[Attestation Result Generation]=====================
+     |                                   |<- {attestationResult} |
      |                                   |                       |
      |                        appraiseResult(policy,             |
      |                          attestationResult)               |
      |                                   |                       |
+
+  Figure 3: Figure 3: Background-Check Model for Challenge/Response
+                          Remote Attestation
 
 7.2.  Uni-Directional Remote Attestation
 
@@ -707,6 +768,8 @@ Table of Contents
 | '------------------------------------------------------------------' |
  '--------------------------------------------------------------------'
      |                                                            |
+
+        Figure 4: Figure 4: Uni-Directional Remote Attestation
 
    Uni-Directional Remote Attestation procedures can be initiated both
    by the Attester and by the Verifier.  Initiation by the Attester can
@@ -860,6 +923,8 @@ Table of Contents
  '--------------------------------------------------------------------'
      |                                                            |
 
+  Figure 5: Figure 5: Streaming Remote Attestation without a Broker
+
    In the observer pattern, an observer establishes a direct connection
    to the observed resources through a subscription mechanism, which is
    designed specifically for conveying conceptual messages for remote
@@ -971,6 +1036,9 @@ Table of Contents
      |                                   |                        |
      ~                                   ~                        ~
 
+     Figure 6: Figure 6: Handle Generation for Challenge/Response
+              Remote Attestation over Publish-Subscribe
+
    The _Challenge/Response Remote Attestation over Publish-Subscribe_
    interaction model uses the same information elements as the
    _Challenge/Response Remote Attestation_ interaction model.  Handles
@@ -1011,6 +1079,9 @@ Table of Contents
      |                       notify(topic=Handle, handle) ------->|
      |                                   |                        |
      ~                                   ~                        ~
+
+   Figure 7: Figure 7: Handle Generation for Uni-Directional Remote
+                  Attestation over Publish-Subscribe
 
    Handles are created by a trusted third party, the Handle Distributor
    (see Section 9).  In the sequence diagram above, both an Attester and
@@ -1063,6 +1134,9 @@ Table of Contents
      |                                   |                        |
      ~                                   ~                        ~
 
+   Figure 8: Figure 8: Evidence Generation and Appraisal for Remote
+                  Attestation over Publish-Subscribe
+
    Exactly as in the Challenge/Response and Uni-Directional interaction
    models, there is an Evidence Generation-Appraisal loop, in which the
    Attester generates Evidence and the Verifier appraises it.  In the
@@ -1099,6 +1173,9 @@ Table of Contents
  '--------------------------------------------------------------------'
      |          |                        |                        |
      ~          ~                        ~                        ~
+
+     Figure 9: Figure 9: Attestation Result Generation for Remote
+                  Attestation over Publish-Subscribe
 
    Attestation Result Generation is the same for both publish-subscribe
    models,_Challenge/Response Remote Attestation over Publish-Subscribe_
@@ -1380,9 +1457,9 @@ Table of Contents
    [I-D.ietf-rats-epoch-markers]
               Birkholz, H., Fossati, T., Pan, W., and C. Bormann, "Epoch
               Markers", Work in Progress, Internet-Draft, draft-ietf-
-              rats-epoch-markers-00, 10 October 2024,
+              rats-epoch-markers-01, 11 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-00>.
+              epoch-markers-01>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1446,9 +1523,9 @@ Table of Contents
    [I-D.ietf-rats-endorsements]
               Thaler, D., Birkholz, H., and T. Fossati, "RATS
               Endorsements", Work in Progress, Internet-Draft, draft-
-              ietf-rats-endorsements-05, 8 November 2024,
+              ietf-rats-endorsements-06, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              endorsements-05>.
+              endorsements-06>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
