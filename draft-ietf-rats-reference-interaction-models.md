@@ -57,8 +57,8 @@ normative:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
-  I-D.tschofenig-rats-psa-token: psa-token
-  I-D.ietf-rats-uccs: uccs
+  RFC9783: psa-token
+  RFC9781: uccs
   DAA:
     title: Direct Anonymous Attestation
     author:
