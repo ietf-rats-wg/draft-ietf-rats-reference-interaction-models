@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T01:17:06.129769+00:00",
+  "timestamp": "2025-07-10T01:17:51.231520+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -4184,6 +4184,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOEYizNM6eHkK1",
+      "title": "refs update",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/71",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-09T12:35:34Z",
+      "updatedAt": "2025-07-09T12:35:35Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "b584e60828cc452411b7353662ee6dbef3f9e8e4",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "refs-update",
+      "headRefOid": "42537867bf4f5cf155ebe3c7092aad34d201bb4b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
