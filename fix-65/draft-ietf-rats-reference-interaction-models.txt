@@ -130,7 +130,7 @@ Table of Contents
    illustrates three main interaction models between various RATS roles,
    namely Attesters, Verifiers, and Relying Parties that can be used in
    specific RATS-related specifications.  Using Evidence as a prominent
-   example these three interaction models are:
+   example, these three interaction models are:
 
    1.  _Challenge/Response Remote Attestation_: A Verifier actively
        challenges an Attester and receives time-fresh Evidence in
