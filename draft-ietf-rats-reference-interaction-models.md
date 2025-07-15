@@ -238,7 +238,8 @@ Attester Identity:
 
 : A statement made by an Endorser about an Attester that affirms the Attester's distinguishability.
 
-: In essence, an Attester Identity can be explicit, e.g., via a Claim in Evidence or Endorsement, or implicit, e.g., via a signature that matches a trust anchor. Note: distinguishability does not imply uniqueness, for example, a group of Attesters can be identified by an Attester Identity.
+: In essence, an Attester Identity can either be explicit (e.g., via a Claim in Evidence or Endorsement) or implicit (e.g., via a signature that matches a trust anchor).
+Note that distinguishability does not imply uniqueness; for example, a group of Attesters can be identified by an Attester Identity.
 
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 
