@@ -297,8 +297,8 @@ Table of Contents
    prerequisites MUST be in place to support their implementation:
 
    Authentication Secret:  An Authentication Secret MUST be established
-      before any RATS interaction takes place and be exclusively
-      available to an Attesting Environment of the Attester.
+      before any RATS interaction takes place, and it must be made
+      available exclusively to an Attesting Environment of the Attester.
 
       The Attester MUST protect Claims with this Authentication Secret
       to prove the authenticity of the Claims included in Evidence.  The
