@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 8 January 2026                                           W. Pan
+Expires: 16 January 2026                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                             7 July 2025
+                                                            15 July 2025
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 16 January 2026.
 
 Copyright Notice
 
@@ -278,15 +278,15 @@ Table of Contents
    Integrity:  Information provided by an Attester MUST NOT have been
       altered since it was created.  This may be achieved via symmetric
       cryptography, e.g., using COSE Mac0 as in PSA TF-M profile
-      (Section 5.2 of [I-D.tschofenig-rats-psa-token]), or asymmetric,
-      such as a COSE Sign algorithm like ECDSA.
+      (Section 5.2 of [RFC9783]), or asymmetric, such as a COSE Sign
+      algorithm like ECDSA.
 
    Authentication:  The information provided by the Attester MUST be
       authentic.  To do this, the Attester should authenticate itself to
       the Verifier.  This can be done through implicit authentication
       using a digital signature over the Attestation Evidence, which
       does not require additional protocol steps, or by using a secure
-      channel (see [I-D.ietf-rats-uccs]) that includes authentication.
+      channel (see [RFC9781]) that includes authentication.
 
 5.  Normative Prerequisites
 
@@ -1528,21 +1528,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               endorsements-06>.
 
-   [I-D.ietf-rats-uccs]
-              Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
-              Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
-              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
-              3 November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-uccs-12>.
-
-   [I-D.tschofenig-rats-psa-token]
-              Tschofenig, H., Frost, S., Brossard, M., Shaw, A. L., and
-              T. Fossati, "Arm's Platform Security Architecture (PSA)
-              Attestation Token", Work in Progress, Internet-Draft,
-              draft-tschofenig-rats-psa-token-24, 23 September 2024,
-              <https://datatracker.ietf.org/doc/html/draft-tschofenig-
-              rats-psa-token-24>.
-
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
               <https://doi.org/10.1145/41457.37515>.
@@ -1558,6 +1543,17 @@ Table of Contents
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <https://www.rfc-editor.org/rfc/rfc4949>.
+
+   [RFC9781]  Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
+              Bormann, "A Concise Binary Object Representation (CBOR)
+              Tag for Unprotected CBOR Web Token Claims Sets (UCCS)",
+              RFC 9781, DOI 10.17487/RFC9781, May 2025,
+              <https://www.rfc-editor.org/rfc/rfc9781>.
+
+   [RFC9783]  Tschofenig, H., Frost, S., Brossard, M., Shaw, A., and T.
+              Fossati, "Arm's Platform Security Architecture (PSA)
+              Attestation Token", RFC 9783, DOI 10.17487/RFC9783, June
+              2025, <https://www.rfc-editor.org/rfc/rfc9783>.
 
    [turtles]  Rudnicki, R., "Turtles All the Way Down: Foundation,
               Edifice, and Ruin in Faulkner and McCarthy", The Faulkner
