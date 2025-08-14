@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-17T01:20:44.790292+00:00",
+  "timestamp": "2025-08-14T01:17:06.318776+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1325,6 +1325,30 @@
           "body": "a) no, but there can be specification that come with that prescription\n\nb) That's a good point. We think the diagram is actually the correct point of view and the text should not elaborate on how the attestation result is hauled off the Verifier. Would you agree?\n\nc) Yes, but as in b) we would like to keep the reference models as simple as possible (the diagrams already became quite noisy over time). Conveyance of AR would be a \"re-application\" of the interaction model - but for AR. Would that make more sense? Can you think of a suggested change and where it should go?\n\nd) sorry, but we need to ask a clarifying questions: what does \"if the PubSub server must attest to the Handle\" mean? If you would like to see more elaborate language about \"topic isolation\" addressing your concern of \"limiting dissemination of identifying information to subscribers\", could you provide a suggested change?\n\nThe trust relationships to trusted third parties are a policy topic that is currently out-of-scope of the rats charter. Maybe we can augment it a little bit that the trust relationship for Verifiers apply here, too? Or would that be too vague to address your issue?",
           "createdAt": "2025-07-15T13:42:41Z",
           "updatedAt": "2025-07-15T13:42:41Z"
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "I_kwDOEYizNM7Fh5s8",
+      "title": "[Rats] review of draft-ietf-rats-reference-interaction-models-14 (2025-07-17)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/73",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From IETF RATS Mailing List\nFrom: Thomas Fossati <thomas.fossati@linaro.org> (@thomas-fossati)\nDate: Thu, 17 Jul 2025 11:54:38 +0200\nArchived-At: <https://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw>\n\n---\n\nHi,\n\nI have reviewed -14.\n\nFirstly, thank you very much, Henk and Michael, for addressing the\ncomments I made in my previous review rounds.\n\nI believe the document is in good shape and ready for WGLC.\n\nI have a few more minor points:\n\n# S 1\n\n* Attestation Policies => Appraisal Policies\n* It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how.  Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\n* It says: \"privacy-preserving conveyance methods\" -- what does\n\"privacy-preserving\" refer to?\n\n# S 2.2\n\n* Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\n\n# S 4\n\n* The term \"implicit authentication\" referring to digital signatures sounds a bit odd\n* It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\n\n# Figure 2\n\n* Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\n\n# S 7.2.1\n\n* Unsure how \u201cSynchronization Checks\u201d would work in practice.\n\n# S 11.1\n\n* Why is RFC9683 normative?\n\ncheers, t\n",
+      "createdAt": "2025-08-12T12:24:46Z",
+      "updatedAt": "2025-08-12T14:01:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @thomas-fossati,\n\nThanks for the review. Very helpful. I went through all of your comments and integrated them (see PR #74). In the following some more details.\n\n# S 1\n\n* [x] Attestation Policies => Appraisal Policies\n  * Renamed.\n* [x] It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how.  Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\n  * Removed the sentence\n* [x] It says: \"privacy-preserving conveyance methods\" -- what does \"privacy-preserving\" refer to?\n  * Added reference to \"Cryptographic Blinding\" section in \"Security Considerations\" section.\n\n# S 2.2\n\n* [x] Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\n  * Removed it.\n\n# S 4\n\n* [x] The term \"implicit authentication\" referring to digital signatures sounds a bit odd\n  * Removed \"implicit\".\n* [x] It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\n  * Added \"see Sections 3 and 4 of\".\n\n# Figure 2\n\n* [x] Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\n  * The thing is, in all the other diagrams, the Attester is on the left and the Verifier is on the right. We wanted to represent it in the same way here.\n  * To make the diagram clearer, represented the crossings as *aasvg* \"wire jumps/hops.\"\n\n# S 7.2.1\n\n* [x] Unsure how \u201cSynchronization Checks\u201d would work in practice.\n  * Added example showing how TUDA implements this.\n  * Does this clarify the comment?\n\n# S 11.1\n\n* [x] Why is RFC9683 normative?\n  * Good point. Thanks. Made it informative.\n\nCheers,\nMichael",
+          "createdAt": "2025-08-12T14:01:42Z",
+          "updatedAt": "2025-08-12T14:01:42Z"
         }
       ]
     }
@@ -4330,6 +4354,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOEYizNM6jRtKt",
+      "title": "Integrated Thomas Fossati's review from 2025-07-17 (RATS mailing list).",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/74",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #73\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw\r\n\r\n# S 1\r\n\r\n* [x] Attestation Policies => Appraisal Policies\r\n  * Renamed.\r\n* [x] It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how. Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\r\n  * Removed the sentence\r\n* [x] It says: \"privacy-preserving conveyance methods\" -- what does \"privacy-preserving\" refer to?\r\n* Added reference to \"Cryptographic Blinding\" section in \"Security Considerations\" section.\r\n\r\n# S 2.2\r\n\r\n* [x] Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\r\n  * Removed it.\r\n\r\n# S 4\r\n\r\n* [x] The term \"implicit authentication\" referring to digital signatures sounds a bit odd\r\n  * Removed \"implicit\".\r\n* [x] It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\r\n  * Added \"see Sections 3 and 4 of\".\r\n\r\n# Figure 2\r\n\r\n* [x] Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\r\n* The thing is, in all the other diagrams, the Attester is on the left and the Verifier is on the right. We wanted to represent it in the same way here.\r\n* To make the diagram clearer, represented the crossings as *aasvg* \"wire jumps/hops.\"\r\n\r\n# S 7.2.1\r\n\r\n* [x] Unsure how \u201cSynchronization Checks\u201d would work in practice.\r\n  * Added example showing how TUDA implements this.\r\n  * Does this clarify the comment?\r\n\r\n# S 11.1\r\n\r\n* [x] Why is RFC9683 normative?\r\n  * Good point. Thanks. Made it informative.",
+      "createdAt": "2025-08-12T14:00:34Z",
+      "updatedAt": "2025-08-12T15:30:55Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "addressing-issue-73-review-thomas",
+      "headRefOid": "89ebeb19612c35ac6347867b0dcb0b0dbbe01294",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
