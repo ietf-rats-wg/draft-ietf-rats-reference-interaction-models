@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T01:17:06.318776+00:00",
+  "timestamp": "2025-08-17T01:22:18.887061+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1285,15 +1285,15 @@
       "id": "I_kwDOEYizNM64SCRK",
       "title": "Streaming Remote Attestation",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) What occurs when evidence/evidence delta's fail to verify?  Can the Verfier unsubscribe?  More broadly, a description of how the unsubscribe process works may be useful in understanding the streaming mode.\n\nb) Applicable to both uni-directional and streaming:\n\n>While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance. These updates reflecting the differences are called \"delta\" in the sequence diagram above.\n\nThis is not an adequate definition for delta evidence IMO.  For instance if the attester goes through a sleep cycle, but is still able to detect that the claim value has changed and then reverted back to the previous value during the sleep period, then the attester should potentially pass this information on to the Verifier.",
       "createdAt": "2025-05-26T17:23:00Z",
-      "updatedAt": "2025-07-15T13:30:51Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-16T14:01:35Z",
+      "closedAt": "2025-08-16T14:01:34Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1301,6 +1301,13 @@
           "body": "a) Unsubscribing is actually current not in scope of this document, but is covered by standards track I-Ds, such as draft-ietf-rats-network-device-subscription. We were considering this a specification detail that does not require a reference model as this is typically done in the same conveyance paths / trust relationships as the subscription.\n\nCould you maybe provide a suggested change to the current main, so we can understand better where this could pose an issute?\n\nb) That is correct. Would like to see a change to the extend of: \"If the Attester is not able to detect a change immeditatly when it occurs, e.g., due to a sleep cylce or hibernation, it MUST be conveyed as soon as possible after.\"?",
           "createdAt": "2025-07-15T13:30:51Z",
           "updatedAt": "2025-07-15T13:30:51Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @gmandyam,\n\nThanks for your helpful comments. I went through all of them and integrated them (see PR #76).\n\n* [x] **a)** Evidence verification failures & unsubscribe:\n  * @gmandyam's concern:\n    * What happens when Evidence (or delta Evidence) fails verification?\n    * Should the Verifier be able to unsubscribe?\n    * A description of how unsubscribe works might be useful in streaming mode.\n  * @henkbirkholz's reply:\n    * Unsubscribe is out of scope of this doc, since it is already covered by standards track work (e.g., [draft-ietf-rats-network-device-subscription](https://datatracker.ietf.org/doc/draft-ietf-rats-network-device-subscription/)).\n    * It's a protocol detail, not part of the reference model.\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.\n\n* [x] **b)** Definition of delta evidence:\n  * @gmandyam's concern:\n    * Current definition (\u201conly changed claims and new event logs\u201d) is too narrow.\n    * Example: Attester goes to sleep, detects a change and reversion, and should still report that sequence, even if the final state looks unchanged.\n  * @henkbirkholz's reply:\n    * Agree, propose adding text to cover this.\n  * \u27a1\ufe0f Improved definition of delta evidence in Section 7.2.1.\n  * \u27a1\ufe0f Referenced this definition in 7.3 (Streaming).\n\nCheers,\nMichael\n",
+          "createdAt": "2025-08-16T14:01:35Z",
+          "updatedAt": "2025-08-16T14:01:35Z"
         }
       ]
     },
@@ -1309,15 +1316,15 @@
       "id": "I_kwDOEYizNM64TJOQ",
       "title": "PubSub Server",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/69",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) Sec. 7.3.2.2.:  Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy?  If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\n\nb) Sec. 7.3.2.3:  If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\n\nc) Sec. 7.3.2.4: Call flow in figure seems to be overly limiting.  Attester can also subscribe to attestationResult.\n\nd) Section 9:  Need a discussion on security/privacy considerations for PubSub server.  This is different that what is described in Section 9.3.  For instance, if the PubSub server must attest to the  Handle used as part of evidence then this could be discussed in Section 9.  Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it).\n\nMoreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server.  For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?",
       "createdAt": "2025-05-26T20:41:32Z",
-      "updatedAt": "2025-07-15T13:42:41Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-16T12:53:29Z",
+      "closedAt": "2025-08-16T12:53:28Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1325,6 +1332,13 @@
           "body": "a) no, but there can be specification that come with that prescription\n\nb) That's a good point. We think the diagram is actually the correct point of view and the text should not elaborate on how the attestation result is hauled off the Verifier. Would you agree?\n\nc) Yes, but as in b) we would like to keep the reference models as simple as possible (the diagrams already became quite noisy over time). Conveyance of AR would be a \"re-application\" of the interaction model - but for AR. Would that make more sense? Can you think of a suggested change and where it should go?\n\nd) sorry, but we need to ask a clarifying questions: what does \"if the PubSub server must attest to the Handle\" mean? If you would like to see more elaborate language about \"topic isolation\" addressing your concern of \"limiting dissemination of identifying information to subscribers\", could you provide a suggested change?\n\nThe trust relationships to trusted third parties are a policy topic that is currently out-of-scope of the rats charter. Maybe we can augment it a little bit that the trust relationship for Verifiers apply here, too? Or would that be too vague to address your issue?",
           "createdAt": "2025-07-15T13:42:41Z",
           "updatedAt": "2025-07-15T13:42:41Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @gmandyam,\n\nThanks for your helpful comments. I went through all of them and integrated them (see PR #75).\n\n* [x] **a)** Sec. 7.3.2.2.: Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy? If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\n  * *Henk's reply:* No, but there can be specifications that come with that prescription.\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.2.\n\n* [x] **b)** Sec. 7.3.2.3: If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\n  * *Henk\u2019s Response (rephrased, simplified):* Good point \u2014 the diagram already reflects the correct model (the result is published to the PubSub server), but the *text may be misleading*.\n  * \u27a1\ufe0f Added clarification by improving/extending the last sentence of Section 7.3.2.3.\n\n* [x] **c)** Sec. 7.3.2.4: Call flow in figure seems to be overly limiting. Attester can also subscribe to attestationResult.\n  * *Henk\u2019s reply (rephrased, simplified):* Agree, but we want to keep the diagram simple. Maybe this can be described as a \u201cre-application\u201d of the interaction model.\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.4.\n\n* [x] **d)** Section 9: Need a discussion on security/privacy considerations for PubSub server. This is different that what is described in Section 9.3. For instance, if the PubSub server must attest to the Handle used as part of evidence then this could be discussed in Section 9. Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it).\n  Moreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server. For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?\n\n  * [x] **d.1)** What does \u201cattest to the Handle\u201d mean?\n    * Clarification: This seems to ask whether the PubSub server must vouch for the Handle (e.g., by proving it delivered it, or binding it cryptographically).\n    * \u27a1\ufe0f Added clarifying sentence at the end of Section 9.3.\n\n  * [x] **d.2)** Strong Isolation of Topics\" does not address privacy preservation\n    * This is a good point: topic isolation != privacy preservation.\n    * \u27a1\ufe0f Added clarifying sentence for *Strong Isolation of Topics* bullet point of Section 9.3.\n\n  * [x] **d.3)** \"Trusted Association Verification\" lacks details\n    * \"Are endorsements required? How are trust relationships established?\": This is currently vague.\n    * \u27a1\ufe0f Added clarifying sentence for *Trusted Association Verification* bullet point of Section 9.3.\n\n@henkbirkholz Thanks for your comments, too!\n\nCheers,\nMichael\n",
+          "createdAt": "2025-08-16T12:53:28Z",
+          "updatedAt": "2025-08-16T12:53:28Z"
         }
       ]
     },
@@ -4374,6 +4388,58 @@
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-73-review-thomas",
       "headRefOid": "89ebeb19612c35ac6347867b0dcb0b0dbbe01294",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOEYizNM6j8JLN",
+      "title": "Integrated @gmandyam's comments/review.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/75",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #69.\r\n\r\n* [x] **a)** Sec. 7.3.2.2.: Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy? If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\r\n* *Henk's reply:* No, but there can be specifications that come with that prescription.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.2.\r\n\r\n* [x] **b)** Sec. 7.3.2.3: If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\r\n* *Henk\u2019s Response (rephrased, simplified):* Good point \u2014 the diagram already reflects the correct model (the result is published to the PubSub server), but the *text may be misleading*.\r\n* \u27a1\ufe0f Added clarification by improving/extending the last sentence of Section 7.3.2.3.\r\n\r\n* [x] **c)** Sec. 7.3.2.4: Call flow in figure seems to be overly limiting. Attester can also subscribe to attestationResult.\r\n* *Henk\u2019s reply (rephrased, simplified):* Agree, but we want to keep the diagram simple. Maybe this can be described as a \u201cre-application\u201d of the interaction model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.4.\r\n\r\n* [x] **d)** Section 9: Need a discussion on security/privacy considerations for PubSub server. This is different that what is described in Section 9.3. For instance, if the PubSub server must attest to the Handle used as part of evidence then this could be discussed in Section 9. Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it). Moreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server. For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?\r\n\r\n  * [x] **d.1)** What does \u201cattest to the Handle\u201d mean?\r\n* Clarification: This seems to ask whether the PubSub server must vouch for the Handle (e.g., by proving it delivered it, or binding it cryptographically).\r\n    * \u27a1\ufe0f Added clarifying sentence at the end of Section 9.3.\r\n\r\n* [x] **d.2)** Strong Isolation of Topics\" does not address privacy preservation\r\n    * This is a good point: topic isolation != privacy preservation.\r\n* \u27a1\ufe0f Added clarifying sentence for *Strong Isolation of Topics* bullet point of Section 9.3.\r\n\r\n  * [x] **d.3)** \"Trusted Association Verification\" lacks details\r\n* \"Are endorsements required? How are trust relationships established?\": This is currently vague.\r\n* \u27a1\ufe0f Added clarifying sentence for *Trusted Association Verification* bullet point of Section 9.3.",
+      "createdAt": "2025-08-16T12:51:58Z",
+      "updatedAt": "2025-08-16T12:51:59Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "addressing-issue-69-gmandyam",
+      "headRefOid": "70f18b11481f2afacd7891b842191c0ad4e3eff5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOEYizNM6j8TwG",
+      "title": "Integrated @gmandyam's comments/review on streaming remote attestation.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/76",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #68.\r\n\r\n* [x] **a)** Evidence verification failures & unsubscribe:\r\n  * @gmandyam's concern:\r\n    * What happens when Evidence (or delta Evidence) fails verification?\r\n    * Should the Verifier be able to unsubscribe?\r\n* A description of how unsubscribe works might be useful in streaming mode.\r\n  * @henkbirkholz's reply:\r\n* Unsubscribe is out of scope of this doc, since it is already covered by standards track work (e.g.,\r\n[draft-ietf-rats-network-device-subscription](https://datatracker.ietf.org/doc/draft-ietf-rats-network-device-subscription/)).\r\n    * It's a protocol detail, not part of the reference model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.\r\n\r\n* [x] **b)** Definition of delta evidence:\r\n  * @gmandyam's concern:\r\n* Current definition (\u201conly changed claims and new event logs\u201d) is too narrow.\r\n* Example: Attester goes to sleep, detects a change and reversion, and should still report that sequence, even if the final state looks unchanged.\r\n  * @henkbirkholz's reply:\r\n    * Agree, propose adding text to cover this.\r\n  * \u27a1\ufe0f Improved definition of delta evidence in Section 7.2.1.\r\n  * \u27a1\ufe0f Referenced this definition in 7.3 (Streaming).",
+      "createdAt": "2025-08-16T14:00:41Z",
+      "updatedAt": "2025-08-16T14:01:06Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "addressing-issue-68-gmandyam-streaming-remote-attestation",
+      "headRefOid": "5ccc8bf8a5557f84a482ba3b4844d55e40796edf",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
