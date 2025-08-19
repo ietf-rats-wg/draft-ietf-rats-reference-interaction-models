@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-17T01:22:18.887061+00:00",
+  "timestamp": "2025-08-19T01:13:42.644351+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1096,7 +1096,7 @@
       "labels": [],
       "body": "The Attester boots up and thereby produces Claims about its boot state and its operational state. Claims are produced by all Attesting Environments of an Attester. Event Logs can accompany produced Claims and provide an event trail of security-relevant events that can be observed or collected by Attesting Environments. \n\nA Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.\n\nIn the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.\nA Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.\n\nUltimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.\nCorrespondingly, a particular set of Evidence originating from certain Attesting Environments in a composite device can be requested via multiple Attesting Environment IDs.\nMethods to acquire Attesting Environment IDs or mappings between Attesting Environments to Attesting Environment IDs are out-of-scope of this document.\n\nBased on the provided Handle, the Attesting Environment IDs, and collected Claims, an Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment. The Attester conveys signed Evidence as well as all accompanying data, such as Event Logs, back to the Verifier.\n\nWhile it is crucial that Claims, the Handle, and the Attesting Environment IDs MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nAs soon as the Verifier receives the Evidence, it can begin the appraisal procedure.\nFor this purpose, the Verifier checks the signature, the Attesting Environment ID, and the Handle, and then appraises the Claims.\nAppraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements, conditions that have to be met by Evidence, such as the presence of certain Claims, and the application of Appraisal Policy for Evidence.\nThe final outputs of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to then assess an Attester's trustworthiness.\n\n--------------------\n\nThe Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.\n\nThe Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.\n\nIn the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.\nThe Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.\n\nThe list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.\nEach selected key is uniquely associated with an Attesting Environment of the Attester.\nAs a result, a single Attestation Key ID identifies a single Attesting Environment.\nCorrespondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.\nMethods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.\n\nThe Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.\nThe Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.\nIf the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.\nFor example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.\n\nWith the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.\n\nThe Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nUpon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.\nClaim appraisal is driven by Policy and takes Reference Values and Endorsements as input.\nThe Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.\n",
       "createdAt": "2025-01-22T14:01:27Z",
-      "updatedAt": "2025-07-15T13:43:57Z",
+      "updatedAt": "2025-08-17T16:42:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -1133,6 +1133,13 @@
           "body": "We can just wait for your 2nd review wave this week and then check that again together. WDYT?",
           "createdAt": "2025-07-15T13:43:57Z",
           "updatedAt": "2025-07-15T13:43:57Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @thomas-fossati,\n\nThanks for you review. Very helpful. \ud83d\udc4d\ud83c\udffb \n\nHowever, I diffed the text from the current [master](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/tree/master) branch and think it has all been addressed already, e.g., in PR #70 which addresses @muhammad-usama-sardar's review (issue #64).\n\nSo, closing this issue.\n\nCheers,\nMichael",
+          "createdAt": "2025-08-17T13:39:56Z",
+          "updatedAt": "2025-08-17T13:39:56Z"
         }
       ]
     },
@@ -1268,7 +1275,7 @@
       "labels": [],
       "body": "a) Regarding the figure in Section 7.2, is is possible for the Verifier to retrieve the handle from the Handle Generator and convey it to the Attester?  This would be different from Passport Model IMO as trust must be established between the Verifier and Handle Generator.\n\nb) Handle Expiry:  If the attester knows the expiry and is trustworthy, then it should be inhibited from sending evidence with a stale handle.  If this is a MUST requirement for the attester, then the likelihood of old and new handles being n circulation simultaneously can be reduced.\n\nc) This is not really a unidirectional model in my opinion.  The attester has 2-way communication between the Handle Generator and Verifier. Can this model be extended to cover attesters that can communicate unicast to verifiers, but can only receive communication from  verifiers via broadcast/multicast?\n",
       "createdAt": "2025-05-26T16:57:41Z",
-      "updatedAt": "2025-07-15T13:24:50Z",
+      "updatedAt": "2025-08-17T16:40:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -1277,6 +1284,13 @@
           "body": "Hi Giri! Interesting questions.\n\na) If the handle can be authenticated, such as an Epoch Marker, that should be possible, but would introduce an amount of latency unkown to the Attester. If a timestamp would be the content of such an Epoch Marker, it would be possible to correlate that timestamp with another (potentially trustworthy) time-source, but you still would need to have an understanding of the intended epoch span (e.g., in seconds) to infer freshness from that. Maybe adding an optional epoch life-time to the Epoch Marker would help  with that? Otherwise it is not recommended to relay any type of handle from one RATS role to another without any way to understand what it means for the freshness of the conceptual message.\n\nb) \"Expiration\" is known to the Attester by receiving a new fresh handle. And yes, an Attester MUST NOT use a stale handle. If it would, the Verifier would notice (in the frame of latency of handle conveyance to all related roles). We'll add clarifying normative text, if it is missing. Thx!\n\nc) Yes, two uni-directional channels are required for the Attester, one uni-directional conveyance of Evidence, and one uni-directional way of acquiring the handle. We are unsure, why the Attester would require multi/borad-cast messages from the Verifier (that would violate the \"data diode\" principle) - unless the Verifier is also taking on the role of the Handle Distributor which would defeat the purpose of this model, right? ",
           "createdAt": "2025-07-15T13:24:50Z",
           "updatedAt": "2025-07-15T13:24:50Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @gmandyam,\n\nThanks for your helpful comments. I went through all of them and integrated them (see PR #77).\n\n* [x] **a)** Can the Verifier retrieve the handle and convey it to the Attester?\n  * @gmandyam concern:\n    * Suggests an alternative path where Verifier fetches handle from the Handle Generator and relays it to the Attester.\n  * @henkbirkholz's reply:\n    * Possible if handle is authenticatable (e.g., Epoch Marker), but introduces latency and semantics issues.\n    * Recommends against unless lifetime/epoch span is well understood.\n  * \u27a1\ufe0f Added short note in Section 7.2 (Handle Generation) to explain why it is discouraged.\n\n* [x] **b)** Handle Expiry and stale handles:\n  * @gmandyam's concern:\n    * Suggests that if Attester knows expiry, it MUST NOT send Evidence with stale handle.\n  * @henkbirkholz's reply:\n    * Agrees \u2014 this needs normative clarification.\n  * \u27a1\ufe0f Strengthened *Handle Expiry* bullet in Section 7.2.1.\n\n* [x] **c)** Is this really unidirectional? Broadcast/multicast variant?\n  * @gmandyam's concern:\n    * Argues that since the Attester talks to both Handle Distributor (receiving) and Verifier (sending), it is not \"uni\" but \"two-way\".\n    * Suggests covering multicast/broadcast cases where Attester can only receive from Verifiers.\n  * @henkbirkholz's reply:\n    * Clarifies that two separate one-way channels are used (one for handle acquisition, one for evidence conveyance).\n    * Broadcasting handles from Verifiers would defeat the model unless Verifier also plays Handle Distributor role.\n  * \u27a1\ufe0f Clarified in Section 7.2 that the \"uni-directional\" term applies to each channel independently, not the whole system.\n  * \u27a1\ufe0f Explicitly mentioned why multicast from Verifier is not modeled.\n\nCheers,\nMichael",
+          "createdAt": "2025-08-17T09:03:33Z",
+          "updatedAt": "2025-08-17T09:03:33Z"
         }
       ]
     },
@@ -1285,15 +1299,15 @@
       "id": "I_kwDOEYizNM64SCRK",
       "title": "Streaming Remote Attestation",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/68",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) What occurs when evidence/evidence delta's fail to verify?  Can the Verfier unsubscribe?  More broadly, a description of how the unsubscribe process works may be useful in understanding the streaming mode.\n\nb) Applicable to both uni-directional and streaming:\n\n>While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance. These updates reflecting the differences are called \"delta\" in the sequence diagram above.\n\nThis is not an adequate definition for delta evidence IMO.  For instance if the attester goes through a sleep cycle, but is still able to detect that the claim value has changed and then reverted back to the previous value during the sleep period, then the attester should potentially pass this information on to the Verifier.",
       "createdAt": "2025-05-26T17:23:00Z",
-      "updatedAt": "2025-08-16T14:01:35Z",
-      "closedAt": "2025-08-16T14:01:34Z",
+      "updatedAt": "2025-08-17T16:40:39Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1316,15 +1330,15 @@
       "id": "I_kwDOEYizNM64TJOQ",
       "title": "PubSub Server",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/69",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) Sec. 7.3.2.2.:  Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy?  If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\n\nb) Sec. 7.3.2.3:  If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\n\nc) Sec. 7.3.2.4: Call flow in figure seems to be overly limiting.  Attester can also subscribe to attestationResult.\n\nd) Section 9:  Need a discussion on security/privacy considerations for PubSub server.  This is different that what is described in Section 9.3.  For instance, if the PubSub server must attest to the  Handle used as part of evidence then this could be discussed in Section 9.  Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it).\n\nMoreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server.  For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?",
       "createdAt": "2025-05-26T20:41:32Z",
-      "updatedAt": "2025-08-16T12:53:29Z",
-      "closedAt": "2025-08-16T12:53:28Z",
+      "updatedAt": "2025-08-17T16:40:35Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1354,7 +1368,7 @@
       "labels": [],
       "body": "From IETF RATS Mailing List\nFrom: Thomas Fossati <thomas.fossati@linaro.org> (@thomas-fossati)\nDate: Thu, 17 Jul 2025 11:54:38 +0200\nArchived-At: <https://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw>\n\n---\n\nHi,\n\nI have reviewed -14.\n\nFirstly, thank you very much, Henk and Michael, for addressing the\ncomments I made in my previous review rounds.\n\nI believe the document is in good shape and ready for WGLC.\n\nI have a few more minor points:\n\n# S 1\n\n* Attestation Policies => Appraisal Policies\n* It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how.  Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\n* It says: \"privacy-preserving conveyance methods\" -- what does\n\"privacy-preserving\" refer to?\n\n# S 2.2\n\n* Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\n\n# S 4\n\n* The term \"implicit authentication\" referring to digital signatures sounds a bit odd\n* It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\n\n# Figure 2\n\n* Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\n\n# S 7.2.1\n\n* Unsure how \u201cSynchronization Checks\u201d would work in practice.\n\n# S 11.1\n\n* Why is RFC9683 normative?\n\ncheers, t\n",
       "createdAt": "2025-08-12T12:24:46Z",
-      "updatedAt": "2025-08-12T14:01:42Z",
+      "updatedAt": "2025-08-17T16:42:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -1363,6 +1377,13 @@
           "body": "Hi @thomas-fossati,\n\nThanks for the review. Very helpful. I went through all of your comments and integrated them (see PR #74). In the following some more details.\n\n# S 1\n\n* [x] Attestation Policies => Appraisal Policies\n  * Renamed.\n* [x] It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how.  Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\n  * Removed the sentence\n* [x] It says: \"privacy-preserving conveyance methods\" -- what does \"privacy-preserving\" refer to?\n  * Added reference to \"Cryptographic Blinding\" section in \"Security Considerations\" section.\n\n# S 2.2\n\n* [x] Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\n  * Removed it.\n\n# S 4\n\n* [x] The term \"implicit authentication\" referring to digital signatures sounds a bit odd\n  * Removed \"implicit\".\n* [x] It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\n  * Added \"see Sections 3 and 4 of\".\n\n# Figure 2\n\n* [x] Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\n  * The thing is, in all the other diagrams, the Attester is on the left and the Verifier is on the right. We wanted to represent it in the same way here.\n  * To make the diagram clearer, represented the crossings as *aasvg* \"wire jumps/hops.\"\n\n# S 7.2.1\n\n* [x] Unsure how \u201cSynchronization Checks\u201d would work in practice.\n  * Added example showing how TUDA implements this.\n  * Does this clarify the comment?\n\n# S 11.1\n\n* [x] Why is RFC9683 normative?\n  * Good point. Thanks. Made it informative.\n\nCheers,\nMichael",
           "createdAt": "2025-08-12T14:01:42Z",
           "updatedAt": "2025-08-12T14:01:42Z"
+        },
+        {
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Everything addressed, so closing.",
+          "createdAt": "2025-08-17T13:41:15Z",
+          "updatedAt": "2025-08-17T13:41:15Z"
         }
       ]
     }
@@ -4322,7 +4343,7 @@
       "labels": [],
       "body": "fixes #66 ",
       "createdAt": "2025-07-15T13:12:22Z",
-      "updatedAt": "2025-07-15T15:32:27Z",
+      "updatedAt": "2025-08-17T15:24:12Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
@@ -4366,6 +4387,26 @@
               "updatedAt": "2025-07-15T13:30:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM66WEWd",
+          "commit": {
+            "abbreviatedOid": "30f92e6"
+          },
+          "author": "eckelmeckel",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-08-17T13:44:48Z",
+          "updatedAt": "2025-08-17T15:24:12Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "`Verifier's` -> `Verifiers`",
+              "createdAt": "2025-08-17T13:44:49Z",
+              "updatedAt": "2025-08-17T15:24:12Z"
+            }
+          ]
         }
       ]
     },
@@ -4407,7 +4448,7 @@
       "labels": [],
       "body": "Fixes #69.\r\n\r\n* [x] **a)** Sec. 7.3.2.2.: Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy? If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\r\n* *Henk's reply:* No, but there can be specifications that come with that prescription.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.2.\r\n\r\n* [x] **b)** Sec. 7.3.2.3: If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\r\n* *Henk\u2019s Response (rephrased, simplified):* Good point \u2014 the diagram already reflects the correct model (the result is published to the PubSub server), but the *text may be misleading*.\r\n* \u27a1\ufe0f Added clarification by improving/extending the last sentence of Section 7.3.2.3.\r\n\r\n* [x] **c)** Sec. 7.3.2.4: Call flow in figure seems to be overly limiting. Attester can also subscribe to attestationResult.\r\n* *Henk\u2019s reply (rephrased, simplified):* Agree, but we want to keep the diagram simple. Maybe this can be described as a \u201cre-application\u201d of the interaction model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.4.\r\n\r\n* [x] **d)** Section 9: Need a discussion on security/privacy considerations for PubSub server. This is different that what is described in Section 9.3. For instance, if the PubSub server must attest to the Handle used as part of evidence then this could be discussed in Section 9. Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it). Moreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server. For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?\r\n\r\n  * [x] **d.1)** What does \u201cattest to the Handle\u201d mean?\r\n* Clarification: This seems to ask whether the PubSub server must vouch for the Handle (e.g., by proving it delivered it, or binding it cryptographically).\r\n    * \u27a1\ufe0f Added clarifying sentence at the end of Section 9.3.\r\n\r\n* [x] **d.2)** Strong Isolation of Topics\" does not address privacy preservation\r\n    * This is a good point: topic isolation != privacy preservation.\r\n* \u27a1\ufe0f Added clarifying sentence for *Strong Isolation of Topics* bullet point of Section 9.3.\r\n\r\n  * [x] **d.3)** \"Trusted Association Verification\" lacks details\r\n* \"Are endorsements required? How are trust relationships established?\": This is currently vague.\r\n* \u27a1\ufe0f Added clarifying sentence for *Trusted Association Verification* bullet point of Section 9.3.",
       "createdAt": "2025-08-16T12:51:58Z",
-      "updatedAt": "2025-08-16T12:51:59Z",
+      "updatedAt": "2025-08-17T22:33:20Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
@@ -4418,7 +4459,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "NONE",
+          "body": "I am OK with these proposed changes.",
+          "createdAt": "2025-08-17T22:33:20Z",
+          "updatedAt": "2025-08-17T22:33:20Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -4445,6 +4494,40 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 77,
+      "id": "PR_kwDOEYizNM6j-tIG",
+      "title": "Improved Uni-Directional Remote Attestation: freshness mechanisms.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/77",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes issue #67.\r\n\r\n* [x] **a)** Can the Verifier retrieve the handle and convey it to the Attester?\r\n  * @gmandyam concern:\r\n* Suggests an alternative path where Verifier fetches handle from the Handle Generator and relays it to the Attester.\r\n  * @henkbirkholz's reply:\r\n* Possible if handle is authenticatable (e.g., Epoch Marker), but introduces latency and semantics issues.\r\n    * Recommends against unless lifetime/epoch span is well understood.\r\n* \u27a1\ufe0f Added short note in Section 7.2 (Handle Generation) to explain why it is discouraged.\r\n\r\n* [x] **b)** Handle Expiry and stale handles:\r\n  * @gmandyam's concern:\r\n* Suggests that if Attester knows expiry, it MUST NOT send Evidence with stale handle.\r\n  * @henkbirkholz's reply:\r\n    * Agrees \u2014 this needs normative clarification.\r\n  * \u27a1\ufe0f Strengthened *Handle Expiry* bullet in Section 7.2.1.\r\n\r\n* [x] **c)** Is this really unidirectional? Broadcast/multicast variant?\r\n  * @gmandyam's concern:\r\n* Argues that since the Attester talks to both Handle Distributor (receiving) and Verifier (sending), it is not \"uni\" but \"two-way\".\r\n* Suggests covering multicast/broadcast cases where Attester can only receive from Verifiers.\r\n  * @henkbirkholz's reply:\r\n* Clarifies that two separate one-way channels are used (one for handle acquisition, one for evidence conveyance).\r\n* Broadcasting handles from Verifiers would defeat the model unless Verifier also plays Handle Distributor role.\r\n* \u27a1\ufe0f Clarified in Section 7.2 that the \"uni-directional\" term applies to each channel independently, not the whole system.\r\n  * \u27a1\ufe0f Explicitly mentioned why multicast from Verifier is not modeled.",
+      "createdAt": "2025-08-17T09:02:19Z",
+      "updatedAt": "2025-08-17T22:29:24Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "addressing-issue-67-gmandyam-freshness-mechanisms",
+      "headRefOid": "a87c033d0cf6cf06ced4f994c70cc924924fb73f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "NONE",
+          "body": "Am fine with these changes.",
+          "createdAt": "2025-08-17T22:29:24Z",
+          "updatedAt": "2025-08-17T22:29:24Z"
+        }
+      ],
       "reviews": []
     }
   ]
