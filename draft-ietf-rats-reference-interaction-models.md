@@ -134,7 +134,7 @@ Analogously, a general overview about the information elements typically used by
 # Introduction
 
 Remote ATtestation procedureS (RATS, {{-RATS}}) are workflows composed of roles and interactions, in which Verifiers create Attestation Results about the trustworthiness of an Attester's system component characteristics.
-Verifier's generate assessments in the form of Attestation Results that are based on Endorsements, Reference Values, Appraisal Policies, and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics.
+Verifiers generate assessments in the form of Attestation Results that are based on Endorsements, Reference Values, Appraisal Policies, and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics.
 The roles *Attester* and *Verifier*, as well as the Conceptual Messages *Evidence* and *Attestation Results* are concepts defined by the RATS Architecture {{-RATS}}.
  This document illustrates three main interaction models between various RATS roles, namely Attesters, Verifiers, and Relying Parties that can be used in specific RATS-related specifications.
  Using Evidence as a prominent example, these three interaction models are:
