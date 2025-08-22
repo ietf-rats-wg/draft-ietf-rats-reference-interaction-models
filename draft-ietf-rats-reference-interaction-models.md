@@ -738,7 +738,7 @@ The streaming model without a Broker uses the same information elements as the C
 Methods to detect excessive time drift that would render Handles stale and mandate a fresh Handles to be conveyed via another subscribe operation are out-of-scope of this document.
 
 If Evidence or delta Evidence repeatedly fails to verify, a Verifier may terminate the subscription.
-The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document; for example, subscription lifecycle management is defined in {{rats-network-device-subscription}}.
+The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document; for example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.
 
 ### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
