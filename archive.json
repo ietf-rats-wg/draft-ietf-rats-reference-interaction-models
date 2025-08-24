@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-19T01:13:42.644351+00:00",
+  "timestamp": "2025-08-24T01:19:26.778393+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -4343,13 +4343,13 @@
       "labels": [],
       "body": "fixes #66 ",
       "createdAt": "2025-07-15T13:12:22Z",
-      "updatedAt": "2025-08-17T15:24:12Z",
+      "updatedAt": "2025-08-22T15:02:36Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "fix-65",
-      "headRefOid": "30f92e680acb4fc65fc6eae6051a1c778acf4f42",
+      "headRefOid": "444abe6028edc69dc7e3d43db22b3f5d3eb0e7c4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4407,6 +4407,26 @@
               "updatedAt": "2025-08-17T15:24:12Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM67cppG",
+          "commit": {
+            "abbreviatedOid": "30f92e6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-22T15:02:29Z",
+          "updatedAt": "2025-08-22T15:02:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nVerifiers generate assessments in the form of Attestation Results that are based on Endorsements, Reference Values, Appraisal Policies, and Evidence -- trustable and tamper-evident Claims Sets about an Attester's system component characteristics.\r\n```",
+              "createdAt": "2025-08-22T15:02:29Z",
+              "updatedAt": "2025-08-22T15:02:30Z"
+            }
+          ]
         }
       ]
     },
@@ -4422,7 +4442,7 @@
       "labels": [],
       "body": "Fixes #73\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw\r\n\r\n# S 1\r\n\r\n* [x] Attestation Policies => Appraisal Policies\r\n  * Renamed.\r\n* [x] It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how. Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\r\n  * Removed the sentence\r\n* [x] It says: \"privacy-preserving conveyance methods\" -- what does \"privacy-preserving\" refer to?\r\n* Added reference to \"Cryptographic Blinding\" section in \"Security Considerations\" section.\r\n\r\n# S 2.2\r\n\r\n* [x] Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\r\n  * Removed it.\r\n\r\n# S 4\r\n\r\n* [x] The term \"implicit authentication\" referring to digital signatures sounds a bit odd\r\n  * Removed \"implicit\".\r\n* [x] It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\r\n  * Added \"see Sections 3 and 4 of\".\r\n\r\n# Figure 2\r\n\r\n* [x] Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\r\n* The thing is, in all the other diagrams, the Attester is on the left and the Verifier is on the right. We wanted to represent it in the same way here.\r\n* To make the diagram clearer, represented the crossings as *aasvg* \"wire jumps/hops.\"\r\n\r\n# S 7.2.1\r\n\r\n* [x] Unsure how \u201cSynchronization Checks\u201d would work in practice.\r\n  * Added example showing how TUDA implements this.\r\n  * Does this clarify the comment?\r\n\r\n# S 11.1\r\n\r\n* [x] Why is RFC9683 normative?\r\n  * Good point. Thanks. Made it informative.",
       "createdAt": "2025-08-12T14:00:34Z",
-      "updatedAt": "2025-08-12T15:30:55Z",
+      "updatedAt": "2025-08-22T15:03:20Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
@@ -4434,7 +4454,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM67cqSk",
+          "commit": {
+            "abbreviatedOid": "89ebeb1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-22T15:03:20Z",
+          "updatedAt": "2025-08-22T15:03:20Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 75,
@@ -4448,7 +4482,7 @@
       "labels": [],
       "body": "Fixes #69.\r\n\r\n* [x] **a)** Sec. 7.3.2.2.: Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy? If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\r\n* *Henk's reply:* No, but there can be specifications that come with that prescription.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.2.\r\n\r\n* [x] **b)** Sec. 7.3.2.3: If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\r\n* *Henk\u2019s Response (rephrased, simplified):* Good point \u2014 the diagram already reflects the correct model (the result is published to the PubSub server), but the *text may be misleading*.\r\n* \u27a1\ufe0f Added clarification by improving/extending the last sentence of Section 7.3.2.3.\r\n\r\n* [x] **c)** Sec. 7.3.2.4: Call flow in figure seems to be overly limiting. Attester can also subscribe to attestationResult.\r\n* *Henk\u2019s reply (rephrased, simplified):* Agree, but we want to keep the diagram simple. Maybe this can be described as a \u201cre-application\u201d of the interaction model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.4.\r\n\r\n* [x] **d)** Section 9: Need a discussion on security/privacy considerations for PubSub server. This is different that what is described in Section 9.3. For instance, if the PubSub server must attest to the Handle used as part of evidence then this could be discussed in Section 9. Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it). Moreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server. For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?\r\n\r\n  * [x] **d.1)** What does \u201cattest to the Handle\u201d mean?\r\n* Clarification: This seems to ask whether the PubSub server must vouch for the Handle (e.g., by proving it delivered it, or binding it cryptographically).\r\n    * \u27a1\ufe0f Added clarifying sentence at the end of Section 9.3.\r\n\r\n* [x] **d.2)** Strong Isolation of Topics\" does not address privacy preservation\r\n    * This is a good point: topic isolation != privacy preservation.\r\n* \u27a1\ufe0f Added clarifying sentence for *Strong Isolation of Topics* bullet point of Section 9.3.\r\n\r\n  * [x] **d.3)** \"Trusted Association Verification\" lacks details\r\n* \"Are endorsements required? How are trust relationships established?\": This is currently vague.\r\n* \u27a1\ufe0f Added clarifying sentence for *Trusted Association Verification* bullet point of Section 9.3.",
       "createdAt": "2025-08-16T12:51:58Z",
-      "updatedAt": "2025-08-17T22:33:20Z",
+      "updatedAt": "2025-08-22T15:04:17Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
@@ -4468,7 +4502,21 @@
           "updatedAt": "2025-08-17T22:33:20Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM67cq9e",
+          "commit": {
+            "abbreviatedOid": "70f18b1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-22T15:04:17Z",
+          "updatedAt": "2025-08-22T15:04:17Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 76,
@@ -4482,19 +4530,40 @@
       "labels": [],
       "body": "Fixes #68.\r\n\r\n* [x] **a)** Evidence verification failures & unsubscribe:\r\n  * @gmandyam's concern:\r\n    * What happens when Evidence (or delta Evidence) fails verification?\r\n    * Should the Verifier be able to unsubscribe?\r\n* A description of how unsubscribe works might be useful in streaming mode.\r\n  * @henkbirkholz's reply:\r\n* Unsubscribe is out of scope of this doc, since it is already covered by standards track work (e.g.,\r\n[draft-ietf-rats-network-device-subscription](https://datatracker.ietf.org/doc/draft-ietf-rats-network-device-subscription/)).\r\n    * It's a protocol detail, not part of the reference model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.\r\n\r\n* [x] **b)** Definition of delta evidence:\r\n  * @gmandyam's concern:\r\n* Current definition (\u201conly changed claims and new event logs\u201d) is too narrow.\r\n* Example: Attester goes to sleep, detects a change and reversion, and should still report that sequence, even if the final state looks unchanged.\r\n  * @henkbirkholz's reply:\r\n    * Agree, propose adding text to cover this.\r\n  * \u27a1\ufe0f Improved definition of delta evidence in Section 7.2.1.\r\n  * \u27a1\ufe0f Referenced this definition in 7.3 (Streaming).",
       "createdAt": "2025-08-16T14:00:41Z",
-      "updatedAt": "2025-08-16T14:01:06Z",
+      "updatedAt": "2025-08-22T15:05:54Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-68-gmandyam-streaming-remote-attestation",
-      "headRefOid": "5ccc8bf8a5557f84a482ba3b4844d55e40796edf",
+      "headRefOid": "03db2dc4e4e33c169b1097448ffab15aca91ed47",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM67cr8F",
+          "commit": {
+            "abbreviatedOid": "5ccc8bf"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-22T15:05:43Z",
+          "updatedAt": "2025-08-22T15:05:44Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nThe detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document; for example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.\r\n```",
+              "createdAt": "2025-08-22T15:05:43Z",
+              "updatedAt": "2025-08-22T15:05:44Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 77,
