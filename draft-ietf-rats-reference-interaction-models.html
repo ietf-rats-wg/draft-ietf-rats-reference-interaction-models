@@ -2234,10 +2234,16 @@ The specific manner how Handles are generated is not in scope of this document.
 One example of a specific handle representation is <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.2-4">In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in <span>[<a href="#I-D.birkholz-rats-tuda" class="cite xref">I-D.birkholz-rats-tuda</a>]</span>, potentially including other qualifying data.
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>).
-Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
+In some deployments, a Verifier may obtain a Handle from the Handle Distributor and forward it to an Attester.
+While feasible if the Handle can be authenticated (e.g., an Epoch Marker with a verifiable timestamp), this indirection introduces additional latency for the Attester and can make freshness semantics harder to appraise.
+Therefore, direct distribution of Handles from the Handle Distributor to Attesters is the recommended approach.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
+<p id="section-7.2-5">Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
+The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.<a href="#section-7.2-5" class="pilcrow">¶</a></p>
+<p id="section-7.2-6">The term "uni-directional" refers to the individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
+Together, they establish the attestation loop without requiring request/response exchanges.
+This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
 <div id="handle-lifecycle-and-propagation-delays">
 <section id="section-7.2.1">
           <h4 id="name-handle-lifecycle-and-propag">
@@ -2252,6 +2258,7 @@ This "grey zone" can potentially lead to situations where Evidence may be associ
 <li class="normal" id="section-7.2.1-3.1">
               <p id="section-7.2.1-3.1.1"><em>Handle Expiry</em>:
 Each handle should have a well-defined expiration time, after which it is considered invalid.
+An Attester that is aware of the expiration time MUST NOT send Evidence with an expired handle.
 This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.<a href="#section-7.2.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-7.2.1-3.2">
