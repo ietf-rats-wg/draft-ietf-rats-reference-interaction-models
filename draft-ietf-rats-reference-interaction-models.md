@@ -615,10 +615,18 @@ One example of a specific handle representation is {{-epoch-markers}}.
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
+In some deployments, a Verifier may obtain a Handle from the Handle Distributor and forward it to an Attester.
+While feasible if the Handle can be authenticated (e.g., an Epoch Marker with a verifiable timestamp), this indirection introduces additional latency for the Attester and can make freshness semantics harder to appraise.
+Therefore, direct distribution of Handles from the Handle Distributor to Attesters is the recommended approach.
+
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
 The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.
+
+The term "uni-directional" refers to the individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
+Together, they establish the attestation loop without requiring request/response exchanges.
+This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
 ### Handle Lifecycle and Propagation Delays
 
@@ -631,6 +639,7 @@ To manage this complexity, it is essential to define a clear policy for handle v
 
 * *Handle Expiry*:
   Each handle should have a well-defined expiration time, after which it is considered invalid.
+  An Attester that is aware of the expiration time MUST NOT send Evidence with an expired handle.
   This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.
 
 * *Synchronization Checks*:
