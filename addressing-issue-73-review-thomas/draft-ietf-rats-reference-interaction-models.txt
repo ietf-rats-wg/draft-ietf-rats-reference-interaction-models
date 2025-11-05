@@ -570,8 +570,7 @@ Table of Contents
    The Claims, the Handle, and the Attester Identity information (i.e.,
    the Authentication Secret) MUST be cryptographically bound to the
    signature of Evidence.  These MAY be presented obfuscated, encrypted,
-   or cryptographically blinded.  For further reference see
-   Section Section 9.
+   or cryptographically blinded.  For further reference, see Section 9.
 
    Upon receiving the Evidence and Event Logs, the Verifier validates
    the signature, Attester Identity, and Handle, and then appraises the
