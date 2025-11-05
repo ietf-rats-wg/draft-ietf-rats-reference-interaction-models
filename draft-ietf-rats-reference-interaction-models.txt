@@ -1061,6 +1061,13 @@ Table of Contents
    specific attestation request, thereby enhancing security by
    preventing replay attacks.
 
+   While this model allows for Verifier-specific Handles and custom
+   freshness policies, such policies must be defined and enforced
+   outside the scope of this specification.  For instance, a Verifier
+   may choose to include a Handle reference in its appraisal policy or
+   request specific handling by the PubSub server through
+   implementation-specific mechanisms.
+
 7.3.2.2.  Handle Generation for Uni-Directional Remote Attestation over
           Publish-Subscribe
 
@@ -1155,9 +1162,12 @@ Table of Contents
    a Verifier subscribed before.  The PubSub server notifies Verifiers,
    accordingly, by forwarding the attestation Evidence.  Although the
    above diagram depicts only full attestation Evidence and Event Logs,
-   later attestations may use "deltas' for Evidence and Event Logs.
+   later attestations may use "deltas" for Evidence and Event Logs.
+
    Verifiers appraise the Evidence and publish the Attestation Result to
-   topic "AttRes" (= Attestation Result) on the PubSub server.
+   the AttRes topic (= Attestation Result) on the PubSub server, which
+   then serves as the dissemination point from which subscribers, such
+   as Relying Parties or other authorized roles, retrieve the result.
 
 7.3.2.4.  Attestation Result Generation
 
@@ -1193,6 +1203,11 @@ Table of Contents
    Relying Parties subscribe to topic AttRes (= Attestation Result) on
    the PubSub server.  The PubSub server forwards Attestation Results to
    the Relying Parties as soon as they are published to topic AttRes.
+
+   In some deployments, Attesters may also subscribe to the AttRes topic
+   to consume Attestation Results.  This reuses the same publish-
+   subscribe mechanism described here and may support local policy
+   decisions or caching.
 
 8.  Implementation Status
 
@@ -1370,6 +1385,12 @@ Table of Contents
       controls that restrict the Broker's ability to manipulate topic
       subscriptions.
 
+      In addition to isolating topics, privacy can be preserved by
+      minimizing the inclusion of personally identifying information or
+      unique Attester identifiers in messages published to shared
+      topics, unless strictly required by the subscriber’s role or
+      appraisal policy.
+
    *  _Trusted Association Verification:_ To further safeguard against
       confusion attacks where the Broker might misroute notifications,
       mechanisms should be in place to verify the trust association
@@ -1377,6 +1398,13 @@ Table of Contents
       facilitated by cryptographic assurances, such as digital
       signatures and trusted certificates that validate the sender's
       identity and the integrity of the message content.
+
+      Implementations may use Verifier Endorsements or pre-established
+      authorization policies to define valid sender-receiver
+      associations.  These policies can be cryptographically enforced
+      using signed metadata, access control lists, or secured
+      registration procedures on the PubSub server.  The precise method
+      is deployment-specific.
 
    *  _Audit and Monitoring:_ Regular audits and real-time monitoring of
       Broker activities can detect and respond to anomalous behavior
@@ -1398,6 +1426,12 @@ Table of Contents
    to incorporate these security measures during the design and
    deployment phases to ensure that the attestation process remains
    secure and trustworthy.
+
+   This specification does not require the PubSub server to attest to
+   the Handle or cryptographically prove its dissemination.  If such
+   assurances are needed (e.g., for auditability or binding Handle
+   provenance), additional mechanisms---such as signed delivery receipts
+   or logs---must be provided by the PubSub infrastructure.
 
 9.4.  Additional Application-Specific Security Considerations
 
