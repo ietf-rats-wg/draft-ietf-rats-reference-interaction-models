@@ -1170,7 +1170,7 @@ Table of Contents
    Publish-Subscribe model above, the Attester publishes Evidence to the
    topic "AttEv" (= Attestation Evidence) on the PubSub server, to which
    a Verifier subscribed before.  The PubSub server notifies Verifiers,
-   accordingly, by forwarding the attestation Evidence. bAlthough the
+   accordingly, by forwarding the attestation Evidence.  Although the
    above diagram depicts only full attestation Evidence and Event Logs,
    later attestations may use "deltas' for Evidence and Event Logs.  The
    definition of delta Evidence is provided in Section 7.2.1.  Verifiers
