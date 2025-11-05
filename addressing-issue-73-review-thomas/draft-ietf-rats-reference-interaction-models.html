@@ -1778,7 +1778,7 @@ If the Claim Selection is omitted, then all available Claims on the Attester MUS
 For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
 <p id="section-7.1-8">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
 <p id="section-7.1-9">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
-For further reference, see <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+For further reference see, Section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
 <p id="section-7.1-10">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
 Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
 The Verifier outputs Attestation Results.
@@ -2236,16 +2236,10 @@ The specific manner how Handles are generated is not in scope of this document.
 One example of a specific handle representation is <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.2-4">In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in <span>[<a href="#I-D.birkholz-rats-tuda" class="cite xref">I-D.birkholz-rats-tuda</a>]</span>, potentially including other qualifying data.
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>).
-In some deployments, a Verifier may obtain a Handle from the Handle Distributor and forward it to an Attester.
-While feasible if the Handle can be authenticated (e.g., an Epoch Marker with a verifiable timestamp), this indirection introduces additional latency for the Attester and can make freshness semantics harder to appraise.
-Therefore, direct distribution of Handles from the Handle Distributor to Attesters is the recommended approach.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
-<p id="section-7.2-5">Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
+Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.<a href="#section-7.2-5" class="pilcrow">¶</a></p>
-<p id="section-7.2-6">The term "uni-directional" refers to the individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
-Together, they establish the attestation loop without requiring request/response exchanges.
-This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.<a href="#section-7.2-6" class="pilcrow">¶</a></p>
+The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 <div id="handle-lifecycle-and-propagation-delays">
 <section id="section-7.2.1">
           <h4 id="name-handle-lifecycle-and-propag">
@@ -2260,7 +2254,6 @@ This "grey zone" can potentially lead to situations where Evidence may be associ
 <li class="normal" id="section-7.2.1-3.1">
               <p id="section-7.2.1-3.1.1"><em>Handle Expiry</em>:
 Each handle should have a well-defined expiration time, after which it is considered invalid.
-An Attester that is aware of the expiration time MUST NOT send Evidence with an expired handle.
 This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.<a href="#section-7.2.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-7.2.1-3.2">
@@ -2592,8 +2585,6 @@ Handles are generated by the Verifier on a per-request basis.
 In the sequence diagram above, the Verifier initiates an attestation by generating a new handle and publishing it to the "AttReq" (= Attestation Request) topic on the PubSub server.
 The PubSub server then forwards this handle to the Attester by notifying it.
 This mechanism ensures that each handle is uniquely associated with a specific attestation request, thereby enhancing security by preventing replay attacks.<a href="#section-7.3.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.3.2.1-3">While this model allows for Verifier-specific Handles and custom freshness policies, such policies must be defined and enforced outside the scope of this specification.
-For instance, a Verifier may choose to include a Handle reference in its appraisal policy or request specific handling by the PubSub server through implementation-specific mechanisms.<a href="#section-7.3.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="handle-generation-for-uni-directional-remote-attestation-over-publish-subscribe">
@@ -2814,8 +2805,8 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 <p id="section-7.3.2.3-2">Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
-Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas" for Evidence and Event Logs.<a href="#section-7.3.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.3.2.3-3">Verifiers appraise the Evidence and publish the Attestation Result to the <code>AttRes</code> topic (= Attestation Result) on the PubSub server, which then serves as the dissemination point from which subscribers, such as Relying Parties or other authorized roles, retrieve the result.<a href="#section-7.3.2.3-3" class="pilcrow">¶</a></p>
+Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
+Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.<a href="#section-7.3.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="attestation-result-generation">
@@ -2927,8 +2918,6 @@ Although the above diagram depicts only full attestation Evidence and Event Logs
 <p id="section-7.3.2.4-2">Attestation Result Generation is the same for both publish-subscribe models,<em>Challenge/Response Remote Attestation over Publish-Subscribe</em> and <em>Uni-Directional Remote Attestation over Publish-Subscribe</em>.
 Relying Parties subscribe to topic <code>AttRes</code> (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic <code>AttRes</code>.<a href="#section-7.3.2.4-2" class="pilcrow">¶</a></p>
-<p id="section-7.3.2.4-3">In some deployments, Attesters may also subscribe to the <code>AttRes</code> topic to consume Attestation Results.
-This reuses the same publish-subscribe mechanism described here and may support local policy decisions or caching.<a href="#section-7.3.2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3119,17 +3108,11 @@ This measure prevents the Broker from altering the content of the messages, incl
             <p id="section-9.3-2.2.1"><em>Strong Isolation of Topics:</em>
 Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
 This includes using secure naming conventions and access controls that restrict the Broker's ability to manipulate topic subscriptions.<a href="#section-9.3-2.2.1" class="pilcrow">¶</a></p>
-<p id="section-9.3-2.2.2">
-In addition to isolating topics, privacy can be preserved by minimizing the inclusion of personally identifying information or unique Attester identifiers in messages published to shared topics, unless strictly required by the subscriber’s role or appraisal policy.<a href="#section-9.3-2.2.2" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.3-2.3">
             <p id="section-9.3-2.3.1"><em>Trusted Association Verification:</em>
 To further safeguard against confusion attacks where the Broker might misroute notifications, mechanisms should be in place to verify the trust association between senders and receivers continuously.
 This can be facilitated by cryptographic assurances, such as digital signatures and trusted certificates that validate the sender's identity and the integrity of the message content.<a href="#section-9.3-2.3.1" class="pilcrow">¶</a></p>
-<p id="section-9.3-2.3.2">
-Implementations may use Verifier Endorsements or pre-established authorization policies to define valid sender-receiver associations.
-These policies can be cryptographically enforced using signed metadata, access control lists, or secured registration procedures on the PubSub server.
-The precise method is deployment-specific.<a href="#section-9.3-2.3.2" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.3-2.4">
             <p id="section-9.3-2.4.1"><em>Audit and Monitoring:</em>
@@ -3144,8 +3127,6 @@ This includes regular security assessments and certifications that validate the 
         </ul>
 <p id="section-9.3-3">By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
 It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
-<p id="section-9.3-4">This specification does not require the PubSub server to attest to the Handle or cryptographically prove its dissemination.
-If such assurances are needed (e.g., for auditability or binding Handle provenance), additional mechanisms---such as signed delivery receipts or logs---must be provided by the PubSub infrastructure.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="additional-application-specific-security-considerations">
