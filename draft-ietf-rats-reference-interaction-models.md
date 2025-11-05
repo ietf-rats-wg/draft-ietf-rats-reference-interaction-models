@@ -889,7 +889,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
-bAlthough the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
+Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
 The definition of delta Evidence is provided in {{handle-lifecycle-and-propagation-delays}}.
 Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.
 
