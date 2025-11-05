@@ -411,7 +411,7 @@ For example, when performing a boot integrity evaluation, a Verifier may only re
 With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
 The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
-For further reference see section {{security-and-privacy-considerations}}.
+For further reference see, Section {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
 Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
@@ -615,18 +615,10 @@ One example of a specific handle representation is {{-epoch-markers}}.
 
 In the Uni-Directional model, handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
 The Handles are created by an external trusted third party (TTP) -- the Handle Distributor -- which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
-In some deployments, a Verifier may obtain a Handle from the Handle Distributor and forward it to an Attester.
-While feasible if the Handle can be authenticated (e.g., an Epoch Marker with a verifiable timestamp), this indirection introduces additional latency for the Attester and can make freshness semantics harder to appraise.
-Therefore, direct distribution of Handles from the Handle Distributor to Attesters is the recommended approach.
-
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
 The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.
-
-The term "uni-directional" refers to the individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
-Together, they establish the attestation loop without requiring request/response exchanges.
-This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
 ### Handle Lifecycle and Propagation Delays
 
@@ -639,7 +631,6 @@ To manage this complexity, it is essential to define a clear policy for handle v
 
 * *Handle Expiry*:
   Each handle should have a well-defined expiration time, after which it is considered invalid.
-  An Attester that is aware of the expiration time MUST NOT send Evidence with an expired handle.
   This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.
 
 * *Synchronization Checks*:
@@ -805,9 +796,6 @@ In the sequence diagram above, the Verifier initiates an attestation by generati
 The PubSub server then forwards this handle to the Attester by notifying it.
 This mechanism ensures that each handle is uniquely associated with a specific attestation request, thereby enhancing security by preventing replay attacks.
 
-While this model allows for Verifier-specific Handles and custom freshness policies, such policies must be defined and enforced outside the scope of this specification.
-For instance, a Verifier may choose to include a Handle reference in its appraisal policy or request specific handling by the PubSub server through implementation-specific mechanisms.
-
 #### Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe
 
 ~~~~ aasvg
@@ -892,10 +880,8 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
-Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas" for Evidence and Event Logs.
-
-Verifiers appraise the Evidence and publish the Attestation Result to the `AttRes` topic (= Attestation Result) on the PubSub server, which then serves as the dissemination point from which subscribers, such as Relying Parties or other authorized roles, retrieve the result.
-
+Although the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use "deltas' for Evidence and Event Logs.
+Verifiers appraise the Evidence and publish the Attestation Result to topic "AttRes" (= Attestation Result) on the PubSub server.
 
 #### Attestation Result Generation
 
@@ -929,9 +915,6 @@ Verifiers appraise the Evidence and publish the Attestation Result to the `AttRe
 Attestation Result Generation is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
 Relying Parties subscribe to topic `AttRes` (= Attestation Result) on the PubSub server.
 The PubSub server forwards Attestation Results to the Relying Parties as soon as they are published to topic `AttRes`.
-
-In some deployments, Attesters may also subscribe to the `AttRes` topic to consume Attestation Results.
-This reuses the same publish-subscribe mechanism described here and may support local policy decisions or caching.
 
 # Implementation Status
 
@@ -1050,15 +1033,9 @@ To mitigate these risks, it is essential to implement robust security measures:
   Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
   This includes using secure naming conventions and access controls that restrict the Broker's ability to manipulate topic subscriptions.
 
-  In addition to isolating topics, privacy can be preserved by minimizing the inclusion of personally identifying information or unique Attester identifiers in messages published to shared topics, unless strictly required by the subscriber’s role or appraisal policy.
-
 * *Trusted Association Verification:*
   To further safeguard against confusion attacks where the Broker might misroute notifications, mechanisms should be in place to verify the trust association between senders and receivers continuously.
   This can be facilitated by cryptographic assurances, such as digital signatures and trusted certificates that validate the sender's identity and the integrity of the message content.
-
-  Implementations may use Verifier Endorsements or pre-established authorization policies to define valid sender-receiver associations.
-  These policies can be cryptographically enforced using signed metadata, access control lists, or secured registration procedures on the PubSub server.
-  The precise method is deployment-specific.
 
 * *Audit and Monitoring:*
   Regular audits and real-time monitoring of Broker activities can detect and respond to anomalous behavior that might indicate security breaches or manipulation attempts.
@@ -1070,9 +1047,6 @@ To mitigate these risks, it is essential to implement robust security measures:
 
 By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
 It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.
-
-This specification does not require the PubSub server to attest to the Handle or cryptographically prove its dissemination.
-If such assurances are needed (e.g., for auditability or binding Handle provenance), additional mechanisms---such as signed delivery receipts or logs---must be provided by the PubSub infrastructure.
 
 ## Additional Application-Specific Security Considerations
 
