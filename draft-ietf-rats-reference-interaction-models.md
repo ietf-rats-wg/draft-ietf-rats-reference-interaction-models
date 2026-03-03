@@ -385,7 +385,7 @@ Note: In the following diagrams, a leading `?` indicates that an information ele
      |                                       attestationResult <= |
      |                                                            |
 ~~~~
-{: #fig-challenge-response title="Figure 1: Challenge/Response Remote Attestation"}
+{: #fig-challenge-response title="Challenge/Response Remote Attestation"}
 
 The Attester boots up and thereby produces Claims about its boot state and its operational state during runtime (cf. {{terminology}}), e.g., loaded applications, configurations, and environment variables.
 Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.
@@ -478,7 +478,7 @@ In the second step, the Attester presents the Attestation Result (and possibly a
      |                              attestationResult)           |
      |                                   |                       |
 ~~~~
-{: #fig-passport title="Figure 2: Passport Model for Challenge/Response Remote Attestation"}
+{: #fig-passport title="Passport Model for Challenge/Response Remote Attestation"}
 
 #### Background-Check Model
 
@@ -533,7 +533,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
      |                          attestationResult)               |
      |                                   |                       |
 ~~~~
-{: #fig-background-check title="Figure 3: Background-Check Model for Challenge/Response Remote Attestation"}
+{: #fig-background-check title="Background-Check Model for Challenge/Response Remote Attestation"}
 
 
 ## Uni-Directional Remote Attestation {#unidirectional}
@@ -600,7 +600,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
-{: #fig-unidirectional title="Figure 4: Uni-Directional Remote Attestation"}
+{: #fig-unidirectional title="Uni-Directional Remote Attestation"}
 
 
 Uni-Directional Remote Attestation procedures can be initiated both by the Attester and by the Verifier.
@@ -726,7 +726,7 @@ In the observer pattern, observers are directly connected to target resources wi
  '--------------------------------------------------------------------'
      |                                                            |
 ~~~~
-{: #fig-streaming-without-broker title="Figure 5: Streaming Remote Attestation without a Broker"}
+{: #fig-streaming-without-broker title="Streaming Remote Attestation without a Broker"}
 
 In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.
 This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
@@ -797,7 +797,7 @@ From a remote attestations procedure's point of view Evidence Generation, Convey
      |                                   |                        |
      ~                                   ~                        ~
 ~~~~
-{: #fig-streaming-with-broker-cr-handle-gen title="Figure 6: Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe"}
+{: #fig-streaming-with-broker-cr-handle-gen title="Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe"}
 
 
 The *Challenge/Response Remote Attestation over Publish-Subscribe* interaction model uses the same information elements as the *Challenge/Response Remote Attestation* interaction model.
@@ -835,7 +835,7 @@ This mechanism ensures that each handle is uniquely associated with a specific a
      |                                   |                        |
      ~                                   ~                        ~
 ~~~~
-{: #fig-streaming-with-broker-ud-handle-gen title="Figure 7: Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe"}
+{: #fig-streaming-with-broker-ud-handle-gen title="Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe"}
 
 Handles are created by a trusted third party, the Handle Distributor (see {{security-and-privacy-considerations}}).
 In the sequence diagram above, both an Attester and a Verifier subscribe to the topic "Handle" on the PubSub server.
@@ -885,7 +885,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
      |                                   |                        |
      ~                                   ~                        ~
 ~~~~
-{: #fig-streaming-with-broker-evidence-gen title="Figure 8: Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe"}
+{: #fig-streaming-with-broker-evidence-gen title="Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe"}
 
 Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
@@ -921,7 +921,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
      ~          ~                        ~                        ~
 ~~~~
-{: #fig-streaming-with-broker-ar-gen title="Figure 9: Attestation Result Generation for Remote Attestation over Publish-Subscribe"}
+{: #fig-streaming-with-broker-ar-gen title="Attestation Result Generation for Remote Attestation over Publish-Subscribe"}
 
 
 Attestation Result Generation is the same for both publish-subscribe models,*Challenge/Response Remote Attestation over Publish-Subscribe* and *Uni-Directional Remote Attestation over Publish-Subscribe*.
