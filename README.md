@@ -1,3 +1,5 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # Reference Interaction Models for Remote Attestation Procedures
 
 This is the working area for the IETF [RATS Working Group](https://datatracker.ietf.org/group/rats/documents/) Internet-Draft, "Reference Interaction Models for Remote Attestation Procedures".
@@ -13,9 +15,8 @@ This is the working area for the IETF [RATS Working Group](https://datatracker.i
 See the
 [guidelines for contributions](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/blob/master/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
