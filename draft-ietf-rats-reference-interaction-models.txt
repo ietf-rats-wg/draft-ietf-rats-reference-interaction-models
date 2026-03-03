@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 9 May 2026                                               W. Pan
+Expires: 4 September 2026                                         W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                         5 November 2025
+                                                            3 March 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -28,9 +28,9 @@ Discussion Venues
 
    This note is to be removed before publishing as an RFC.
 
-   Discussion of this document takes place on the RATS Working Group
-   mailing list (rats@ietf.org), which is archived at
-   https://mailarchive.ietf.org/arch/browse/rats/.
+   Discussion of this document takes place on the Remote ATtestation
+   ProcedureS Working Group mailing list (rats@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/rats/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/ietf-rats-wg/draft-ietf-rats-reference-
@@ -51,11 +51,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2026.
+   This Internet-Draft will expire on 4 September 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1489,11 +1489,11 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc7942>.
 
    [I-D.ietf-rats-epoch-markers]
-              Birkholz, H., Fossati, T., Pan, W., and C. Bormann, "Epoch
-              Markers", Work in Progress, Internet-Draft, draft-ietf-
-              rats-epoch-markers-02, 9 October 2025,
+              Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
+              Bormann, "Epoch Markers", Work in Progress, Internet-
+              Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-02>.
+              epoch-markers-03>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1551,16 +1551,16 @@ Table of Contents
    [I-D.ietf-rats-endorsements]
               Thaler, D., Birkholz, H., and T. Fossati, "RATS
               Endorsements", Work in Progress, Internet-Draft, draft-
-              ietf-rats-endorsements-07, 25 August 2025,
+              ietf-rats-endorsements-09, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              endorsements-07>.
+              endorsements-09>.
 
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-07, 21 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-07>.
+              draft-ietf-rats-network-device-subscription-09, 13 January
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-network-device-subscription-09>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
