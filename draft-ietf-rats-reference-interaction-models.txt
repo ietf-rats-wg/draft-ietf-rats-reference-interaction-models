@@ -513,7 +513,7 @@ Table of Contents
      |                                       attestationResult <= |
      |                                                            |
 
-      Figure 1: Figure 1: Challenge/Response Remote Attestation
+           Figure 1: Challenge/Response Remote Attestation
 
    The Attester boots up and thereby produces Claims about its boot
    state and its operational state during runtime (cf. Section 2), e.g.,
@@ -651,8 +651,7 @@ Table of Contents
      |                              attestationResult)           |
      |                                   |                       |
 
-   Figure 2: Figure 2: Passport Model for Challenge/Response Remote
-                             Attestation
+  Figure 2: Passport Model for Challenge/Response Remote Attestation
 
 7.1.1.2.  Background-Check Model
 
@@ -712,8 +711,8 @@ Table of Contents
      |                          attestationResult)               |
      |                                   |                       |
 
-  Figure 3: Figure 3: Background-Check Model for Challenge/Response
-                          Remote Attestation
+    Figure 3: Background-Check Model for Challenge/Response Remote
+                             Attestation
 
 7.2.  Uni-Directional Remote Attestation
 
@@ -778,7 +777,7 @@ Table of Contents
  '--------------------------------------------------------------------'
      |                                                            |
 
-        Figure 4: Figure 4: Uni-Directional Remote Attestation
+             Figure 4: Uni-Directional Remote Attestation
 
    Uni-Directional Remote Attestation procedures can be initiated both
    by the Attester and by the Verifier.  Initiation by the Attester can
@@ -949,7 +948,7 @@ Table of Contents
  '--------------------------------------------------------------------'
      |                                                            |
 
-  Figure 5: Figure 5: Streaming Remote Attestation without a Broker
+       Figure 5: Streaming Remote Attestation without a Broker
 
    In the observer pattern, an observer establishes a direct connection
    to the observed resources through a subscription mechanism, which is
@@ -1068,8 +1067,8 @@ Table of Contents
      |                                   |                        |
      ~                                   ~                        ~
 
-     Figure 6: Figure 6: Handle Generation for Challenge/Response
-              Remote Attestation over Publish-Subscribe
+      Figure 6: Handle Generation for Challenge/Response Remote
+                  Attestation over Publish-Subscribe
 
    The _Challenge/Response Remote Attestation over Publish-Subscribe_
    interaction model uses the same information elements as the
@@ -1112,7 +1111,7 @@ Table of Contents
      |                                   |                        |
      ~                                   ~                        ~
 
-   Figure 7: Figure 7: Handle Generation for Uni-Directional Remote
+        Figure 7: Handle Generation for Uni-Directional Remote
                   Attestation over Publish-Subscribe
 
    Handles are created by a trusted third party, the Handle Distributor
@@ -1166,7 +1165,7 @@ Table of Contents
      |                                   |                        |
      ~                                   ~                        ~
 
-   Figure 8: Figure 8: Evidence Generation and Appraisal for Remote
+        Figure 8: Evidence Generation and Appraisal for Remote
                   Attestation over Publish-Subscribe
 
    Exactly as in the Challenge/Response and Uni-Directional interaction
@@ -1208,8 +1207,8 @@ Table of Contents
      |          |                        |                        |
      ~          ~                        ~                        ~
 
-     Figure 9: Figure 9: Attestation Result Generation for Remote
-                  Attestation over Publish-Subscribe
+    Figure 9: Attestation Result Generation for Remote Attestation
+                       over Publish- Subscribe
 
    Attestation Result Generation is the same for both publish-subscribe
    models,_Challenge/Response Remote Attestation over Publish-Subscribe_

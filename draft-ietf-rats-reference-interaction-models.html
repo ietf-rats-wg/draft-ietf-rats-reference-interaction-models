@@ -1218,7 +1218,7 @@ Analogously, a general overview about the information elements typically used by
                     <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="auto internal xref">7.3.1</a>.  <a href="#name-streaming-remote-attestation" class="internal xref">Streaming Remote Attestation without a Broker</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.2">
-                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="auto internal xref">7.3.2</a>.  <a href="#name-streaming-remote-attestation-" class="internal xref">Streaming Remote Attestation with a Broker</a></p>
+                    <p id="section-toc.1-1.7.2.3.2.2.1"><a href="#section-7.3.2" class="auto internal xref">7.3.2</a>.  <a href="#name-streaming-remote-attestation-w" class="internal xref">Streaming Remote Attestation with a Broker</a></p>
 </li>
                 </ul>
 </li>
@@ -1687,7 +1687,7 @@ The way the Handle is processed is the most prominent difference between the thr
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-challenge-response-remote-a" class="section-name selfRef">Challenge/Response Remote Attestation</a>
         </h3>
 <p id="section-7.1-1">Note: In the following diagrams, a leading <code>?</code> indicates that an information element is optional.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<span id="name-figure-1-challenge-response"></span><div id="fig-challenge-response">
+<span id="name-challenge-response-remote-at"></span><div id="fig-challenge-response">
 <figure id="figure-1">
           <div id="section-7.1-2.1">
             <div class="alignLeft art-svg artwork" id="section-7.1-2.1.1">
@@ -1759,7 +1759,7 @@ The way the Handle is processed is the most prominent difference between the thr
 </div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-figure-1-challenge-response" class="selfRef">Figure 1: Challenge/Response Remote Attestation</a>
+<a href="#name-challenge-response-remote-at" class="selfRef">Challenge/Response Remote Attestation</a>
           </figcaption></figure>
 </div>
 <p id="section-7.1-3">The Attester boots up and thereby produces Claims about its boot state and its operational state during runtime (cf. <a href="#terminology" class="auto internal xref">Section 2</a>), e.g., loaded applications, configurations, and environment variables.
@@ -1804,7 +1804,7 @@ In this model, the attestation sequence is a two-step procedure.
 In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy.
 The Verifier then gives back an Attestation Result to the Attester, which caches it.
 In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.<a href="#section-7.1.1.1-1" class="pilcrow">¶</a></p>
-<span id="name-figure-2-passport-model-for"></span><div id="fig-passport">
+<span id="name-passport-model-for-challeng"></span><div id="fig-passport">
 <figure id="figure-2">
               <div id="section-7.1.1.1-2.1">
                 <div class="alignLeft art-svg artwork" id="section-7.1.1.1-2.1.1">
@@ -1917,7 +1917,7 @@ In the second step, the Attester presents the Attestation Result (and possibly a
 </div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-figure-2-passport-model-for" class="selfRef">Figure 2: Passport Model for Challenge/Response Remote Attestation</a>
+<a href="#name-passport-model-for-challeng" class="selfRef">Passport Model for Challenge/Response Remote Attestation</a>
               </figcaption></figure>
 </div>
 </section>
@@ -1934,7 +1934,7 @@ Upon receiving the Evidence, the Relying Party initiates a session with the Veri
 Once the session is established, it forwards the received Evidence to the Verifier.
 The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party.
 The Relying Party then checks the Attestation Result against its own appraisal policy to conclude attestation.<a href="#section-7.1.1.2-1" class="pilcrow">¶</a></p>
-<span id="name-figure-3-background-check-m"></span><div id="fig-background-check">
+<span id="name-background-check-model-for-"></span><div id="fig-background-check">
 <figure id="figure-3">
               <div id="section-7.1.1.2-2.1">
                 <div class="alignLeft art-svg artwork" id="section-7.1.1.2-2.1.1">
@@ -2040,7 +2040,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-figure-3-background-check-m" class="selfRef">Figure 3: Background-Check Model for Challenge/Response Remote Attestation</a>
+<a href="#name-background-check-model-for-" class="selfRef">Background-Check Model for Challenge/Response Remote Attestation</a>
               </figcaption></figure>
 </div>
 </section>
@@ -2054,7 +2054,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
         <h3 id="name-uni-directional-remote-atte">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-uni-directional-remote-atte" class="section-name selfRef">Uni-Directional Remote Attestation</a>
         </h3>
-<span id="name-figure-4-uni-directional-re"></span><div id="fig-unidirectional">
+<span id="name-uni-directional-remote-attes"></span><div id="fig-unidirectional">
 <figure id="figure-4">
           <div id="section-7.2-1.1">
             <div class="alignLeft art-svg artwork" id="section-7.2-1.1.1">
@@ -2225,7 +2225,7 @@ The Relying Party then checks the Attestation Result against its own appraisal p
 </div>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-figure-4-uni-directional-re" class="selfRef">Figure 4: Uni-Directional Remote Attestation</a>
+<a href="#name-uni-directional-remote-attes" class="selfRef">Uni-Directional Remote Attestation</a>
           </figcaption></figure>
 </div>
 <p id="section-7.2-2">Uni-Directional Remote Attestation procedures can be initiated both by the Attester and by the Verifier.
@@ -2297,7 +2297,7 @@ In the observer pattern, observers are directly connected to target resources wi
           <h4 id="name-streaming-remote-attestation">
 <a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-streaming-remote-attestation" class="section-name selfRef">Streaming Remote Attestation without a Broker</a>
           </h4>
-<span id="name-figure-5-streaming-remote-a"></span><div id="fig-streaming-without-broker">
+<span id="name-streaming-remote-attestation-"></span><div id="fig-streaming-without-broker">
 <figure id="figure-5">
             <div id="section-7.3.1-1.1">
               <div class="alignLeft art-svg artwork" id="section-7.3.1-1.1.1">
@@ -2462,7 +2462,7 @@ In the observer pattern, observers are directly connected to target resources wi
 </div>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-figure-5-streaming-remote-a" class="selfRef">Figure 5: Streaming Remote Attestation without a Broker</a>
+<a href="#name-streaming-remote-attestation-" class="selfRef">Streaming Remote Attestation without a Broker</a>
             </figcaption></figure>
 </div>
 <p id="section-7.3.1-2">In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying conceptual messages for remote attestation purposes.
@@ -2485,8 +2485,8 @@ The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific a
 </div>
 <div id="streaming-with-broker">
 <section id="section-7.3.2">
-          <h4 id="name-streaming-remote-attestation-">
-<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-streaming-remote-attestation-" class="section-name selfRef">Streaming Remote Attestation with a Broker</a>
+          <h4 id="name-streaming-remote-attestation-w">
+<a href="#section-7.3.2" class="section-number selfRef">7.3.2. </a><a href="#name-streaming-remote-attestation-w" class="section-name selfRef">Streaming Remote Attestation with a Broker</a>
           </h4>
 <p id="section-7.3.2-1">This model includes a Broker to facilitate the distribution of messages between RATS roles, such as Attesters and Verifiers.
 The Broker is a trusted third party and acts as an intermediary that ensures messages are securely and reliably conveyed between involved RATS roles.
@@ -2525,7 +2525,7 @@ From a remote attestations procedure's point of view Evidence Generation, Convey
             <h5 id="name-handle-generation-for-chall">
 <a href="#section-7.3.2.1" class="section-number selfRef">7.3.2.1. </a><a href="#name-handle-generation-for-chall" class="section-name selfRef">Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
             </h5>
-<span id="name-figure-6-handle-generation-"></span><div id="fig-streaming-with-broker-cr-handle-gen">
+<span id="name-handle-generation-for-challe"></span><div id="fig-streaming-with-broker-cr-handle-gen">
 <figure id="figure-6">
               <div id="section-7.3.2.1-1.1">
                 <div class="alignLeft art-svg artwork" id="section-7.3.2.1-1.1.1">
@@ -2586,7 +2586,7 @@ From a remote attestations procedure's point of view Evidence Generation, Convey
 </div>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-figure-6-handle-generation-" class="selfRef">Figure 6: Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
+<a href="#name-handle-generation-for-challe" class="selfRef">Handle Generation for Challenge/Response Remote Attestation over Publish-Subscribe</a>
               </figcaption></figure>
 </div>
 <p id="section-7.3.2.1-2">The <em>Challenge/Response Remote Attestation over Publish-Subscribe</em> interaction model uses the same information elements as the <em>Challenge/Response Remote Attestation</em> interaction model.
@@ -2601,7 +2601,7 @@ This mechanism ensures that each handle is uniquely associated with a specific a
             <h5 id="name-handle-generation-for-uni-d">
 <a href="#section-7.3.2.2" class="section-number selfRef">7.3.2.2. </a><a href="#name-handle-generation-for-uni-d" class="section-name selfRef">Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
             </h5>
-<span id="name-figure-7-handle-generation-"></span><div id="fig-streaming-with-broker-ud-handle-gen">
+<span id="name-handle-generation-for-uni-di"></span><div id="fig-streaming-with-broker-ud-handle-gen">
 <figure id="figure-7">
               <div id="section-7.3.2.2-1.1">
                 <div class="alignLeft art-svg artwork" id="section-7.3.2.2-1.1.1">
@@ -2680,7 +2680,7 @@ This mechanism ensures that each handle is uniquely associated with a specific a
 </div>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-figure-7-handle-generation-" class="selfRef">Figure 7: Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
+<a href="#name-handle-generation-for-uni-di" class="selfRef">Handle Generation for Uni-Directional Remote Attestation over Publish-Subscribe</a>
               </figcaption></figure>
 </div>
 <p id="section-7.3.2.2-2">Handles are created by a trusted third party, the Handle Distributor (see <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>).
@@ -2693,7 +2693,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
             <h5 id="name-evidence-generation-and-app">
 <a href="#section-7.3.2.3" class="section-number selfRef">7.3.2.3. </a><a href="#name-evidence-generation-and-app" class="section-name selfRef">Evidence Generation and Appraisal</a>
             </h5>
-<span id="name-figure-8-evidence-generatio"></span><div id="fig-streaming-with-broker-evidence-gen">
+<span id="name-evidence-generation-and-appr"></span><div id="fig-streaming-with-broker-evidence-gen">
 <figure id="figure-8">
               <div id="section-7.3.2.3-1.1">
                 <div class="alignLeft art-svg artwork" id="section-7.3.2.3-1.1.1">
@@ -2808,7 +2808,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 </div>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-figure-8-evidence-generatio" class="selfRef">Figure 8: Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe</a>
+<a href="#name-evidence-generation-and-appr" class="selfRef">Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe</a>
               </figcaption></figure>
 </div>
 <p id="section-7.3.2.3-2">Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
@@ -2824,7 +2824,7 @@ The definition of delta Evidence is provided in <a href="#handle-lifecycle-and-p
             <h5 id="name-attestation-result-generati">
 <a href="#section-7.3.2.4" class="section-number selfRef">7.3.2.4. </a><a href="#name-attestation-result-generati" class="section-name selfRef">Attestation Result Generation</a>
             </h5>
-<span id="name-figure-9-attestation-result"></span><div id="fig-streaming-with-broker-ar-gen">
+<span id="name-attestation-result-generatio"></span><div id="fig-streaming-with-broker-ar-gen">
 <figure id="figure-9">
               <div id="section-7.3.2.4-1.1">
                 <div class="alignLeft art-svg artwork" id="section-7.3.2.4-1.1.1">
@@ -2922,7 +2922,7 @@ The definition of delta Evidence is provided in <a href="#handle-lifecycle-and-p
 </div>
 </div>
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-figure-9-attestation-result" class="selfRef">Figure 9: Attestation Result Generation for Remote Attestation over Publish-Subscribe</a>
+<a href="#name-attestation-result-generatio" class="selfRef">Attestation Result Generation for Remote Attestation over Publish-Subscribe</a>
               </figcaption></figure>
 </div>
 <p id="section-7.3.2.4-2">Attestation Result Generation is the same for both publish-subscribe models,<em>Challenge/Response Remote Attestation over Publish-Subscribe</em> and <em>Uni-Directional Remote Attestation over Publish-Subscribe</em>.
