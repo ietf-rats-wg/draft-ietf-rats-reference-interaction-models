@@ -1528,131 +1528,137 @@ This enables interaction models to support the conveyance of proofs of freshness
       </h2>
 <p id="section-6-1">This section describes the essential information elements for the interaction models described in <a href="#interaction-models" class="auto internal xref">Section 7</a>.
 These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-6-2">
-        <dt id="section-6-2.1">Attesting Environment IDs ('attEnvIDs'):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.2">
-          <p id="section-6-2.2.1"><em>optional</em><a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-6-2">The information elements below are grouped with mandatory elements first, followed by optional elements.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-6-3">
+        <dt id="section-6-3.1">Handle (<code>handle</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.2">
+          <p id="section-6-3.2.1"><em>mandatory</em><a href="#section-6-3.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.3"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.4">
-          <p id="section-6-2.4.1">A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.<a href="#section-6-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.3"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.4">
+          <p id="section-6-3.4.1">An information element provided to the Attester from an external source included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.<a href="#section-6-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.5"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.6">
-          <p id="section-6-2.6.1">While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
-If no Attesting Environment IDs are provided, a local default applies based on the Attester.
-For example, all Attesting Environments will provide Evidence.<a href="#section-6-2.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.7">Handle (<code>handle</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.8">
-          <p id="section-6-2.8.1"><em>mandatory</em><a href="#section-6-2.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.9"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.10">
-          <p id="section-6-2.10.1">An information element provided to the Attester from an external source included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.<a href="#section-6-2.10.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.11"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.12">
-          <p id="section-6-2.12.1">The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
+<dt id="section-6-3.5"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.6">
+          <p id="section-6-3.6.1">The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
 Examples include Nonces, which protect against replay attacks, and Epoch Markers that identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.
-Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.<a href="#section-6-2.12.1" class="pilcrow">¶</a></p>
+Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.<a href="#section-6-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.13">Claims (<code>claims</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.14">
-          <p id="section-6-2.14.1"><em>mandatory</em><a href="#section-6-2.14.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.7">Claims (<code>claims</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.8">
+          <p id="section-6-3.8.1"><em>mandatory</em><a href="#section-6-3.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.15"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.16">
-          <p id="section-6-2.16.1">Claims are assertions that represent characteristics of an Attester's Target Environment.<a href="#section-6-2.16.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.9"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.10">
+          <p id="section-6-3.10.1">Claims are assertions that represent characteristics of an Attester's Target Environment.<a href="#section-6-3.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.17"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.18">
-          <p id="section-6-2.18.1">Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.<a href="#section-6-2.18.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.11"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.12">
+          <p id="section-6-3.12.1">Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.<a href="#section-6-3.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.19">Event Logs (<code>eventLogs</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.20">
-          <p id="section-6-2.20.1"><em>optional</em><a href="#section-6-2.20.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.13">Collected Claims (<code>collectedClaims</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.14">
+          <p id="section-6-3.14.1"><em>mandatory</em><a href="#section-6-3.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.21"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.22">
-          <p id="section-6-2.22.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.<a href="#section-6-2.22.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.15"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.16">
+          <p id="section-6-3.16.1">Collected Claims represent a (sub-)set of Claims created by an Attester.<a href="#section-6-3.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.23">Verifier Inputs ('verInputs')</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.24">
-          <p id="section-6-2.24.1"><em>mandatory</em><a href="#section-6-2.24.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.17"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.18">
+          <p id="section-6-3.18.1">Collected Claims are gathered based on the Claim Selection. If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.<a href="#section-6-3.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.25"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.26">
-          <p id="section-6-2.26.1">Appraisal procedures implemented by Verifiers require certain inputs as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values that can be expressed via Reference Integrity Measurements (RIM) or Endorsements that can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.<a href="#section-6-2.26.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.19">Evidence (<code>evidence</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.20">
+          <p id="section-6-3.20.1"><em>mandatory</em><a href="#section-6-3.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.27">Claim Selection (<code>claimSelection</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.28">
-          <p id="section-6-2.28.1"><em>optional</em><a href="#section-6-2.28.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.21"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.22">
+          <p id="section-6-3.22.1">A set of Claims that can include: (a) a list of Attestation Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
+Attestation Evidence MUST cryptographically bind all of these information elements.
+Evidence MUST be protected via an Authentication Secret.
+The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" <span>[<a href="#lampson06" class="cite xref">lampson06</a>]</span> the Attester.<a href="#section-6-3.22.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.29"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.30">
-          <p id="section-6-2.30.1">A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.<a href="#section-6-2.30.1" class="pilcrow">¶</a></p>
+<dt id="section-6-3.23">Attestation Result (<code>attestationResult</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.24">
+          <p id="section-6-3.24.1"><em>mandatory</em><a href="#section-6-3.24.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-2.31"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.32">
-          <p id="section-6-2.32.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
+<dt id="section-6-3.25"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.26">
+          <p id="section-6-3.26.1">Attestation Results are assertions about the integrity or other characteristics of the appraised Attester.<a href="#section-6-3.26.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.27"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.28">
+          <p id="section-6-3.28.1">Attestation Results are created by Verifiers based on appraised Evidence and other input information. Attestation Results are typically conveyed to Relying Parties and can be used to inform access control decisions.<a href="#section-6-3.28.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.29">Verifier Inputs ('verInputs')</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.30">
+          <p id="section-6-3.30.1"><em>mandatory</em><a href="#section-6-3.30.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.31"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.32">
+          <p id="section-6-3.32.1">Appraisal procedures implemented by Verifiers require certain inputs as defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values that can be expressed via Reference Integrity Measurements (RIM) or Endorsements that can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.<a href="#section-6-3.32.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.33">Attesting Environment IDs ('attEnvIDs'):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.34">
+          <p id="section-6-3.34.1"><em>optional</em><a href="#section-6-3.34.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.35"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.36">
+          <p id="section-6-3.36.1">A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.<a href="#section-6-3.36.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.37"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.38">
+          <p id="section-6-3.38.1">While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
+If no Attesting Environment IDs are provided, a local default applies based on the Attester.
+For example, all Attesting Environments will provide Evidence.<a href="#section-6-3.38.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.39">Event Logs (<code>eventLogs</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.40">
+          <p id="section-6-3.40.1"><em>optional</em><a href="#section-6-3.40.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.41"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.42">
+          <p id="section-6-3.42.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.<a href="#section-6-3.42.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.43">Claim Selection (<code>claimSelection</code>):</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.44">
+          <p id="section-6-3.44.1"><em>optional</em><a href="#section-6-3.44.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.45"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.46">
+          <p id="section-6-3.46.1">A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.<a href="#section-6-3.46.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.47"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.48">
+          <p id="section-6-3.48.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
 For example, a Verifier could send a Claim Selection, among other elements, to an Attester.
 An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
 If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier.
-In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.<a href="#section-6-2.32.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.33">Collected Claims (<code>collectedClaims</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.34">
-          <p id="section-6-2.34.1"><em>mandatory</em><a href="#section-6-2.34.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.35"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.36">
-          <p id="section-6-2.36.1">Collected Claims represent a (sub-)set of Claims created by an Attester.<a href="#section-6-2.36.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.37"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.38">
-          <p id="section-6-2.38.1">Collected Claims are gathered based on the Claim Selection. If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.<a href="#section-6-2.38.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.39">Evidence (<code>evidence</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.40">
-          <p id="section-6-2.40.1"><em>mandatory</em><a href="#section-6-2.40.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.41"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.42">
-          <p id="section-6-2.42.1">A set of Claims that can include: (a) a list of Attestation Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
-Attestation Evidence MUST cryptographically bind all of these information elements.
-Evidence MUST be protected via an Authentication Secret.
-The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" <span>[<a href="#lampson06" class="cite xref">lampson06</a>]</span> the Attester.<a href="#section-6-2.42.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.43">Attestation Result (<code>attestationResult</code>):</dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.44">
-          <p id="section-6-2.44.1"><em>mandatory</em><a href="#section-6-2.44.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-6-2.45"></dt>
-        <dd style="margin-left: 1.5em" id="section-6-2.46">
-          <p id="section-6-2.46.1">An Attestation Result is produced by the Verifier as the output of the appraisal of Evidence generated by an Attester. Attestation Results include concise assertions about integrity or other characteristics of the appraised Attester that can be processed by Relying Parties.<a href="#section-6-2.46.1" class="pilcrow">¶</a></p>
+In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.<a href="#section-6-3.48.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2289,9 +2295,10 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
         <h3 id="name-streaming-remote-attestatio">
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-streaming-remote-attestatio" class="section-name selfRef">Streaming Remote Attestation</a>
         </h3>
-<p id="section-7.3-1">Streaming Remote Attestation serves as the foundational concept for both the observer pattern <span>[<a href="#ISIS" class="cite xref">ISIS</a>]</span> and the publish-subscribe pattern <span>[<a href="#DesignPatterns" class="cite xref">DesignPatterns</a>]</span>.
-It entails establishing subscription states to enable continuous remote attestation.
-In the observer pattern, observers are directly connected to target resources without a Broker, while the publish-subscribe pattern involves a central Broker for message distribution.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-1">Streaming Remote Attestation serves as the foundational concept for both the publish-subscribe pattern <span>[<a href="#DesignPatterns" class="cite xref">DesignPatterns</a>]</span> and the observer pattern <span>[<a href="#ISIS" class="cite xref">ISIS</a>]</span>.
+It entails establishing subscription state to enable continuous remote attestation.
+In the publish-subscribe pattern, messages are distributed by a broker that relays publications from producers to subscribers.
+In the observer pattern, observers are directly connected to target resources and no broker is used.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <div id="streaming-without-broker">
 <section id="section-7.3.1">
           <h4 id="name-streaming-remote-attestation">
