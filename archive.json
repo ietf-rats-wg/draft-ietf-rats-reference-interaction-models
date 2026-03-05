@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-24T01:19:26.778393+00:00",
+  "timestamp": "2026-03-05T01:49:21.110171+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1087,7 +1087,7 @@
       "id": "I_kwDOEYizNM6nKOuk",
       "title": "Attester boot up procedure (recheck this)",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1096,8 +1096,8 @@
       "labels": [],
       "body": "The Attester boots up and thereby produces Claims about its boot state and its operational state. Claims are produced by all Attesting Environments of an Attester. Event Logs can accompany produced Claims and provide an event trail of security-relevant events that can be observed or collected by Attesting Environments. \n\nA Challenge/Response remote attestation procedure is typically initiated by a Verifier via sending a remote attestation request to an Attester. A request includes a Handle, a list of Attestation Environment IDs, and a Claim Selection for all Attesting Environments or dedicated Claim Selections for sets of Attesting Environments.\n\nIn the Challenge/Response model, a handle is composed of qualifying extra data typically in the form of a practically infeasible to guess cryptographically strong random number (nonce) or an Epoch Marker {{-epoch-markers}}.\nA Verifier-generated nonce is intended to demonstrate Evidence freshness via recentness and to prevent replay attacks.\n\nUltimately, the list of Attesting Environment IDs selects the attestation keys via which an Attester is requested to sign its Attestation Evidence.\nCorrespondingly, a particular set of Evidence originating from certain Attesting Environments in a composite device can be requested via multiple Attesting Environment IDs.\nMethods to acquire Attesting Environment IDs or mappings between Attesting Environments to Attesting Environment IDs are out-of-scope of this document.\n\nBased on the provided Handle, the Attesting Environment IDs, and collected Claims, an Attester produces signed Evidence. That is, it digitally signs the Handle and the collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment. The Attester conveys signed Evidence as well as all accompanying data, such as Event Logs, back to the Verifier.\n\nWhile it is crucial that Claims, the Handle, and the Attesting Environment IDs MUST be cryptographically bound to the signature of Evidence, they MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nAs soon as the Verifier receives the Evidence, it can begin the appraisal procedure.\nFor this purpose, the Verifier checks the signature, the Attesting Environment ID, and the Handle, and then appraises the Claims.\nAppraisal procedures are application-specific and can be conducted via comparison of the Claims with corresponding Reference Values, such as Reference Integrity Measurements, conditions that have to be met by Evidence, such as the presence of certain Claims, and the application of Appraisal Policy for Evidence.\nThe final outputs of the Verifier are Attestation Results. Attestation Results constitute new Claim Sets about the properties and characteristics of an Attester, which enables Relying Parties, for example, to then assess an Attester's trustworthiness.\n\n--------------------\n\nThe Attester boots up and thereby produces Claims about its boot state and its operational state. Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.\n\nThe Challenge/Response remote attestation procedure is initiated by the Verifier by sending a remote attestation request to the Attester. A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.\n\nIn the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible to guess nonce, such as a cryptographically strong random number.\nThe Verifier-generated nonce is intended to guarantee Evidence freshness and to prevent replay attacks.\n\nThe list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.\nEach selected key is uniquely associated with an Attesting Environment of the Attester.\nAs a result, a single Attestation Key ID identifies a single Attesting Environment.\nCorrespondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.\nMethods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.\n\nThe Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.\nThe Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.\nIf the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.\nFor example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.\n\nWith the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.\n\nThe Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.\nFor further reference see section {{security-and-privacy-considerations}}.\n\nUpon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.\nClaim appraisal is driven by Policy and takes Reference Values and Endorsements as input.\nThe Verifier outputs Attestation Results. Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.\n",
       "createdAt": "2025-01-22T14:01:27Z",
-      "updatedAt": "2025-08-17T16:42:12Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T15:56:39Z",
+      "closedAt": "2025-11-05T15:56:39Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1140,6 +1140,13 @@
           "body": "Hi @thomas-fossati,\n\nThanks for you review. Very helpful. \ud83d\udc4d\ud83c\udffb \n\nHowever, I diffed the text from the current [master](https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/tree/master) branch and think it has all been addressed already, e.g., in PR #70 which addresses @muhammad-usama-sardar's review (issue #64).\n\nSo, closing this issue.\n\nCheers,\nMichael",
           "createdAt": "2025-08-17T13:39:56Z",
           "updatedAt": "2025-08-17T13:39:56Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "addressed in https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/70",
+          "createdAt": "2025-11-05T15:56:39Z",
+          "updatedAt": "2025-11-05T15:56:39Z"
         }
       ]
     },
@@ -1252,15 +1259,15 @@
       "id": "I_kwDOEYizNM63XlB4",
       "title": "Review of Latest Draft: IETF RATS Reference Interaction Models",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In the Abstract, please provide reference to the three conveying mechanisms.\n\n**Introduction** Line 2:\n\nVerifier instead of Verifiers, create Attestation Results.\n\nAppraisal Policies instead of Attestation Policies.\n\nI would state the last sentence in the paragraph clearly as:\n\nThis document, illustrates three main models of interaction between various RATS roles, namely\nAttester, Verifier and Relying Party that can be used in specific RATS-related solution documents.\n\nPlease add examples in the statement below:\n\n The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS, give examples, here...\n\nSection 5:\n\nThe Authentication Secret MUST be established before RATS interaction takes place..\n\nAttester Identity: Not clear to me, what are we trying to say here>>>\n\nThe first sentence needs to be clear what we mean by Identity\n\nAlso, Provenance of Evidence, could be any abstract thing much more than\n\nWho build the claim, so I would not use the term Provenance here,\nBut it can be watered down to \nThe Evidence from an Attesting Environment should be distinguishable \n\nand MUST be UNAMBIGUOUS\n\n=============================\n\nSection 6:\n\nThe below sentence, seems ambiguous and confusing to me:\n\nWhile a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID. If no Attesting Environment IDs are provided, a local default applies based on the Attester. For example, all Attesting Environments will provide Evidence\n\nPlease clarify, what is the intent and simplify??\n\nWe need to state that Attesting Env ID may be implicit or explicit, but I do not understand, how it can be optional?\n\n\n=============================================\n\nSection 7:\n\nThe conveyance paragraph is Out of Sync with the Section 3:Scope and Intent\n\nIn Section 3: We say conveying ONLY Evidence, while in Section 7:\nWe say scope is both Evidence and RP\n\nPicture should clearly show Self Referential Arrows to Indicate Internal Activity\nAs against sending External Message..\n \nEnd of Section 7:\nAttestation Results may create new Claim Sets about the properties and characteristics of an Attester\n\nSection 7.2.1 :\n\nThe grey zone may lead to Attestation Failures due to Handle Mismatch and suitable protocols\nshould take care to recover from the scenario...\n\nAlso Mention that in Unidirectional Remote Attestation, the role of Handle Distribution may be delegated to the RP..\n\nSection 7.3: Streaming Remote Attestation:\n\nSection 7.3.2 ==> How the Broker is trusted by all parties, Attester and Verifier is Outside the scope of this document.\n\n==============\n\nSection 8: Implementation Status:\n\nOne can also Include Project Veraison which implements Section 7.1 of this draft\n\n============================================",
       "createdAt": "2025-05-20T09:53:11Z",
-      "updatedAt": "2025-05-20T10:10:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T13:29:22Z",
+      "closedAt": "2025-11-05T13:29:22Z",
       "comments": []
     },
     {
@@ -1268,15 +1275,15 @@
       "id": "I_kwDOEYizNM64R4xG",
       "title": "Uni-Directional Remote Attestation:  freshness mechanisms",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/67",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) Regarding the figure in Section 7.2, is is possible for the Verifier to retrieve the handle from the Handle Generator and convey it to the Attester?  This would be different from Passport Model IMO as trust must be established between the Verifier and Handle Generator.\n\nb) Handle Expiry:  If the attester knows the expiry and is trustworthy, then it should be inhibited from sending evidence with a stale handle.  If this is a MUST requirement for the attester, then the likelihood of old and new handles being n circulation simultaneously can be reduced.\n\nc) This is not really a unidirectional model in my opinion.  The attester has 2-way communication between the Handle Generator and Verifier. Can this model be extended to cover attesters that can communicate unicast to verifiers, but can only receive communication from  verifiers via broadcast/multicast?\n",
       "createdAt": "2025-05-26T16:57:41Z",
-      "updatedAt": "2025-08-17T16:40:43Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T15:55:51Z",
+      "closedAt": "2025-11-05T15:55:51Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1291,6 +1298,13 @@
           "body": "Hi @gmandyam,\n\nThanks for your helpful comments. I went through all of them and integrated them (see PR #77).\n\n* [x] **a)** Can the Verifier retrieve the handle and convey it to the Attester?\n  * @gmandyam concern:\n    * Suggests an alternative path where Verifier fetches handle from the Handle Generator and relays it to the Attester.\n  * @henkbirkholz's reply:\n    * Possible if handle is authenticatable (e.g., Epoch Marker), but introduces latency and semantics issues.\n    * Recommends against unless lifetime/epoch span is well understood.\n  * \u27a1\ufe0f Added short note in Section 7.2 (Handle Generation) to explain why it is discouraged.\n\n* [x] **b)** Handle Expiry and stale handles:\n  * @gmandyam's concern:\n    * Suggests that if Attester knows expiry, it MUST NOT send Evidence with stale handle.\n  * @henkbirkholz's reply:\n    * Agrees \u2014 this needs normative clarification.\n  * \u27a1\ufe0f Strengthened *Handle Expiry* bullet in Section 7.2.1.\n\n* [x] **c)** Is this really unidirectional? Broadcast/multicast variant?\n  * @gmandyam's concern:\n    * Argues that since the Attester talks to both Handle Distributor (receiving) and Verifier (sending), it is not \"uni\" but \"two-way\".\n    * Suggests covering multicast/broadcast cases where Attester can only receive from Verifiers.\n  * @henkbirkholz's reply:\n    * Clarifies that two separate one-way channels are used (one for handle acquisition, one for evidence conveyance).\n    * Broadcasting handles from Verifiers would defeat the model unless Verifier also plays Handle Distributor role.\n  * \u27a1\ufe0f Clarified in Section 7.2 that the \"uni-directional\" term applies to each channel independently, not the whole system.\n  * \u27a1\ufe0f Explicitly mentioned why multicast from Verifier is not modeled.\n\nCheers,\nMichael",
           "createdAt": "2025-08-17T09:03:33Z",
           "updatedAt": "2025-08-17T09:03:33Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "addressed in https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/77",
+          "createdAt": "2025-11-05T15:55:51Z",
+          "updatedAt": "2025-11-05T15:55:51Z"
         }
       ]
     },
@@ -1299,15 +1313,15 @@
       "id": "I_kwDOEYizNM64SCRK",
       "title": "Streaming Remote Attestation",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) What occurs when evidence/evidence delta's fail to verify?  Can the Verfier unsubscribe?  More broadly, a description of how the unsubscribe process works may be useful in understanding the streaming mode.\n\nb) Applicable to both uni-directional and streaming:\n\n>While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey evidence generated from Claim values that have changed and new Event Log entries since the previous conveyance. These updates reflecting the differences are called \"delta\" in the sequence diagram above.\n\nThis is not an adequate definition for delta evidence IMO.  For instance if the attester goes through a sleep cycle, but is still able to detect that the claim value has changed and then reverted back to the previous value during the sleep period, then the attester should potentially pass this information on to the Verifier.",
       "createdAt": "2025-05-26T17:23:00Z",
-      "updatedAt": "2025-08-17T16:40:39Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T15:55:05Z",
+      "closedAt": "2025-11-05T15:55:05Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1330,15 +1344,15 @@
       "id": "I_kwDOEYizNM64TJOQ",
       "title": "PubSub Server",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/69",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "a) Sec. 7.3.2.2.:  Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy?  If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\n\nb) Sec. 7.3.2.3:  If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\n\nc) Sec. 7.3.2.4: Call flow in figure seems to be overly limiting.  Attester can also subscribe to attestationResult.\n\nd) Section 9:  Need a discussion on security/privacy considerations for PubSub server.  This is different that what is described in Section 9.3.  For instance, if the PubSub server must attest to the  Handle used as part of evidence then this could be discussed in Section 9.  Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it).\n\nMoreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server.  For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?",
       "createdAt": "2025-05-26T20:41:32Z",
-      "updatedAt": "2025-08-17T16:40:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T13:30:51Z",
+      "closedAt": "2025-11-05T13:30:51Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -1361,15 +1375,15 @@
       "id": "I_kwDOEYizNM7Fh5s8",
       "title": "[Rats] review of draft-ietf-rats-reference-interaction-models-14 (2025-07-17)",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/73",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From IETF RATS Mailing List\nFrom: Thomas Fossati <thomas.fossati@linaro.org> (@thomas-fossati)\nDate: Thu, 17 Jul 2025 11:54:38 +0200\nArchived-At: <https://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw>\n\n---\n\nHi,\n\nI have reviewed -14.\n\nFirstly, thank you very much, Henk and Michael, for addressing the\ncomments I made in my previous review rounds.\n\nI believe the document is in good shape and ready for WGLC.\n\nI have a few more minor points:\n\n# S 1\n\n* Attestation Policies => Appraisal Policies\n* It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how.  Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\n* It says: \"privacy-preserving conveyance methods\" -- what does\n\"privacy-preserving\" refer to?\n\n# S 2.2\n\n* Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\n\n# S 4\n\n* The term \"implicit authentication\" referring to digital signatures sounds a bit odd\n* It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\n\n# Figure 2\n\n* Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\n\n# S 7.2.1\n\n* Unsure how \u201cSynchronization Checks\u201d would work in practice.\n\n# S 11.1\n\n* Why is RFC9683 normative?\n\ncheers, t\n",
       "createdAt": "2025-08-12T12:24:46Z",
-      "updatedAt": "2025-08-17T16:42:27Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T15:53:56Z",
+      "closedAt": "2025-11-05T15:53:56Z",
       "comments": [
         {
           "author": "eckelmeckel",
@@ -1386,6 +1400,121 @@
           "updatedAt": "2025-08-17T13:41:15Z"
         }
       ]
+    },
+    {
+      "number": 78,
+      "id": "I_kwDOEYizNM7Uiivc",
+      "title": "Interaction patterns for Evidence vs. Reference Values and Endorsements",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/78",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "What precisely is the difference between interaction patterns for Evidence vs. Reference Values and Endorsements at the level of abstraction the draft is dealing with. Why wouldn't the latter be included in this draft?",
+      "createdAt": "2025-10-29T12:49:02Z",
+      "updatedAt": "2025-11-08T23:54:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "For record: it is at least one year old issue [see [here](https://mailarchive.ietf.org/arch/msg/rats/4LIBkVYfnWU0QZ96gAMRSDC4ZGQ/)]",
+          "createdAt": "2025-11-07T06:22:21Z",
+          "updatedAt": "2025-11-07T06:22:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "For record, issue #58 states:\n\nhttps://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58#issuecomment-2682063317\n\nand\n\nhttps://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58#issuecomment-2685260383\n\nSo, thank you for revealing the diff we were looking for now. We'll address it, happily.",
+          "createdAt": "2025-11-08T23:53:41Z",
+          "updatedAt": "2025-11-08T23:54:02Z"
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "I_kwDOEYizNM7WF2yH",
+      "title": "Addressing Shepherd Review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/80",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "as illustrated in: https://mailarchive.ietf.org/arch/msg/rats/TOyeOCek1CbJ-FZMoK96W5dHa4Q",
+      "createdAt": "2025-11-05T16:27:32Z",
+      "updatedAt": "2026-01-19T12:51:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "* [ ] Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\n* [x] In Section 4, the definition of implicit authentication doesn't match other uses I've seen of that term, so being more verbose in what's meant would help clarify (personally, I would describe the use case given of using a digital signature as explicit authentication, rather than implicit, but even dropping the word implicit would suffice.)\n\n* [ ] A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\n\n* [ ] One thing that could be drawn out a bit more explicitly in Section 7 is details of how the public key required for validating the signature is communicated to the verifier. If this is as simple as calling back to discussion of key identifiers in Section 6, that's fine, but being explicit about which key and how the verifier obtains it would aid the reader.\n\n* [ ] In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\n* [ ] A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.",
+          "createdAt": "2026-01-19T11:00:21Z",
+          "updatedAt": "2026-01-19T12:44:50Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\nSuggestion: in \u00a77.2:\n\nOLD\nIn the observer pattern, observers are directly connected to target resources without a Broker, while the publish-subscribe pattern involves a central Broker for message distribution.\n\nNEW\nIn the publish-subscribe pattern, a central broker is used to distribute messages between publishers and subscribers.\nThe broker receives messages from publishers and forwards them to the appropriate subscribers.\nIn the observer pattern, however, observers are connected directly to target resources, without a broker.\n\n\n\n",
+          "createdAt": "2026-01-19T12:42:42Z",
+          "updatedAt": "2026-01-19T12:42:42Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\\\n\nThat makes sense, and it could be done very easily.",
+          "createdAt": "2026-01-19T12:45:56Z",
+          "updatedAt": "2026-01-19T12:45:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\nAgree.  I believe what is actually meant here is \"selective disclosure\u201d.",
+          "createdAt": "2026-01-19T12:48:23Z",
+          "updatedAt": "2026-01-19T12:48:23Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.\n\nSeems like a reasonable ask to me.  For example: mTLS, server-authenticated TLS with HTTP authentication for the client, etc.",
+          "createdAt": "2026-01-19T12:51:09Z",
+          "updatedAt": "2026-01-19T12:51:09Z"
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "id": "I_kwDOEYizNM7WF7Im",
+      "title": "Reassess the use of Handle in favor of Epoch ID",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/81",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "based on: https://mailarchive.ietf.org/arch/msg/rats/-Hndn9m_y7wQsGXk35o9YFHSnyI",
+      "createdAt": "2025-11-05T16:30:56Z",
+      "updatedAt": "2025-11-05T16:30:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 82,
+      "id": "I_kwDOEYizNM7rX6NH",
+      "title": "Evidence freshness control using nonce or other timing specific mechanisms",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/82",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In a discussion that originated in the composite attesters design team, and issue was created [25](https://github.com/mcr/composite-attesters/issues/25) that observed there is potential for confusion over what security properties exist when \"nonces\" are used. It was observed that attestation introduces a new context for nonce use relating to how a Verifier/RP might control Attesting Env (AE) behavior having to do with claims collection dynamics. For example, an AE might collect claims and cache them because it is early in system boot and there is no connectivity to a bus or network over which the claims could be delivered. \n\nThis draft should describe the three contexts (disciplines?) where nonces are commonly used and clarify that Attestation contexts typically refer to claims collection timeliness and evidence freshness. Nevertheless, it should offer terminology convention that allows for appropriate disambiguation in cases where multi-discipline prose is used. E.g., Attestation nonce vs. TLS nonce vs. ECDSA nonce.\n\nThe content should consider defining the semantics for a conceptual message type that contains claims collection control information (a.k.a., \"attestation nonce\") that instructs Attesting Environment(s) to invalidate cached claims and/or re-collect \"fresh\" claims. By including the attestation nonce with newly collected claims, the AE is asserting to Verifier/RP that the associated claims are \"fresh\" or in some way recently collected. A nonce may have limitations as it pertains to fine grained timing since it typically isn't associated with a clock tic or elapsed tics. However, epoch markers may have such capabilities. A detailed discussion should be considered that highlights these nuances relating to the timing of claims collection operations. The particular case of pre-boot AE considerations should be included so that it is understood that an attestation nonce could be cached before a reboot operation then included with evidence collected during a subsequent reboot as a way of indicating \"fresh\", albeit delineated by reboot latency. \n\nRich architectures might evolve to support machine state transitions that allow \"pre-boot\" AEs to regain an execution thread without having to jump directly into a reset / reboot scenario. This would allow \"freshness conceptual messages\" that result in Verifier/RP control of the state transitions that produce the freshest possible measurements. Interaction models should describe this control surface. For example, upon receipt of a freshness CM, the Attester might return \"pending\" indicating the reply freshness CM is pending a reboot or machine state transition. In some server contexts this could be pending for months or years. ",
+      "createdAt": "2026-02-16T17:54:55Z",
+      "updatedAt": "2026-02-16T18:06:00Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -4336,24 +4465,26 @@
       "id": "PR_kwDOEYizNM6e_FUt",
       "title": "Fixes #66 from Yogesh",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/72",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "fixes #66 ",
       "createdAt": "2025-07-15T13:12:22Z",
-      "updatedAt": "2025-08-22T15:02:36Z",
+      "updatedAt": "2025-11-05T13:29:21Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "fix-65",
       "headRefOid": "444abe6028edc69dc7e3d43db22b3f5d3eb0e7c4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T13:29:20Z",
+      "mergedAt": "2025-11-05T13:29:20Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "8d3f20c6eea131783da7a74783eb0f6b12a99d85"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4435,24 +4566,26 @@
       "id": "PR_kwDOEYizNM6jRtKt",
       "title": "Integrated Thomas Fossati's review from 2025-07-17 (RATS mailing list).",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #73\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/rats/ktS3-_RDHpN-jITeoqsy0p22oqw\r\n\r\n# S 1\r\n\r\n* [x] Attestation Policies => Appraisal Policies\r\n  * Renamed.\r\n* [x] It says \"The reference models defined can also be applied to the conveyance of other Conceptual Messages in RATS\" without explaining how. Please remove the sentence: there is already better prose for this in the last paragraph of this same section.\r\n  * Removed the sentence\r\n* [x] It says: \"privacy-preserving conveyance methods\" -- what does \"privacy-preserving\" refer to?\r\n* Added reference to \"Cryptographic Blinding\" section in \"Security Considerations\" section.\r\n\r\n# S 2.2\r\n\r\n* [x] Please remove the confusing parenthetical \"(typically via layered attestation)\", or place it more appropriately.\r\n  * Removed it.\r\n\r\n# S 4\r\n\r\n* [x] The term \"implicit authentication\" referring to digital signatures sounds a bit odd\r\n  * Removed \"implicit\".\r\n* [x] It says: \"(see [I-D.ietf-rats-uccs])\" -- which section?\r\n  * Added \"see Sections 3 and 4 of\".\r\n\r\n# Figure 2\r\n\r\n* [x] Unsure why this needed to be changed, but noting that since you were at it, you could\u2019ve moved the Verifier to the left of the Attester to avoid crossing the RP, which is visually confusing.\r\n* The thing is, in all the other diagrams, the Attester is on the left and the Verifier is on the right. We wanted to represent it in the same way here.\r\n* To make the diagram clearer, represented the crossings as *aasvg* \"wire jumps/hops.\"\r\n\r\n# S 7.2.1\r\n\r\n* [x] Unsure how \u201cSynchronization Checks\u201d would work in practice.\r\n  * Added example showing how TUDA implements this.\r\n  * Does this clarify the comment?\r\n\r\n# S 11.1\r\n\r\n* [x] Why is RFC9683 normative?\r\n  * Good point. Thanks. Made it informative.",
       "createdAt": "2025-08-12T14:00:34Z",
-      "updatedAt": "2025-08-22T15:03:20Z",
+      "updatedAt": "2025-11-05T15:53:55Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
-      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "baseRefOid": "27f9dd820e64ce4390df7658a322ea71b3f0b8bf",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-73-review-thomas",
-      "headRefOid": "89ebeb19612c35ac6347867b0dcb0b0dbbe01294",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "03f080d676e023050b3889cf8c74e20eb81e00cc",
+      "closedAt": "2025-11-05T15:53:55Z",
+      "mergedAt": "2025-11-05T15:53:55Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "a1f674c5c3f3e8fce51a2d60b54d63541a56489b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4467,6 +4600,39 @@
           "createdAt": "2025-08-22T15:03:20Z",
           "updatedAt": "2025-08-22T15:03:20Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM7L_PTC",
+          "commit": {
+            "abbreviatedOid": "89ebeb1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-05T14:18:45Z",
+          "updatedAt": "2025-11-05T14:18:46Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "-= Section (otherwise it\u2019ll render as \u201cSection Section 9\u201d)\r\n+= comma\r\n\r\n```suggestion\r\nFor further reference, see {{security-and-privacy-considerations}}.\r\n```",
+              "createdAt": "2025-11-05T14:18:45Z",
+              "updatedAt": "2025-11-05T14:21:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7L_Yzz",
+          "commit": {
+            "abbreviatedOid": "89ebeb1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks!\r\n\r\nA couple of trivial fixes inlined.",
+          "createdAt": "2025-11-05T14:24:58Z",
+          "updatedAt": "2025-11-05T14:24:58Z",
+          "comments": []
         }
       ]
     },
@@ -4475,24 +4641,26 @@
       "id": "PR_kwDOEYizNM6j8JLN",
       "title": "Integrated @gmandyam's comments/review.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/75",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #69.\r\n\r\n* [x] **a)** Sec. 7.3.2.2.: Is there a requirement for the handle to be Verifier-specific with a vednor-defined freshness policy? If so, how do both the Attester and Verifier ensure that the PubSub Server is enforcing per-Verifier compliance with the Verifier freshness policy (e.g. PubSub server communicates handle as part of an attestation claim)?\r\n* *Henk's reply:* No, but there can be specifications that come with that prescription.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.2.\r\n\r\n* [x] **b)** Sec. 7.3.2.3: If the Attestation Result can only be communicated via publication to the PubSub server, then why does the figure not show the Attestation Result terminating there?\r\n* *Henk\u2019s Response (rephrased, simplified):* Good point \u2014 the diagram already reflects the correct model (the result is published to the PubSub server), but the *text may be misleading*.\r\n* \u27a1\ufe0f Added clarification by improving/extending the last sentence of Section 7.3.2.3.\r\n\r\n* [x] **c)** Sec. 7.3.2.4: Call flow in figure seems to be overly limiting. Attester can also subscribe to attestationResult.\r\n* *Henk\u2019s reply (rephrased, simplified):* Agree, but we want to keep the diagram simple. Maybe this can be described as a \u201cre-application\u201d of the interaction model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.2.4.\r\n\r\n* [x] **d)** Section 9: Need a discussion on security/privacy considerations for PubSub server. This is different that what is described in Section 9.3. For instance, if the PubSub server must attest to the Handle used as part of evidence then this could be discussed in Section 9. Moreover, \"Strong Isolation of Topics\" does not directly address privacy preservation (i.e. limiting dissemination of identifying information to subscribers that don't require it). Moreover for \"Trusted Association Verification\" it is not clear how this can be achieved in the PubSub server. For instance, are endorsements specific to the \"the trust association between senders and receivers\" required?\r\n\r\n  * [x] **d.1)** What does \u201cattest to the Handle\u201d mean?\r\n* Clarification: This seems to ask whether the PubSub server must vouch for the Handle (e.g., by proving it delivered it, or binding it cryptographically).\r\n    * \u27a1\ufe0f Added clarifying sentence at the end of Section 9.3.\r\n\r\n* [x] **d.2)** Strong Isolation of Topics\" does not address privacy preservation\r\n    * This is a good point: topic isolation != privacy preservation.\r\n* \u27a1\ufe0f Added clarifying sentence for *Strong Isolation of Topics* bullet point of Section 9.3.\r\n\r\n  * [x] **d.3)** \"Trusted Association Verification\" lacks details\r\n* \"Are endorsements required? How are trust relationships established?\": This is currently vague.\r\n* \u27a1\ufe0f Added clarifying sentence for *Trusted Association Verification* bullet point of Section 9.3.",
       "createdAt": "2025-08-16T12:51:58Z",
-      "updatedAt": "2025-08-22T15:04:17Z",
+      "updatedAt": "2025-11-05T13:30:50Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-69-gmandyam",
       "headRefOid": "70f18b11481f2afacd7891b842191c0ad4e3eff5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T13:30:50Z",
+      "mergedAt": "2025-11-05T13:30:50Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "5c8b4cd0879d86953941f4b8a2d793630aec4ada"
+      },
       "comments": [
         {
           "author": "gmandyam",
@@ -4523,24 +4691,26 @@
       "id": "PR_kwDOEYizNM6j8TwG",
       "title": "Integrated @gmandyam's comments/review on streaming remote attestation.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/76",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #68.\r\n\r\n* [x] **a)** Evidence verification failures & unsubscribe:\r\n  * @gmandyam's concern:\r\n    * What happens when Evidence (or delta Evidence) fails verification?\r\n    * Should the Verifier be able to unsubscribe?\r\n* A description of how unsubscribe works might be useful in streaming mode.\r\n  * @henkbirkholz's reply:\r\n* Unsubscribe is out of scope of this doc, since it is already covered by standards track work (e.g.,\r\n[draft-ietf-rats-network-device-subscription](https://datatracker.ietf.org/doc/draft-ietf-rats-network-device-subscription/)).\r\n    * It's a protocol detail, not part of the reference model.\r\n  * \u27a1\ufe0f Added clarifying sentence at the end of Section 7.3.\r\n\r\n* [x] **b)** Definition of delta evidence:\r\n  * @gmandyam's concern:\r\n* Current definition (\u201conly changed claims and new event logs\u201d) is too narrow.\r\n* Example: Attester goes to sleep, detects a change and reversion, and should still report that sequence, even if the final state looks unchanged.\r\n  * @henkbirkholz's reply:\r\n    * Agree, propose adding text to cover this.\r\n  * \u27a1\ufe0f Improved definition of delta evidence in Section 7.2.1.\r\n  * \u27a1\ufe0f Referenced this definition in 7.3 (Streaming).",
       "createdAt": "2025-08-16T14:00:41Z",
-      "updatedAt": "2025-08-22T15:05:54Z",
+      "updatedAt": "2025-11-05T15:55:05Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
-      "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
+      "baseRefOid": "27f9dd820e64ce4390df7658a322ea71b3f0b8bf",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-68-gmandyam-streaming-remote-attestation",
-      "headRefOid": "03db2dc4e4e33c169b1097448ffab15aca91ed47",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "57c8f4f34cc3276dfb0069c62bb47ed99c5cfa89",
+      "closedAt": "2025-11-05T15:55:04Z",
+      "mergedAt": "2025-11-05T15:55:04Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "185aaca49a05e57e6abcae832602c62b788c1da1"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4562,6 +4732,26 @@
               "updatedAt": "2025-08-22T15:05:44Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7L-RSc",
+          "commit": {
+            "abbreviatedOid": "26f6fb2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-05T13:36:46Z",
+          "updatedAt": "2025-11-05T13:36:46Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\nAlthough the above diagram depicts only full attestation Evidence and Event Logs, later attestations may use \"deltas' for Evidence and Event Logs.\r\n```",
+              "createdAt": "2025-11-05T13:36:46Z",
+              "updatedAt": "2025-11-05T13:36:47Z"
+            }
+          ]
         }
       ]
     },
@@ -4570,24 +4760,26 @@
       "id": "PR_kwDOEYizNM6j-tIG",
       "title": "Improved Uni-Directional Remote Attestation: freshness mechanisms.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/77",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes issue #67.\r\n\r\n* [x] **a)** Can the Verifier retrieve the handle and convey it to the Attester?\r\n  * @gmandyam concern:\r\n* Suggests an alternative path where Verifier fetches handle from the Handle Generator and relays it to the Attester.\r\n  * @henkbirkholz's reply:\r\n* Possible if handle is authenticatable (e.g., Epoch Marker), but introduces latency and semantics issues.\r\n    * Recommends against unless lifetime/epoch span is well understood.\r\n* \u27a1\ufe0f Added short note in Section 7.2 (Handle Generation) to explain why it is discouraged.\r\n\r\n* [x] **b)** Handle Expiry and stale handles:\r\n  * @gmandyam's concern:\r\n* Suggests that if Attester knows expiry, it MUST NOT send Evidence with stale handle.\r\n  * @henkbirkholz's reply:\r\n    * Agrees \u2014 this needs normative clarification.\r\n  * \u27a1\ufe0f Strengthened *Handle Expiry* bullet in Section 7.2.1.\r\n\r\n* [x] **c)** Is this really unidirectional? Broadcast/multicast variant?\r\n  * @gmandyam's concern:\r\n* Argues that since the Attester talks to both Handle Distributor (receiving) and Verifier (sending), it is not \"uni\" but \"two-way\".\r\n* Suggests covering multicast/broadcast cases where Attester can only receive from Verifiers.\r\n  * @henkbirkholz's reply:\r\n* Clarifies that two separate one-way channels are used (one for handle acquisition, one for evidence conveyance).\r\n* Broadcasting handles from Verifiers would defeat the model unless Verifier also plays Handle Distributor role.\r\n* \u27a1\ufe0f Clarified in Section 7.2 that the \"uni-directional\" term applies to each channel independently, not the whole system.\r\n  * \u27a1\ufe0f Explicitly mentioned why multicast from Verifier is not modeled.",
       "createdAt": "2025-08-17T09:02:19Z",
-      "updatedAt": "2025-08-17T22:29:24Z",
+      "updatedAt": "2025-11-05T13:35:30Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "3f4c85b0f76cf28e7e122d6815bd889031bf43f3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "addressing-issue-67-gmandyam-freshness-mechanisms",
       "headRefOid": "a87c033d0cf6cf06ced4f994c70cc924924fb73f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T13:35:30Z",
+      "mergedAt": "2025-11-05T13:35:30Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "5391aabeaf507f760127299adad2069e33e95135"
+      },
       "comments": [
         {
           "author": "gmandyam",
@@ -4597,6 +4789,236 @@
           "updatedAt": "2025-08-17T22:29:24Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7L-O7x",
+          "commit": {
+            "abbreviatedOid": "a87c033"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-05T13:35:24Z",
+          "updatedAt": "2025-11-05T13:35:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOEYizNM6xqxIz",
+      "title": "Thomas' Nits",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/79",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-05T14:30:28Z",
+      "updatedAt": "2025-11-05T14:31:12Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "5391aabeaf507f760127299adad2069e33e95135",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "thomas-nots",
+      "headRefOid": "d73efe508517cc13df5c22c52b067df778271edd",
+      "closedAt": "2025-11-05T14:31:12Z",
+      "mergedAt": "2025-11-05T14:31:12Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "27f9dd820e64ce4390df7658a322ea71b3f0b8bf"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 83,
+      "id": "PR_kwDOEYizNM7Hn0KB",
+      "title": "Editorial: remove redundant \"Figure N:\" prefixes from figure titles.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/83",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes duplicated figure numbering in rendered output (e.g., \u2018Figure 2: Figure 2: \u2026\u2019). No semantic changes.",
+      "createdAt": "2026-03-03T14:21:29Z",
+      "updatedAt": "2026-03-03T19:24:44Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "185aaca49a05e57e6abcae832602c62b788c1da1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a1-figure-title-prefix",
+      "headRefOid": "652d8ee8ea3576aea0c1c14d4a749b0738fe520a",
+      "closedAt": "2026-03-03T19:24:44Z",
+      "mergedAt": "2026-03-03T19:24:44Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "5dabcc790c7a90072f87190e7fc3db7c6d60fb20"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7nilfp",
+          "commit": {
+            "abbreviatedOid": "652d8ee"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-03T19:23:54Z",
+          "updatedAt": "2026-03-03T19:23:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOEYizNM7Hr_dL",
+      "title": "Editorial: reorder Generic Information Elements; clarify streaming broker wording",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/84",
+      "state": "MERGED",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "editorial/clarification only (no protocol changes)",
+      "createdAt": "2026-03-03T18:52:56Z",
+      "updatedAt": "2026-03-03T19:31:31Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "185aaca49a05e57e6abcae832602c62b788c1da1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a2-structure-mandatory-first",
+      "headRefOid": "ffe8c3cd5fb723deb83290e55dd9200fa1414645",
+      "closedAt": "2026-03-03T19:31:31Z",
+      "mergedAt": "2026-03-03T19:31:31Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7nirYU",
+          "commit": {
+            "abbreviatedOid": "ffe8c3c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-03T19:29:48Z",
+          "updatedAt": "2026-03-03T19:29:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "id": "PR_kwDOEYizNM7Hsf2R",
+      "title": "Terminology: clarify Evidence authentication; redefine cryptographic blinding as selective disclosure",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/85",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-03T19:40:21Z",
+      "updatedAt": "2026-03-03T19:40:22Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a3-terminology-auth-blinding",
+      "headRefOid": "5453167d8bc7e13309506cdb7ef3714a96316aef",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOEYizNM7Hsxq8",
+      "title": "Clarify verifier access to verification key material.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/86",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarify how Verifier obtains verification key material for Evidence signature validation",
+      "createdAt": "2026-03-03T20:02:42Z",
+      "updatedAt": "2026-03-03T20:02:43Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a4-verifier-key-material",
+      "headRefOid": "b0c24816e07d6aecd1b00f40884d52b14e28e722",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOEYizNM7HtOle",
+      "title": "Clarify handle/nonce/epoch marker terminology",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/87",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarify Handle vs (attestation) nonce vs Epoch Marker; add nonce disambiguation",
+      "createdAt": "2026-03-03T20:38:18Z",
+      "updatedAt": "2026-03-03T20:38:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a5-handle-nonce-epoch-disambiguation",
+      "headRefOid": "66c258b922e9aba78ae414578964c5e27ae92e0f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 88,
+      "id": "PR_kwDOEYizNM7HuHBG",
+      "title": "Clarify delta handle usage and bind attestation results to handle",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/88",
+      "state": "OPEN",
+      "author": "eckelmeckel",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarify handle origin, delta handle rotation, handle-loss behavior, and AttRes-handle binding",
+      "createdAt": "2026-03-03T21:49:33Z",
+      "updatedAt": "2026-03-03T21:49:34Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "a6-diagrams-handle-binding",
+      "headRefOid": "df4bfef6a9025f8d4162401f298388df55bce38e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
