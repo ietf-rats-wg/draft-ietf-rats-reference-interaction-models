@@ -709,7 +709,7 @@ Streaming Remote Attestation serves as the foundational concept for both the pub
 It entails establishing subscription state to enable continuous remote attestation.
 In the publish-subscribe pattern, a central broker is used to distribute messages between publishers and subscribers.
 The broker receives messages from publishers and forwards them to the appropriate subscribers.
-In the observer pattern, however, observers are connected directly to target resources, without a broker (oub/sub only).	
+In the observer pattern, however, observers are connected directly to target resources, without a broker (oub/sub only).
 
 ### Streaming Remote Attestation without a Broker {#streaming-without-broker}
 
