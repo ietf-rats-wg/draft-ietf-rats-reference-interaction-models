@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 4 September 2026                                         W. Pan
+Expires: 7 September 2026                                         W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                            3 March 2026
+                                                            6 March 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2026.
+   This Internet-Draft will expire on 7 September 2026.
 
 Copyright Notice
 
@@ -232,8 +232,8 @@ Table of Contents
       uniqueness and secrecy) than attestation nonces.
 
    Unless explicitly stated otherwise, when this document uses the term
-   "nonce" in the context of Handles and freshness, it refers to an
-   _attestation nonce_.
+   "nonce" in the context of Handles, it refers to an _attestation
+   nonce_ with the purpose to demonstrate freshness.
 
 2.3.  Boot Time Integrity
 
