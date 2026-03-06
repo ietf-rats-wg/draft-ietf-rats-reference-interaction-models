@@ -187,7 +187,7 @@ The term "nonce" can be used in different security disciplines with different in
   Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.
 
 * Signature nonce (e.g., ECDSA nonce):
-  Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.
+: Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.
 
 Unless explicitly stated otherwise, when this document uses the term "nonce" in the context of Handles, it refers to an *attestation nonce* with the purpose to demonstrate freshness.
 
