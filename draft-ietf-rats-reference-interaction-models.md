@@ -259,6 +259,8 @@ Attestation Evidence Authenticity:
 
 : In order to provide a proof of authenticity, Attestation Evidence can be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or could include a correct, unambiguous, and stable reference to an accessible identity document.
 
+: For signature validation and appraisal, the Verifier MUST be able to obtain the corresponding verification key material (e.g., a public key or certificate) and the trust anchor(s) needed to establish trust in that material. This may be achieved via provisioning/enrollment, by conveying the identity document together with Evidence, or by providing a stable reference that enables retrieval of the identity document. The concrete distribution and enrollment mechanisms are out of scope of this document.
+
 : Authenticity includes the protection of Evidence in a tamper-evident manner (e.g., either by signatures or by protection mechanisms implemented at both ends of a Secure Channel; see Authentication above).
 
 Evidence Freshness:
@@ -327,6 +329,8 @@ Attesting Environment IDs ('attEnvIDs'):
 : *optional*
 
 : A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
+
+: A Verifier MAY use such identifiers (or other key identifiers used by a given interaction model) to locate the verification key material and related trust anchors required to validate the Evidence signature.
 
 : While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
 If no Attesting Environment IDs are provided, a local default applies based on the Attester.
@@ -413,6 +417,8 @@ Each selected key is uniquely associated with an Attesting Environment of the At
 As a result, a single Attestation Key ID identifies a single Attesting Environment.
 Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
 Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.
+
+Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attestation Key ID(s), as well as the trust anchors required to establish trust in that key material. This trust material may be provisioned/enrolled out of band, conveyed alongside Evidence, or retrieved via a stable reference to an identity document.
 
 The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
 The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
