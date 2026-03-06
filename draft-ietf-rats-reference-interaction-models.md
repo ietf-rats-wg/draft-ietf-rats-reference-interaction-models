@@ -53,6 +53,7 @@ normative:
   BCP205:
   RFC9334: RATS
   I-D.ietf-rats-epoch-markers: epoch-markers
+  RFC9711: EAT
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
@@ -122,6 +123,8 @@ informative:
     date: 2006
   I-D.ietf-rats-endorsements: rats-endorsements
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
+  I-D.ietf-spice-sd-cwt: sd-cwt
+
 ...
 
 --- abstract
@@ -221,7 +224,11 @@ Integrity:
 : Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in PSA TF-M profile ({{Section 5.2 of -psa-token}}), or asymmetric, such as a COSE Sign algorithm like ECDSA.
 
 Authentication:
-: The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier. This can be done through authentication using a digital signature over the Attestation Evidence, which does not require additional protocol steps, or by using a secure channel (see Sections 3 and 4 of {{-uccs}}) that includes authentication.
+: The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier.
+
+: This can be achieved by digitally signing the Attestation Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
+
+: Alternatively, Evidence can be conveyed over a secure channel that provides authentication (see Sections 3 and 4 of {{-uccs}}).
 
 # Normative Prerequisites
 
@@ -414,7 +421,7 @@ For example, when performing a boot integrity evaluation, a Verifier may only re
 
 With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or cryptographically blinded.
+The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in Section {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference see, Section {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
@@ -991,10 +998,11 @@ While the subsequent sections address additional security and privacy considerat
 Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
 {: #cryptographic-blinding}
-## Cryptographic Blinding
+## Selective Disclosure and Obfuscation
 
-In a remote attestation procedure, both the Verifier and the Attester may choose to cryptographically blind certain attributes to enhance privacy.
-For example, specific information can be included in the signature after being processed through a one-way function, such as a hash function.
+This section uses the term "blinding" in the broad sense of privacy-preserving treatment of attributes prior to disclosure (e.g., selective disclosure, obfuscation, or encryption), and not in the more specific cryptographic sense used for blind signatures.
+
+In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal. For example, an attribute can be conveyed only as a digest that is included in, and protected by, the Evidence signature; or it can be encrypted for an authorized recipient.
 
 ## Trust Assumptions on the Handle Distributor
 
