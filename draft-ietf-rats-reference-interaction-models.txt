@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 4 September 2026                                         W. Pan
+Expires: 7 September 2026                                         W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                            3 March 2026
+                                                            6 March 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2026.
+   This Internet-Draft will expire on 7 September 2026.
 
 Copyright Notice
 
@@ -98,7 +98,7 @@ Table of Contents
      8.7.  Implementation Dependencies
      8.8.  Contact
    9.  Security and Privacy Considerations
-     9.1.  Cryptographic Blinding
+     9.1.  Selective Disclosure and Obfuscation
      9.2.  Trust Assumptions on the Handle Distributor
        9.2.1.  Security Assumptions
        9.2.2.  Mitigating Risks
@@ -284,10 +284,15 @@ Table of Contents
 
    Authentication:  The information provided by the Attester MUST be
       authentic.  To do this, the Attester should authenticate itself to
-      the Verifier.  This can be done through authentication using a
-      digital signature over the Attestation Evidence, which does not
-      require additional protocol steps, or by using a secure channel
-      (see Sections 3 and 4 of [RFC9781]) that includes authentication.
+      the Verifier.
+
+      This can be achieved by digitally signing the Attestation Evidence
+      (i.e., explicit authentication) and conveying that signed Evidence
+      to the Verifier, without requiring additional authentication
+      handshakes beyond those needed for conveyance.
+
+      Alternatively, Evidence can be conveyed over a secure channel that
+      provides authentication (see Sections 3 and 4 of [RFC9781]).
 
 5.  Normative Prerequisites
 
@@ -575,7 +580,9 @@ Table of Contents
    The Claims, the Handle, and the Attester Identity information (i.e.,
    the Authentication Secret) MUST be cryptographically bound to the
    signature of Evidence.  These MAY be presented obfuscated, encrypted,
-   or cryptographically blinded.  For further reference see,
+   or selectively disclosed (e.g., via hashing) as discussed in
+   Section Section 9.1 or, for example, via the use of
+   [I-D.ietf-spice-sd-cwt] in [RFC9711].  For further reference see,
    Section Section 9.
 
    Upon receiving the Evidence and Event Logs, the Verifier validates
@@ -1307,13 +1314,18 @@ Table of Contents
    security considerations outlined in Section 5 of [RFC9683] should be
    taken into account.
 
-9.1.  Cryptographic Blinding
+9.1.  Selective Disclosure and Obfuscation
 
-   In a remote attestation procedure, both the Verifier and the Attester
-   may choose to cryptographically blind certain attributes to enhance
-   privacy.  For example, specific information can be included in the
-   signature after being processed through a one-way function, such as a
-   hash function.
+   This section uses the term "blinding" in the broad sense of privacy-
+   preserving treatment of attributes prior to disclosure (e.g.,
+   selective disclosure, obfuscation, or encryption), and not in the
+   more specific cryptographic sense used for blind signatures.
+
+   In a remote attestation procedure, the Verifier and the Attester may
+   choose to reduce the disclosure of sensitive attributes while still
+   enabling appraisal.  For example, an attribute can be conveyed only
+   as a digest that is included in, and protected by, the Evidence
+   signature; or it can be encrypted for an authorized recipient.
 
 9.2.  Trust Assumptions on the Handle Distributor
 
@@ -1533,6 +1545,11 @@ Table of Contents
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
+   [RFC9711]  Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
+              Wallace, "The Entity Attestation Token (EAT)", RFC 9711,
+              DOI 10.17487/RFC9711, April 2025,
+              <https://www.rfc-editor.org/rfc/rfc9711>.
+
 11.2.  Informative References
 
    [DAA]      Brickell, E., Camenisch, J., and L. Chen, "Direct
@@ -1565,6 +1582,13 @@ Table of Contents
               draft-ietf-rats-network-device-subscription-09, 13 January
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
               rats-network-device-subscription-09>.
+
+   [I-D.ietf-spice-sd-cwt]
+              Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
+              "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-07, 2
+              March 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-spice-sd-cwt-07>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
