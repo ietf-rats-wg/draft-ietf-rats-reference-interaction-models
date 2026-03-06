@@ -392,9 +392,10 @@ Table of Contents
 
       The term Handle encompasses various data types that can be
       utilized to determine recentness, freshness, or provide replay
-      protection.  Examples include _attestation nonces_ (see
-      Section 2.2), which protect against replay attacks, and Epoch
-      Markers, which identify distinct periods (Epochs) of freshness
+      protection.  Examples include attestation nonces (see
+      Section 2.2), which are used to demonstrate freshness (and also
+      protect against replay attacks), and Epoch Markers, which identify
+      distinct periods (Epochs) of freshness
       [I-D.ietf-rats-epoch-markers].  Handles can also indicate
       authenticity or attestation Evidence provenance, as only specific
       RATS roles (e.g., an Attester and a Verifier in a challenge-

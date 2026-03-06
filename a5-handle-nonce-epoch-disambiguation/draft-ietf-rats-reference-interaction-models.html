@@ -1569,7 +1569,7 @@ These generic information elements may be Conceptual Messages included in the pr
 <dt id="section-6-3.5"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.6">
           <p id="section-6-3.6.1">The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
-Examples include <em>attestation nonces</em> (see <a href="#nonce-disambiguation" class="auto internal xref">Section 2.2</a>), which protect against replay attacks, and Epoch Markers, which identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.
+Examples include attestation nonces (see <a href="#nonce-disambiguation" class="auto internal xref">Section 2.2</a>), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.
 Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.<a href="#section-6-3.6.1" class="pilcrow">¶</a></p>
 </dd>
