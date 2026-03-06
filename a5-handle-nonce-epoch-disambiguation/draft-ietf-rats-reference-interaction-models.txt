@@ -212,8 +212,8 @@ Table of Contents
    different intended security properties.  In order to avoid confusion,
    this document distinguishes the following contexts:
 
-   *  _Attestation nonce_ (freshness handle): A nonce used as a Handle
-      in a remote attestation interaction model to provide replay
+   *  Attestation nonce (freshness handle): A nonce used as a Handle in
+      a remote attestation interaction model to provide replay
       protection and/or evidence freshness.  It is conveyed to an
       Attesting Environment and is cryptographically bound into
       Evidence.  Depending on deployment, an attestation nonce MAY also
