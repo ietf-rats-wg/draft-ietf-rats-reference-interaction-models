@@ -2368,8 +2368,9 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
         </h3>
 <p id="section-7.3-1">Streaming Remote Attestation serves as the foundational concept for both the publish-subscribe pattern <span>[<a href="#DesignPatterns" class="cite xref">DesignPatterns</a>]</span> and the observer pattern <span>[<a href="#ISIS" class="cite xref">ISIS</a>]</span>.
 It entails establishing subscription state to enable continuous remote attestation.
-In the publish-subscribe pattern, messages are distributed by a broker that relays publications from producers to subscribers.
-In the observer pattern, observers are directly connected to target resources and no broker is used.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+In the publish-subscribe pattern, a central broker is used to distribute messages between publishers and subscribers.
+The broker receives messages from publishers and forwards them to the appropriate subscribers.
+In the observer pattern, however, observers are connected directly to target resources, without a broker (oub/sub only).<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <div id="streaming-without-broker">
 <section id="section-7.3.1">
           <h4 id="name-streaming-remote-attestation">
