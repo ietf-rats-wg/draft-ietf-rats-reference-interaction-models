@@ -222,7 +222,7 @@ Table of Contents
       may be provisioned before a reboot and then included with Evidence
       collected after boot.
 
-   *  _TLS nonce_: Random values used within TLS handshakes and key
+   *  TLS nonce: Random values used within TLS handshakes and key
       derivation.  These are not Handles and are unrelated to Evidence
       freshness semantics in this document.
 
