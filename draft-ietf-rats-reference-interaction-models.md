@@ -150,7 +150,7 @@ The roles *Attester* and *Verifier*, as well as the Conceptual Messages *Evidenc
    An Attester sends Evidence proactively to a Verifier, often using externally generated freshness indicators.
 
 3. *Streaming Remote Attestation*:
-   A persistent subscription-based model where Evidence is pushed continuously to interested Verifiers, optionally via a Broker.
+   A persistent subscription-based model where Evidence is pushed continuously to interested Verifiers, optionally via a broker.
 
 As a basis to describe the interaction models is this document, the example of attestation Evidence conveyance is used to illustrate the usage scenarios.
 This document aims to:
@@ -175,7 +175,7 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key Broker system (see {{Section 6 of -RATS}} for more details).
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example in a cryptographic key broker system (see {{Section 6 of -RATS}} for more details).
 If an entity takes on two or more different roles, the functions they provide typically reside in isolated environments that are components of the same entity.
 Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).
 
