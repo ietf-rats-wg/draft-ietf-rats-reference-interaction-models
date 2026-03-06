@@ -53,6 +53,7 @@ normative:
   BCP205:
   RFC9334: RATS
   I-D.ietf-rats-epoch-markers: epoch-markers
+  RFC9711: EAT
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
@@ -122,6 +123,8 @@ informative:
     date: 2006
   I-D.ietf-rats-endorsements: rats-endorsements
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
+  I-D.ietf-spice-sd-cwt: sd-cwt
+
 ...
 
 --- abstract
@@ -418,7 +421,7 @@ For example, when performing a boot integrity evaluation, a Verifier may only re
 
 With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in Section {{cryptographic-blinding}}.
+The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in Section {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference see, Section {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
