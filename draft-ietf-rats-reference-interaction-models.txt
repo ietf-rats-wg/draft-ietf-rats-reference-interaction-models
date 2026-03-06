@@ -336,6 +336,16 @@ Table of Contents
       DAA credential [DAA]), or could include a correct, unambiguous,
       and stable reference to an accessible identity document.
 
+      For signature validation and appraisal, the Verifier MUST be able
+      to obtain the corresponding verification key material (e.g., a
+      public key or certificate) and the trust anchor(s) needed to
+      establish trust in that material.  This may be achieved via
+      provisioning/enrollment, by conveying the identity document
+      together with Evidence, or by providing a stable reference that
+      enables retrieval of the identity document.  The concrete
+      distribution and enrollment mechanisms are out of scope of this
+      document.
+
       Authenticity includes the protection of Evidence in a tamper-
       evident manner (e.g., either by signatures or by protection
       mechanisms implemented at both ends of a Secure Channel; see
@@ -436,6 +446,11 @@ Table of Contents
       public key associated with the private key that is used to produce
       Evidence), key identifiers, environment names, or individual
       hardware-based immutable identifiers.
+
+      A Verifier MAY use such identifiers (or other key identifiers used
+      by a given interaction model) to locate the verification key
+      material and related trust anchors required to validate the
+      Evidence signature.
 
       While a Verifier does not necessarily have knowledge about an
       Attesting Environment's identifiers, each distinguishable
@@ -558,6 +573,14 @@ Table of Contents
    Attestation Key IDs.  Methods to acquire Attestation Key IDs or
    mappings between Attesting Environments to Attestation Key IDs are
    out of scope of this document.
+
+   Nevertheless, in order to validate the Evidence signature, the
+   Verifier needs access to the verification key material corresponding
+   to the selected Attestation Key ID(s), as well as the trust anchors
+   required to establish trust in that key material.  This trust
+   material may be provisioned/enrolled out of band, conveyed alongside
+   Evidence, or retrieved via a stable reference to an identity
+   document.
 
    The Attester selects Claims based on the specified Claim Selection,
    which is defined by the Verifier.  The Claim Selection determines the

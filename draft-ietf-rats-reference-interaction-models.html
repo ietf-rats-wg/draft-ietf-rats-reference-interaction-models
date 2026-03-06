@@ -1519,13 +1519,18 @@ It could be a unique identity, it could be included in a zero-knowledge proof (Z
         <dd class="break"></dd>
 <dt id="section-5-2.17"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.18">
-          <p id="section-5-2.18.1">Authenticity includes the protection of Evidence in a tamper-evident manner (e.g., either by signatures or by protection mechanisms implemented at both ends of a Secure Channel; see Authentication above).<a href="#section-5-2.18.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.18.1">For signature validation and appraisal, the Verifier MUST be able to obtain the corresponding verification key material (e.g., a public key or certificate) and the trust anchor(s) needed to establish trust in that material. This may be achieved via provisioning/enrollment, by conveying the identity document together with Evidence, or by providing a stable reference that enables retrieval of the identity document. The concrete distribution and enrollment mechanisms are out of scope of this document.<a href="#section-5-2.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-2.19">Evidence Freshness:</dt>
+<dt id="section-5-2.19"></dt>
         <dd style="margin-left: 1.5em" id="section-5-2.20">
-          <p id="section-5-2.20.1">Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also <span><a href="https://rfc-editor.org/rfc/rfc9334#section-10" class="relref">Section 10</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>).
-This enables interaction models to support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.<a href="#section-5-2.20.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.20.1">Authenticity includes the protection of Evidence in a tamper-evident manner (e.g., either by signatures or by protection mechanisms implemented at both ends of a Secure Channel; see Authentication above).<a href="#section-5-2.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-2.21">Evidence Freshness:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-2.22">
+          <p id="section-5-2.22.1">Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also <span><a href="https://rfc-editor.org/rfc/rfc9334#section-10" class="relref">Section 10</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>).
+This enables interaction models to support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.<a href="#section-5-2.22.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1637,38 +1642,43 @@ The Authentication Secret MUST be trusted by the Verifier as authoritatively "sp
         <dd class="break"></dd>
 <dt id="section-6-3.37"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.38">
-          <p id="section-6-3.38.1">While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
-If no Attesting Environment IDs are provided, a local default applies based on the Attester.
-For example, all Attesting Environments will provide Evidence.<a href="#section-6-3.38.1" class="pilcrow">¶</a></p>
+          <p id="section-6-3.38.1">A Verifier MAY use such identifiers (or other key identifiers used by a given interaction model) to locate the verification key material and related trust anchors required to validate the Evidence signature.<a href="#section-6-3.38.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-3.39">Event Logs (<code>eventLogs</code>):</dt>
+<dt id="section-6-3.39"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.40">
-          <p id="section-6-3.40.1"><em>optional</em><a href="#section-6-3.40.1" class="pilcrow">¶</a></p>
+          <p id="section-6-3.40.1">While a Verifier does not necessarily have knowledge about an Attesting Environment's identifiers, each distinguishable Attesting Environment typically has access to a protected capability that includes an Attesting Environment ID.
+If no Attesting Environment IDs are provided, a local default applies based on the Attester.
+For example, all Attesting Environments will provide Evidence.<a href="#section-6-3.40.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-3.41"></dt>
+<dt id="section-6-3.41">Event Logs (<code>eventLogs</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-3.42">
-          <p id="section-6-3.42.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.<a href="#section-6-3.42.1" class="pilcrow">¶</a></p>
+          <p id="section-6-3.42.1"><em>optional</em><a href="#section-6-3.42.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-3.43">Claim Selection (<code>claimSelection</code>):</dt>
+<dt id="section-6-3.43"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.44">
-          <p id="section-6-3.44.1"><em>optional</em><a href="#section-6-3.44.1" class="pilcrow">¶</a></p>
+          <p id="section-6-3.44.1">Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.<a href="#section-6-3.44.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-6-3.45"></dt>
+<dt id="section-6-3.45">Claim Selection (<code>claimSelection</code>):</dt>
         <dd style="margin-left: 1.5em" id="section-6-3.46">
-          <p id="section-6-3.46.1">A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.<a href="#section-6-3.46.1" class="pilcrow">¶</a></p>
+          <p id="section-6-3.46.1"><em>optional</em><a href="#section-6-3.46.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-3.47"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.48">
-          <p id="section-6-3.48.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
+          <p id="section-6-3.48.1">A (sub-)set of Claims that can be collected and incorporated in Evidence by the Attesting Environments of an Attester.<a href="#section-6-3.48.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.49"></dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.50">
+          <p id="section-6-3.50.1">Claim Selections act as optional filters to specify the exact set of Claims to be included in Evidence.
 For example, a Verifier could send a Claim Selection, among other elements, to an Attester.
 An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
 If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier.
-In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.<a href="#section-6-3.48.1" class="pilcrow">¶</a></p>
+In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.<a href="#section-6-3.50.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1790,19 +1800,20 @@ Each selected key is uniquely associated with an Attesting Environment of the At
 As a result, a single Attestation Key ID identifies a single Attesting Environment.
 Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
 Methods to acquire Attestation Key IDs or mappings between Attesting Environments to Attestation Key IDs are out of scope of this document.<a href="#section-7.1-6" class="pilcrow">¶</a></p>
-<p id="section-7.1-7">The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
+<p id="section-7.1-7">Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attestation Key ID(s), as well as the trust anchors required to establish trust in that key material. This trust material may be provisioned/enrolled out of band, conveyed alongside Evidence, or retrieved via a stable reference to an identity document.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+<p id="section-7.1-8">The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
 The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
 If the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.
-For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
-<p id="section-7.1-8">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
-<p id="section-7.1-9">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in Section <a href="#cryptographic-blinding" class="auto internal xref">Section 9.1</a> or, for example, via the use of <span>[<a href="#I-D.ietf-spice-sd-cwt" class="cite xref">I-D.ietf-spice-sd-cwt</a>]</span> in <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>.
-For further reference see, Section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
-<p id="section-7.1-10">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
+For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.<a href="#section-7.1-8" class="pilcrow">¶</a></p>
+<p id="section-7.1-9">With the Handle, the Attestation Key IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attestation Key ID. This is done once per Attesting Environment which is identified by the particular Attestation Key ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.<a href="#section-7.1-9" class="pilcrow">¶</a></p>
+<p id="section-7.1-10">The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in Section <a href="#cryptographic-blinding" class="auto internal xref">Section 9.1</a> or, for example, via the use of <span>[<a href="#I-D.ietf-spice-sd-cwt" class="cite xref">I-D.ietf-spice-sd-cwt</a>]</span> in <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>.
+For further reference see, Section <a href="#security-and-privacy-considerations" class="auto internal xref">Section 9</a>.<a href="#section-7.1-10" class="pilcrow">¶</a></p>
+<p id="section-7.1-11">Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
 Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
 The Verifier outputs Attestation Results.
-Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.<a href="#section-7.1-10" class="pilcrow">¶</a></p>
-<p id="section-7.1-11">Note: This diagram illustrates the canonical Challenge/Response interaction between Attester and Verifier.
-Variants that include a Relying Party (e.g., Passport or Background-Check models) are shown in subsequent sections.<a href="#section-7.1-11" class="pilcrow">¶</a></p>
+Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.<a href="#section-7.1-11" class="pilcrow">¶</a></p>
+<p id="section-7.1-12">Note: This diagram illustrates the canonical Challenge/Response interaction between Attester and Verifier.
+Variants that include a Relying Party (e.g., Passport or Background-Check models) are shown in subsequent sections.<a href="#section-7.1-12" class="pilcrow">¶</a></p>
 <div id="models-and-example-sequences-of-challengeresponse-remote-attestation">
 <section id="section-7.1.1">
           <h4 id="name-models-and-example-sequence">
