@@ -180,7 +180,7 @@ Examples of such isolated environments include a Trusted Execution Environment (
 
 The term "nonce" can be used in different security disciplines with different intended security properties. In order to avoid confusion, this document distinguishes the following contexts:
 
-* Attestation nonce (freshness handle):
+Attestation nonce (freshness handle):
   A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.
 
 * TLS nonce:
