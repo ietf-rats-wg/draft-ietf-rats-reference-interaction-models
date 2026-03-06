@@ -1170,13 +1170,16 @@ Analogously, a general overview about the information elements typically used by
                 <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-disambiguation" class="internal xref">Disambiguation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-boot-time-integrity" class="internal xref">Boot Time Integrity</a></p>
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-nonce-disambiguation" class="internal xref">Nonce Disambiguation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-runtime-integrity" class="internal xref">Runtime Integrity</a></p>
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-boot-time-integrity" class="internal xref">Boot Time Integrity</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
-                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-boot-to-runtime-boundary" class="internal xref">Boot-to-Runtime Boundary</a></p>
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.  <a href="#name-runtime-integrity" class="internal xref">Runtime Integrity</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
+                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.  <a href="#name-boot-to-runtime-boundary" class="internal xref">Boot-to-Runtime Boundary</a></p>
 </li>
             </ul>
 </li>
@@ -1377,31 +1380,67 @@ If an entity takes on two or more different roles, the functions they provide ty
 Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="boot-time-integrity">
+<div id="nonce-disambiguation">
 <section id="section-2.2">
-        <h3 id="name-boot-time-integrity">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-boot-time-integrity" class="section-name selfRef">Boot Time Integrity</a>
+        <h3 id="name-nonce-disambiguation">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-nonce-disambiguation" class="section-name selfRef">Nonce Disambiguation</a>
         </h3>
-<p id="section-2.2-1">Boot time integrity refers to the trustworthiness of the platform during its boot sequence, typically covering firmware, BIOS/UEFI, initial bootloaders, and core operating system components up until a stable runtime environment is reached.
-This may apply equally to physical devices and virtual machines.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">The term "nonce" can be used in different security disciplines with different intended security properties. In order to avoid confusion, this document distinguishes the following contexts:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.2-2">
+          <dt id="section-2.2-2.1">Attestation nonce (freshness handle):</dt>
+          <dd style="margin-left: 1.5em" id="section-2.2-2.2">
+            <p id="section-2.2-2.2.1">A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.<a href="#section-2.2-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<ul class="normal">
+<li class="normal" id="section-2.2-3.1">
+            <span class="break"></span><dl class="dlParallel" id="section-2.2-3.1.1">
+              <dt id="section-2.2-3.1.1.1">TLS nonce:</dt>
+              <dd style="margin-left: 1.5em" id="section-2.2-3.1.1.2">
+                <p id="section-2.2-3.1.1.2.1">Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.<a href="#section-2.2-3.1.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+</li>
+          <li class="normal" id="section-2.2-3.2">
+            <span class="break"></span><dl class="dlParallel" id="section-2.2-3.2.1">
+              <dt id="section-2.2-3.2.1.1">Signature nonce (e.g., ECDSA nonce):</dt>
+              <dd style="margin-left: 1.5em" id="section-2.2-3.2.1.2">
+                <p id="section-2.2-3.2.1.2.1">Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.<a href="#section-2.2-3.2.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+</li>
+        </ul>
+<p id="section-2.2-4">Unless explicitly stated otherwise, when this document uses the term "nonce" in the context of Handles, it refers to an <em>attestation nonce</em> with the purpose to demonstrate freshness.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="boot-time-integrity">
+<section id="section-2.3">
+        <h3 id="name-boot-time-integrity">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-boot-time-integrity" class="section-name selfRef">Boot Time Integrity</a>
+        </h3>
+<p id="section-2.3-1">Boot time integrity refers to the trustworthiness of the platform during its boot sequence, typically covering firmware, BIOS/UEFI, initial bootloaders, and core operating system components up until a stable runtime environment is reached.
+This may apply equally to physical devices and virtual machines.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="runtime-integrity">
-<section id="section-2.3">
+<section id="section-2.4">
         <h3 id="name-runtime-integrity">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-runtime-integrity" class="section-name selfRef">Runtime Integrity</a>
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-runtime-integrity" class="section-name selfRef">Runtime Integrity</a>
         </h3>
-<p id="section-2.3-1">Runtime integrity refers to the ongoing trustworthiness of a platform during normal operation, after the boot sequence completes.
-It encompasses the integrity of dynamic system state, including loaded applications, kernel modules, and active configurations.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-1">Runtime integrity refers to the ongoing trustworthiness of a platform during normal operation, after the boot sequence completes.
+It encompasses the integrity of dynamic system state, including loaded applications, kernel modules, and active configurations.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="boot-to-runtime-boundary">
-<section id="section-2.4">
+<section id="section-2.5">
         <h3 id="name-boot-to-runtime-boundary">
-<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-boot-to-runtime-boundary" class="section-name selfRef">Boot-to-Runtime Boundary</a>
+<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-boot-to-runtime-boundary" class="section-name selfRef">Boot-to-Runtime Boundary</a>
         </h3>
-<p id="section-2.4-1">The exact boundary between boot time and runtime may vary between systems.
-Generally, it is marked by the handoff from the final bootloader or initial OS kernel to a fully operational environment capable of executing arbitrary applications or services.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.5-1">The exact boundary between boot time and runtime may vary between systems.
+Generally, it is marked by the handoff from the final bootloader or initial OS kernel to a fully operational environment capable of executing arbitrary applications or services.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1558,8 +1597,9 @@ These generic information elements may be Conceptual Messages included in the pr
 <dt id="section-6-3.5"></dt>
         <dd style="margin-left: 1.5em" id="section-6-3.6">
           <p id="section-6-3.6.1">The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
-Examples include Nonces, which protect against replay attacks, and Epoch Markers that identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.
-Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.<a href="#section-6-3.6.1" class="pilcrow">¶</a></p>
+Examples include attestation nonces (see <a href="#nonce-disambiguation" class="auto internal xref">Section 2.2</a>), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span>.
+Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
+In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.<a href="#section-6-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-6-3.7">Claims (<code>claims</code>):</dt>
@@ -1794,7 +1834,8 @@ Event Logs may accompany the produced Claims and provide an event trail of secur
 Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
 A request includes a Handle, an optional list of Attestation Key IDs, and an optional Claim Selection.<a href="#section-7.1-4" class="pilcrow">¶</a></p>
 <p id="section-7.1-5">In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce <span>[<a href="#RFC4949" class="cite xref">RFC4949</a>]</span>, such as a cryptographically strong random number.
-This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks; however, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
+This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks; however, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.
+In this interaction model, that nonce is an attestation nonce (freshness handle) as described in <a href="#nonce-disambiguation" class="auto internal xref">Section 2.2</a>.<a href="#section-7.1-5" class="pilcrow">¶</a></p>
 <p id="section-7.1-6">The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
 As a result, a single Attestation Key ID identifies a single Attesting Environment.
@@ -2268,7 +2309,7 @@ The Handles are created by an external trusted third party (TTP) -- the Handle D
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
+The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch as identified by an Epoch Marker handle.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 <div id="handle-lifecycle-and-propagation-delays">
 <section id="section-7.2.1">
           <h4 id="name-handle-lifecycle-and-propag">
