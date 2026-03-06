@@ -288,7 +288,7 @@ Handle (`handle`):
 : An information element provided to the Attester from an external source included in Evidence (or other RATS Conceptual Messages) to determine recentness, freshness, or to protect against replay attacks.
 
 : The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
-Examples include *attestation nonces* (see {{nonce-disambiguation}}), which protect against replay attacks, and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
+Examples include attestation nonces (see {{nonce-disambiguation}}), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
 Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
 
