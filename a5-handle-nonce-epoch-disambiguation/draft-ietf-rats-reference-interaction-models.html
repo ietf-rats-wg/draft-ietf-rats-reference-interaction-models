@@ -1396,8 +1396,13 @@ A nonce used as a Handle in a remote attestation interaction model to provide re
 Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.<a href="#section-2.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.2-2.3">
-            <p id="section-2.2-2.3.1">Signature nonce (e.g., ECDSA nonce):
-Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.<a href="#section-2.2-2.3.1" class="pilcrow">¶</a></p>
+            <span class="break"></span><dl class="dlParallel" id="section-2.2-2.3.1">
+              <dt id="section-2.2-2.3.1.1">Signature nonce (e.g., ECDSA nonce):</dt>
+              <dd style="margin-left: 1.5em" id="section-2.2-2.3.1.2">
+                <p id="section-2.2-2.3.1.2.1">Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.<a href="#section-2.2-2.3.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
 </li>
         </ul>
 <p id="section-2.2-3">Unless explicitly stated otherwise, when this document uses the term "nonce" in the context of Handles, it refers to an <em>attestation nonce</em> with the purpose to demonstrate freshness.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
