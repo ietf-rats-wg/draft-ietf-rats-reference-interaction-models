@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T01:49:21.110171+00:00",
+  "timestamp": "2026-03-08T01:50:18.856687+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1413,7 +1413,7 @@
       "labels": [],
       "body": "What precisely is the difference between interaction patterns for Evidence vs. Reference Values and Endorsements at the level of abstraction the draft is dealing with. Why wouldn't the latter be included in this draft?",
       "createdAt": "2025-10-29T12:49:02Z",
-      "updatedAt": "2025-11-08T23:54:02Z",
+      "updatedAt": "2026-03-06T22:14:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -1429,6 +1429,20 @@
           "body": "For record, issue #58 states:\n\nhttps://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58#issuecomment-2682063317\n\nand\n\nhttps://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/58#issuecomment-2685260383\n\nSo, thank you for revealing the diff we were looking for now. We'll address it, happily.",
           "createdAt": "2025-11-08T23:53:41Z",
           "updatedAt": "2025-11-08T23:54:02Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "@muhammad-usama-sardar could you check, if your issue has been addressed in the current main?",
+          "createdAt": "2026-03-06T17:06:16Z",
+          "updatedAt": "2026-03-06T17:06:16Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "Did you mean [this](https://ietf-rats-wg.github.io/draft-ietf-rats-reference-interaction-models/draft-ietf-rats-reference-interaction-models.html)? On a quick look, it still reads:\n\n> While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers [[I-D.ietf-rats-epoch-markers](https://ietf-rats-wg.github.io/draft-ietf-rats-reference-interaction-models/draft-ietf-rats-reference-interaction-models.html#I-D.ietf-rats-epoch-markers)] or stand-alone event logs.\n\n> The same interaction models may apply to the conveyance of other Conceptual Messages (Endorsements, Reference Values, or Appraisal Policies) with other roles involved. However, that is out of scope for the present document.\n\nHave you added interaction pattern for these CMs? If not, can't we simply remove these two sentences?",
+          "createdAt": "2026-03-06T22:14:12Z",
+          "updatedAt": "2026-03-06T22:14:12Z"
         }
       ]
     },
@@ -1444,15 +1458,15 @@
       "labels": [],
       "body": "as illustrated in: https://mailarchive.ietf.org/arch/msg/rats/TOyeOCek1CbJ-FZMoK96W5dHa4Q",
       "createdAt": "2025-11-05T16:27:32Z",
-      "updatedAt": "2026-01-19T12:51:09Z",
+      "updatedAt": "2026-03-07T02:01:51Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "COLLABORATOR",
-          "body": "* [ ] Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\n* [x] In Section 4, the definition of implicit authentication doesn't match other uses I've seen of that term, so being more verbose in what's meant would help clarify (personally, I would describe the use case given of using a digital signature as explicit authentication, rather than implicit, but even dropping the word implicit would suffice.)\n\n* [ ] A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\n\n* [ ] One thing that could be drawn out a bit more explicitly in Section 7 is details of how the public key required for validating the signature is communicated to the verifier. If this is as simple as calling back to discussion of key identifiers in Section 6, that's fine, but being explicit about which key and how the verifier obtains it would aid the reader.\n\n* [ ] In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\n* [ ] A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.",
+          "body": "* [x] Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\n* [x] In Section 4, the definition of implicit authentication doesn't match other uses I've seen of that term, so being more verbose in what's meant would help clarify (personally, I would describe the use case given of using a digital signature as explicit authentication, rather than implicit, but even dropping the word implicit would suffice.)\n\n* [x] A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\n\n* [x] One thing that could be drawn out a bit more explicitly in Section 7 is details of how the public key required for validating the signature is communicated to the verifier. If this is as simple as calling back to discussion of key identifiers in Section 6, that's fine, but being explicit about which key and how the verifier obtains it would aid the reader.\n\n* [x] In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\n* [ ] A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.",
           "createdAt": "2026-01-19T11:00:21Z",
-          "updatedAt": "2026-01-19T12:44:50Z"
+          "updatedAt": "2026-03-06T17:17:55Z"
         },
         {
           "author": "thomas-fossati",
@@ -1481,6 +1495,27 @@
           "body": "> A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.\n\nSeems like a reasonable ask to me.  For example: mTLS, server-authenticated TLS with HTTP authentication for the client, etc.",
           "createdAt": "2026-01-19T12:51:09Z",
           "updatedAt": "2026-01-19T12:51:09Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "@thomas-fossati, I am not entirely sure that we addressed the first and last item to you satisfaction, could you check that with the current main, please?",
+          "createdAt": "2026-03-06T17:08:32Z",
+          "updatedAt": "2026-03-06T17:08:32Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "One quick fix is to not capitalize \"broker\" befor it is introduced. ",
+          "createdAt": "2026-03-06T17:15:08Z",
+          "updatedAt": "2026-03-06T17:15:08Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [@thomas-fossati](https://github.com/thomas-fossati), I am not entirely sure that we addressed the first and last item to you satisfaction, could you check that with the current main, please?\n\nI believe that the document Shepherd (i.e., Michael) should answer this.",
+          "createdAt": "2026-03-07T02:01:51Z",
+          "updatedAt": "2026-03-07T02:01:51Z"
         }
       ]
     },
@@ -1489,32 +1524,48 @@
       "id": "I_kwDOEYizNM7WF7Im",
       "title": "Reassess the use of Handle in favor of Epoch ID",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/81",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "based on: https://mailarchive.ietf.org/arch/msg/rats/-Hndn9m_y7wQsGXk35o9YFHSnyI",
       "createdAt": "2025-11-05T16:30:56Z",
-      "updatedAt": "2025-11-05T16:30:56Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-03-06T17:08:51Z",
+      "closedAt": "2026-03-06T17:08:51Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "done",
+          "createdAt": "2026-03-06T17:08:51Z",
+          "updatedAt": "2026-03-06T17:08:51Z"
+        }
+      ]
     },
     {
       "number": 82,
       "id": "I_kwDOEYizNM7rX6NH",
       "title": "Evidence freshness control using nonce or other timing specific mechanisms",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/82",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "In a discussion that originated in the composite attesters design team, and issue was created [25](https://github.com/mcr/composite-attesters/issues/25) that observed there is potential for confusion over what security properties exist when \"nonces\" are used. It was observed that attestation introduces a new context for nonce use relating to how a Verifier/RP might control Attesting Env (AE) behavior having to do with claims collection dynamics. For example, an AE might collect claims and cache them because it is early in system boot and there is no connectivity to a bus or network over which the claims could be delivered. \n\nThis draft should describe the three contexts (disciplines?) where nonces are commonly used and clarify that Attestation contexts typically refer to claims collection timeliness and evidence freshness. Nevertheless, it should offer terminology convention that allows for appropriate disambiguation in cases where multi-discipline prose is used. E.g., Attestation nonce vs. TLS nonce vs. ECDSA nonce.\n\nThe content should consider defining the semantics for a conceptual message type that contains claims collection control information (a.k.a., \"attestation nonce\") that instructs Attesting Environment(s) to invalidate cached claims and/or re-collect \"fresh\" claims. By including the attestation nonce with newly collected claims, the AE is asserting to Verifier/RP that the associated claims are \"fresh\" or in some way recently collected. A nonce may have limitations as it pertains to fine grained timing since it typically isn't associated with a clock tic or elapsed tics. However, epoch markers may have such capabilities. A detailed discussion should be considered that highlights these nuances relating to the timing of claims collection operations. The particular case of pre-boot AE considerations should be included so that it is understood that an attestation nonce could be cached before a reboot operation then included with evidence collected during a subsequent reboot as a way of indicating \"fresh\", albeit delineated by reboot latency. \n\nRich architectures might evolve to support machine state transitions that allow \"pre-boot\" AEs to regain an execution thread without having to jump directly into a reset / reboot scenario. This would allow \"freshness conceptual messages\" that result in Verifier/RP control of the state transitions that produce the freshest possible measurements. Interaction models should describe this control surface. For example, upon receipt of a freshness CM, the Attester might return \"pending\" indicating the reply freshness CM is pending a reboot or machine state transition. In some server contexts this could be pending for months or years. ",
       "createdAt": "2026-02-16T17:54:55Z",
-      "updatedAt": "2026-02-16T18:06:00Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-03-06T17:10:22Z",
+      "closedAt": "2026-03-06T17:10:22Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "done by disambiguation of nonces and using the term \"attestation nonce\" as done by Ned in this issue",
+          "createdAt": "2026-03-06T17:10:22Z",
+          "updatedAt": "2026-03-06T17:10:22Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -4922,104 +4973,381 @@
       "id": "PR_kwDOEYizNM7Hsf2R",
       "title": "Terminology: clarify Evidence authentication; redefine cryptographic blinding as selective disclosure",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/85",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-03-03T19:40:21Z",
-      "updatedAt": "2026-03-03T19:40:22Z",
+      "updatedAt": "2026-03-06T16:49:00Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "a3-terminology-auth-blinding",
-      "headRefOid": "5453167d8bc7e13309506cdb7ef3714a96316aef",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "906060937a2deda839f730f4d7858b9c4bda0d09",
+      "closedAt": "2026-03-06T16:49:00Z",
+      "mergedAt": "2026-03-06T16:49:00Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "07730f0a8a73ab963047ff47f77aae8e596270b9"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7ovzab",
+          "commit": {
+            "abbreviatedOid": "9060609"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-06T16:48:51Z",
+          "updatedAt": "2026-03-06T16:48:51Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 86,
       "id": "PR_kwDOEYizNM7Hsxq8",
       "title": "Clarify verifier access to verification key material.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/86",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Clarify how Verifier obtains verification key material for Evidence signature validation",
       "createdAt": "2026-03-03T20:02:42Z",
-      "updatedAt": "2026-03-03T20:02:43Z",
+      "updatedAt": "2026-03-06T16:50:19Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "a4-verifier-key-material",
       "headRefOid": "b0c24816e07d6aecd1b00f40884d52b14e28e722",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-06T16:50:19Z",
+      "mergedAt": "2026-03-06T16:50:19Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "56f8990d3146a9b67a2cefb9b7f4a48d9c98d77b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7ov09W",
+          "commit": {
+            "abbreviatedOid": "b0c2481"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-06T16:50:12Z",
+          "updatedAt": "2026-03-06T16:50:12Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 87,
       "id": "PR_kwDOEYizNM7HtOle",
       "title": "Clarify handle/nonce/epoch marker terminology",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/87",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Clarify Handle vs (attestation) nonce vs Epoch Marker; add nonce disambiguation",
       "createdAt": "2026-03-03T20:38:18Z",
-      "updatedAt": "2026-03-03T20:38:19Z",
+      "updatedAt": "2026-03-06T16:59:01Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "a5-handle-nonce-epoch-disambiguation",
-      "headRefOid": "66c258b922e9aba78ae414578964c5e27ae92e0f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "976bb21036db0bbf4cfccbd8c0184dd400c6a882",
+      "closedAt": "2026-03-06T16:59:01Z",
+      "mergedAt": "2026-03-06T16:59:01Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "48e16df00e31ef5a7d17e63550d8a7e657c9b750"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7ov3Qq",
+          "commit": {
+            "abbreviatedOid": "66c258b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:52:12Z",
+          "updatedAt": "2026-03-06T16:52:12Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\nUnless explicitly stated otherwise, when this document uses the term \"nonce\" in the context of Handles, it refers to an *attestation nonce* with the purpose to demonstrate freshness.\n```",
+              "createdAt": "2026-03-06T16:52:12Z",
+              "updatedAt": "2026-03-06T16:52:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov5Ia",
+          "commit": {
+            "abbreviatedOid": "eed0e8d"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:53:39Z",
+          "updatedAt": "2026-03-06T16:53:39Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\nExamples include attestation nonces (see {{nonce-disambiguation}}), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.\n```",
+              "createdAt": "2026-03-06T16:53:39Z",
+              "updatedAt": "2026-03-06T16:53:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov5iq",
+          "commit": {
+            "abbreviatedOid": "3d1bb63"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:54:00Z",
+          "updatedAt": "2026-03-06T16:54:01Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\n* Attestation nonce (freshness handle):\n```",
+              "createdAt": "2026-03-06T16:54:01Z",
+              "updatedAt": "2026-03-06T16:54:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov59q",
+          "commit": {
+            "abbreviatedOid": "fac0080"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:54:23Z",
+          "updatedAt": "2026-03-06T16:54:23Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\n* TLS nonce:\n```",
+              "createdAt": "2026-03-06T16:54:23Z",
+              "updatedAt": "2026-03-06T16:54:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov6Zd",
+          "commit": {
+            "abbreviatedOid": "f065bdc"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:54:47Z",
+          "updatedAt": "2026-03-06T16:54:47Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\n* Signature nonce (e.g., ECDSA nonce):\n```",
+              "createdAt": "2026-03-06T16:54:47Z",
+              "updatedAt": "2026-03-06T16:54:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov6zV",
+          "commit": {
+            "abbreviatedOid": "ae8437b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:55:10Z",
+          "updatedAt": "2026-03-06T16:55:10Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\n: Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.\n```",
+              "createdAt": "2026-03-06T16:55:10Z",
+              "updatedAt": "2026-03-06T16:55:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov7La",
+          "commit": {
+            "abbreviatedOid": "08a6310"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:55:29Z",
+          "updatedAt": "2026-03-06T16:55:30Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\nAttestation nonce (freshness handle):\n```",
+              "createdAt": "2026-03-06T16:55:30Z",
+              "updatedAt": "2026-03-06T16:55:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov7lf",
+          "commit": {
+            "abbreviatedOid": "da7397a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:55:50Z",
+          "updatedAt": "2026-03-06T16:55:50Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\n: A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.\n```",
+              "createdAt": "2026-03-06T16:55:50Z",
+              "updatedAt": "2026-03-06T16:55:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov8YZ",
+          "commit": {
+            "abbreviatedOid": "ff35775"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:56:16Z",
+          "updatedAt": "2026-03-06T16:56:16Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\n: Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.\n```",
+              "createdAt": "2026-03-06T16:56:16Z",
+              "updatedAt": "2026-03-06T16:56:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov9S0",
+          "commit": {
+            "abbreviatedOid": "9e0c956"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-06T16:56:58Z",
+          "updatedAt": "2026-03-06T16:56:58Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\nIn this interaction model, that nonce is an attestation nonce (freshness handle) as described in {{nonce-disambiguation}}.\n```",
+              "createdAt": "2026-03-06T16:56:58Z",
+              "updatedAt": "2026-03-06T16:56:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM7ov_ft",
+          "commit": {
+            "abbreviatedOid": "976bb21"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-06T16:58:52Z",
+          "updatedAt": "2026-03-06T16:58:52Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 88,
       "id": "PR_kwDOEYizNM7HuHBG",
       "title": "Clarify delta handle usage and bind attestation results to handle",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/88",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "eckelmeckel",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Clarify handle origin, delta handle rotation, handle-loss behavior, and AttRes-handle binding",
       "createdAt": "2026-03-03T21:49:33Z",
-      "updatedAt": "2026-03-03T21:49:34Z",
+      "updatedAt": "2026-03-06T17:09:28Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "88666189d171fdbc6f3e9fc8df0d5533f83e10ad",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "a6-diagrams-handle-binding",
       "headRefOid": "df4bfef6a9025f8d4162401f298388df55bce38e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-06T17:09:28Z",
+      "mergedAt": "2026-03-06T17:09:27Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f8a2e4ae1b4fabaac1cad10cae5b5120f47d0316"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM7owG4I",
+          "commit": {
+            "abbreviatedOid": "df4bfef"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-06T17:05:30Z",
+          "updatedAt": "2026-03-06T17:05:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEYizNM7owLI3",
+          "commit": {
+            "abbreviatedOid": "df4bfef"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-06T17:09:15Z",
+          "updatedAt": "2026-03-06T17:09:15Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
