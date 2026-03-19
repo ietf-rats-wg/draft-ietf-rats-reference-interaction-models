@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T01:50:18.856687+00:00",
+  "timestamp": "2026-03-19T01:55:55.583984+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1413,7 +1413,7 @@
       "labels": [],
       "body": "What precisely is the difference between interaction patterns for Evidence vs. Reference Values and Endorsements at the level of abstraction the draft is dealing with. Why wouldn't the latter be included in this draft?",
       "createdAt": "2025-10-29T12:49:02Z",
-      "updatedAt": "2026-03-06T22:14:12Z",
+      "updatedAt": "2026-03-17T03:41:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -1443,6 +1443,20 @@
           "body": "Did you mean [this](https://ietf-rats-wg.github.io/draft-ietf-rats-reference-interaction-models/draft-ietf-rats-reference-interaction-models.html)? On a quick look, it still reads:\n\n> While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers [[I-D.ietf-rats-epoch-markers](https://ietf-rats-wg.github.io/draft-ietf-rats-reference-interaction-models/draft-ietf-rats-reference-interaction-models.html#I-D.ietf-rats-epoch-markers)] or stand-alone event logs.\n\n> The same interaction models may apply to the conveyance of other Conceptual Messages (Endorsements, Reference Values, or Appraisal Policies) with other roles involved. However, that is out of scope for the present document.\n\nHave you added interaction pattern for these CMs? If not, can't we simply remove these two sentences?",
           "createdAt": "2026-03-06T22:14:12Z",
           "updatedAt": "2026-03-06T22:14:12Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "It is now clearly stated that the application of the interaction models is out of scope of this document. It is also correct that their intent is to be adapted to applications (e.g., the network device subscription I-D) and also other content (e.g., Endorsements or stand-alone event logs), which renders the statements informative and harmless as new specification would have to be created for those applications or contents.",
+          "createdAt": "2026-03-17T02:46:17Z",
+          "updatedAt": "2026-03-17T02:46:17Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "Could you please remove those? I don't see a good reason to insist on this.",
+          "createdAt": "2026-03-17T03:41:06Z",
+          "updatedAt": "2026-03-17T03:41:06Z"
         }
       ]
     },
