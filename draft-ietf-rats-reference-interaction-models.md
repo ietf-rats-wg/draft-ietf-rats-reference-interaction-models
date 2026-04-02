@@ -57,6 +57,9 @@ normative:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
+  RFC7617:
+  RFC8446:
+  RFC9110:
   RFC9683: RIV
   RFC9783: psa-token
   RFC9781: uccs
@@ -1133,6 +1136,17 @@ Similarly, for scenarios involving sensitive environments like carrier managemen
 
 Mutual authentication is particularly relevant in models such as the *Challenge/Response Remote Attestation* (cf. {{challenge-response}}) where both the Attester and the Verifier engage in bidirectional exchanges of sensitive information.
 Ensuring that both parties can authenticate each other prevents impersonation attacks, enhancing the trustworthiness of the attestation results.
+
+Practical example mechanisms to achieve mutual authentication include:
+
+Mutual TLS (mTLS):
+: TLS 1.3 {{RFC8446}} supports mutual authentication via the ertificateRequest message.
+  The client presents its X.509 certificate and proves possession of the private key, establishing bidirectional trust before attestation data is exchanged.
+
+Server-Authenticated TLS with HTTP Authentication:
+: Server-only TLS authentication can be combined with application-layer client authentication.
+  The server authenticates via its TLS certificate, while the client uses HTTP authentication {{RFC9110}} such as Basic {{RFC7617}} or Digest credentials.
+  This approach suits deployments where client certificates are impractical.
 
 ### Hardware Enforcement/Support
 
