@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-19T01:55:55.583984+00:00",
+  "timestamp": "2026-04-05T02:05:52.338048+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1413,7 +1413,7 @@
       "labels": [],
       "body": "What precisely is the difference between interaction patterns for Evidence vs. Reference Values and Endorsements at the level of abstraction the draft is dealing with. Why wouldn't the latter be included in this draft?",
       "createdAt": "2025-10-29T12:49:02Z",
-      "updatedAt": "2026-03-17T03:41:06Z",
+      "updatedAt": "2026-04-02T20:22:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1457,6 +1457,20 @@
           "body": "Could you please remove those? I don't see a good reason to insist on this.",
           "createdAt": "2026-03-17T03:41:06Z",
           "updatedAt": "2026-03-17T03:41:06Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Indicating potential reuse prevents potential redundant documents.",
+          "createdAt": "2026-04-02T14:21:07Z",
+          "updatedAt": "2026-04-02T14:21:07Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "I believe the draft does not need to make an opinion on what is not discussed. Simply removing the statements seems like a good option.\nOtherwise justify this claim by showing at least one pattern for Reference Values and Endorsements. ",
+          "createdAt": "2026-04-02T20:22:20Z",
+          "updatedAt": "2026-04-02T20:22:20Z"
         }
       ]
     },
@@ -1472,15 +1486,15 @@
       "labels": [],
       "body": "as illustrated in: https://mailarchive.ietf.org/arch/msg/rats/TOyeOCek1CbJ-FZMoK96W5dHa4Q",
       "createdAt": "2025-11-05T16:27:32Z",
-      "updatedAt": "2026-03-07T02:01:51Z",
+      "updatedAt": "2026-04-02T14:28:41Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "COLLABORATOR",
-          "body": "* [x] Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\n* [x] In Section 4, the definition of implicit authentication doesn't match other uses I've seen of that term, so being more verbose in what's meant would help clarify (personally, I would describe the use case given of using a digital signature as explicit authentication, rather than implicit, but even dropping the word implicit would suffice.)\n\n* [x] A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\n\n* [x] One thing that could be drawn out a bit more explicitly in Section 7 is details of how the public key required for validating the signature is communicated to the verifier. If this is as simple as calling back to discussion of key identifiers in Section 6, that's fine, but being explicit about which key and how the verifier obtains it would aid the reader.\n\n* [x] In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\n* [ ] A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.",
+          "body": "* [x] Most of the definitions are reliant on RFC 9334 and are used consistently with the descriptions in that document. A minor editorial point is that the role of Broker is used before it is explained/defined (in Section 7.3.2). As it is capitalized to indicate that it is a formal role, some minor editorial work could be useful to prevent inconsistencies in other documents.\n\n* [x] In Section 4, the definition of implicit authentication doesn't match other uses I've seen of that term, so being more verbose in what's meant would help clarify (personally, I would describe the use case given of using a digital signature as explicit authentication, rather than implicit, but even dropping the word implicit would suffice.)\n\n* [x] A minor editorial point for Section 6 is that I would order elements by mandatory first and then optional, rather than the current order which mixes them. This is a bit pedantic, but I think it would give weight to the elements that must be included and improve clarity.\n\n* [x] One thing that could be drawn out a bit more explicitly in Section 7 is details of how the public key required for validating the signature is communicated to the verifier. If this is as simple as calling back to discussion of key identifiers in Section 6, that's fine, but being explicit about which key and how the verifier obtains it would aid the reader.\n\n* [x] In Section 9.1, the terminology \"cryptographic blinding\" is used differently in other places, for example RFC 9474, so suggest including what is meant by blinding for clarity.\n\n* [x] A small addition of examples of how to achieve mutual authentication in 9.4.2 would be useful. Other security considerations have suggestions of how implementers might achieve the required property, and that is the only property without a practical way of achieving it.",
           "createdAt": "2026-01-19T11:00:21Z",
-          "updatedAt": "2026-03-06T17:17:55Z"
+          "updatedAt": "2026-04-02T14:25:50Z"
         },
         {
           "author": "thomas-fossati",
@@ -1530,6 +1544,13 @@
           "body": "> [@thomas-fossati](https://github.com/thomas-fossati), I am not entirely sure that we addressed the first and last item to you satisfaction, could you check that with the current main, please?\n\nI believe that the document Shepherd (i.e., Michael) should answer this.",
           "createdAt": "2026-03-07T02:01:51Z",
           "updatedAt": "2026-03-07T02:01:51Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "All boxes are ticked for now. Will keep the issue open until Michael confirms.",
+          "createdAt": "2026-04-02T14:28:40Z",
+          "updatedAt": "2026-04-02T14:28:40Z"
         }
       ]
     },
@@ -5362,6 +5383,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 89,
+      "id": "PR_kwDOEYizNM7PkzwS",
+      "title": "Examples for Mutual Attestation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/89",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-04-02T14:14:10Z",
+      "updatedAt": "2026-04-02T14:20:00Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "76e79bf1b701f74f4bba57a1e222f09e78f48a2d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "mutual",
+      "headRefOid": "ddeea7dbeba2cb39a37041302ed01e345ec57860",
+      "closedAt": "2026-04-02T14:20:00Z",
+      "mergedAt": "2026-04-02T14:20:00Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "faa6277ac51e877e14565dc20de7636be6c69be1"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
