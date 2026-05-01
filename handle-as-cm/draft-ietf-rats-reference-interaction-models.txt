@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 1 November 2026                                          W. Pan
+Expires: 2 November 2026                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                           30 April 2026
+                                                              1 May 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 November 2026.
+   This Internet-Draft will expire on 2 November 2026.
 
 Copyright Notice
 
@@ -1628,10 +1628,10 @@ Table of Contents
 
 10.1.  New Conceptual Message Indicator for Handles
 
-   IANA is requested to add a new Indicator Value to the "RATS
-   Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote
-   Attestation Procedures (RATS)" registry group [IANA.rats] as
-   described in Table 1.
+   IANA is requested to add a new entry to the "RATS Conceptual Message
+   Wrapper (CMW) Indicators" registry of the "Remote Attestation
+   Procedures (RATS)" registry group [IANA.rats] as described in
+   Table 1.
 
         +=================+==============+========================+
         | Indicator value | Conceptual   | Reference              |
