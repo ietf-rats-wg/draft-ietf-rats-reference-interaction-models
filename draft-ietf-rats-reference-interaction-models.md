@@ -1172,7 +1172,7 @@ By addressing these application-specific security requirements within the contex
 
 ## New Conceptual Message Indicator for Handles {#iana-handle-cmind}
 
-IANA is requested to add a new Indicator Value to the "RATS Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote Attestation Procedures (RATS)" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.
+IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote Attestation Procedures (RATS)" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.
 
 | Indicator value | Conceptual Message name | Reference |
 |-----------------|-------------------------|-----------|
