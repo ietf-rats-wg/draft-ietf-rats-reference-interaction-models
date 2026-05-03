@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-05T02:05:52.338048+00:00",
+  "timestamp": "2026-05-03T02:34:11.006192+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -5411,6 +5411,73 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 90,
+      "id": "PR_kwDOEYizNM7XK3Jb",
+      "title": "Promote Handles to RATS Conceptual Messages",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/90",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-04-30T15:52:50Z",
+      "updatedAt": "2026-05-01T08:53:22Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "faa6277ac51e877e14565dc20de7636be6c69be1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "handle-as-cm",
+      "headRefOid": "edd443714aa7b2e97739587c34c76101d9f55c60",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM76u00l",
+          "commit": {
+            "abbreviatedOid": "5e49b98"
+          },
+          "author": "github-actions",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-30T15:53:15Z",
+          "updatedAt": "2026-04-30T15:53:15Z",
+          "comments": [
+            {
+              "originalPosition": 2,
+              "body": "````suggestion\nSubproject commit 7b8eb97cf0daa28cc14be5c87ec4c35b10577974\n````",
+              "createdAt": "2026-04-30T15:53:15Z",
+              "updatedAt": "2026-04-30T15:53:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM76-OqO",
+          "commit": {
+            "abbreviatedOid": "da80d83"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-01T08:53:05Z",
+          "updatedAt": "2026-05-01T08:53:06Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "```suggestion\nIANA is requested to add a new entry to the \"RATS Conceptual Message Wrapper (CMW) Indicators\" registry of the \"Remote Attestation Procedures (RATS)\" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.\n```",
+              "createdAt": "2026-05-01T08:53:06Z",
+              "updatedAt": "2026-05-01T08:53:06Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
