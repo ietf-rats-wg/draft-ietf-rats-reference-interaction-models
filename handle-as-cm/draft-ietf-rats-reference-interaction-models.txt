@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 2 November 2026                                          W. Pan
+Expires: 5 November 2026                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                              1 May 2026
+                                                              4 May 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 November 2026.
+   This Internet-Draft will expire on 5 November 2026.
 
 Copyright Notice
 
@@ -533,8 +533,8 @@ Table of Contents
 
    Accordingly, Section 10.1 registers a new Conceptual Message
    indicator for Handles to be used with Conceptual Message Wrappers
-   (CMW) [I-D.ietf-rats-msg-wrap].  Note that concrete Handle
-   representations require an associated media type for use with CMW.
+   (CMW) [I-D.ietf-rats-msg-wrap].  A concrete Handle representations
+   requires an associated media type for use with CMW.
 
 7.  Interaction Models
 
