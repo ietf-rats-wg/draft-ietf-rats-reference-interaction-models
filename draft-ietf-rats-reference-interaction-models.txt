@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Informational                            Fraunhofer SIT
-Expires: 7 September 2026                                         W. Pan
+Expires: 5 November 2026                                          W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                            6 March 2026
+                                                              4 May 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2026.
+   This Internet-Draft will expire on 5 November 2026.
 
 Copyright Notice
 
@@ -80,6 +80,7 @@ Table of Contents
    4.  Essential Requirements
    5.  Normative Prerequisites
    6.  Generic Information Elements
+     6.1.  Handles as RATS Conceptual Messages
    7.  Interaction Models
      7.1.  Challenge/Response Remote Attestation
        7.1.1.  Models and Example Sequences of Challenge/Response
@@ -108,10 +109,12 @@ Table of Contents
        9.4.1.  Confidentiality
        9.4.2.  Mutual Authentication
        9.4.3.  Hardware Enforcement/Support
-   10. Acknowledgments
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   10. IANA Considerations
+     10.1.  New Conceptual Message Indicator for Handles
+   11. Acknowledgments
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Appendix A.  CDDL Specification for a simple CoAP Challenge/
            Response Interaction
    Authors' Addresses
@@ -517,6 +520,21 @@ Table of Contents
       by the Attester and SHOULD be known by the Verifier.  In order to
       select Claims, Claims that can be potentially included in Evidence
       by an Attesting Environment have to be known by the Verifier.
+
+6.1.  Handles as RATS Conceptual Messages
+
+   Handles, whether instantiated as attestation nonces or Epoch IDs, are
+   fundamental to many Remote Attestation protocols.  In all the
+   interaction models presented in this document, Handles are exchanged
+   between RATS roles and used to correlate and lock together the
+   different stages of the interaction.  Given their ubiquity and key
+   role, it is appropriate to recognize them as RATS Conceptual Message
+   in their own right.
+
+   Accordingly, Section 10.1 registers a new Conceptual Message
+   indicator for Handles to be used with Conceptual Message Wrappers
+   (CMW) [I-D.ietf-rats-msg-wrap].  A concrete Handle representations
+   requires an associated media type for use with CMW.
 
 7.  Interaction Models
 
@@ -1573,6 +1591,21 @@ Table of Contents
    each other prevents impersonation attacks, enhancing the
    trustworthiness of the attestation results.
 
+   Practical example mechanisms to achieve mutual authentication
+   include:
+
+   Mutual TLS (mTLS):  TLS 1.3 [RFC8446] supports mutual authentication
+      via the ertificateRequest message.  The client presents its X.509
+      certificate and proves possession of the private key, establishing
+      bidirectional trust before attestation data is exchanged.
+
+   Server-Authenticated TLS with HTTP Authentication:  Server-only TLS
+      authentication can be combined with application-layer client
+      authentication.  The server authenticates via its TLS certificate,
+      while the client uses HTTP authentication [RFC9110] such as Basic
+      [RFC7617] or Digest credentials.  This approach suits deployments
+      where client certificates are impractical.
+
 9.4.3.  Hardware Enforcement/Support
 
    In environments where the integrity and security of attestation
@@ -1591,13 +1624,32 @@ Table of Contents
    tailored to fit the unique challenges and operational contexts of
    different attestation scenarios.
 
-10.  Acknowledgments
+10.  IANA Considerations
+
+10.1.  New Conceptual Message Indicator for Handles
+
+   IANA is requested to add a new entry to the "RATS Conceptual Message
+   Wrapper (CMW) Indicators" registry of the "Remote Attestation
+   Procedures (RATS)" registry group [IANA.rats] as described in
+   Table 1.
+
+        +=================+==============+========================+
+        | Indicator value | Conceptual   | Reference              |
+        |                 | Message name |                        |
+        +=================+==============+========================+
+        | 5               | Handle       | Section 6 and          |
+        |                 |              | Section 6.1 of RFCthis |
+        +-----------------+--------------+------------------------+
+
+                   Table 1: New CMW Indicator for Handles
+
+11.  Acknowledgments
 
    Olaf Bergmann, Michael Richardson, and Ned Smith
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [BCP205]   Best Current Practice 205,
               <https://www.rfc-editor.org/info/bcp205>.
@@ -1614,6 +1666,10 @@ Table of Contents
               Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               epoch-markers-03>.
+
+   [IANA.rats]
+              IANA, "Remote Attestation Procedures (RATS)",
+              <https://www.iana.org/assignments/rats>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1654,7 +1710,7 @@ Table of Contents
               DOI 10.17487/RFC9711, April 2025,
               <https://www.rfc-editor.org/rfc/rfc9711>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [DAA]      Brickell, E., Camenisch, J., and L. Chen, "Direct
               Anonymous Attestation", ACM Proceedings of the 11th ACM
@@ -1680,12 +1736,19 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               endorsements-09>.
 
+   [I-D.ietf-rats-msg-wrap]
+              Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
+              D. Glaze, "RATS Conceptual Messages Wrapper (CMW)", Work
+              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-23,
+              11 December 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-msg-wrap-23>.
+
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-09, 13 January
+              draft-ietf-rats-network-device-subscription-11, 30 March
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-09>.
+              rats-network-device-subscription-11>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
@@ -1709,6 +1772,19 @@ Table of Contents
    [RFC4949]  Shirey, R., "Internet Security Glossary, Version 2",
               FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007,
               <https://www.rfc-editor.org/rfc/rfc4949>.
+
+   [RFC7617]  Reschke, J., "The 'Basic' HTTP Authentication Scheme",
+              RFC 7617, DOI 10.17487/RFC7617, September 2015,
+              <https://www.rfc-editor.org/rfc/rfc7617>.
+
+   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8446>.
+
+   [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
+              Ed., "HTTP Semantics", STD 97, RFC 9110,
+              DOI 10.17487/RFC9110, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9110>.
 
    [RFC9683]  Fedorkow, G. C., Ed., Voit, E., and J. Fitzgerald-McKay,
               "Remote Integrity Verification of Network Devices
