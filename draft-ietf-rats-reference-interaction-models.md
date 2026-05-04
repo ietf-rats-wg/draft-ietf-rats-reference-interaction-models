@@ -54,6 +54,7 @@ normative:
   RFC9334: RATS
   I-D.ietf-rats-epoch-markers: epoch-markers
   RFC9711: EAT
+  IANA.rats:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
@@ -127,8 +128,10 @@ informative:
   I-D.ietf-rats-endorsements: rats-endorsements
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
+  I-D.ietf-rats-msg-wrap: rats-cmw
 
-...
+entity:
+  SELF: "RFCthis"
 
 --- abstract
 
@@ -286,7 +289,7 @@ Evidence Freshness:
 : Evidence MUST include an indicator about its freshness that can be understood by a Verifier (See also {{Section 10 of -RATS}}).
 This enables interaction models to support the conveyance of proofs of freshness in a way that is useful to Verifiers and their appraisal procedures.
 
-# Generic Information Elements
+# Generic Information Elements {#generic-ies}
 
 This section describes the essential information elements for the interaction models described in {{interaction-models}}.
 These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.
@@ -372,6 +375,15 @@ For example, a Verifier could send a Claim Selection, among other elements, to a
 An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
 If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier.
 In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.
+
+## Handles as RATS Conceptual Messages {#cm-handle}
+
+Handles, whether instantiated as attestation nonces or Epoch IDs, are fundamental to many Remote Attestation protocols.
+In all the interaction models presented in this document, Handles are exchanged between RATS roles and used to correlate and lock together the different stages of the interaction.
+Given their ubiquity and key role, it is appropriate to recognize them as RATS Conceptual Message in their own right.
+
+Accordingly, {{iana-handle-cmind}} registers a new Conceptual Message indicator for Handles to be used with Conceptual Message Wrappers (CMW) {{-rats-cmw}}.
+A concrete Handle representations requires an associated media type for use with CMW.
 
 # Interaction Models {#interaction-models}
 
@@ -1155,6 +1167,17 @@ Technologies like Hardware Security Modules (HSMs), Physically Unclonable Functi
 These are especially important in high-security settings such as financial services or military applications, where attestation processes must rely on physically secure and tamper-resistant components to meet stringent regulatory and security standards.
 
 By addressing these application-specific security requirements within the context of defined interaction models, security strategies can be tailored to fit the unique challenges and operational contexts of different attestation scenarios.
+
+# IANA Considerations
+
+## New Conceptual Message Indicator for Handles {#iana-handle-cmind}
+
+IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote Attestation Procedures (RATS)" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.
+
+| Indicator value | Conceptual Message name | Reference |
+|-----------------|-------------------------|-----------|
+| 5 | Handle | {{generic-ies}} and {{cm-handle}} of {{&SELF}} |
+{: #tab-handle-cmind title="New CMW Indicator for Handles"}
 
 # Acknowledgments
 
