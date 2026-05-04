@@ -383,7 +383,7 @@ In all the interaction models presented in this document, Handles are exchanged 
 Given their ubiquity and key role, it is appropriate to recognize them as RATS Conceptual Message in their own right.
 
 Accordingly, {{iana-handle-cmind}} registers a new Conceptual Message indicator for Handles to be used with Conceptual Message Wrappers (CMW) {{-rats-cmw}}.
-Note that concrete Handle representations require an associated media type for use with CMW.
+A concrete Handle representations requires an associated media type for use with CMW.
 
 # Interaction Models {#interaction-models}
 
