@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-03T02:34:11.006192+00:00",
+  "timestamp": "2026-05-05T02:27:06.577997+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -1479,15 +1479,15 @@
       "id": "I_kwDOEYizNM7WF2yH",
       "title": "Addressing Shepherd Review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/issues/80",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "as illustrated in: https://mailarchive.ietf.org/arch/msg/rats/TOyeOCek1CbJ-FZMoK96W5dHa4Q",
       "createdAt": "2025-11-05T16:27:32Z",
-      "updatedAt": "2026-04-02T14:28:41Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-04T10:06:51Z",
+      "closedAt": "2026-05-04T10:06:51Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1551,6 +1551,13 @@
           "body": "All boxes are ticked for now. Will keep the issue open until Michael confirms.",
           "createdAt": "2026-04-02T14:28:40Z",
           "updatedAt": "2026-04-02T14:28:40Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Confirmed in https://mailarchive.ietf.org/arch/msg/rats/CB2EjX_CBfUGc5wRGvlQtHUKk3M",
+          "createdAt": "2026-05-04T10:06:51Z",
+          "updatedAt": "2026-05-04T10:06:51Z"
         }
       ]
     },
@@ -5417,24 +5424,26 @@
       "id": "PR_kwDOEYizNM7XK3Jb",
       "title": "Promote Handles to RATS Conceptual Messages",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/90",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-04-30T15:52:50Z",
-      "updatedAt": "2026-05-01T08:53:22Z",
+      "updatedAt": "2026-05-04T09:33:03Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "faa6277ac51e877e14565dc20de7636be6c69be1",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "handle-as-cm",
-      "headRefOid": "edd443714aa7b2e97739587c34c76101d9f55c60",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c5ec6dd33af53a766c463f8885e16ddf143c7cc4",
+      "closedAt": "2026-05-04T09:33:03Z",
+      "mergedAt": "2026-05-04T09:33:03Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "8ff3e76a3f41cbd46149d99614fcfbec7ddfb40c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5476,6 +5485,39 @@
               "updatedAt": "2026-05-01T08:53:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM77drwJ",
+          "commit": {
+            "abbreviatedOid": "edd4437"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-04T09:32:08Z",
+          "updatedAt": "2026-05-04T09:32:09Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\nA concrete Handle representations requires an associated media type for use with CMW.\n```",
+              "createdAt": "2026-05-04T09:32:09Z",
+              "updatedAt": "2026-05-04T09:32:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM77dswz",
+          "commit": {
+            "abbreviatedOid": "c5ec6dd"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "very good",
+          "createdAt": "2026-05-04T09:32:46Z",
+          "updatedAt": "2026-05-04T09:32:46Z",
+          "comments": []
         }
       ]
     }
