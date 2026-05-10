@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-05T02:27:06.577997+00:00",
+  "timestamp": "2026-05-10T02:36:42.883210+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -5520,6 +5520,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 91,
+      "id": "PR_kwDOEYizNM7ZJJjp",
+      "title": "Examplary (non-Evidence) interaction model vor CoSERV",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/pull/91",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "addresses #78 \r\n\r\nIllustrating the different shapes and forms a handle can take outside \"classical' Conveyance of Evidence.",
+      "createdAt": "2026-05-07T12:32:08Z",
+      "updatedAt": "2026-05-07T13:41:09Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "baseRefName": "master",
+      "baseRefOid": "8ff3e76a3f41cbd46149d99614fcfbec7ddfb40c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
+      "headRefName": "coserv-appendix",
+      "headRefOid": "52b0996af5994fe5a4074dd671f8e89fd188ce80",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CC @paulhowardarm\r\n",
+          "createdAt": "2026-05-07T13:41:09Z",
+          "updatedAt": "2026-05-07T13:41:09Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
