@@ -1227,8 +1227,7 @@ This document introduces the information element `handle` to include this extra-
 However, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
 Examples include: Endorsements and Reference Values.
 
-The Concise Selector for Endorsements and Reference Values ({{-CoSERV}}) document specifies a structured request/response model for not only the conveyance of Endorsements and Reference Values, but also for their in-path caching and potentially aggregation.
-As such, the structured request/response model defined by CoSERV effectively defines a retrieval and query language for Endorsements and Reference Values that are distributed across various Concptual Message providers and RATS owner roles.
+CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
 
 While there is no explicit 'handle' included in the CoSERV query language, that does not imply that the corresponding semantics are missing from the language.
 Explicitly including a 'handle' information element in CoSERV would undermine an optimization scheme that CoSERV realizes: the combination of the information elements 'attEnvIDs' and 'claimSelection', which are part of the CoSERV request, represent the start of an Epoch (see {{-epoch-markers}}.
