@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 8 November 2026                                          W. Pan
+Expires: 30 November 2026                                         W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                              7 May 2026
+                                                             29 May 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2026.
+   This Internet-Draft will expire on 30 November 2026.
 
 Copyright Notice
 
@@ -1663,9 +1663,9 @@ Table of Contents
    [I-D.ietf-rats-epoch-markers]
               Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
               Bormann, "Epoch Markers", Work in Progress, Internet-
-              Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
+              Draft, draft-ietf-rats-epoch-markers-04, 18 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-03>.
+              epoch-markers-04>.
 
    [IANA.rats]
               IANA, "Remote Attestation Procedures (RATS)",
@@ -1740,9 +1740,9 @@ Table of Contents
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
               G., and D. Ma, "Concise Selector for Endorsements and
               Reference Values", Work in Progress, Internet-Draft,
-              draft-ietf-rats-coserv-05, 2 March 2026,
+              draft-ietf-rats-coserv-06, 11 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              coserv-05>.
+              coserv-06>.
 
    [I-D.ietf-rats-endorsements]
               Thaler, D., Birkholz, H., and T. Fossati, "RATS
@@ -1761,9 +1761,9 @@ Table of Contents
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-11, 30 March
+              draft-ietf-rats-network-device-subscription-12, 26 May
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-11>.
+              rats-network-device-subscription-12>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
@@ -1861,7 +1861,7 @@ Appendix A.  CDDL Specification for a simple CoAP Challenge/Response
    # An Examplary Interaction Model for Endorsement Retrieval with Implicit Handles
 
    The interaction models specified in this document focus on Evidence conveyance.
-   Evidence conveyance requires an indication of recentness, from which freshness if Evidence can be deducted by a Verifier during its appraisal of Evidence.
+   Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
    In this document, the information element `handle` is introduced to include such extra-data in the conveyance of Evidence.
 
    The conveyance of other Conceptual Messages (see {{I-D.ietf-rats-msg-wrap}}) does not necessary rely on the concept of freshness as much as Evidence.
