@@ -1222,7 +1222,7 @@ charra-attestation-response = [
 # An Examplary Interaction Model for Endorsement Retrieval with Implicit Handles
 
 The interaction models specified in this document focus on Evidence conveyance.
-Evidence conveyance requires an indication of recentness, from which freshness if Evidence can be deducted by a Verifier during its appraisal of Evidence.
+Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
 In this document, the information element `handle` is introduced to include such extra-data in the conveyance of Evidence.
 
 The conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessary rely on the concept of freshness as much as Evidence.
