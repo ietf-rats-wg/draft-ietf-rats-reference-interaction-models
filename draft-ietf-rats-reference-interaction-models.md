@@ -1224,9 +1224,8 @@ charra-attestation-response = [
 The interaction models specified in this document focus on Evidence conveyance.
 Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
 This document introduces the information element `handle` to include this extra-data in the conveyance of evidence.
-
-The conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessary rely on the concept of freshness as much as Evidence.
-Examples include: Endorsements and Reference Values
+However, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
+Examples include: Endorsements and Reference Values.
 
 The Concise Selector for Endorsements and Reference Values ({{-CoSERV}}) document specifies a structured request/response model for not only the conveyance of Endorsements and Reference Values, but also for their in-path caching and potentially aggregation.
 As such, the structured request/response model defined by CoSERV effectively defines a retrieval and query language for Endorsements and Reference Values that are distributed across various Concptual Message providers and RATS owner roles.
