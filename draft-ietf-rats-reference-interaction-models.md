@@ -1232,11 +1232,10 @@ CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, an
 The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
 The problem with including an explicit `handle` information element in CoSERV is that it would undermine CoSERV's caching mechanism.
 Instead, the combination of the `attEnvIDs` and `claimSelection` information elements, which are part of the CoSERV request, can be interpreted as representing the start of an epoch (see {{-epoch-markers}}).
-In essence, the URL in the get request becomes the 'handle' in the interaction.
-CoSERV's handle variant (effectively, the URL in the GET request) is used to minimize in-path interaction via caching.
-The 'generateEndorsements' operation illustrated below {{fig-coserv-transactionfig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and and expiration timestamp for the response.
-Semantically, this renders the URL in the GET request effectively a 'handle' that specifies the start of an epoch and the expiration timestamp specifies the end of an epoch.
-Of course, this approach implies that an entity taking on a RATS role has access to a reliable time source (which could be an Epoch Bell {{-epoch-markers}}.
+Essentially, the URL in the GET request becomes the `handle` in the interaction.
+The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.
+Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
+This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
 
 ~~~~ aasvg
 .----------.                                                .----------.
