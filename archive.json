@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T02:36:42.883210+00:00",
+  "timestamp": "2026-05-31T03:24:59.940972+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -5533,13 +5533,13 @@
       "labels": [],
       "body": "addresses #78 \r\n\r\nIllustrating the different shapes and forms a handle can take outside \"classical' Conveyance of Evidence.",
       "createdAt": "2026-05-07T12:32:08Z",
-      "updatedAt": "2026-05-07T13:41:09Z",
+      "updatedAt": "2026-05-29T14:17:40Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "8ff3e76a3f41cbd46149d99614fcfbec7ddfb40c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "coserv-appendix",
-      "headRefOid": "52b0996af5994fe5a4074dd671f8e89fd188ce80",
+      "headRefOid": "cfe8bf1dbd4d7c9ecf27b5aa98c2fd2df2a6430b",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5553,7 +5553,118 @@
           "updatedAt": "2026-05-07T13:41:09Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOEYizNM8AAAABBaUXHQ",
+          "commit": {
+            "abbreviatedOid": "52b0996"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some editorial suggestions inlined",
+          "createdAt": "2026-05-29T12:55:44Z",
+          "updatedAt": "2026-05-29T13:17:47Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "1st attempt at de-clunkification\n\n```suggestion\nEvidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.\n```\n\nBut I am not even sure this is what you really meant.",
+              "createdAt": "2026-05-29T12:55:44Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "use the active form\n\n```suggestion\nThis document introduces the information element `handle` to include this extra-data in the conveyance of evidence.\n```",
+              "createdAt": "2026-05-29T12:56:50Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            },
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\nHowever, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.\nExamples include: Endorsements and Reference Values.\n```",
+              "createdAt": "2026-05-29T12:58:11Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "streamline\n\n```suggestion\nCoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.\n```",
+              "createdAt": "2026-05-29T13:09:26Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "de-clunkify\n\n```suggestion\nThe absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.\nThe problem with including an explicit `handle` information element in CoSERV is that it would undermine CoSERV's caching mechanism.\nInstead, the combination of the `attEnvIDs` and `claimSelection` information elements, which are part of the CoSERV request, can be interpreted as representing the start of an epoch (see {{-epoch-markers}}).\n```",
+              "createdAt": "2026-05-29T13:13:11Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\nEssentially, the URL in the GET request becomes the `handle` in the interaction.\nThe `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.\nSemantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.\nThis approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.\n```",
+              "createdAt": "2026-05-29T13:17:26Z",
+              "updatedAt": "2026-05-29T13:17:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABBa2SoA",
+          "commit": {
+            "abbreviatedOid": "52b0996"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-29T14:11:38Z",
+          "updatedAt": "2026-05-29T14:11:39Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "this is what I meant... it was poorly phrased.",
+              "createdAt": "2026-05-29T14:11:39Z",
+              "updatedAt": "2026-05-29T14:11:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABBa2h3Q",
+          "commit": {
+            "abbreviatedOid": "1bf0f05"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-29T14:12:05Z",
+          "updatedAt": "2026-05-29T14:12:05Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": ":+1:",
+              "createdAt": "2026-05-29T14:12:05Z",
+              "updatedAt": "2026-05-29T14:12:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABBa3RYQ",
+          "commit": {
+            "abbreviatedOid": "115401b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-29T14:13:29Z",
+          "updatedAt": "2026-05-29T14:13:29Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "better",
+              "createdAt": "2026-05-29T14:13:29Z",
+              "updatedAt": "2026-05-29T14:13:30Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
