@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-31T03:24:59.940972+00:00",
+  "timestamp": "2026-06-14T03:36:16.184497+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -5533,7 +5533,7 @@
       "labels": [],
       "body": "addresses #78 \r\n\r\nIllustrating the different shapes and forms a handle can take outside \"classical' Conveyance of Evidence.",
       "createdAt": "2026-05-07T12:32:08Z",
-      "updatedAt": "2026-05-29T14:17:40Z",
+      "updatedAt": "2026-06-12T08:42:27Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "8ff3e76a3f41cbd46149d99614fcfbec7ddfb40c",
@@ -5661,6 +5661,50 @@
               "body": "better",
               "createdAt": "2026-05-29T14:13:29Z",
               "updatedAt": "2026-05-29T14:13:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABC0CWqA",
+          "commit": {
+            "abbreviatedOid": "cfe8bf1"
+          },
+          "author": "paulhowardarm",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Thanks for taking this on, Henk. Looks really good overall. A few nits/observations.",
+          "createdAt": "2026-06-12T08:17:42Z",
+          "updatedAt": "2026-06-12T08:42:27Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "I'd contend that `ingestEndorsements` is a separate phase of its own (e.g. `========[Endorsements Ingestion]======`). With the diagram as structured right now, it implies (to my eye) that there is an ingestion event per each request/collect event, which is not the case.",
+              "createdAt": "2026-06-12T08:17:42Z",
+              "updatedAt": "2026-06-12T08:42:27Z"
+            },
+            {
+              "originalPosition": 52,
+              "body": "Slight inconsistency of labelling here in that `Verifier` is a RATS role while `CoSERV` is not. CoSERV is the conveyance protocol, so it feels awkward to use it as the label for only one of the participants. It operates between the participants.\n\nWe could label them generically as `CoSERV producer` and `CoSERV consumer`, with some prose to explain that the producer is typically an `Endorser` or `Reference Value Provider`, while the consumer is typically a `Verifier`.\n\nOr, we could make the labels much more wordy and have them as `CoSERV producer (e.g. Endorser or Reference Value Provider)`, and `CoSERV consumer (e.g. Verifier)`.",
+              "createdAt": "2026-06-12T08:22:42Z",
+              "updatedAt": "2026-06-12T08:42:27Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "We could do with spelling this out, because I had to scratch my head a bit to understand how `claimSelection` is part of a CoSERV request. CoSERV supports queries by \"stateful environments\", so I'm assuming that `claimSelection` corresponds to the stateful part. But it would reassure me (and help other readers) to say this explicitly. We could enrich this further by referencing \u00a73.3.1 of CoSERV (\"Stateful Environments\").",
+              "createdAt": "2026-06-12T08:31:48Z",
+              "updatedAt": "2026-06-12T08:42:27Z"
+            },
+            {
+              "originalPosition": 43,
+              "body": "> The problem with including an explicit `handle` information element in CoSERV is that it would undermine CoSERV's caching mechanism.\n\nCan we spell out _how_ it is undermined, just to be kinder to readers? In the CoSERV draft we have a specific section \u00a73.4.3 on \"Avoidance of Volatile Data in Queries\". It might help to reference that specific section from here, just to help glue things together.",
+              "createdAt": "2026-06-12T08:34:56Z",
+              "updatedAt": "2026-06-12T08:42:27Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "As of version 06 of CoSERV, we now also support queries by RIM identifiers instead of by stateful environments. Should we be representing this in the diagram? (I think this diagram was originally created before such queries existed).\n\nThe issue is that CoSERV queries are now bifurcated, with environment-based queries and RIM-ID-based queries as two independent and exclusive forks of the data model. It's effectively a union type. I'm not sure if there's a convention for representing that here. Feels like we want something like:\n\n`requestEndorsements((attEnvIDs, claimSelection) | (rimIDs))`\n\nOr maybe there's a better canonical term for `rimIDs` that we should re-use here?",
+              "createdAt": "2026-06-12T08:40:36Z",
+              "updatedAt": "2026-06-12T08:42:27Z"
             }
           ]
         }
