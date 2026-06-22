@@ -3566,15 +3566,17 @@ In {{fig-coserv-transaction}}, the RATS roles of Verifier, Endorser and Referenc
 |  (e.g., Endorser) |                                | (e.g., Verifier |
 '----+--------------'                                '------------+----'
      |                                                            |
+====================[Endorsements Ingestion]============================
+     |                                                            |
+  ingestEndorsements(attEnvIDs, claims)                           |
+     | =&gt; endorsements                                            |
+     |                                                            |
 ====================[Initiating Evidence Appraisal]=====================
      |                                                            |
      |                                  initEvidenceAppraisal(evidence)
      |                               attEnvIDs, claimSelection &lt;= |
      |                                                            |
 ===============[Endorsements Collection and Conveyance]=================
-     |                                                            |
-  ingestEndorsements(attEnvIDs, claims)                           |
-     | =&gt; endorsements                                            |
      |                                                            |
      |&lt;----------------- requestEndorsements(attEnvIDs, claimSelection)
      |                                                            |
