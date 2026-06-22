@@ -1230,7 +1230,8 @@ Examples include: Endorsements and Reference Values.
 CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
 
 The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
-The problem with including an explicit `handle` information element in CoSERV is that it would undermine CoSERV's caching mechanism.
+The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (See {{Section 3.4.3 of -CoSERV}}).
+
 Instead, the combination of the `attEnvIDs` and `claimSelection` information elements, which are part of the CoSERV request, can be interpreted as representing the start of an epoch (see {{-epoch-markers}}).
 Essentially, the URL in the GET request becomes the `handle` in the interaction.
 The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.
