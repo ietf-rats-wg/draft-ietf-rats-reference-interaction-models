@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 30 November 2026                                         W. Pan
+Expires: 24 December 2026                                         W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                             29 May 2026
+                                                            22 June 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2026.
+   This Internet-Draft will expire on 24 December 2026.
 
 Copyright Notice
 
@@ -1761,16 +1761,16 @@ Table of Contents
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-12, 26 May
+              draft-ietf-rats-network-device-subscription-13, 16 June
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-12>.
+              rats-network-device-subscription-13>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
               "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
-              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-07, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-spice-sd-cwt-07>.
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-08, 1
+              June 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-spice-sd-cwt-08>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
@@ -1869,7 +1869,8 @@ Appendix A.  CDDL Specification for a simple CoAP Challenge/Response
    CoSERV ({{I-D.ietf-rats-coserv}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
 
    The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
-   The problem with including an explicit `handle` information element in CoSERV is that it would undermine CoSERV's caching mechanism.
+   The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (See {{Section 3.4.3 of I-D.ietf-rats-coserv}}).
+
    Instead, the combination of the `attEnvIDs` and `claimSelection` information elements, which are part of the CoSERV request, can be interpreted as representing the start of an epoch (see {{I-D.ietf-rats-epoch-markers}}).
    Essentially, the URL in the GET request becomes the `handle` in the interaction.
    The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{I-D.ietf-rats-corim}}) alongside the query and expiration timestamp for the response.
