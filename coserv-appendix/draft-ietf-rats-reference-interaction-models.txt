@@ -1877,7 +1877,8 @@ Appendix A.  CDDL Specification for a simple CoAP Challenge/Response
    Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
    This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{I-D.ietf-rats-epoch-markers}}.
 
-   In {{fig-coserv-transaction}}, the RATS roles of Verifier, Endorser and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
+   {{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of I-D.ietf-rats-coserv}}.
+   The RATS roles of Verifier, Endorser and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
 
    ~~~~ aasvg
    .-------------------.                                .-----------------.
