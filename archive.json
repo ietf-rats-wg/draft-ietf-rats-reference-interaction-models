@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-14T03:36:16.184497+00:00",
+  "timestamp": "2026-06-23T02:50:20.234585+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
   "labels": [
     {
@@ -5533,13 +5533,13 @@
       "labels": [],
       "body": "addresses #78 \r\n\r\nIllustrating the different shapes and forms a handle can take outside \"classical' Conveyance of Evidence.",
       "createdAt": "2026-05-07T12:32:08Z",
-      "updatedAt": "2026-06-12T08:42:27Z",
+      "updatedAt": "2026-06-22T10:21:37Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "baseRefName": "master",
       "baseRefOid": "8ff3e76a3f41cbd46149d99614fcfbec7ddfb40c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-reference-interaction-models",
       "headRefName": "coserv-appendix",
-      "headRefOid": "cfe8bf1dbd4d7c9ecf27b5aa98c2fd2df2a6430b",
+      "headRefOid": "05c50929f8e3af72bd5e5046f1374978c6eabf06",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5707,6 +5707,119 @@
               "updatedAt": "2026-06-12T08:42:27Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDsYLUA",
+          "commit": {
+            "abbreviatedOid": "cfe8bf1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T09:40:16Z",
+          "updatedAt": "2026-06-22T09:40:16Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "fixed in 99a2a7eb1dc0cebf162914d8869b5a0730aa5c6c",
+              "createdAt": "2026-06-22T09:40:16Z",
+              "updatedAt": "2026-06-22T09:40:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDsczlw",
+          "commit": {
+            "abbreviatedOid": "5675f27"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T09:51:19Z",
+          "updatedAt": "2026-06-22T09:51:20Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "Addressed in 5675f277776b9feaeed9fd75c700e21c635636b4",
+              "createdAt": "2026-06-22T09:51:19Z",
+              "updatedAt": "2026-06-22T09:51:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDsg8ZQ",
+          "commit": {
+            "abbreviatedOid": "8133f7a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T09:59:28Z",
+          "updatedAt": "2026-06-22T09:59:28Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "addressed in 8133f7a3672df8768d231a506d930c0dddc69d21",
+              "createdAt": "2026-06-22T09:59:28Z",
+              "updatedAt": "2026-06-22T09:59:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDsjTkg",
+          "commit": {
+            "abbreviatedOid": "bc96427"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T10:04:08Z",
+          "updatedAt": "2026-06-22T10:04:09Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "Addressed in bc964272ab5d82cca89c27a19f38b225846f5840",
+              "createdAt": "2026-06-22T10:04:08Z",
+              "updatedAt": "2026-06-22T10:04:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDslvCw",
+          "commit": {
+            "abbreviatedOid": "05c5092"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-22T10:09:17Z",
+          "updatedAt": "2026-06-22T10:09:17Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "addressed in 05c50929f8e3af72bd5e5046f1374978c6eabf06",
+              "createdAt": "2026-06-22T10:09:17Z",
+              "updatedAt": "2026-06-22T10:09:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEYizNM8AAAABDsrtDA",
+          "commit": {
+            "abbreviatedOid": "05c5092"
+          },
+          "author": "paulhowardarm",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks for addressing the review points. This looks good to me, now.",
+          "createdAt": "2026-06-22T10:21:37Z",
+          "updatedAt": "2026-06-22T10:21:37Z",
+          "comments": []
         }
       ]
     }
