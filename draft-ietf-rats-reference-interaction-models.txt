@@ -4,12 +4,12 @@
 
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
-Intended status: Informational                            Fraunhofer SIT
-Expires: 5 November 2026                                          W. Pan
+Intended status: Standards Track                          Fraunhofer SIT
+Expires: 13 March 2027                                            W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                              4 May 2026
+                                                        9 September 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 November 2026.
+   This Internet-Draft will expire on 13 March 2027.
 
 Copyright Notice
 
@@ -1663,9 +1663,9 @@ Table of Contents
    [I-D.ietf-rats-epoch-markers]
               Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
               Bormann, "Epoch Markers", Work in Progress, Internet-
-              Draft, draft-ietf-rats-epoch-markers-03, 2 March 2026,
+              Draft, draft-ietf-rats-epoch-markers-05, 3 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-03>.
+              epoch-markers-05>.
 
    [IANA.rats]
               IANA, "Remote Attestation Procedures (RATS)",
@@ -1729,6 +1729,21 @@ Table of Contents
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-tuda-07>.
 
+   [I-D.ietf-rats-corim]
+              Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
+              W. Pan, "Concise Reference Integrity Manifest", Work in
+              Progress, Internet-Draft, draft-ietf-rats-corim-11, 6 July
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-corim-11>.
+
+   [I-D.ietf-rats-coserv]
+              Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
+              G., and D. Ma, "Concise Selector for Endorsements and
+              Reference Values", Work in Progress, Internet-Draft,
+              draft-ietf-rats-coserv-07, 6 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              coserv-07>.
+
    [I-D.ietf-rats-endorsements]
               Thaler, D., Birkholz, H., and T. Fossati, "RATS
               Endorsements", Work in Progress, Internet-Draft, draft-
@@ -1746,16 +1761,16 @@ Table of Contents
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-11, 30 March
+              draft-ietf-rats-network-device-subscription-13, 16 June
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-11>.
+              rats-network-device-subscription-13>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
               "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
-              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-07, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-spice-sd-cwt-07>.
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-08, 1
+              June 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-spice-sd-cwt-08>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
@@ -1842,6 +1857,67 @@ Appendix A.  CDDL Specification for a simple CoAP Challenge/Response
        tpm2-signature: bytes,
        ? ak-cert: bytes,         ; TPM2 attestation key certificate (AK Cert)
    ]
+
+   # An Examplary Interaction Model for Endorsement Retrieval with Implicit Handles
+
+   The interaction models specified in this document focus on Evidence conveyance.
+   Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
+   This document introduces the information element `handle` to include this extra-data in the conveyance of evidence.
+   However, the conveyance of other Conceptual Messages (see {{I-D.ietf-rats-msg-wrap}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
+   Examples include: Endorsements and Reference Values.
+
+   CoSERV ({{I-D.ietf-rats-coserv}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
+
+   The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
+   The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (see {{Section 3.4.3 of I-D.ietf-rats-coserv}}).
+
+   Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of I-D.ietf-rats-coserv}}), their combination represents the start of an epoch (see {{I-D.ietf-rats-epoch-markers}}).
+   Essentially, the URL in the GET request becomes the `handle` in the interaction.
+   The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{I-D.ietf-rats-corim}}) alongside the query and expiration timestamp for the response.
+   Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
+   This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{I-D.ietf-rats-epoch-markers}}.
+
+   {{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of I-D.ietf-rats-coserv}}.
+   The RATS roles of Verifier, Endorser and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
+
+   ~~~~ aasvg
+   .-------------------.                                .-----------------.
+   |  CoSERV producer  |                                | CoSERV consumer |
+   |  (e.g., Endorser) |                                | (e.g., Verifier |
+   '----+--------------'                                '------------+----'
+        |                                                            |
+   ====================[Endorsements Ingestion]============================
+        |                                                            |
+     ingestEndorsements(attEnvIDs, claims)                           |
+        | => endorsements                                            |
+        |                                                            |
+   ====================[Initiating Evidence Appraisal]=====================
+        |                                                            |
+        |                                  initEvidenceAppraisal(evidence)
+        |                               attEnvIDs, claimSelection <= |
+        |                                                            |
+   ===============[Endorsements Collection and Conveyance]=================
+        |                                                            |
+        |<----------------- requestEndorsements(attEnvIDs, claimSelection)
+        |                                                            |
+     collectEndorsementClaims(attEnvIDs, claimSelection)             |
+        | => collectedClaims                                         |
+        |                                                            |
+     generateEndorsements(attEnvIDs,                                 |
+        claimSelection, collectedClaims)                             |
+        | => endorsements                                            |
+        |                                                            |
+        | {endorsements} ------------------------------------------->|
+        |                                                            |
+   ==========================[Evidence Appraisal]==========================
+        |                                                            |
+        |                         appraiseEvidence(evidence, endorsements)
+        |                                       attestationResult <= |
+        |                                                            |
+
+               Figure 10: Endorsement Collection using CoSERV
+
+   ~~~~
 
 Authors' Addresses
 
