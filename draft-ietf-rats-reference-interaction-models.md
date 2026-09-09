@@ -21,7 +21,7 @@ author:
   name: Henk Birkholz
   org: Fraunhofer SIT
   abbrev: Fraunhofer SIT
-  email: henk.birkholz@ietf.contact
+  email: henk.birkholz@sit.fraunhofer.de
   street: Rheinstrasse 75
   code: '64295'
   city: Darmstadt
