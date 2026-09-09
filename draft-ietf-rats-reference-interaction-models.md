@@ -9,7 +9,7 @@ stand_alone: true
 ipr: trust200902
 area: Security
 kw: Internet-Draft
-cat: info
+cat: std
 submissionType: IETF
 pi:
   toc: yes
@@ -58,6 +58,8 @@ normative:
 
 informative:
   I-D.birkholz-rats-tuda: TUDA
+  I-D.ietf-rats-coserv: CoSERV
+  I-D.ietf-rats-corim: CoRIM
   RFC7617:
   RFC8446:
   RFC9110:
@@ -1216,5 +1218,64 @@ charra-attestation-response = [
     tpm2-signature: bytes,
     ? ak-cert: bytes,         ; TPM2 attestation key certificate (AK Cert)
 ]
-~~~~
 
+# An Examplary Interaction Model for Endorsement Retrieval with Implicit Handles
+
+The interaction models specified in this document focus on Evidence conveyance.
+Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
+This document introduces the information element `handle` to include this extra-data in the conveyance of evidence.
+However, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
+Examples include: Endorsements and Reference Values.
+
+CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating endorsements and reference values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
+
+The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
+The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (see {{Section 3.4.3 of -CoSERV}}).
+
+Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), their combination represents the start of an epoch (see {{-epoch-markers}}).
+Essentially, the URL in the GET request becomes the `handle` in the interaction.
+The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.
+Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
+This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
+
+{{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of -CoSERV}}.
+The RATS roles of Verifier, Endorser and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
+
+~~~~ aasvg
+.-------------------.                                .-----------------.
+|  CoSERV producer  |                                | CoSERV consumer |
+|  (e.g., Endorser) |                                | (e.g., Verifier |
+'----+--------------'                                '------------+----'
+     |                                                            |
+====================[Endorsements Ingestion]============================
+     |                                                            |
+  ingestEndorsements(attEnvIDs, claims)                           |
+     | => endorsements                                            |
+     |                                                            |
+====================[Initiating Evidence Appraisal]=====================
+     |                                                            |
+     |                                  initEvidenceAppraisal(evidence)
+     |                               attEnvIDs, claimSelection <= |
+     |                                                            |
+===============[Endorsements Collection and Conveyance]=================
+     |                                                            |
+     |<----------------- requestEndorsements(attEnvIDs, claimSelection)
+     |                                                            |
+  collectEndorsementClaims(attEnvIDs, claimSelection)             |
+     | => collectedClaims                                         |
+     |                                                            |
+  generateEndorsements(attEnvIDs,                                 |
+     claimSelection, collectedClaims)                             |
+     | => endorsements                                            |
+     |                                                            |
+     | {endorsements} ------------------------------------------->|
+     |                                                            |
+==========================[Evidence Appraisal]==========================
+     |                                                            |
+     |                         appraiseEvidence(evidence, endorsements)
+     |                                       attestationResult <= |
+     |                                                            |
+~~~~
+{: #fig-coserv-transaction title="Endorsement Collection using CoSERV"}
+
+~~~~
