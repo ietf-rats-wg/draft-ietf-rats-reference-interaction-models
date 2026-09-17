@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 13 March 2027                                            W. Pan
+Expires: 21 March 2027                                            W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                        9 September 2026
+                                                       17 September 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 March 2027.
+   This Internet-Draft will expire on 21 March 2027.
 
 Copyright Notice
 
@@ -1747,9 +1747,9 @@ Table of Contents
    [I-D.ietf-rats-endorsements]
               Thaler, D., Birkholz, H., and T. Fossati, "RATS
               Endorsements", Work in Progress, Internet-Draft, draft-
-              ietf-rats-endorsements-09, 2 March 2026,
+              ietf-rats-endorsements-10, 16 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              endorsements-09>.
+              endorsements-10>.
 
    [I-D.ietf-rats-msg-wrap]
               Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
