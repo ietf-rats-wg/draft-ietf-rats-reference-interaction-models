@@ -55,6 +55,7 @@ normative:
 
 informative:
   RFC4949:
+  RFC8132:
   RFC7252: COAP
   RFC8949: CBOR
   BCP205:
@@ -367,7 +368,7 @@ Verifier Inputs (`verInputs`):
 
 : Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence.
 These Conceptual Messages can take various forms.
-For example, Reference Values can be expressed as Reference Integrity Measurements (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Attesting Environment IDs (`attEnvIDs`):
 
@@ -852,7 +853,7 @@ If a new Handle is required, it is conveyed by a subsequent subscribe operation.
 
 If Evidence or delta Evidence repeatedly fails to verify, a Verifier may terminate the subscription.
 The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document.
-For example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.
+For example, {{-rats-network-device-subscription}} specifies when a subscription is terminated and when a new subscription has to be established.
 
 ### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
@@ -1012,7 +1013,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
 ====================[Attestation Result Generation]=====================
      |          |                        |                        |
-     |     sub(topic=AttRes,            |                        |
+     |     sub(topic=AttRes,             |                        |
      |         handle) ----------------->|                        |
      |          |                        |                        |
  .--------[loop]------------------------------------------------------.
@@ -1225,8 +1226,8 @@ IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CM
 # CDDL Specification for a simple CoAP Challenge/Response Interaction
 
 The following CDDL specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
-The communication protocol used is CoAP.
-Both the request message and the response message are exchanged via the FETCH operation and corresponding FETCH request and FETCH response body.
+The communication protocol used is CoAP {{-COAP}}.
+Both the request message and the response message are exchanged via the FETCH method {{RFC8132}} and corresponding FETCH request and FETCH response body.
 
 In this example, Evidence is created via the root-of-trust for reporting primitive operation "quote" that is provided by a TPM 2.0.
 
@@ -1279,7 +1280,7 @@ The RATS roles of Verifier, Endorser, and Reference Value Provider can take on a
 ~~~~ aasvg
 .-------------------.                                .-----------------.
 |  CoSERV producer  |                                | CoSERV consumer |
-|  (e.g., Endorser) |                                | (e.g., Verifier |
+|  (e.g., Endorser) |                                | (e.g., Verifier)|
 '----+--------------'                                '------------+----'
      |                                                            |
 ====================[Endorsements Ingestion]============================
