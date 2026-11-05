@@ -833,7 +833,7 @@ In scenarios with large numbers of Attesters and Verifiers, the publish-subscrib
 With publish-subscribe, clients typically *connect* to (or *register* with) a publish-subscribe server (PubSub server or Broker).
 Clients may *publish* data in the form of a *message* under a certain *topic*.
 *Subscribers* to that topic get *notified* whenever a message arrives under a topic, and the appropriate message is forwarded to them.
-Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers or both.
+Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers, or both.
 
 The Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
 All roles MUST establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
@@ -1239,7 +1239,7 @@ Semantically, this makes the URL in the GET request a `handle` that specifies th
 This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
 
 {{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of -CoSERV}}).
-The RATS roles of Verifier, Endorser and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
+The RATS roles of Verifier, Endorser, and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
 
 ~~~~ aasvg
 .-------------------.                                .-----------------.
