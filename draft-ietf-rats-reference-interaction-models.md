@@ -1061,7 +1061,7 @@ Michael Eckel (michael.eckel@sit.fraunhofer.de)
 {: #security-and-privacy-considerations}
 # Security and Privacy Considerations
 
-This document outlines three interaction models for remote attestation procedures (RATS) {{-RATS}}.
+This document outlines three interaction models for Remote ATtestation procedureS (RATS) {{-RATS}}.
 While the subsequent sections address additional security and privacy considerations, the security considerations from {{Section 12 of -RATS}} must also be adhered to.
 Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
