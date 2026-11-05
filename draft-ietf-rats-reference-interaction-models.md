@@ -1297,16 +1297,21 @@ This document introduces the information element `handle` to include this extra 
 However, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
 Examples include Endorsements and Reference Values.
 
-CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating Endorsements and Reference Values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
+CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating Endorsements and Reference Values, as well as a retrieval and query language for these values that works across various Endorsers and Reference Value Providers.
 
 The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
 The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (see {{Section 3.4.3 of -CoSERV}}).
 
-Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), their combination represents the start of an epoch (see {{-epoch-markers}}).
+Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), the query that includes their combination identifies the requested Endorsements and Reference Values in a stable way (see {{Section 3.4.3 of -CoSERV}}).
 Essentially, the URL in the GET request becomes the `handle` in the interaction.
-The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.
-Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
-This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
+The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (for a query by environment, typically CoMID triples {{-CoRIM}} with their authority delegation chains) alongside the query and expiration timestamp for the response.
+Semantically, an epoch starts when the CoSERV producer computes the result set for the query and ends at the expiration timestamp of that result set (see {{Section 6.1.5.1 of -CoSERV}}).
+Each new computation of a result set for the query starts a new epoch, which can begin before the previous epoch ends, for example, when a request with `Cache-Control: no-cache` causes a new computation (see {{Section 6.1.5 of -CoSERV}}).
+A response served from a cache includes the result set of the computation that produced it, together with its expiration timestamp, and therefore belongs to the epoch of that computation.
+The query included in the URL is the same in every epoch, which keeps the results cacheable (see {{Section 3.4.3 of -CoSERV}}).
+The expiration timestamp included in the result set, which is returned together with the query, changes with every computation of the result set (see {{Section 6.1.5.2 of -CoSERV}}).
+Hence, the query and its expiration timestamp together identify the epoch, and the query needs no per-transaction data that would undermine the caching.
+This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, an Epoch Bell that emits Epoch Markers that include a timestamp {{-epoch-markers}}.
 
 {{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.4.1 of -CoSERV}}).
 The RATS roles of Verifier, Endorser, and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
