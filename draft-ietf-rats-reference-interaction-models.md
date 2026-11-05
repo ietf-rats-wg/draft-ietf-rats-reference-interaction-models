@@ -167,7 +167,7 @@ Conveyance protocols realize the interaction models, for example, {{-charra}} re
 The requirements in {{essential-requirements}} and the prerequisites in {{normative-prerequisites}} apply to every protocol that realizes an interaction model.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving (see {{cryptographic-blinding}}) conveyance methods for RATS Conceptual Messages, in particular for Evidence conveyed from an Attester to a Verifier.
-While the exact details for conveyance of other Conceptual Messages are out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
+While the exact details for conveyance of other Conceptual Messages are out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements, Attestation Results, or Handles (e.g., Epoch Markers {{-epoch-markers}}, see {{cm-handle}}), or supplemental messages, such as stand-alone event logs.
 
 # Terminology {#terminology}
 
@@ -184,7 +184,8 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example, in a cryptographic key broker system (see {{Section 6 of -RATS}} for more details).
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
+Similarly, the conveyance of Attestation Results can be "Local", if the Verifier and Relying Party roles are hosted by the same entity, for example, in a cryptographic key broker system (see {{Section 6 of -RATS}} for more details).
 If an entity takes on two or more different roles, the functions it provides typically reside in isolated environments that are components of the same entity.
 Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).
 
@@ -464,7 +465,8 @@ Event Logs may accompany the produced Claims and provide an event trail of secur
 Claims are produced by all Attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
-Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
+Alternative initiation flows, e.g., through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
+Initiation by a Relying Party that also relays the request and the Evidence is shown in the Background-Check Model ({{fig-background-check}}).
 A request includes a Handle, an optional list of Attesting Environment IDs, and an optional Claim Selection.
 
 In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce {{RFC4949}}, such as a cryptographically strong random number.
@@ -475,7 +477,7 @@ In this interaction model, that nonce is an attestation nonce (freshness handle)
 The list of Attesting Environment IDs selects the attestation keys with which the Attester is requested to sign the Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
 As a result, a single Attesting Environment ID identifies a single Attesting Environment.
-Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attesting Environment IDs.
+Correspondingly, an Attesting Environment that holds more than one attestation key has more than one Attesting Environment ID, so Evidence originating from that Attesting Environment in a composite device can be requested via multiple Attesting Environment IDs.
 Methods to acquire Attesting Environment IDs or mappings between Attesting Environments and Attesting Environment IDs are out of scope of this document.
 
 Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attesting Environment ID(s), as well as the trust anchors required to establish trust in that key material.
@@ -488,7 +490,7 @@ For example, when performing a boot integrity evaluation, a Verifier may only re
 
 With the Handle, the Attesting Environment IDs, and the Collected Claims, the Attester produces signed Evidence.
 That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attesting Environment ID.
-This is done once per Attesting Environment which is identified by the particular Attesting Environment ID.
+This is done once per selected Attesting Environment ID.
 The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
 The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the signature of Evidence, which is created with the Authentication Secret.
