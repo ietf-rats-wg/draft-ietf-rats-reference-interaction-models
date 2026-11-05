@@ -1236,11 +1236,10 @@ Server-Authenticated TLS with HTTP Authentication:
 
 ### Hardware Enforcement/Support
 
-In environments where the integrity and security of Evidence are paramount, hardware-based security features play a critical role.
-Technologies like Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide robust protections against tampering and unauthorized access.
-These are especially important in high-security settings such as financial services or military applications, where attestation processes must rely on physically secure and tamper-resistant components to meet stringent regulatory and security standards.
-
-By addressing these application-specific security requirements within the context of defined interaction models, security strategies can be tailored to fit the unique challenges and operational contexts of different remote attestation scenarios.
+Remote attestation procedures mostly rely on hardware-enforced isolation of the Attesting Environment from the Target Environment and on the physical security of the Attester, anchored in a root of trust.
+Only the strength of the protection provided varies, from process isolation enforced by the processor of a general-purpose device to specialized hardware that resists physical attacks on a chip (see {{Section 12.1.1 of -RATS}}).
+Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
+High-security settings, such as financial services or military applications, typically require specialized hardware that resists physical attacks to meet regulatory and security standards.
 
 # IANA Considerations
 
