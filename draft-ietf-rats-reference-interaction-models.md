@@ -478,7 +478,7 @@ Variants that include a Relying Party (e.g., Passport or Background-Check models
 
 ### Models and Example Sequences of Challenge/Response Remote Attestation
 
-According to the RATS Architecture, two reference models for Challenge/Response Remote Attestation have been proposed.
+According to the RATS Architecture ({{Section 5 of -RATS}}), two reference models for Challenge/Response Remote Attestation have been proposed.
 This section highlights the information flows between the Attester, Verifier, and Relying Party in a remote attestation procedure that uses these models.
 
 #### Passport Model
