@@ -122,7 +122,7 @@ informative:
     date: 2006
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
-  I-D.ietf-rats-msg-wrap: rats-cmw
+  RFC9999: rats-cmw
   I-D.fossati-seat-expat: seat-expat
   I-D.fossati-seat-early-attestation: seat-early-attestation
 
@@ -282,7 +282,7 @@ For example, a group of Attesters can be identified by an Attester Identity.
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
 
-: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+: An Attester Identity MAY be bound to an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
 Evidence Authenticity:
@@ -490,7 +490,7 @@ That is, it digitally signs the Handle and the Collected Claims with a cryptogra
 This is done once per Attesting Environment which is identified by the particular Attesting Environment ID.
 The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence.
+The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the signature of Evidence, which is created with the Authentication Secret.
 These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference, see {{security-and-privacy-considerations}}.
 
@@ -1270,7 +1270,7 @@ The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} s
 Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
 This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
 
-{{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of -CoSERV}}).
+{{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.4.1 of -CoSERV}}).
 The RATS roles of Verifier, Endorser, and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
 
 ~~~~ aasvg
