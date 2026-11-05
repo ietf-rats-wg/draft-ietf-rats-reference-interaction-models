@@ -1318,4 +1318,4 @@ The RATS roles of Verifier, Endorser, and Reference Value Provider can take on a
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to thank Olaf Bergmann, Michael Richardson, and Ned Smith.
+The authors would like to thank Thomas Fossati, Olaf Bergmann, Michael Richardson, and Ned Smith.
