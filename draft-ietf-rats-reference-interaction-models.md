@@ -528,7 +528,7 @@ This is done once per selected Attesting Environment ID.
 The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
 The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the protection of Evidence created with the Authentication Secret (e.g., a signature or a MAC).
-These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
+These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via salted digests) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference, see {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
@@ -1132,8 +1132,6 @@ Additionally, for TPM-based remote attestation, the security considerations outl
 
 {: #cryptographic-blinding}
 ## Selective Disclosure and Obfuscation
-
-This section uses the term "blinding" in the broad sense of privacy-preserving treatment of attributes prior to disclosure (e.g., selective disclosure, obfuscation, or encryption), and not in the more specific cryptographic sense used for blind signatures.
 
 In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal.
 For example, an attribute can be conveyed only as a salted digest (e.g., as in {{-sd-cwt}}) that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
