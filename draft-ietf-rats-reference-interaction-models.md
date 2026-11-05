@@ -253,7 +253,7 @@ Similarly, deviations from the generic model described in this document can be i
 In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:
 
 Integrity:
-: Information provided by an Attester MUST NOT have been altered since it was created.
+: Any alteration of information provided by an Attester since its creation MUST be detectable by the Verifier.
 This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in the PSA TF-M profile ({{Section 5.2 of -psa-token}}), or via asymmetric cryptography, e.g., using a COSE signature algorithm such as ECDSA.
 
 Authentication:
@@ -270,7 +270,8 @@ In order to ensure Evidence is appropriately conveyed through the interaction mo
 
 Authentication Secret:
 
-: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester.
+: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester, or, if it is a symmetric key, also to the Verifiers that appraise the Evidence.
+Such Verifiers MUST NOT use a symmetric Authentication Secret to protect statements of their own, as protected statements then no longer speak for the Attester alone.
 
 : The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
 
@@ -496,7 +497,7 @@ That is, it digitally signs the Handle and the Collected Claims with a cryptogra
 This is done once per selected Attesting Environment ID.
 The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the signature of Evidence, which is created with the Authentication Secret.
+The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the protection of Evidence created with the Authentication Secret (e.g., a signature or a MAC).
 These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference, see {{security-and-privacy-considerations}}.
 
