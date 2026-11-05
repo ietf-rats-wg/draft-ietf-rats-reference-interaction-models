@@ -132,6 +132,8 @@ informative:
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
   I-D.ietf-rats-msg-wrap: rats-cmw
+  I-D.fossati-seat-expat: seat-expat
+  I-D.fossati-seat-early-attestation: seat-early-attestation
 
 entity:
   SELF: "RFCthis"
@@ -315,6 +317,9 @@ Handle (`handle`):
 Examples include attestation nonces (see {{nonce-disambiguation}}), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
 Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
+
+: This specification extends the set of RATS Conceptual Messages defined in {{Section 1 of -rats-cmw}} with the "handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
+An expected use of this indicator is to transport channel binders in the context of attested TLS, for example in {{-seat-expat}} and {{-seat-early-attestation}}.
 
 Claims (`claims`):
 
