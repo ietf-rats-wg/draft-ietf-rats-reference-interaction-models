@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 13 March 2027                                            W. Pan
+Expires: 9 May 2027                                               W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                        9 September 2026
+                                                         5 November 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 March 2027.
+   This Internet-Draft will expire on 9 May 2027.
 
 Copyright Notice
 
@@ -422,6 +422,13 @@ Table of Contents
       contexts where the concrete Handle type matters, this document
       uses the more specific term (e.g., "attestation nonce" or "Epoch
       Marker") in addition to the generic term Handle.
+
+      This specification extends the set of RATS Conceptual Messages
+      defined in Section 1 of [I-D.ietf-rats-msg-wrap] with the "handle"
+      Conceptual Message, and registers a corresponding CMW indicator
+      (Section 10.1).  An expected use of this indicator is to transport
+      channel binders in the context of attested TLS, for example in
+      [I-D.fossati-seat-expat] and [I-D.fossati-seat-early-attestation].
 
    Claims (claims):  _mandatory_
 
@@ -1663,9 +1670,9 @@ Table of Contents
    [I-D.ietf-rats-epoch-markers]
               Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
               Bormann, "Epoch Markers", Work in Progress, Internet-
-              Draft, draft-ietf-rats-epoch-markers-05, 3 July 2026,
+              Draft, draft-ietf-rats-epoch-markers-08, 2 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-05>.
+              epoch-markers-08>.
 
    [IANA.rats]
               IANA, "Remote Attestation Procedures (RATS)",
@@ -1729,27 +1736,44 @@ Table of Contents
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-tuda-07>.
 
+   [I-D.fossati-seat-early-attestation]
+              Sheffer, Y., Mihalcea, I., Deshpande, Y., Fossati, T., and
+              T. Reddy.K, "Using Attestation in Transport Layer Security
+              (TLS) and Datagram Transport Layer Security (DTLS)", Work
+              in Progress, Internet-Draft, draft-fossati-seat-early-
+              attestation-09, 1 November 2026,
+              <https://datatracker.ietf.org/doc/html/draft-fossati-seat-
+              early-attestation-09>.
+
+   [I-D.fossati-seat-expat]
+              Sardar, M. U., Fossati, T., Reddy.K, T., Sheffer, Y.,
+              Tschofenig, H., and I. Mihalcea, "Remote Attestation with
+              Exported Authenticators", Work in Progress, Internet-
+              Draft, draft-fossati-seat-expat-05, 2 November 2026,
+              <https://datatracker.ietf.org/doc/html/draft-fossati-seat-
+              expat-05>.
+
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-11, 6 July
-              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-11>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-12, 1
+              November 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-12>.
 
    [I-D.ietf-rats-coserv]
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
               G., and D. Ma, "Concise Selector for Endorsements and
               Reference Values", Work in Progress, Internet-Draft,
-              draft-ietf-rats-coserv-07, 6 July 2026,
+              draft-ietf-rats-coserv-08, 30 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              coserv-07>.
+              coserv-08>.
 
    [I-D.ietf-rats-endorsements]
-              Thaler, D., Birkholz, H., and T. Fossati, "RATS
-              Endorsements", Work in Progress, Internet-Draft, draft-
-              ietf-rats-endorsements-09, 2 March 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              endorsements-09>.
+              Thaler, D., Birkholz, H., and T. Fossati, "Remote
+              Attestation Procedures (RATS) Endorsements", Work in
+              Progress, Internet-Draft, draft-ietf-rats-endorsements-13,
+              14 October 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-endorsements-13>.
 
    [I-D.ietf-rats-msg-wrap]
               Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
@@ -1761,16 +1785,16 @@ Table of Contents
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-13, 16 June
+              draft-ietf-rats-network-device-subscription-16, 4 November
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-13>.
+              rats-network-device-subscription-16>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
               "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
-              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-08, 1
-              June 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-spice-sd-cwt-08>.
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-09, 30
+              October 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-spice-sd-cwt-09>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
