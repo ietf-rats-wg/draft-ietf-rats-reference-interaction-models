@@ -137,9 +137,11 @@ entity:
 
 --- abstract
 
-This document describes interaction models for remote attestation procedures (RATS) {{-RATS}}.
+This document describes interaction models for Remote ATtestation procedureS (RATS).
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
-Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.
+Similarly, a general overview about the information elements typically used by corresponding conveyance protocols is highlighted.
+This document does not define a conveyance protocol of its own.
+Conveyance protocols specified in other documents realize one or more of these interaction models.
 
 --- middle
 
