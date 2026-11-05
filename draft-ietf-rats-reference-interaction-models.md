@@ -339,7 +339,8 @@ Collected Claims (`collectedClaims`):
 : Collected Claims represent a (sub-)set of Claims created by an Attester.
 
 : Collected Claims are gathered based on the Claim Selection.
-If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.
+If a Verifier omits the Claim Selection in a protocol that can convey one, all available Claims on the Attester are part of the Collected Claims.
+If a protocol cannot convey a Claim Selection, the default Claim Selection defined by the Attester determines the Collected Claims.
 
 Evidence (`evidence`):
 
@@ -865,7 +866,7 @@ Clients may *publish* data in the form of a *message* under a certain *topic*.
 Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers, or both.
 
 The Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
-All roles MUST establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
+All roles MUST establish a trust relationship with the Broker and, if present, the Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
 
 Ensuring the security of these trusted third parties is vital, as any compromise could undermine the entire remote attestation procedure.
 Therefore, the deployment of Brokers and Handle Distributors requires stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the remote attestation framework.
