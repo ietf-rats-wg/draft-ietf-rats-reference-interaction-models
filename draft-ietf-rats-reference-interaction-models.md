@@ -189,16 +189,21 @@ Examples of such isolated environments include a Trusted Execution Environment (
 
 ## Nonce Disambiguation {#nonce-disambiguation}
 
-The term "nonce" can be used in different security disciplines with different intended security properties. To avoid confusion, this document distinguishes the following contexts:
+The term "nonce" can be used in different security disciplines with different intended security properties.
+To avoid confusion, this document distinguishes the following contexts:
 
 Attestation nonce (freshness handle):
-: A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or Evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.
+: A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or Evidence freshness.
+It is conveyed to an Attesting Environment and is cryptographically bound into Evidence.
+Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.
 
 TLS nonce:
-: Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.
+: Random values used within TLS handshakes and key derivation.
+These are not Handles and are unrelated to Evidence freshness semantics in this document.
 
 Signature nonce (e.g., ECDSA nonce):
-: Ephemeral randomness used internally by some signature algorithms. These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.
+: Ephemeral randomness used internally by some signature algorithms.
+These are not protocol-visible Handles and have different security requirements (e.g., uniqueness and secrecy) than attestation nonces.
 
 Unless explicitly stated otherwise, when this document uses the term "nonce" in the context of Handles, it refers to an *attestation nonce* with the purpose to demonstrate freshness.
 
@@ -244,10 +249,12 @@ Similarly, deviations from the generic model described in this document can be i
 In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:
 
 Integrity:
-: Information provided by an Attester MUST NOT have been altered since it was created. This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in the PSA TF-M profile ({{Section 5.2 of -psa-token}}), or via asymmetric cryptography, e.g., using a COSE signature algorithm such as ECDSA.
+: Information provided by an Attester MUST NOT have been altered since it was created.
+This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in the PSA TF-M profile ({{Section 5.2 of -psa-token}}), or via asymmetric cryptography, e.g., using a COSE signature algorithm such as ECDSA.
 
 Authentication:
-: The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier.
+: The information provided by the Attester MUST be authentic.
+To do this, the Attester should authenticate itself to the Verifier.
 
 : This can be achieved by digitally signing the Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
 
@@ -268,7 +275,8 @@ Attester Identity:
 : A statement made by an Endorser about an Attester that affirms the Attester's distinguishability.
 
 : In essence, an Attester Identity can either be explicit (e.g., via a Claim in Evidence or Endorsement) or implicit (e.g., via a signature that matches a trust anchor).
-Note that distinguishability does not imply uniqueness. For example, a group of Attesters can be identified by an Attester Identity.
+Note that distinguishability does not imply uniqueness.
+For example, a group of Attesters can be identified by an Attester Identity.
 
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
@@ -282,7 +290,9 @@ Evidence Authenticity:
 
 : To provide a proof of authenticity, Evidence can be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or could include a correct, unambiguous, and stable reference to an accessible identity document.
 
-: For signature validation and appraisal, the Verifier MUST be able to obtain the corresponding verification key material (e.g., a public key or certificate) and the trust anchor(s) needed to establish trust in that material. This may be achieved via provisioning/enrollment, by conveying the identity document together with Evidence, or by providing a stable reference that enables retrieval of the identity document. The concrete distribution and enrollment mechanisms are out of scope of this document.
+: For signature validation and appraisal, the Verifier MUST be able to obtain the corresponding verification key material (e.g., a public key or certificate) and the trust anchor(s) needed to establish trust in that material.
+This may be achieved via provisioning/enrollment, by conveying the identity document together with Evidence, or by providing a stable reference that enables retrieval of the identity document.
+The concrete distribution and enrollment mechanisms are out of scope of this document.
 
 : Authenticity includes the protection of Evidence in a tamper-evident manner (e.g., either by signatures or by protection mechanisms implemented at both ends of a Secure Channel, see Authentication above).
 
@@ -318,7 +328,8 @@ Claims (`claims`):
 
 : Claims are assertions that represent characteristics of an Attester's Target Environment.
 
-: Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers. The other information elements in this section can be presented as Claims in any type of Conceptual Message.
+: Claims are part of a Conceptual Message and are used, for example, to appraise the integrity of Attesters by Verifiers.
+The other information elements in this section can be presented as Claims in any type of Conceptual Message.
 
 Collected Claims (`collectedClaims`):
 
@@ -326,7 +337,8 @@ Collected Claims (`collectedClaims`):
 
 : Collected Claims represent a (sub-)set of Claims created by an Attester.
 
-: Collected Claims are gathered based on the Claim Selection. If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.
+: Collected Claims are gathered based on the Claim Selection.
+If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.
 
 Evidence (`evidence`):
 
@@ -343,19 +355,23 @@ Attestation Result (`attestationResult`):
 
 : Attestation Results are assertions about the integrity or other characteristics of the appraised Attester.
 
-: Attestation Results are created by Verifiers based on appraised Evidence and other input information. Attestation Results are typically conveyed to Relying Parties and can be used to inform access control decisions.
+: Attestation Results are created by Verifiers based on appraised Evidence and other input information.
+Attestation Results are typically conveyed to Relying Parties and can be used to inform access control decisions.
 
 Verifier Inputs (`verInputs`):
 
 : *mandatory*
 
-: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence. These Conceptual Messages can take various forms. For example, Reference Values can be expressed as Reference Integrity Measurements (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+: Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence.
+These Conceptual Messages can take various forms.
+For example, Reference Values can be expressed as Reference Integrity Measurements (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Attesting Environment IDs (`attEnvIDs`):
 
 : *optional*
 
-: A statement representing one or more identifiers that MUST be associated with a corresponding Attesting Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
+: A statement representing one or more identifiers that MUST be associated with a corresponding Attesting Environment's keys used to protect Claims in Evidence produced by an Attester.
+Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
 
 : A Verifier MAY use such identifiers (or other key identifiers used by a given interaction model) to locate the verification key material and related trust anchors required to validate the Evidence signature.
 
@@ -367,7 +383,8 @@ Event Logs (`eventLogs`):
 
 : *optional*
 
-: Event Logs accompany Claims by providing event trails of security-critical events in a system. The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.
+: Event Logs accompany Claims by providing event trails of security-critical events in a system.
+The primary purpose of Event Logs is to ensure Claim reproducibility by providing information on how Claims originated.
 
 Claim Selection (`claimSelection`):
 
@@ -440,14 +457,16 @@ Note: In the following diagrams, a leading `?` indicates that an information ele
 {: #fig-challenge-response title="Challenge/Response Remote Attestation"}
 
 The Attester boots up and thereby produces Claims about its boot state and its operational state during runtime (cf. {{terminology}}), e.g., loaded applications, configurations, and environment variables.
-Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system. Claims are produced by all Attesting Environments of an Attester system.
+Event Logs may accompany the produced Claims and provide an event trail of security-critical events in the system.
+Claims are produced by all Attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
 Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
 A request includes a Handle, an optional list of Attesting Environment IDs, and an optional Claim Selection.
 
 In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce {{RFC4949}}, such as a cryptographically strong random number.
-This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks. However, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.
+This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks.
+However, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.
 In this interaction model, that nonce is an attestation nonce (freshness handle) as described in {{nonce-disambiguation}}.
 
 The list of Attesting Environment IDs selects the attestation keys with which the Attester is requested to sign the Evidence.
@@ -456,16 +475,21 @@ As a result, a single Attesting Environment ID identifies a single Attesting Env
 Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attesting Environment IDs.
 Methods to acquire Attesting Environment IDs or mappings between Attesting Environments and Attesting Environment IDs are out of scope of this document.
 
-Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attesting Environment ID(s), as well as the trust anchors required to establish trust in that key material. This trust material may be provisioned/enrolled out of band, conveyed alongside Evidence, or retrieved via a stable reference to an identity document.
+Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attesting Environment ID(s), as well as the trust anchors required to establish trust in that key material.
+This trust material may be provisioned/enrolled out of band, conveyed alongside Evidence, or retrieved via a stable reference to an identity document.
 
 The Attester selects Claims based on the specified Claim Selection, which is defined by the Verifier.
 The Claim Selection determines the Collected Claims, which may be a subset of all the available Claims.
 If the Claim Selection is omitted, then all available Claims on the Attester MUST be used to create corresponding Evidence.
 For example, when performing a boot integrity evaluation, a Verifier may only request specific claims about the Attester, such as Evidence about the BIOS/UEFI and firmware that the Attester booted up, without including information about all currently running software.
 
-With the Handle, the Attesting Environment IDs, and the Collected Claims, the Attester produces signed Evidence. That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attesting Environment ID. This is done once per Attesting Environment which is identified by the particular Attesting Environment ID. The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
+With the Handle, the Attesting Environment IDs, and the Collected Claims, the Attester produces signed Evidence.
+That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attesting Environment ID.
+This is done once per Attesting Environment which is identified by the particular Attesting Environment ID.
+The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence. These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
+The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence.
+These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference, see {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
@@ -490,7 +514,8 @@ The Verifier then gives back an Attestation Result to the Attester, which caches
 In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.
 
 In Challenge/Response interaction models, the Handle (e.g., an attestation nonce) can be generated by different trusted roles depending on deployment context.
-In the Passport model, the Handle MAY be generated by the Relying Party and conveyed as part of the `requestEvidence(...)` call. Alternatively, it MAY be generated by the Verifier and conveyed to the Attester (e.g., via the Relying Party or other protocol mechanisms).
+In the Passport model, the Handle MAY be generated by the Relying Party and conveyed as part of the `requestEvidence(...)` call.
+Alternatively, it MAY be generated by the Verifier and conveyed to the Attester (e.g., via the Relying Party or other protocol mechanisms).
 
 ~~~~ aasvg
 .----------.                     .---------------.         .----------.
@@ -673,7 +698,8 @@ A request for Evidence from the Verifier, in contrast, would result in a sequenc
 The specific manner in which Handles are generated is out of scope of this document.
 Epoch Markers {{-epoch-markers}} are one example of a specific Handle representation.
 
-In the Uni-Directional model, Evidence may be conveyed as full Evidence or as delta Evidence. Regardless of whether delta Evidence is used, each Evidence conveyance is bound to a current Handle.
+In the Uni-Directional model, Evidence may be conveyed as full Evidence or as delta Evidence.
+Regardless of whether delta Evidence is used, each Evidence conveyance is bound to a current Handle.
 In the diagrams, `handleDelta` denotes the Handle associated with the delta Evidence conveyance, which may be the same as the previous Handle or a newly issued Handle (e.g., for a new Epoch or freshness window).
 The concrete rules for when a Handle is rotated (resulting in a new `handleDelta`) are deployment- and protocol-specific and are out of scope of this document.
 
@@ -819,7 +845,8 @@ Delta Evidence is produced with respect to the previous conveyance, but it is st
 If a new Handle is required, it is conveyed by a subsequent subscribe operation.
 
 If Evidence or delta Evidence repeatedly fails to verify, a Verifier may terminate the subscription.
-The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document. For example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.
+The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document.
+For example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.
 
 ### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
@@ -1066,7 +1093,8 @@ Additionally, for TPM-based remote attestation, the security considerations outl
 
 This section uses the term "blinding" in the broad sense of privacy-preserving treatment of attributes prior to disclosure (e.g., selective disclosure, obfuscation, or encryption), and not in the more specific cryptographic sense used for blind signatures.
 
-In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal. For example, an attribute can be conveyed only as a digest that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
+In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal.
+For example, an attribute can be conveyed only as a digest that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
 
 ## Trust Assumptions on the Handle Distributor
 
