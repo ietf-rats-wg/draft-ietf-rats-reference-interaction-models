@@ -271,6 +271,7 @@ Attester Identity:
 Note that distinguishability does not imply uniqueness. For example, a group of Attesters can be identified by an Attester Identity.
 
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
+For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
 
 : An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
@@ -378,6 +379,7 @@ Claim Selection (`claimSelection`):
 For example, a Verifier could send a Claim Selection, among other elements, to an Attester.
 An Attester MAY decide whether or not to provide all requested Claims from a Claim Selection to the Verifier.
 If there is no way to convey a Claim Selection in a remote attestation protocol, a default Claim Selection (e.g., "all") MUST be defined by the Attester and SHOULD be known by the Verifier.
+A Verifier that does not know the default Claim Selection can still appraise the Claims included in Evidence, but it cannot check the Collected Claims against the Claim Selection that determined them.
 In order to select Claims, Claims that can be potentially included in Evidence by an Attesting Environment have to be known by the Verifier.
 
 ## Handles as RATS Conceptual Messages {#cm-handle}
@@ -834,7 +836,7 @@ Clients may *publish* data in the form of a *message* under a certain *topic*.
 Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers or both.
 
 The Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
-All roles must establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
+All roles MUST establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
 
 Ensuring the security of these trusted third parties is vital, as any compromise could undermine the entire remote attestation procedure.
 Therefore, the deployment of Brokers and Handle Distributors requires stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the remote attestation framework.
