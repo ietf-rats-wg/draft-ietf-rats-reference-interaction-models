@@ -429,6 +429,7 @@ The way the Handle is processed is the most prominent difference between the thr
 ## Challenge/Response Remote Attestation {#challenge-response}
 
 Note: In the following diagrams, a leading `?` indicates that an information element is optional.
+The diagrams in {{unidirectional}} and {{streaming}} show `attEnvIDs` and `eventLogs` without a leading `?`, and these information elements remain optional as defined in {{generic-ies}}.
 
 ~~~~ aasvg
 .----------.                                                .----------.
@@ -719,7 +720,7 @@ If the Verifier has received the current Handle, it can determine whether the re
 
 ### Handle Lifecycle and Propagation Delays {#handle-lifecycle-and-propagation-delays}
 
-The term "uni-directional" refers to individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
+The term "uni-directional" refers to individual conveyance channels: one from the Handle Distributor to the Attester, one from the Handle Distributor to the Verifier, and one from the Attester to the Verifier.
 Together, they establish an attestation loop without requiring request/response exchanges.
 This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
@@ -739,7 +740,7 @@ To manage this complexity, it is essential to define a clear policy for Handle v
   For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps of the Attester (e.g., TPM tick counter values) to fresh Handles issued by a trusted TSA, which the Handle Distributor also conveys to the Verifier.
 
 * *Grace Periods*:
-  Define grace periods during which a newly issued Handle starts being accepted, and the old Handle stops being valid.
+  Define grace periods during which both the newly issued Handle and the previous Handle are accepted, after which the previous Handle stops being valid.
   This period should be long enough to account for the maximum expected propagation delay across the network.
 
 Implementing these measures will help mitigate the risks associated with the Handle lifecycle, particularly in environments where propagation delays are significant.
@@ -990,7 +991,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 ~~~~
 {: #fig-streaming-with-broker-evidence-gen title="Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe"}
 
-Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
+As in the Uni-Directional interaction model, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the Evidence.
 Although the above diagram depicts only full Evidence and Event Logs, later conveyances may use deltas for Evidence and Event Logs.
