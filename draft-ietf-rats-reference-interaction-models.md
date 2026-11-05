@@ -172,7 +172,8 @@ While the exact details for conveyance of other Conceptual Messages are out of s
 # Terminology {#terminology}
 
 This document uses the following terms defined in {{Section 4 of -RATS}}:
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
+Attester, Verifier, Relying Party, Endorser, Reference Value Provider, Claim, Evidence, Endorsement, Reference Values, Attestation Result, Appraisal Policy for Evidence, and Appraisal Policy for Attestation Results.
+This document also uses the terms Attesting Environment and Target Environment ({{Section 3.1 of -RATS}}), Composite Device ({{Section 3.3 of -RATS}}), Conceptual Message ({{Section 8 of -RATS}}), Appraisal Policy ({{Section 8.5 of -RATS}}), and Epoch ID ({{Section 10.3 of -RATS}}).
 
 A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 
@@ -502,8 +503,8 @@ Variants that include a Relying Party (e.g., Passport or Background-Check models
 
 ### Models and Example Sequences of Challenge/Response Remote Attestation
 
-According to the RATS Architecture ({{Section 5 of -RATS}}), two reference models for Challenge/Response Remote Attestation have been proposed.
-This section highlights the information flows between the Attester, Verifier, and Relying Party in a remote attestation procedure that uses these models.
+The RATS Architecture ({{Section 5 of -RATS}}) describes two reference models as topological patterns, the Passport Model and the Background-Check Model.
+This section highlights the information flows between the Attester, Verifier, and Relying Party in a Challenge/Response remote attestation procedure that uses these models.
 
 #### Passport Model
 
