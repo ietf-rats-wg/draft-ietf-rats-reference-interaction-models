@@ -64,6 +64,7 @@ informative:
   I-D.birkholz-rats-tuda: TUDA
   I-D.ietf-rats-coserv: CoSERV
   I-D.ietf-rats-corim: CoRIM
+  RFC7616:
   RFC7617:
   RFC8446:
   RFC9110:
@@ -86,13 +87,24 @@ informative:
       page: 132-145
     date: 2004
   MQTT:
-    title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
+    title: MQTT Version 5.0
     author:
-    - ins: OASIS
-      name: Organization for the Advancement of Structured Information Standards
+    - ins: A. Banks
+      name: Andrew Banks
+      role: editor
+    - ins: E. Briggs
+      name: Ed Briggs
+      role: editor
+    - ins: K. Borgendale
+      name: Ken Borgendale
+      role: editor
+    - ins: R. Gupta
+      name: Rahul Gupta
+      role: editor
     seriesinfo:
-      Specification: Version 5.0
-    date: 2018
+      OASIS: Standard
+    date: 2019-03-07
+    target: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
   DesignPatterns:
     title: Design Patterns - Elements of Reusable Object-Oriented Software
     author:
@@ -122,7 +134,10 @@ informative:
     author:
     - ins: B. Lampson
       name: Butler Lampson
-    date: 2006
+    seriesinfo:
+      Marktoberdorf: Summer School
+    date: 2006-08-02
+    target: https://www.microsoft.com/en-us/research/publication/practical-principles-for-computer-security/
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
   I-D.fossati-seat-expat: seat-expat
@@ -1121,7 +1136,7 @@ Additionally, for TPM-based remote attestation, the security considerations outl
 This section uses the term "blinding" in the broad sense of privacy-preserving treatment of attributes prior to disclosure (e.g., selective disclosure, obfuscation, or encryption), and not in the more specific cryptographic sense used for blind signatures.
 
 In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal.
-For example, an attribute can be conveyed only as a digest that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
+For example, an attribute can be conveyed only as a salted digest (e.g., as in {{-sd-cwt}}) that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
 
 ## Trust Assumptions on the Handle Distributor
 
@@ -1218,7 +1233,7 @@ Mutual TLS (mTLS):
 
 Server-Authenticated TLS with HTTP Authentication:
 : Server-only TLS authentication can be combined with application-layer client authentication.
-  The server authenticates via its TLS certificate, while the client uses HTTP authentication {{RFC9110}} such as Basic {{RFC7617}} or Digest credentials.
+  The server authenticates via its TLS certificate, while the client uses HTTP authentication {{RFC9110}} such as Basic {{RFC7617}} or Digest {{RFC7616}} credentials.
   This approach suits deployments where client certificates are impractical.
 
 ### Hardware Enforcement/Support
