@@ -64,6 +64,7 @@ informative:
   RFC8446:
   RFC9110:
   RFC9683: RIV
+  RFC9684: charra
   RFC9783: psa-token
   RFC9781: uccs
   DAA:
@@ -167,6 +168,10 @@ This document aims to:
 
 1. prevent inconsistencies in descriptions of interaction models in other documents, which may occur due to text cloning and evolution over time, and to
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
+
+This document does not define a conveyance protocol of its own and cannot be implemented by itself.
+Conveyance protocols realize the interaction models, for example, {{-charra}} realizes Challenge/Response Remote Attestation ({{challenge-response}}) and {{-rats-network-device-subscription}} realizes Streaming Remote Attestation ({{streaming}}).
+The requirements in {{essential-requirements}} and the prerequisites in {{normative-prerequisites}} apply to every protocol that realizes an interaction model.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving (see Section {{cryptographic-blinding}}) conveyance methods for RATS Conceptual Messages; specifically attestation Evidence conveyed from an Attester to a Verifier.
 While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
