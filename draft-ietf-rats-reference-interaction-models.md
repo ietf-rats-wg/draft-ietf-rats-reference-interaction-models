@@ -412,6 +412,7 @@ Given their ubiquity and key role, it is appropriate to recognize them as RATS C
 
 Accordingly, {{iana-handle-cmind}} registers a new Conceptual Message indicator for Handles to be used with Conceptual Message Wrappers (CMW) {{-rats-cmw}}.
 A concrete Handle representation requires an associated media type for use with CMW.
+Specifications that define a concrete Handle representation can register a more specific CMW Indicator.
 
 # Interaction Models {#interaction-models}
 
@@ -1215,6 +1216,7 @@ By addressing these application-specific security requirements within the contex
 ## New Conceptual Message Indicator for Handles {#iana-handle-cmind}
 
 IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote Attestation Procedures (RATS)" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.
+Handles extend the set of RATS Conceptual Messages as described in {{generic-ies}} and {{cm-handle}}, which is the basis for this IANA registration request under {{Section 9.4 of -rats-cmw}}.
 
 | Indicator value | Conceptual Message name | Reference |
 |-----------------|-------------------------|-----------|
