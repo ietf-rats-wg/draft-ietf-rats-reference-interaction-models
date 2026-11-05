@@ -259,10 +259,9 @@ In order to ensure Evidence is appropriately conveyed through the interaction mo
 
 Authentication Secret:
 
-: An Authentication Secret MUST be established before any RATS interaction takes place, and it must be made available exclusively to an Attesting Environment of the Attester.
+: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester.
 
 : The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
-The Authentication Secret MUST be established before RATS take place.
 
 Attester Identity:
 
