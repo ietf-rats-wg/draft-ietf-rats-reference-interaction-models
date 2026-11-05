@@ -707,7 +707,7 @@ To manage this complexity, it is essential to define a clear policy for handle v
 
 * *Synchronization Checks*:
   Implement periodic synchronization checks between the Handle Distributor and both Attesters and Verifiers to ensure that handles are updated consistently across all participants.
-  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps from Attesters and Verifiers to fresh Epoch Handles issued by a trusted TSA, thereby proving that both entities share a consistent notion of time.
+  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps from Attesters and Verifiers to fresh Handles issued by a trusted TSA, thereby proving that both entities share a consistent notion of time.
 
 * *Grace Periods*:
   Define grace periods during which a newly issued handle starts being accepted, and the old handle stops being valid.
@@ -726,7 +726,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 ## Streaming Remote Attestation {#streaming}
 
-Streaming Remote Attestation serves as the foundational concept for both the publish-subscribe pattern {{DesignPatterns}} and the observer pattern {{ISIS}}.
+Streaming Remote Attestation serves as the foundational concept for both the publish-subscribe pattern {{ISIS}} and the observer pattern {{DesignPatterns}}.
 It entails establishing subscription state to enable continuous remote attestation.
 In the publish-subscribe pattern, a central broker is used to distribute messages between publishers and subscribers.
 The broker receives messages from publishers and forwards them to the appropriate subscribers.
