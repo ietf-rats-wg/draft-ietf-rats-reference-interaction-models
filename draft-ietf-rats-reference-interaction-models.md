@@ -192,7 +192,7 @@ Examples of such isolated environments include a Trusted Execution Environment (
 The term "nonce" can be used in different security disciplines with different intended security properties. To avoid confusion, this document distinguishes the following contexts:
 
 Attestation nonce (freshness handle):
-: A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.
+: A nonce used as a Handle in a remote attestation interaction model to provide replay protection and/or Evidence freshness. It is conveyed to an Attesting Environment and is cryptographically bound into Evidence. Depending on deployment, an attestation nonce MAY also serve as a claims-collection control signal (e.g., to invalidate cached claims and trigger re-collection of fresh claims), and it may be provisioned before a reboot and then included with Evidence collected after boot.
 
 TLS nonce:
 : Random values used within TLS handshakes and key derivation. These are not Handles and are unrelated to Evidence freshness semantics in this document.
@@ -249,7 +249,7 @@ Integrity:
 Authentication:
 : The information provided by the Attester MUST be authentic. To do this, the Attester should authenticate itself to the Verifier.
 
-: This can be achieved by digitally signing the Attestation Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
+: This can be achieved by digitally signing the Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
 
 : Alternatively, Evidence can be conveyed over a secure channel that provides authentication (see {{Sections 3 and 4 of -uccs}}).
 
@@ -276,9 +276,9 @@ Note that distinguishability does not imply uniqueness. For example, a group of 
 : An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
-Attestation Evidence Authenticity:
+Evidence Authenticity:
 
-: Attestation Evidence MUST be authentic.
+: Evidence MUST be authentic.
 
 : To provide a proof of authenticity, Evidence can be cryptographically associated with an identity document (e.g., a PKIX certificate or trusted key material, or a randomized DAA credential {{DAA}}), or could include a correct, unambiguous, and stable reference to an accessible identity document.
 
@@ -306,7 +306,7 @@ Handle (`handle`):
 
 : The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
 Examples include attestation nonces (see {{nonce-disambiguation}}), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
-Handles can also indicate authenticity or attestation Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
+Handles can also indicate authenticity or Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain handle.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
 
 : This specification extends the set of RATS Conceptual Messages defined in {{Section 1 of -rats-cmw}} with the "handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
@@ -332,8 +332,8 @@ Evidence (`evidence`):
 
 : *mandatory*
 
-: A set of Claims that can include: (a) a list of Attestation Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
-Attestation Evidence MUST cryptographically bind all of these information elements.
+: A set of Claims that can include: (a) a list of Attesting Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
+Evidence MUST cryptographically bind all of these information elements.
 Evidence MUST be protected via an Authentication Secret.
 The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
 
@@ -355,7 +355,7 @@ Attesting Environment IDs (`attEnvIDs`):
 
 : *optional*
 
-: A statement representing one or more identifiers that MUST be associated with a corresponding Attestation Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
+: A statement representing one or more identifiers that MUST be associated with a corresponding Attesting Environment's keys used to protect Claims in Evidence produced by an Attester. Exemplary identifiers include attestation key material (e.g., the public key associated with the private key that is used to produce Evidence), key identifiers, environment names, or individual hardware-based immutable identifiers.
 
 : A Verifier MAY use such identifiers (or other key identifiers used by a given interaction model) to locate the verification key material and related trust anchors required to validate the Evidence signature.
 
@@ -395,7 +395,7 @@ A concrete Handle representation requires an associated media type for use with 
 This document describes three interaction models for Remote Attestation:
 
 1. Challenge/Response ({{challenge-response}}),
-2. Unidirectional ({{unidirectional}}), and
+2. Uni-Directional ({{unidirectional}}), and
 3. Streaming ({{streaming}}).
 
 Each section starts with a sequence diagram illustrating the interactions between the involved roles: Attester, Verifier, and, optionally, a Relying Party.
@@ -449,7 +449,7 @@ In the Challenge/Response model, the Handle is composed of qualifying data in th
 This nonce is typically generated by the Verifier to guarantee Evidence freshness and prevent replay attacks. However, depending on deployment context, it may also be generated by another trusted role, such as a Relying Party.
 In this interaction model, that nonce is an attestation nonce (freshness handle) as described in {{nonce-disambiguation}}.
 
-The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the attestation Evidence.
+The list of Attestation Key IDs selects the attestation keys with which the Attester is requested to sign the Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
 As a result, a single Attestation Key ID identifies a single Attesting Environment.
 Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attestation Key IDs.
@@ -693,7 +693,7 @@ The term "uni-directional" refers to individual conveyance channels: one from th
 Together, they establish an attestation loop without requiring request/response exchanges.
 This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
-The lifecycle of a handle is a critical aspect of ensuring the freshness and validity of attestation Evidence.
+The lifecycle of a handle is a critical aspect of ensuring the freshness and validity of Evidence.
 When a new handle is generated by the Handle Distributor, it effectively supersedes the previous handle.
 However, due to network latencies and propagation delays, there may be a period during which both the old and new handles are in circulation.
 This "gray zone" can potentially lead to situations where Evidence may be associated with an outdated handle yet still appear to be valid.
@@ -961,7 +961,7 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 
 Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
 In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
-The PubSub server notifies Verifiers, accordingly, by forwarding the attestation Evidence.
+The PubSub server notifies Verifiers, accordingly, by forwarding the Evidence.
 Although the above diagram depicts only full Evidence and Event Logs, later conveyances may use deltas for Evidence and Event Logs.
 The definition of delta Evidence is provided in {{handle-lifecycle-and-propagation-delays}}.
 
@@ -1071,7 +1071,7 @@ In a remote attestation procedure, the Verifier and the Attester may choose to r
 
 The handle distributor, as a third party in remote attestation scenarios, holds a critical position similar to that of a Trusted Third Party (TTP).
 Given its role in generating handles, it has the potential to influence the attestation process significantly.
-The integrity and reliability of the handles it produces are pivotal for ensuring that the attestation evidence remains trustworthy and that the attestation process is not susceptible to manipulation or interference.
+The integrity and reliability of the handles it produces are pivotal for ensuring that the Evidence remains trustworthy and that the attestation process is not susceptible to manipulation or interference.
 
 ### Security Assumptions
 
@@ -1166,7 +1166,7 @@ Server-Authenticated TLS with HTTP Authentication:
 
 ### Hardware Enforcement/Support
 
-In environments where the integrity and security of attestation evidence are paramount, hardware-based security features play a critical role.
+In environments where the integrity and security of Evidence are paramount, hardware-based security features play a critical role.
 Technologies like Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide robust protections against tampering and unauthorized access.
 These are especially important in high-security settings such as financial services or military applications, where attestation processes must rely on physically secure and tamper-resistant components to meet stringent regulatory and security standards.
 
