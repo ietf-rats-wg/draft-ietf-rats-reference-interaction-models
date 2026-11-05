@@ -49,13 +49,14 @@ normative:
   RFC3161: TSA
   RFC5280: X509
   RFC9334: RATS
-  I-D.ietf-rats-epoch-markers: epoch-markers
-  RFC9711: EAT
   IANA.rats:
 
 informative:
+  I-D.ietf-rats-epoch-markers: epoch-markers
+  RFC9711: EAT
   RFC4949:
   RFC8132:
+  RFC8610:
   RFC7252: COAP
   RFC8949: CBOR
   BCP205:
@@ -719,7 +720,7 @@ If Handles are trusted timestamps, the Handle Distributor includes a trustworthy
 Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-If the Verifier has received the current Handle, it can determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch as identified by an Epoch Marker Handle.
+If the Verifier has received the current Handle, it can determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch (e.g., identified by an Epoch Marker Handle or by a counter signed by the Handle Distributor, see {{Section 10.3 of -RATS}}).
 
 ### Handle Lifecycle and Propagation Delays {#handle-lifecycle-and-propagation-delays}
 
@@ -1225,7 +1226,7 @@ IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CM
 {: #coap-fetch-bodies}
 # CDDL Specification for a simple CoAP Challenge/Response Interaction
 
-The following CDDL specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
+The following CDDL {{RFC8610}} specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
 The communication protocol used is CoAP {{-COAP}}.
 Both the request message and the response message are exchanged via the FETCH method {{RFC8132}} and corresponding FETCH request and FETCH response body.
 
