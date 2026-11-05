@@ -46,12 +46,13 @@ author:
   email: evoit@cisco.com
 
 normative:
-  RFC3161: TSA
-  RFC5280: X509
   RFC9334: RATS
   IANA.rats:
+  RFC9999: rats-cmw
 
 informative:
+  RFC3161: TSA
+  RFC5280: X509
   I-D.ietf-rats-epoch-markers: epoch-markers
   RFC9711: EAT
   RFC4949:
@@ -124,7 +125,6 @@ informative:
     date: 2006
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
-  RFC9999: rats-cmw
   I-D.fossati-seat-expat: seat-expat
   I-D.fossati-seat-early-attestation: seat-early-attestation
 
@@ -352,7 +352,7 @@ Evidence (`evidence`):
 : A set of Claims that can include: (a) a list of Attesting Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
 Evidence MUST cryptographically bind all of these information elements.
 Evidence MUST be protected via an Authentication Secret.
-The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
+The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester, i.e., the Verifier treats every statement protected with the Authentication Secret as made by the Attester.
 
 Attestation Result (`attestationResult`):
 
