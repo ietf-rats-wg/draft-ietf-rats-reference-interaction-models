@@ -1147,7 +1147,7 @@ To mitigate these risks, it is essential to implement robust security measures:
 
 * *End-to-End Authentication:*
   Establishing end-to-end authenticated channels between Attesters and Verifiers ensures that data integrity and authenticity are preserved across the communication process.
-  This measure prevents the Broker from altering the content of the messages, including Handles and other sensitive data.
+  This measure enables receivers to detect any alteration of the messages by the Broker, including alterations of Handles and other sensitive data.
 
 * *Strong Isolation of Topics:*
   Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
@@ -1176,7 +1176,8 @@ This section details additional security considerations that are pertinent to th
 ### Confidentiality
 
 The need for confidentiality in the transmission of attestation information is critical, particularly when exchanges occur over public or untrusted networks, such as the public Internet.
-For instance, in the *Streaming Remote Attestation with a Broker* model (cf. {{streaming-with-broker}}), where data might traverse multiple nodes, employing TLS can provide necessary confidentiality protections.
+For instance, in the *Streaming Remote Attestation with a Broker* model (cf. {{streaming-with-broker}}), where data might traverse multiple nodes, TLS protects each connection between a client and the Broker, but the Broker itself can read the conveyed data.
+Confidentiality with respect to the Broker requires protection of the Conceptual Messages themselves, e.g., encryption for the intended recipient.
 Similarly, for scenarios involving sensitive environments like carrier management networks, evaluating the confidentiality of the transport medium is crucial to ensure that attestation data remains secure against interception or eavesdropping.
 
 ### Mutual Authentication
