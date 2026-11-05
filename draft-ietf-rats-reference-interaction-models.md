@@ -1193,10 +1193,6 @@ IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CM
 | 5 | Handle | {{generic-ies}} and {{cm-handle}} of {{&SELF}} |
 {: #tab-handle-cmind title="New CMW Indicator for Handles"}
 
-# Acknowledgments
-
-Olaf Bergmann, Michael Richardson, and Ned Smith
-
 --- back
 
 {: #coap-fetch-bodies}
@@ -1230,8 +1226,9 @@ charra-attestation-response = [
     tpm2-signature: bytes,
     ? ak-cert: bytes,         ; TPM2 attestation key certificate (AK Cert)
 ]
+~~~~
 
-# An Examplary Interaction Model for Endorsement Retrieval with Implicit Handles
+# An Exemplary Interaction Model for Endorsement Retrieval with Implicit Handles
 
 The interaction models specified in this document focus on Evidence conveyance.
 Evidence conveyance requires an indication of recentness, which a Verifier can use to determine the freshness of Evidence during its appraisal.
@@ -1290,4 +1287,7 @@ The RATS roles of Verifier, Endorser and Reference Value Provider can take on an
 ~~~~
 {: #fig-coserv-transaction title="Endorsement Collection using CoSERV"}
 
-~~~~
+# Acknowledgments
+{:numbered="false"}
+
+The authors would like to thank Olaf Bergmann, Michael Richardson, and Ned Smith.
