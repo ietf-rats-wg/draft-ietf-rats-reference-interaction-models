@@ -269,6 +269,8 @@ To do this, the Attester should authenticate itself to the Verifier.
 : This can be achieved by digitally signing the Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
 
 : Alternatively, Evidence can be conveyed over a secure channel that provides authentication (see {{Sections 3 and 4 of -uccs}}).
+This alternative authenticates the Attester only to the receiving endpoint of the secure channel.
+If Evidence is relayed, e.g., by a Relying Party in the Background-Check Model or by a Broker, the protection of the channel ends at the relaying entity, which then appears as the originator of the Evidence (see {{Section 4 of -uccs}}).
 
 # Normative Prerequisites
 
@@ -740,7 +742,7 @@ If the Verifier has received the current Handle, it can determine whether the re
 ### Handle Lifecycle and Propagation Delays {#handle-lifecycle-and-propagation-delays}
 
 The term "uni-directional" refers to individual conveyance channels: one from the Handle Distributor to the Attester, one from the Handle Distributor to the Verifier, and one from the Attester to the Verifier.
-Together, they establish an attestation loop without requiring request/response exchanges.
+Together, they establish a remote attestation loop without requiring a request/response exchange for each Evidence conveyance.
 This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
 The lifecycle of a Handle is a critical aspect of ensuring the freshness and validity of Evidence.
@@ -1123,7 +1125,7 @@ For example, an attribute can be conveyed only as a digest that is included in, 
 
 ## Trust Assumptions on the Handle Distributor
 
-The Handle Distributor, as a third party in remote attestation scenarios, holds a critical position similar to that of a Trusted Third Party (TTP).
+The Handle Distributor, as a third party in remote attestation scenarios, holds the critical position of a Trusted Third Party (TTP).
 Given its role in generating Handles, it has the potential to influence the attestation process significantly.
 The integrity and reliability of the Handles it produces are pivotal for ensuring that the Evidence remains trustworthy and that the attestation process is not susceptible to manipulation or interference.
 
@@ -1165,7 +1167,7 @@ By defining and adhering to these security assumptions, the role of the Handle D
 
 ## Security Considerations for Brokers in Remote Attestation
 
-The role of the Broker in the *Streaming Remote Attestation with a Broker* model ({{streaming-with-broker}}) introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating Handles and topics.
+Although the Broker is a trusted third party in the *Streaming Remote Attestation with a Broker* model ({{streaming-with-broker}}), a compromised or misbehaving Broker introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating Handles and topics.
 To mitigate these risks, it is essential to implement robust security measures:
 
 * *End-to-End Authentication:*
