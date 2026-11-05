@@ -708,12 +708,13 @@ Note: If a Verifier does not receive the current Handle (e.g., due to propagatio
 In such cases, Evidence appraisal cannot be completed until re-synchronization occurs.
 Error signaling and re-synchronization mechanisms are protocol-specific and out of scope of this document.
 
-In the Uni-Directional model, Handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
-The Handles are created by an external trusted third party (TTP), the Handle Distributor, which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
-Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
+In the Uni-Directional model, Handles can be composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
+The Handles are created by an external trusted third party (TTP), the Handle Distributor.
+If Handles are trusted timestamps, the Handle Distributor includes a trustworthy source of time and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
+Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch as identified by an Epoch Marker Handle.
+If the Verifier has received the current Handle, it can determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch as identified by an Epoch Marker Handle.
 
 ### Handle Lifecycle and Propagation Delays {#handle-lifecycle-and-propagation-delays}
 
@@ -734,7 +735,7 @@ To manage this complexity, it is essential to define a clear policy for Handle v
 
 * *Synchronization Checks*:
   Implement periodic synchronization checks between the Handle Distributor and both Attesters and Verifiers to ensure that Handles are updated consistently across all participants.
-  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps from Attesters and Verifiers to fresh Handles issued by a trusted TSA, thereby proving that both entities share a consistent notion of time.
+  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps of the Attester (e.g., TPM tick counter values) to fresh Handles issued by a trusted TSA, which the Handle Distributor also conveys to the Verifier.
 
 * *Grace Periods*:
   Define grace periods during which a newly issued Handle starts being accepted, and the old Handle stops being valid.
