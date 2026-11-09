@@ -2037,7 +2037,7 @@ Appendix B.  An Exemplary Interaction Model for Endorsement Retrieval
    Verifier, Endorser, and Reference Value Provider can take on an
    additional _logistic_ role of CoSERV producer and consumer.
 
-.-------------------.                                .-----------------.
+.-------------------.                               .------------------.
 |  CoSERV producer  |                               | CoSERV consumer  |
 |  (e.g., Endorser) |                               | (e.g., Verifier) |
 '----+--------------'                               '-------------+----'
