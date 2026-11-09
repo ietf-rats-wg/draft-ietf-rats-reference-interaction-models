@@ -1316,7 +1316,7 @@ This approach assumes that an entity taking on a RATS role has access to a relia
 The RATS roles of Verifier, Endorser, and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
 
 ~~~~ aasvg
-.-------------------.                                .-----------------.
+.-------------------.                               .------------------.
 |  CoSERV producer  |                               | CoSERV consumer  |
 |  (e.g., Endorser) |                               | (e.g., Verifier) |
 '----+--------------'                               '-------------+----'
