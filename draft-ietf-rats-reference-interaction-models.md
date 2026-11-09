@@ -46,21 +46,25 @@ author:
   email: evoit@cisco.com
 
 normative:
-  RFC3161: TSA
-  RFC5280: X509
   RFC9334: RATS
-  I-D.ietf-rats-epoch-markers: epoch-markers
-  RFC9711: EAT
   IANA.rats:
+  RFC9999: rats-cmw
 
 informative:
+  RFC3161: TSA
+  RFC5280: X509
+  I-D.ietf-rats-epoch-markers: epoch-markers
+  RFC9711: EAT
   RFC4949:
+  RFC8132:
+  RFC8610:
   RFC7252: COAP
   RFC8949: CBOR
   BCP205:
   I-D.birkholz-rats-tuda: TUDA
   I-D.ietf-rats-coserv: CoSERV
   I-D.ietf-rats-corim: CoRIM
+  RFC7616:
   RFC7617:
   RFC8446:
   RFC9110:
@@ -83,13 +87,24 @@ informative:
       page: 132-145
     date: 2004
   MQTT:
-    title: Message Queuing Telemetry Transport (MQTT) Version 5.0 Committee Specification 02
+    title: MQTT Version 5.0
     author:
-    - ins: OASIS
-      name: Organization for the Advancement of Structured Information Standards
+    - ins: A. Banks
+      name: Andrew Banks
+      role: editor
+    - ins: E. Briggs
+      name: Ed Briggs
+      role: editor
+    - ins: K. Borgendale
+      name: Ken Borgendale
+      role: editor
+    - ins: R. Gupta
+      name: Rahul Gupta
+      role: editor
     seriesinfo:
-      Specification: Version 5.0
-    date: 2018
+      OASIS: Standard
+    date: 2019-03-07
+    target: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
   DesignPatterns:
     title: Design Patterns - Elements of Reusable Object-Oriented Software
     author:
@@ -119,10 +134,12 @@ informative:
     author:
     - ins: B. Lampson
       name: Butler Lampson
-    date: 2006
+    seriesinfo:
+      Marktoberdorf: Summer School
+    date: 2006-08-02
+    target: https://www.microsoft.com/en-us/research/publication/practical-principles-for-computer-security/
   I-D.ietf-rats-network-device-subscription: rats-network-device-subscription
   I-D.ietf-spice-sd-cwt: sd-cwt
-  I-D.ietf-rats-msg-wrap: rats-cmw
   I-D.fossati-seat-expat: seat-expat
   I-D.fossati-seat-early-attestation: seat-early-attestation
 
@@ -167,14 +184,21 @@ Conveyance protocols realize the interaction models, for example, {{-charra}} re
 The requirements in {{essential-requirements}} and the prerequisites in {{normative-prerequisites}} apply to every protocol that realizes an interaction model.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving (see {{cryptographic-blinding}}) conveyance methods for RATS Conceptual Messages, in particular for Evidence conveyed from an Attester to a Verifier.
-While the exact details for conveyance of other Conceptual Messages are out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
+While the exact details for conveyance of other Conceptual Messages are out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements, Attestation Results, or Handles (e.g., Epoch Markers {{-epoch-markers}}, see {{cm-handle}}), or supplemental messages, such as stand-alone event logs.
 
 # Terminology {#terminology}
 
 This document uses the following terms defined in {{Section 4 of -RATS}}:
-Attester, Verifier, Relying Party, Conceptual Message, Evidence, Endorsement, Attestation Result, Appraisal Policy, Attesting Environment, Target Environment.
+Attester, Verifier, Relying Party, Endorser, Reference Value Provider, Claim, Evidence, Endorsement, Reference Values, Attestation Result, Appraisal Policy for Evidence, and Appraisal Policy for Attestation Results.
+This document also uses the terms Attesting Environment and Target Environment ({{Section 3.1 of -RATS}}), Composite Device ({{Section 3.3 of -RATS}}), Conceptual Message ({{Section 8 of -RATS}}), Appraisal Policy ({{Section 8.5 of -RATS}}), and Epoch ID ({{Section 10.3 of -RATS}}).
 
 A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
+
+Handle Distributor:
+: A trusted third party that generates Handles and distributes them to other RATS roles (see {{unidirectional}}).
+
+Broker:
+: A trusted third party that forwards messages between publishers and subscribers in a publish-subscribe pattern (see {{streaming-with-broker}}).
 
 {::boilerplate bcp14-tagged-bcp14}
 
@@ -183,7 +207,8 @@ A PKIX Certificate is an X.509v3 certificate as specified by {{-X509}}.
 "Remote Attestation" is a common expression often associated or connoted with certain properties.
 In the context of this document, the term "Remote" does not necessarily refer to a remote entity in the scope of network topologies or the Internet.
 It rather refers to decoupled systems or entities that exchange the Conceptual Message type called Evidence {{-RATS}}.
-This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity), or the Verifier and Relying Party roles are hosted by the same entity, for example, in a cryptographic key broker system (see {{Section 6 of -RATS}} for more details).
+This conveyance can also be "Local", if the Verifier role is part of the same entity as the Attester role, e.g., separate system components of the same Composite Device (a single RATS entity).
+Similarly, the conveyance of Attestation Results can be "Local", if the Verifier and Relying Party roles are hosted by the same entity, for example, in a cryptographic key broker system (see {{Section 6 of -RATS}} for more details).
 If an entity takes on two or more different roles, the functions it provides typically reside in isolated environments that are components of the same entity.
 Examples of such isolated environments include a Trusted Execution Environment (TEE), Baseboard Management Controllers (BMCs), as well as other physical or logical protected/isolated/shielded Computing Environments (e.g., embedded Secure Elements (eSE) or Trusted Platform Modules (TPM)).
 
@@ -249,7 +274,7 @@ Similarly, deviations from the generic model described in this document can be i
 In order to ensure appropriate conveyance of Evidence, the following requirements MUST be fulfilled:
 
 Integrity:
-: Information provided by an Attester MUST NOT have been altered since it was created.
+: Any alteration of information provided by an Attester since its creation MUST be detectable by the Verifier.
 This may be achieved via symmetric cryptography, e.g., using COSE Mac0 as in the PSA TF-M profile ({{Section 5.2 of -psa-token}}), or via asymmetric cryptography, e.g., using a COSE signature algorithm such as ECDSA.
 
 Authentication:
@@ -259,6 +284,8 @@ To do this, the Attester should authenticate itself to the Verifier.
 : This can be achieved by digitally signing the Evidence (i.e., explicit authentication) and conveying that signed Evidence to the Verifier, without requiring additional authentication handshakes beyond those needed for conveyance.
 
 : Alternatively, Evidence can be conveyed over a secure channel that provides authentication (see {{Sections 3 and 4 of -uccs}}).
+This alternative authenticates the Attester only to the receiving endpoint of the secure channel.
+If Evidence is relayed, e.g., by a Relying Party in the Background-Check Model or by a Broker, the protection of the channel ends at the relaying entity, which then appears as the originator of the Evidence (see {{Section 4 of -uccs}}).
 
 # Normative Prerequisites
 
@@ -266,7 +293,8 @@ In order to ensure Evidence is appropriately conveyed through the interaction mo
 
 Authentication Secret:
 
-: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester.
+: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester, or, if it is a symmetric key, also to the Verifiers that appraise the Evidence.
+Such Verifiers MUST NOT use a symmetric Authentication Secret to protect statements of their own, as protected statements then no longer speak for the Attester alone.
 
 : The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
 
@@ -281,7 +309,7 @@ For example, a group of Attesters can be identified by an Attester Identity.
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
 
-: An Attester Identity MAY be an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+: An Attester Identity MAY be bound to an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
 Evidence Authenticity:
@@ -307,6 +335,7 @@ This section describes the essential information elements for the interaction mo
 These generic information elements may be Conceptual Messages included in the protocol messages or may be added as protocol parameters, depending on the specific solution.
 
 The information elements below are grouped with mandatory elements first, followed by optional elements.
+In the diagrams, `attestingEnvironment` denotes the Attesting Environment that generates Claims, `endorsements` denotes Endorsements, and the suffix `Delta` denotes the information element of a delta conveyance (see {{handle-lifecycle-and-propagation-delays}}).
 
 Handle (`handle`):
 
@@ -316,7 +345,7 @@ Handle (`handle`):
 
 : The term Handle encompasses various data types that can be utilized to determine recentness, freshness, or provide replay protection.
 Examples include attestation nonces (see {{nonce-disambiguation}}), which are used to demonstrate freshness (and also protect against replay attacks), and Epoch Markers, which identify distinct periods (Epochs) of freshness {{-epoch-markers}}.
-Handles can also indicate authenticity or Evidence provenance, as only specific RATS roles (e.g., an Attester and a Verifier in a challenge-response interaction) are meant to know a certain Handle.
+Handles that are known only to specific RATS roles (e.g., an attestation nonce in a challenge-response interaction) can also indicate Evidence provenance.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
 
 : This specification extends the set of RATS Conceptual Messages defined in {{Section 1 of -rats-cmw}} with the "Handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
@@ -338,7 +367,8 @@ Collected Claims (`collectedClaims`):
 : Collected Claims represent a (sub-)set of Claims created by an Attester.
 
 : Collected Claims are gathered based on the Claim Selection.
-If a Verifier does not provide a Claim Selection, all available Claims on the Attester are part of the Collected Claims.
+If a Verifier omits the Claim Selection in a protocol that can convey one, all available Claims on the Attester are part of the Collected Claims.
+If a protocol cannot convey a Claim Selection, the default Claim Selection defined by the Attester determines the Collected Claims.
 
 Evidence (`evidence`):
 
@@ -347,7 +377,7 @@ Evidence (`evidence`):
 : A set of Claims that can include: (a) a list of Attesting Environment IDs, each identifying an Authentication Secret in a single Attesting Environment, (b) the Attester Identity, (c) Claims about the Attester's Target Environment, and (d) a Handle.
 Evidence MUST cryptographically bind all of these information elements.
 Evidence MUST be protected via an Authentication Secret.
-The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester.
+The Authentication Secret MUST be trusted by the Verifier as authoritatively "speaking for" {{lampson06}} the Attester, i.e., the Verifier treats every statement protected with the Authentication Secret as made by the Attester.
 
 Attestation Result (`attestationResult`):
 
@@ -364,7 +394,13 @@ Verifier Inputs (`verInputs`):
 
 : Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence.
 These Conceptual Messages can take various forms.
-For example, Reference Values can be expressed as Reference Integrity Measurements (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+
+Relying Party Inputs (`rpInputs`):
+
+: *mandatory*
+
+: Appraisal procedures implemented by Relying Parties require certain inputs as defined in {{-RATS}}: Appraisal Policy for Attestation Results ({{Section 4.2 of -RATS}}).
 
 Attesting Environment IDs (`attEnvIDs`):
 
@@ -407,6 +443,7 @@ Given their ubiquity and key role, it is appropriate to recognize them as RATS C
 
 Accordingly, {{iana-handle-cmind}} registers a new Conceptual Message indicator for Handles to be used with Conceptual Message Wrappers (CMW) {{-rats-cmw}}.
 A concrete Handle representation requires an associated media type for use with CMW.
+Specifications that define a concrete Handle representation can register a more specific CMW Indicator.
 
 # Interaction Models {#interaction-models}
 
@@ -427,6 +464,7 @@ The way the Handle is processed is the most prominent difference between the thr
 ## Challenge/Response Remote Attestation {#challenge-response}
 
 Note: In the following diagrams, a leading `?` indicates that an information element is optional.
+The diagrams in {{unidirectional}} and {{streaming}} show `attEnvIDs` and `eventLogs` without a leading `?`, and these information elements remain optional as defined in {{generic-ies}}.
 
 ~~~~ aasvg
 .----------.                                                .----------.
@@ -461,7 +499,8 @@ Event Logs may accompany the produced Claims and provide an event trail of secur
 Claims are produced by all Attesting Environments of an Attester system.
 
 The Challenge/Response remote attestation procedure is typically initiated by the Verifier by sending a remote attestation request to the Attester.
-Alternative initiation flows, e.g., via an intermediary or through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
+Alternative initiation flows, e.g., through pre-configured requests (e.g., Call-Home procedures or trusted trigger events from Relying Parties), are out of scope for this document.
+Initiation by a Relying Party that also relays the request and the Evidence is shown in the Background-Check Model ({{fig-background-check}}).
 A request includes a Handle, an optional list of Attesting Environment IDs, and an optional Claim Selection.
 
 In the Challenge/Response model, the Handle is composed of qualifying data in the form of a practically infeasible-to-guess nonce {{RFC4949}}, such as a cryptographically strong random number.
@@ -472,7 +511,7 @@ In this interaction model, that nonce is an attestation nonce (freshness handle)
 The list of Attesting Environment IDs selects the attestation keys with which the Attester is requested to sign the Evidence.
 Each selected key is uniquely associated with an Attesting Environment of the Attester.
 As a result, a single Attesting Environment ID identifies a single Attesting Environment.
-Correspondingly, a particular set of Evidence originating from a particular Attesting Environment in a composite device can be requested via multiple Attesting Environment IDs.
+Correspondingly, an Attesting Environment that holds more than one attestation key has more than one Attesting Environment ID, so Evidence originating from that Attesting Environment in a composite device can be requested via multiple Attesting Environment IDs.
 Methods to acquire Attesting Environment IDs or mappings between Attesting Environments and Attesting Environment IDs are out of scope of this document.
 
 Nevertheless, in order to validate the Evidence signature, the Verifier needs access to the verification key material corresponding to the selected Attesting Environment ID(s), as well as the trust anchors required to establish trust in that key material.
@@ -485,15 +524,15 @@ For example, when performing a boot integrity evaluation, a Verifier may only re
 
 With the Handle, the Attesting Environment IDs, and the Collected Claims, the Attester produces signed Evidence.
 That is, it digitally signs the Handle and the Collected Claims with a cryptographic secret identified by the Attesting Environment ID.
-This is done once per Attesting Environment which is identified by the particular Attesting Environment ID.
+This is done once per selected Attesting Environment ID.
 The Attester communicates the signed Evidence as well as all accompanying Event Logs back to the Verifier.
 
-The Claims, the Handle, and the Attester Identity information (i.e., the Authentication Secret) MUST be cryptographically bound to the signature of Evidence.
-These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via hashing) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
+The Claims, the Handle, and the Attester Identity information MUST be cryptographically bound to the protection of Evidence created with the Authentication Secret (e.g., a signature or a MAC).
+These MAY be presented obfuscated, encrypted, or selectively disclosed (e.g., via salted digests) as discussed in {{cryptographic-blinding}} or, for example, via the use of {{-sd-cwt}} in {{-EAT}}.
 For further reference, see {{security-and-privacy-considerations}}.
 
 Upon receiving the Evidence and Event Logs, the Verifier validates the signature, Attester Identity, and Handle, and then appraises the Claims.
-Claim appraisal is driven by Policy and takes Reference Values and Endorsements as input.
+Claim appraisal is driven by the Appraisal Policy for Evidence and takes Reference Values and Endorsements as input.
 The Verifier outputs Attestation Results.
 Attestation Results create new Claim Sets about the properties and characteristics of an Attester, which enable Relying Parties to assess an Attester's trustworthiness.
 
@@ -502,20 +541,20 @@ Variants that include a Relying Party (e.g., Passport or Background-Check models
 
 ### Models and Example Sequences of Challenge/Response Remote Attestation
 
-According to the RATS Architecture ({{Section 5 of -RATS}}), two reference models for Challenge/Response Remote Attestation have been proposed.
-This section highlights the information flows between the Attester, Verifier, and Relying Party in a remote attestation procedure that uses these models.
+The RATS Architecture ({{Section 5 of -RATS}}) describes two reference models as topological patterns, the Passport Model and the Background-Check Model.
+This section highlights the information flows between the Attester, Verifier, and Relying Party in a Challenge/Response remote attestation procedure that uses these models.
 
 #### Passport Model
 
 The passport model is so named because of its resemblance to how nations issue passports to their citizens.
-In this model, the attestation sequence is a two-step procedure.
-In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy.
+In this model, the remote attestation procedure has two steps.
+In the first step, an Attester conveys Evidence to a Verifier, which appraises the Evidence according to its Appraisal Policy for Evidence.
 The Verifier then gives back an Attestation Result to the Attester, which caches it.
-In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy to establish the trustworthiness of the Attester.
+In the second step, the Attester presents the Attestation Result (and possibly additional Claims/Evidence) to a Relying Party, which appraises this information according to its own Appraisal Policy for Attestation Results to establish the trustworthiness of the Attester.
 
 In Challenge/Response interaction models, the Handle (e.g., an attestation nonce) can be generated by different trusted roles depending on deployment context.
 In the Passport model, the Handle MAY be generated by the Relying Party and conveyed as part of the `requestEvidence(...)` call.
-Alternatively, it MAY be generated by the Verifier and conveyed to the Attester (e.g., via the Relying Party or other protocol mechanisms).
+Alternatively, it MAY be generated by the Verifier (as depicted) and conveyed to the Attester (e.g., via the Relying Party or other protocol mechanisms).
 
 ~~~~ aasvg
 .----------.                     .---------------.         .----------.
@@ -554,10 +593,10 @@ Alternatively, it MAY be generated by the Verifier and conveyed to the Attester 
      | <---------------------------------(-- {attestationResult} |
      |                                   |                       |
      |                                   |                       |
-     | {evidence, attestationResult} --->|                       |
+     | {?evidence, attestationResult} -->|                       |
      |                                   |                       |
      |                            appraiseResult(                |
-     |                              policy,                      |
+     |                              rpInputs,                    |
      |                              attestationResult)           |
      |                                   |                       |
 ~~~~
@@ -566,12 +605,12 @@ Alternatively, it MAY be generated by the Verifier and conveyed to the Attester 
 #### Background-Check Model
 
 The background-check model is so named because of the resemblance of how employers and volunteer organizations perform background checks.
-In this model, the attestation sequence is initiated by a Relying Party.
+In this model, the remote attestation procedure is initiated by a Relying Party.
 The Attester conveys Evidence to the Relying Party, which does not process its payload, but relays the message and optionally checks its signature against a policed trust anchor store.
 Upon receiving the Evidence, the Relying Party initiates a session with the Verifier.
 Once the session is established, it forwards the received Evidence to the Verifier.
-The Verifier appraises the received Evidence according to its appraisal policy for Evidence and returns a corresponding Attestation Result to the Relying Party.
-The Relying Party then checks the Attestation Result against its own appraisal policy to conclude the remote attestation procedure.
+The Verifier appraises the received Evidence according to its Appraisal Policy for Evidence and returns a corresponding Attestation Result to the Relying Party.
+The Relying Party then checks the Attestation Result against its own Appraisal Policy for Attestation Results to conclude the remote attestation procedure.
 
 As in the Passport model, the Handle MAY be generated by the Relying Party (as depicted), or it MAY originate from the Verifier and be conveyed to the Attester by protocol-specific means.
 
@@ -614,7 +653,7 @@ As in the Passport model, the Handle MAY be generated by the Relying Party (as d
      |                                   |                       |
      |                                   |<- {attestationResult} |
      |                                   |                       |
-     |                        appraiseResult(policy,             |
+     |                        appraiseResult(rpInputs,           |
      |                          attestationResult)               |
      |                                   |                       |
 ~~~~
@@ -707,17 +746,18 @@ Note: If a Verifier does not receive the current Handle (e.g., due to propagatio
 In such cases, Evidence appraisal cannot be completed until re-synchronization occurs.
 Error signaling and re-synchronization mechanisms are protocol-specific and out of scope of this document.
 
-In the Uni-Directional model, Handles are composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
-The Handles are created by an external trusted third party (TTP), the Handle Distributor, which includes a trustworthy source of time, and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
-Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters and Verifiers MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
+In the Uni-Directional model, Handles can be composed of cryptographically signed trusted timestamps as shown in {{-TUDA}}, potentially including other qualifying data.
+The Handles are created by an external trusted third party (TTP), the Handle Distributor.
+If Handles are trusted timestamps, the Handle Distributor includes a trustworthy source of time and takes on the role of a Time Stamping Authority (TSA, as initially defined in {{-TSA}}).
+Timestamps created from local clocks (absolute clocks using a global timescale, as well as relative clocks, such as tick-counters) of Attesters MUST be cryptographically bound to fresh Handles received from the Handle Distributor.
 This binding provides a proof of synchronization that MUST be included in all produced Evidence.
 This model provides proof that Evidence generation happened after the Handle generation phase.
-The Verifier can always determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch as identified by an Epoch Marker Handle.
+If the Verifier has received the current Handle, it can determine whether the received Evidence includes a fresh Handle, i.e., one corresponding to the current Epoch (e.g., identified by an Epoch Marker Handle or by a counter signed by the Handle Distributor, see {{Section 10.3 of -RATS}}).
 
 ### Handle Lifecycle and Propagation Delays {#handle-lifecycle-and-propagation-delays}
 
-The term "uni-directional" refers to individual conveyance channels: one from the Handle Distributor to the Attester, and one from the Attester to the Verifier.
-Together, they establish an attestation loop without requiring request/response exchanges.
+The term "uni-directional" refers to individual conveyance channels: one from the Handle Distributor to the Attester, one from the Handle Distributor to the Verifier, and one from the Attester to the Verifier.
+Together, they establish a remote attestation loop without requiring a request/response exchange for each Evidence conveyance.
 This model does not assume that Verifiers broadcast Handles, as such a setup would require Verifiers to take on the Handle Distributor role and undermine the separation of duties between these roles.
 
 The lifecycle of a Handle is a critical aspect of ensuring the freshness and validity of Evidence.
@@ -729,18 +769,18 @@ To manage this complexity, it is essential to define a clear policy for Handle v
 
 * *Handle Expiry*:
   Each Handle should have a well-defined expiration time, after which it is considered invalid.
-  This expiry must account for expected propagation delays and be clearly communicated to all entities in the attestation process.
+  This expiry must account for expected propagation delays and be clearly communicated to all entities in the remote attestation procedure.
 
 * *Synchronization Checks*:
   Implement periodic synchronization checks between the Handle Distributor and both Attesters and Verifiers to ensure that Handles are updated consistently across all participants.
-  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps from Attesters and Verifiers to fresh Handles issued by a trusted TSA, thereby proving that both entities share a consistent notion of time.
+  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps of the Attester (e.g., TPM tick counter values or internal clock/time information) to fresh Handles issued by a trusted TSA, which the Handle Distributor also conveys to the Verifier.
 
 * *Grace Periods*:
-  Define grace periods during which a newly issued Handle starts being accepted, and the old Handle stops being valid.
+  Define grace periods during which both the newly issued Handle and the previous Handle are accepted, after which the previous Handle stops being valid.
   This period should be long enough to account for the maximum expected propagation delay across the network.
 
 Implementing these measures will help mitigate the risks associated with the Handle lifecycle, particularly in environments where propagation delays are significant.
-This careful management ensures that the integrity and trustworthiness of the attestation process are maintained.
+This careful management ensures that the integrity and trustworthiness of the remote attestation procedure are maintained.
 
 While periodically pushing Evidence to the Verifier, the Attester only needs to generate and convey updates since the previous conveyance.
 These updates, referred to as "delta" in the sequence diagrams, are not limited to net changes of Claim values.
@@ -752,7 +792,7 @@ Methods to detect excessive time drift that would mandate a fresh Handle to be r
 
 ## Streaming Remote Attestation {#streaming}
 
-Streaming Remote Attestation serves as the foundational concept for both the publish-subscribe pattern {{ISIS}} and the observer pattern {{DesignPatterns}}.
+Streaming Remote Attestation builds on two established patterns, the publish-subscribe pattern {{ISIS}} and the observer pattern {{DesignPatterns}}.
 It entails establishing subscription state to enable continuous remote attestation.
 In the publish-subscribe pattern, a central broker is used to distribute messages between publishers and subscribers.
 The broker receives messages from publishers and forwards them to the appropriate subscribers.
@@ -826,7 +866,7 @@ In the observer pattern, however, observers are connected directly to target res
 
 In the observer pattern, an observer establishes a direct connection to the observed resources through a subscription mechanism, which is designed specifically for conveying Conceptual Messages for remote attestation purposes.
 This mechanism not only facilitates the initial subscription request but also actively maintains the state of the subscription, ensuring that any changes in the observed resources are consistently communicated to the observer.
-It handles the complexities of managing these connections, including the maintenance of pertinent information about the observer's preferences and security requirements, ensuring that the transmission of attestation data remains both secure and relevant to the observer's specific context.
+It handles the complexities of managing these connections, including the maintenance of pertinent information about the observer's preferences and security requirements, ensuring that the transmission of Conceptual Messages remains both secure and relevant to the observer's specific context.
 
 Setting up subscription state between a Verifier and an Attester is conducted via a subscribe operation.
 The subscribe operation is used to convey Handles required for Evidence generation.
@@ -846,7 +886,7 @@ If a new Handle is required, it is conveyed by a subsequent subscribe operation.
 
 If Evidence or delta Evidence repeatedly fails to verify, a Verifier may terminate the subscription.
 The detailed mechanisms for unsubscribe and re-subscribe are protocol-specific and out of scope for this document.
-For example, subscription lifecycle management is defined in {{-rats-network-device-subscription}}.
+For example, {{-rats-network-device-subscription}} specifies when a subscription is terminated and when a new subscription has to be established.
 
 ### Streaming Remote Attestation with a Broker {#streaming-with-broker}
 
@@ -863,7 +903,7 @@ Clients may *publish* data in the form of a *message* under a certain *topic*.
 Depending on particular publish-subscribe models and implementations, involved roles can be publishers, subscribers, or both.
 
 The Broker and Handle Distributor are considered to be trusted third parties (TTPs) for all other participating roles, including Attesters and Verifiers (see also {{security-and-privacy-considerations}}).
-All roles MUST establish a trust relationship with the Broker and Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
+All roles MUST establish a trust relationship with the Broker and, if present, the Handle Distributor, as those are responsible for the secure and reliable dissemination of critical protocol information, such as Handles and Attestation Results.
 
 Ensuring the security of these trusted third parties is vital, as any compromise could undermine the entire remote attestation procedure.
 Therefore, the deployment of Brokers and Handle Distributors requires stringent security measures to protect against unauthorized access and to ensure that they operate as trustworthy facilitators within the remote attestation framework.
@@ -902,7 +942,7 @@ From the point of view of a remote attestation procedure, Evidence Generation, C
 
 The *Challenge/Response Remote Attestation over Publish-Subscribe* interaction model uses the same information elements as the *Challenge/Response Remote Attestation* interaction model.
 Handles are generated by the Verifier on a per-request basis.
-In the sequence diagram above, the Verifier initiates an attestation by generating a new Handle and publishing it to the "AttReq" (= Attestation Request) topic on the PubSub server.
+In the sequence diagram above, the Verifier initiates a remote attestation procedure by generating a new Handle and publishing it to the "AttReq" (= Attestation Request) topic on the PubSub server.
 The PubSub server then forwards this Handle to the Attester by notifying it.
 This mechanism ensures that each Handle is uniquely associated with a specific attestation request, thereby enhancing security by preventing replay attacks.
 
@@ -987,9 +1027,11 @@ When the Handle Distributor generates and publishes a Handle to the "Handle" top
 ~~~~
 {: #fig-streaming-with-broker-evidence-gen title="Evidence Generation and Appraisal for Remote Attestation over Publish-Subscribe"}
 
-Exactly as in the Challenge/Response and Uni-Directional interaction models, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
-In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Attestation Evidence) on the PubSub server, to which a Verifier subscribed before.
+As in the Uni-Directional interaction model, there is an Evidence Generation-Appraisal loop, in which the Attester generates Evidence and the Verifier appraises it.
+In the Publish-Subscribe model above, the Attester publishes Evidence to the topic "AttEv" (= Evidence) on the PubSub server, to which a Verifier subscribed before.
 The PubSub server notifies Verifiers, accordingly, by forwarding the Evidence.
+In Challenge/Response Remote Attestation over Publish-Subscribe, each iteration of the loop corresponds to one request and uses the Handle of that request.
+In Uni-Directional Remote Attestation over Publish-Subscribe, each iteration uses the current Handle from the Handle Distributor.
 Although the above diagram depicts only full Evidence and Event Logs, later conveyances may use deltas for Evidence and Event Logs.
 The definition of delta Evidence is provided in {{handle-lifecycle-and-propagation-delays}}.
 
@@ -1006,7 +1048,7 @@ Verifiers appraise the Evidence and publish the Attestation Result to topic "Att
      |          |                        |                        |
 ====================[Attestation Result Generation]=====================
      |          |                        |                        |
-     |     sub(topic=AttRes,            |                        |
+     |     sub(topic=AttRes,             |                        |
      |         handle) ----------------->|                        |
      |          |                        |                        |
  .--------[loop]------------------------------------------------------.
@@ -1091,16 +1133,14 @@ Additionally, for TPM-based remote attestation, the security considerations outl
 {: #cryptographic-blinding}
 ## Selective Disclosure and Obfuscation
 
-This section uses the term "blinding" in the broad sense of privacy-preserving treatment of attributes prior to disclosure (e.g., selective disclosure, obfuscation, or encryption), and not in the more specific cryptographic sense used for blind signatures.
-
 In a remote attestation procedure, the Verifier and the Attester may choose to reduce the disclosure of sensitive attributes while still enabling appraisal.
-For example, an attribute can be conveyed only as a digest that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
+For example, an attribute can be conveyed only as a salted digest (e.g., as in {{-sd-cwt}}) that is included in, and protected by, the Evidence signature, or it can be encrypted for an authorized recipient.
 
 ## Trust Assumptions on the Handle Distributor
 
-The Handle Distributor, as a third party in remote attestation scenarios, holds a critical position similar to that of a Trusted Third Party (TTP).
-Given its role in generating Handles, it has the potential to influence the attestation process significantly.
-The integrity and reliability of the Handles it produces are pivotal for ensuring that the Evidence remains trustworthy and that the attestation process is not susceptible to manipulation or interference.
+The Handle Distributor, as a third party in remote attestation scenarios, holds the critical position of a Trusted Third Party (TTP).
+Given its role in generating Handles, it has the potential to influence the remote attestation procedure significantly.
+The integrity and reliability of the Handles it produces are pivotal for ensuring that the Evidence remains trustworthy and that the remote attestation procedure is not susceptible to manipulation or interference.
 
 ### Security Assumptions
 
@@ -1136,16 +1176,16 @@ To mitigate risks associated with the Handle Distributor being a central point o
   The Handle Distributor should comply with relevant security standards and undergo regular security certifications.
   This ensures that they meet industry-wide security benchmarks and maintain high levels of trust.
 
-By defining and adhering to these security assumptions, the role of the Handle Distributor in remote attestation procedures can be securely managed, minimizing risks and enhancing the overall trust in the attestation process.
+By defining and adhering to these security assumptions, the role of the Handle Distributor in remote attestation procedures can be securely managed, minimizing risks and enhancing the overall trust in the remote attestation procedure.
 
 ## Security Considerations for Brokers in Remote Attestation
 
-The role of the Broker in the *Streaming Remote Attestation with a Broker* model ({{streaming-with-broker}}) introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating Handles and topics.
+Although the Broker is a trusted third party in the *Streaming Remote Attestation with a Broker* model ({{streaming-with-broker}}), a compromised or misbehaving Broker introduces potential security vulnerabilities, including the ability to perform cross-application attacks by manipulating Handles and topics.
 To mitigate these risks, it is essential to implement robust security measures:
 
 * *End-to-End Authentication:*
   Establishing end-to-end authenticated channels between Attesters and Verifiers ensures that data integrity and authenticity are preserved across the communication process.
-  This measure prevents the Broker from altering the content of the messages, including Handles and other sensitive data.
+  This measure enables receivers to detect any alteration of the messages by the Broker, including alterations of Handles and other sensitive data.
 
 * *Strong Isolation of Topics:*
   Implementing strong isolation mechanisms for topics can help prevent the Broker from inadvertently or maliciously routing notifications to unauthorized parties.
@@ -1163,49 +1203,50 @@ To mitigate these risks, it is essential to implement robust security measures:
   Recognizing the Broker as a TTP necessitates stringent security certifications and compliance with security standards to ensure that they operate under strict governance and security protocols.
   This includes regular security assessments and certifications that validate the Broker's security practices.
 
-By addressing these vulnerabilities proactively, the integrity and confidentiality of the attestation process can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
-It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the attestation process remains secure and trustworthy.
+By addressing these vulnerabilities proactively, the integrity and confidentiality of the remote attestation procedure can be maintained, reducing the risks associated with Broker-mediated communication in remote attestation scenarios.
+It is crucial for solution architects to incorporate these security measures during the design and deployment phases to ensure that the remote attestation procedure remains secure and trustworthy.
 
 ## Additional Application-Specific Security Considerations
 
-The security and privacy requirements for remote attestation can vary significantly based on the deployment environment, the nature of the attestation mechanisms used, and the specific threats each scenario faces.
+The security and privacy requirements for remote attestation can vary significantly based on the deployment environment, the nature of the remote attestation procedures used, and the specific threats each scenario faces.
 This section details additional security considerations that are pertinent to the interaction models discussed in this document.
 
 ### Confidentiality
 
-The need for confidentiality in the transmission of attestation information is critical, particularly when exchanges occur over public or untrusted networks, such as the public Internet.
-For instance, in the *Streaming Remote Attestation with a Broker* model (cf. {{streaming-with-broker}}), where data might traverse multiple nodes, employing TLS can provide necessary confidentiality protections.
-Similarly, for scenarios involving sensitive environments like carrier management networks, evaluating the confidentiality of the transport medium is crucial to ensure that attestation data remains secure against interception or eavesdropping.
+The need for confidentiality in the transmission of Evidence and Attestation Results is critical, particularly when exchanges occur over public or untrusted networks, such as the public Internet.
+For instance, in the *Streaming Remote Attestation with a Broker* model (cf. {{streaming-with-broker}}), where data might traverse multiple nodes, TLS protects each connection between a client and the Broker, but the Broker itself can read the conveyed data.
+Confidentiality with respect to the Broker requires protection of the Conceptual Messages themselves, e.g., encryption for the intended recipient.
+Similarly, for scenarios involving sensitive environments like carrier management networks, evaluating the confidentiality of the transport medium is crucial to ensure that Evidence and Attestation Results remain secure against interception or eavesdropping.
 
 ### Mutual Authentication
 
 Mutual authentication is particularly relevant in models such as the *Challenge/Response Remote Attestation* (cf. {{challenge-response}}) where both the Attester and the Verifier engage in bidirectional exchanges of sensitive information.
-Ensuring that both parties can authenticate each other prevents impersonation attacks, enhancing the trustworthiness of the attestation results.
+Ensuring that both parties can authenticate each other prevents impersonation attacks, enhancing the trustworthiness of the Attestation Results.
 
 Practical example mechanisms to achieve mutual authentication include:
 
 Mutual TLS (mTLS):
 : TLS 1.3 {{RFC8446}} supports mutual authentication via the CertificateRequest message.
-  The client presents its X.509 certificate and proves possession of the private key, establishing bidirectional trust before attestation data is exchanged.
+  The client presents its X.509 certificate and proves possession of the private key, establishing bidirectional trust before Evidence or Attestation Results are exchanged.
 
 Server-Authenticated TLS with HTTP Authentication:
 : Server-only TLS authentication can be combined with application-layer client authentication.
-  The server authenticates via its TLS certificate, while the client uses HTTP authentication {{RFC9110}} such as Basic {{RFC7617}} or Digest credentials.
+  The server authenticates via its TLS certificate, while the client uses HTTP authentication {{RFC9110}} such as Basic {{RFC7617}} or Digest {{RFC7616}} credentials.
   This approach suits deployments where client certificates are impractical.
 
 ### Hardware Enforcement/Support
 
-In environments where the integrity and security of Evidence are paramount, hardware-based security features play a critical role.
-Technologies like Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide robust protections against tampering and unauthorized access.
-These are especially important in high-security settings such as financial services or military applications, where attestation processes must rely on physically secure and tamper-resistant components to meet stringent regulatory and security standards.
-
-By addressing these application-specific security requirements within the context of defined interaction models, security strategies can be tailored to fit the unique challenges and operational contexts of different attestation scenarios.
+Remote attestation procedures mostly rely on hardware-enforced isolation of the Attesting Environment from the Target Environment and on the physical security of the Attester, anchored in a root of trust.
+Only the strength of the protection provided varies, from process isolation enforced by the processor of a general-purpose device to specialized hardware that resists physical attacks on a chip (see {{Section 12.1.1 of -RATS}}).
+Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physical(ly) Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
+High-security settings, such as financial services or military applications, typically require specialized hardware that resists physical attacks to meet regulatory and security standards.
 
 # IANA Considerations
 
 ## New Conceptual Message Indicator for Handles {#iana-handle-cmind}
 
 IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CMW) Indicators" registry of the "Remote Attestation Procedures (RATS)" registry group {{IANA.rats}} as described in {{tab-handle-cmind}}.
+Handles extend the set of RATS Conceptual Messages as described in {{generic-ies}} and {{cm-handle}}, which is the basis for this IANA registration request under {{Section 9.4 of -rats-cmw}}.
 
 | Indicator value | Conceptual Message name | Reference |
 |-----------------|-------------------------|-----------|
@@ -1217,9 +1258,9 @@ IANA is requested to add a new entry to the "RATS Conceptual Message Wrapper (CM
 {: #coap-fetch-bodies}
 # CDDL Specification for a simple CoAP Challenge/Response Interaction
 
-The following CDDL specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
-The communication protocol used is CoAP.
-Both the request message and the response message are exchanged via the FETCH operation and corresponding FETCH request and FETCH response body.
+The following CDDL {{RFC8610}} specification is an exemplary proof-of-concept to illustrate a potential implementation of the Challenge/Response Interaction Model.
+The communication protocol used is CoAP {{-COAP}}.
+Both the request message and the response message are exchanged via the FETCH method {{RFC8132}} and corresponding FETCH request and FETCH response body.
 
 In this example, Evidence is created via the root-of-trust for reporting primitive operation "quote" that is provided by a TPM 2.0.
 
@@ -1255,25 +1296,30 @@ This document introduces the information element `handle` to include this extra 
 However, the conveyance of other Conceptual Messages (see {{-rats-cmw}}) does not necessarily rely on the concept of freshness to the same extent as Evidence.
 Examples include Endorsements and Reference Values.
 
-CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating Endorsements and Reference Values, as well as a retrieval and query language for these values that works across various Conceptual Message providers and RATS owner roles.
+CoSERV ({{-CoSERV}}) defines a request/response model for conveying, caching, and potentially aggregating Endorsements and Reference Values, as well as a retrieval and query language for these values that works across various Endorsers and Reference Value Providers.
 
 The absence of an explicit `handle` in the CoSERV query language does not imply a lack of corresponding semantics.
 The problem with including an explicit `handle` information element in CoSERV is that it would introduce unique data for each transaction, which would undermine CoSERV's caching mechanism (see {{Section 3.4.3 of -CoSERV}}).
 
-Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), their combination represents the start of an epoch (see {{-epoch-markers}}).
+Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), the query that includes their combination identifies the requested Endorsements and Reference Values in a stable way (see {{Section 3.4.3 of -CoSERV}}).
 Essentially, the URL in the GET request becomes the `handle` in the interaction.
-The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (typically, one or more CoRIM tags {{-CoRIM}}) alongside the query and expiration timestamp for the response.
-Semantically, this makes the URL in the GET request a `handle` that specifies the start of an epoch, while the expiration timestamp specifies the end.
-This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, using an Epoch Bell {{-epoch-markers}}.
+The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (for a query by environment, typically CoMID triples {{-CoRIM}} with their authority delegation chains) alongside the query and expiration timestamp for the response.
+Semantically, an epoch starts when the CoSERV producer computes the result set for the query and ends at the expiration timestamp of that result set (see {{Section 6.1.5.1 of -CoSERV}}).
+Each new computation of a result set for the query starts a new epoch, which can begin before the previous epoch ends, for example, when a request with `Cache-Control: no-cache` causes a new computation (see {{Section 6.1.5 of -CoSERV}}).
+A response served from a cache includes the result set of the computation that produced it, together with its expiration timestamp, and therefore belongs to the epoch of that computation.
+The query included in the URL is the same in every epoch, which keeps the results cacheable (see {{Section 3.4.3 of -CoSERV}}).
+The expiration timestamp included in the result set, which is returned together with the query, changes with every computation of the result set (see {{Section 6.1.5.2 of -CoSERV}}).
+Hence, the query and its expiration timestamp together identify the epoch, and the query needs no per-transaction data that would undermine the caching.
+This approach assumes that an entity taking on a RATS role has access to a reliable time source, for example, an Epoch Bell that emits Epoch Markers that include a timestamp {{-epoch-markers}}.
 
-{{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.3 of -CoSERV}}).
+{{fig-coserv-transaction}} illustrates the "query by environment" CoSERV variant (see {{Section 3.4.1 of -CoSERV}}).
 The RATS roles of Verifier, Endorser, and Reference Value Provider can take on an additional *logistic* role of CoSERV producer and consumer.
 
 ~~~~ aasvg
-.-------------------.                                .-----------------.
-|  CoSERV producer  |                                | CoSERV consumer |
-|  (e.g., Endorser) |                                | (e.g., Verifier |
-'----+--------------'                                '------------+----'
+.-------------------.                               .------------------.
+|  CoSERV producer  |                               | CoSERV consumer  |
+|  (e.g., Endorser) |                               | (e.g., Verifier) |
+'----+--------------'                               '-------------+----'
      |                                                            |
 ====================[Endorsements Ingestion]============================
      |                                                            |
@@ -1309,4 +1355,4 @@ The RATS roles of Verifier, Endorser, and Reference Value Provider can take on a
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to thank Olaf Bergmann, Michael Richardson, and Ned Smith.
+The authors would like to thank Thomas Fossati, Olaf Bergmann, Michael Richardson, and Ned Smith.
