@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 9 May 2027                                               W. Pan
+Expires: 13 May 2027                                              W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                         5 November 2026
+                                                         9 November 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2027.
+   This Internet-Draft will expire on 13 May 2027.
 
 Copyright Notice
 
@@ -1035,8 +1035,9 @@ Table of Contents
       all participants.  For example, in TUDA [I-D.birkholz-rats-tuda],
       synchronization checks can be realized by cryptographically
       binding local timestamps of the Attester (e.g., TPM tick counter
-      values) to fresh Handles issued by a trusted TSA, which the Handle
-      Distributor also conveys to the Verifier.
+      values or internal clock/time information) to fresh Handles issued
+      by a trusted TSA, which the Handle Distributor also conveys to the
+      Verifier.
 
    *  _Grace Periods_: Define grace periods during which both the newly
       issued Handle and the previous Handle are accepted, after which
