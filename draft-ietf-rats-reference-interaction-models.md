@@ -64,6 +64,7 @@ informative:
   RFC8446:
   RFC9110:
   RFC9683: RIV
+  RFC9684: charra
   RFC9783: psa-token
   RFC9781: uccs
   DAA:
@@ -137,9 +138,11 @@ entity:
 
 --- abstract
 
-This document describes interaction models for remote attestation procedures (RATS) {{-RATS}}.
+This document describes interaction models for Remote ATtestation procedureS (RATS).
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
-Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.
+Similarly, a general overview about the information elements typically used by corresponding conveyance protocols is highlighted.
+This document does not define a conveyance protocol of its own.
+Conveyance protocols specified in other documents realize one or more of these interaction models.
 
 --- middle
 
@@ -165,6 +168,10 @@ This document aims to:
 
 1. prevent inconsistencies in descriptions of interaction models in other documents, which may occur due to text cloning and evolution over time, and to
 2. highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.
+
+This document does not define a conveyance protocol of its own and cannot be implemented by itself.
+Conveyance protocols realize the interaction models, for example, {{-charra}} realizes Challenge/Response Remote Attestation ({{challenge-response}}) and {{-rats-network-device-subscription}} realizes Streaming Remote Attestation ({{streaming}}).
+The requirements in {{essential-requirements}} and the prerequisites in {{normative-prerequisites}} apply to every protocol that realizes an interaction model.
 
 In summary, this document enables the specification and design of trustworthy and privacy-preserving (see Section {{cryptographic-blinding}}) conveyance methods for RATS Conceptual Messages; specifically attestation Evidence conveyed from an Attester to a Verifier.
 While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers {{-epoch-markers}} or stand-alone event logs.
@@ -1005,7 +1012,7 @@ This binding can be achieved by including the Handle in the Attestation Result i
 
 Note to RFC Editor: Please remove this section as well as references to {{BCP205}} before AUTH48.
 
-This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in {{BCP205}}.
+This section records the status of a known implementation of the interaction models described in this specification at the time of posting of this Internet-Draft, and is based on a proposal described in {{BCP205}}.
 The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.
 Please note that the listing of any individual implementation here does not imply endorsement by the IETF.
 Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.
@@ -1054,7 +1061,7 @@ Michael Eckel (michael.eckel@sit.fraunhofer.de)
 {: #security-and-privacy-considerations}
 # Security and Privacy Considerations
 
-This document outlines three interaction models for remote attestation procedures (RATS) {{-RATS}}.
+This document outlines three interaction models for Remote ATtestation procedureS (RATS) {{-RATS}}.
 While the subsequent sections address additional security and privacy considerations, the security considerations from {{Section 12 of -RATS}} must also be adhered to.
 Additionally, for TPM-based remote attestation, the security considerations outlined in {{Section 5 of -RIV}} should be taken into account.
 
