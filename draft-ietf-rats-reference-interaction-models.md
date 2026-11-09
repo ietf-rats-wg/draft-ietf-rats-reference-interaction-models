@@ -1208,7 +1208,7 @@ It is crucial for solution architects to incorporate these security measures dur
 
 ## Additional Application-Specific Security Considerations
 
-The security and privacy requirements for remote attestation can vary significantly based on the deployment environment, the nature of the remote attestation mechanisms used, and the specific threats each scenario faces.
+The security and privacy requirements for remote attestation can vary significantly based on the deployment environment, the nature of the remote attestation procedures used, and the specific threats each scenario faces.
 This section details additional security considerations that are pertinent to the interaction models discussed in this document.
 
 ### Confidentiality
