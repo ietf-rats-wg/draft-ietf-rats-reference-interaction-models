@@ -2040,7 +2040,7 @@ Appendix B.  An Exemplary Interaction Model for Endorsement Retrieval
 .-------------------.                                .-----------------.
 |  CoSERV producer  |                                | CoSERV consumer |
 |  (e.g., Endorser) |                                | (e.g., Verifier)|
-'----+--------------'                                '------------+----'
+'----+--------------'                               '-------------+----'
      |                                                            |
 ====================[Endorsements Ingestion]============================
      |                                                            |
