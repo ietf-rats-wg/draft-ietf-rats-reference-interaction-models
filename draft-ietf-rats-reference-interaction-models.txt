@@ -5,11 +5,11 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                                  M. Eckel
 Intended status: Standards Track                          Fraunhofer SIT
-Expires: 21 March 2027                                            W. Pan
+Expires: 13 May 2027                                              W. Pan
                                                      Huawei Technologies
                                                                  E. Voit
                                                                    Cisco
-                                                       17 September 2026
+                                                         9 November 2026
 
 
      Reference Interaction Models for Remote Attestation Procedures
@@ -17,12 +17,14 @@ Expires: 21 March 2027                                            W. Pan
 
 Abstract
 
-   This document describes interaction models for remote attestation
-   procedures (RATS) [RFC9334].  Three conveying mechanisms --
-   Challenge/Response, Uni-Directional, and Streaming Remote Attestation
-   -- are illustrated and defined.  Analogously, a general overview
-   about the information elements typically used by corresponding
-   conveyance protocols are highlighted.
+   This document describes interaction models for Remote ATtestation
+   procedureS (RATS).  Three conveying mechanisms -- Challenge/Response,
+   Uni-Directional, and Streaming Remote Attestation -- are illustrated
+   and defined.  Similarly, a general overview about the information
+   elements typically used by corresponding conveyance protocols is
+   highlighted.  This document does not define a conveyance protocol of
+   its own.  Conveyance protocols specified in other documents realize
+   one or more of these interaction models.
 
 Discussion Venues
 
@@ -51,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 13 May 2027.
 
 Copyright Notice
 
@@ -160,6 +162,15 @@ Table of Contents
    2.  highlight the exact delta/divergence between the core
        characteristics captured in this document and variants of these
        interaction models used in other specifications or solutions.
+
+   This document does not define a conveyance protocol of its own and
+   cannot be implemented by itself.  Conveyance protocols realize the
+   interaction models, for example, [RFC9684] realizes Challenge/
+   Response Remote Attestation (Section 7.1) and
+   [I-D.ietf-rats-network-device-subscription] realizes Streaming Remote
+   Attestation (Section 7.3).  The requirements in Section 4 and the
+   prerequisites in Section 5 apply to every protocol that realizes an
+   interaction model.
 
    In summary, this document enables the specification and design of
    trustworthy and privacy-preserving (see Section Section 9.1)
@@ -1356,18 +1367,18 @@ Table of Contents
    Note to RFC Editor: Please remove this section as well as references
    to [BCP205] before AUTH48.
 
-   This section records the status of known implementations of the
-   protocol defined by this specification at the time of posting of this
-   Internet-Draft, and is based on a proposal described in [BCP205].
-   The description of implementations in this section is intended to
-   assist the IETF in its decision processes in progressing drafts to
-   RFCs.  Please note that the listing of any individual implementation
-   here does not imply endorsement by the IETF.  Furthermore, no effort
-   has been spent to verify the information presented here that was
-   supplied by IETF contributors.  This is not intended as, and must not
-   be construed to be, a catalog of available implementations or their
-   features.  Readers are advised to note that other implementations may
-   exist.
+   This section records the status of a known implementation of the
+   interaction models described in this specification at the time of
+   posting of this Internet-Draft, and is based on a proposal described
+   in [BCP205].  The description of implementations in this section is
+   intended to assist the IETF in its decision processes in progressing
+   drafts to RFCs.  Please note that the listing of any individual
+   implementation here does not imply endorsement by the IETF.
+   Furthermore, no effort has been spent to verify the information
+   presented here that was supplied by IETF contributors.  This is not
+   intended as, and must not be construed to be, a catalog of available
+   implementations or their features.  Readers are advised to note that
+   other implementations may exist.
 
    According to [BCP205], "this will allow reviewers and working groups
    to assign due consideration to documents that have the benefit of
@@ -1428,8 +1439,8 @@ Table of Contents
 
 9.  Security and Privacy Considerations
 
-   This document outlines three interaction models for remote
-   attestation procedures (RATS) [RFC9334].  While the subsequent
+   This document outlines three interaction models for Remote
+   ATtestation procedureS (RATS) [RFC9334].  While the subsequent
    sections address additional security and privacy considerations, the
    security considerations from Section 12 of [RFC9334] must also be
    adhered to.  Additionally, for TPM-based remote attestation, the
@@ -1663,9 +1674,9 @@ Table of Contents
    [I-D.ietf-rats-epoch-markers]
               Birkholz, H., Fossati, T., Pan, W., Mihalcea, I., and C.
               Bormann, "Epoch Markers", Work in Progress, Internet-
-              Draft, draft-ietf-rats-epoch-markers-05, 3 July 2026,
+              Draft, draft-ietf-rats-epoch-markers-08, 2 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              epoch-markers-05>.
+              epoch-markers-08>.
 
    [IANA.rats]
               IANA, "Remote Attestation Procedures (RATS)",
@@ -1732,24 +1743,24 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-11, 6 July
-              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-11>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-12, 1
+              November 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-12>.
 
    [I-D.ietf-rats-coserv]
               Howard, P., Fossati, T., Birkholz, H., Kamal, S., Mandyam,
               G., and D. Ma, "Concise Selector for Endorsements and
               Reference Values", Work in Progress, Internet-Draft,
-              draft-ietf-rats-coserv-07, 6 July 2026,
+              draft-ietf-rats-coserv-08, 30 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              coserv-07>.
+              coserv-08>.
 
    [I-D.ietf-rats-endorsements]
-              Thaler, D., Birkholz, H., and T. Fossati, "RATS
-              Endorsements", Work in Progress, Internet-Draft, draft-
-              ietf-rats-endorsements-10, 16 September 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              endorsements-10>.
+              Thaler, D., Birkholz, H., and T. Fossati, "Remote
+              Attestation Procedures (RATS) Endorsements", Work in
+              Progress, Internet-Draft, draft-ietf-rats-endorsements-13,
+              14 October 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-endorsements-13>.
 
    [I-D.ietf-rats-msg-wrap]
               Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
@@ -1761,16 +1772,16 @@ Table of Contents
    [I-D.ietf-rats-network-device-subscription]
               Birkholz, H., Voit, E., and W. Pan, "Attestation Event
               Stream Subscription", Work in Progress, Internet-Draft,
-              draft-ietf-rats-network-device-subscription-13, 16 June
+              draft-ietf-rats-network-device-subscription-16, 4 November
               2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-network-device-subscription-13>.
+              rats-network-device-subscription-16>.
 
    [I-D.ietf-spice-sd-cwt]
               Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
               "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
-              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-08, 1
-              June 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-spice-sd-cwt-08>.
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-09, 30
+              October 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-spice-sd-cwt-09>.
 
    [ISIS]     Birman, K. and T. Joseph, "Exploiting Virtual Synchrony in
               Distributed Systems", DOI 10.1145/41457.37515, 1987,
@@ -1806,6 +1817,13 @@ Table of Contents
               Containing Trusted Platform Modules", RFC 9683,
               DOI 10.17487/RFC9683, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9683>.
+
+   [RFC9684]  Birkholz, H., Eckel, M., Bhandari, S., Voit, E., Sulzen,
+              B., Xia, L., Laffey, T., and G. C. Fedorkow, "A YANG Data
+              Model for Challenge-Response-Based Remote Attestation
+              (CHARRA) Procedures Using Trusted Platform Modules
+              (TPMs)", RFC 9684, DOI 10.17487/RFC9684, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9684>.
 
    [RFC9781]  Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
               Bormann, "A Concise Binary Object Representation (CBOR)

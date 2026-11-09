@@ -10,27 +10,29 @@
 <meta content="Wei Pan" name="author">
 <meta content="Eric Voit" name="author">
 <meta content="
-       This document describes interaction models for remote attestation procedures (RATS)  .
+       This document describes interaction models for Remote ATtestation procedureS (RATS).
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
-Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted. 
+Similarly, a general overview about the information elements typically used by corresponding conveyance protocols is highlighted.
+This document does not define a conveyance protocol of its own.
+Conveyance protocols specified in other documents realize one or more of these interaction models. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.35.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-rats-reference-interaction-models-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.7
-    ConfigArgParse 1.7.5
+  xml2rfc 3.35.0
+    Python 3.14.10
+    ConfigArgParse 1.9.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.7
+    platformdirs 4.14.3
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.3
+    wcwidth 0.9.4
 -->
 <link href="draft-ietf-rats-reference-interaction-models.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1031,7 +1033,7 @@ svg {
   & :is([stroke="white"], [stroke^="#fff"]) {
     stroke: var(--background-color);
   }
-  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+  & :is([fill="black"], [fill^="#000"], :not([fill], [fill] *)) {
     fill: var(--text-color);
   }
   & :is([fill="white"], [fill^="#fff"]) {
@@ -1046,11 +1048,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">REIM</td>
-<td class="right">September 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 21 March 2027</td>
+<td class="center">Expires 13 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1065,12 @@ svg {
 <dd class="internet-draft">draft-ietf-rats-reference-interaction-models-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-17" class="published">17 September 2026</time>
+<time datetime="2026-11-09" class="published">9 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-21">21 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-13">13 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1093,9 +1095,11 @@ svg {
 <h1 id="title">Reference Interaction Models for Remote Attestation Procedures</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document describes interaction models for remote attestation procedures (RATS) <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+<p id="section-abstract-1">This document describes interaction models for Remote ATtestation procedureS (RATS).
 Three conveying mechanisms -- Challenge/Response, Uni-Directional, and Streaming Remote Attestation -- are illustrated and defined.
-Analogously, a general overview about the information elements typically used by corresponding conveyance protocols are highlighted.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+Similarly, a general overview about the information elements typically used by corresponding conveyance protocols is highlighted.
+This document does not define a conveyance protocol of its own.
+Conveyance protocols specified in other documents realize one or more of these interaction models.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1127,7 +1131,7 @@ Analogously, a general overview about the information elements typically used by
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1359,8 +1363,11 @@ This document aims to:<a href="#section-1-3" class="pilcrow">¶</a></p>
           <p id="section-1-4.2.1">highlight the exact delta/divergence between the core characteristics captured in this document and variants of these interaction models used in other specifications or solutions.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-1-5">In summary, this document enables the specification and design of trustworthy and privacy-preserving (see Section <a href="#cryptographic-blinding" class="auto internal xref">Section 9.1</a>) conveyance methods for RATS Conceptual Messages; specifically attestation Evidence conveyed from an Attester to a Verifier.
-While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span> or stand-alone event logs.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">This document does not define a conveyance protocol of its own and cannot be implemented by itself.
+Conveyance protocols realize the interaction models, for example, <span>[<a href="#RFC9684" class="cite xref">RFC9684</a>]</span> realizes Challenge/Response Remote Attestation (<a href="#challenge-response" class="auto internal xref">Section 7.1</a>) and <span>[<a href="#I-D.ietf-rats-network-device-subscription" class="cite xref">I-D.ietf-rats-network-device-subscription</a>]</span> realizes Streaming Remote Attestation (<a href="#streaming" class="auto internal xref">Section 7.3</a>).
+The requirements in <a href="#essential-requirements" class="auto internal xref">Section 4</a> and the prerequisites in <a href="#normative-prerequisites" class="auto internal xref">Section 5</a> apply to every protocol that realizes an interaction model.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">In summary, this document enables the specification and design of trustworthy and privacy-preserving (see Section <a href="#cryptographic-blinding" class="auto internal xref">Section 9.1</a>) conveyance methods for RATS Conceptual Messages; specifically attestation Evidence conveyed from an Attester to a Verifier.
+While the exact details for conveyance of other Conceptual Messages is out of scope, the models described in this document may be adapted to apply to the conveyance of other Conceptual Messages, such as Endorsements or Attestation Results, or supplemental messages, such as Epoch Markers <span>[<a href="#I-D.ietf-rats-epoch-markers" class="cite xref">I-D.ietf-rats-epoch-markers</a>]</span> or stand-alone event logs.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -3048,7 +3055,7 @@ This binding can be achieved by including the Handle in the Attestation Result i
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
 <p id="section-8-1">Note to RFC Editor: Please remove this section as well as references to <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span> before AUTH48.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">This section records the status of known implementations of the protocol defined by this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span>.
+<p id="section-8-2">This section records the status of a known implementation of the interaction models described in this specification at the time of posting of this Internet-Draft, and is based on a proposal described in <span>[<a href="#BCP205" class="cite xref">BCP205</a>]</span>.
 The description of implementations in this section is intended to assist the IETF in its decision processes in progressing drafts to RFCs.
 Please note that the listing of any individual implementation here does not imply endorsement by the IETF.
 Furthermore, no effort has been spent to verify the information presented here that was supplied by IETF contributors.
@@ -3130,7 +3137,7 @@ The corresponding project resources (code and data) for Linux-based operating sy
       <h2 id="name-security-and-privacy-consid">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-and-privacy-consid" class="section-name selfRef">Security and Privacy Considerations</a>
       </h2>
-<p id="section-9-1">This document outlines three interaction models for remote attestation procedures (RATS) <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+<p id="section-9-1">This document outlines three interaction models for Remote ATtestation procedureS (RATS) <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 While the subsequent sections address additional security and privacy considerations, the security considerations from <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12" class="relref">Section 12</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> must also be adhered to.
 Additionally, for TPM-based remote attestation, the security considerations outlined in <span><a href="https://rfc-editor.org/rfc/rfc9683#section-5" class="relref">Section 5</a> of [<a href="#RFC9683" class="cite xref">RFC9683</a>]</span> should be taken into account.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <div id="cryptographic-blinding">
@@ -3369,7 +3376,7 @@ These are especially important in high-security settings such as financial servi
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-epoch-markers">[I-D.ietf-rats-epoch-markers]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, <span class="refAuthor">Mihalcea, I.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-epoch-markers-05</span>, <time datetime="2026-07-03" class="refDate">3 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Pan, W.</span>, <span class="refAuthor">Mihalcea, I.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Epoch Markers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-epoch-markers-08</span>, <time datetime="2026-11-02" class="refDate">2 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.rats">[IANA.rats]</dt>
         <dd>
@@ -3430,15 +3437,15 @@ These are especially important in high-security settings such as financial servi
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-11</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-11">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-12</span>, <time datetime="2026-11-01" class="refDate">1 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-coserv">[I-D.ietf-rats-coserv]</dt>
         <dd>
-<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-07</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Kamal, S.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">D. Ma</span>, <span class="refTitle">"Concise Selector for Endorsements and Reference Values"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-coserv-08</span>, <time datetime="2026-10-30" class="refDate">30 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-coserv-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-endorsements">[I-D.ietf-rats-endorsements]</dt>
         <dd>
-<span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"RATS Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-endorsements-10</span>, <time datetime="2026-09-16" class="refDate">16 September 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-10">https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-10</a>&gt;</span>. </dd>
+<span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Remote Attestation Procedures (RATS) Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-endorsements-13</span>, <time datetime="2026-10-14" class="refDate">14 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-13">https://datatracker.ietf.org/doc/html/draft-ietf-rats-endorsements-13</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-msg-wrap">[I-D.ietf-rats-msg-wrap]</dt>
         <dd>
@@ -3446,11 +3453,11 @@ These are especially important in high-security settings such as financial servi
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-network-device-subscription">[I-D.ietf-rats-network-device-subscription]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Voit, E.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Attestation Event Stream Subscription"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-network-device-subscription-13</span>, <time datetime="2026-06-16" class="refDate">16 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-network-device-subscription-13">https://datatracker.ietf.org/doc/html/draft-ietf-rats-network-device-subscription-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Voit, E.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Attestation Event Stream Subscription"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-network-device-subscription-16</span>, <time datetime="2026-11-04" class="refDate">4 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-network-device-subscription-16">https://datatracker.ietf.org/doc/html/draft-ietf-rats-network-device-subscription-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-spice-sd-cwt">[I-D.ietf-spice-sd-cwt]</dt>
         <dd>
-<span class="refAuthor">Prorock, M.</span>, <span class="refAuthor">Steele, O.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">R. Mahy</span>, <span class="refTitle">"Selective Disclosure CBOR Web Tokens (SD-CWT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spice-sd-cwt-08</span>, <time datetime="2026-06-01" class="refDate">1 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spice-sd-cwt-08">https://datatracker.ietf.org/doc/html/draft-ietf-spice-sd-cwt-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Prorock, M.</span>, <span class="refAuthor">Steele, O.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">R. Mahy</span>, <span class="refTitle">"Selective Disclosure CBOR Web Tokens (SD-CWT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spice-sd-cwt-09</span>, <time datetime="2026-10-30" class="refDate">30 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spice-sd-cwt-09">https://datatracker.ietf.org/doc/html/draft-ietf-spice-sd-cwt-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ISIS">[ISIS]</dt>
         <dd>
@@ -3483,6 +3490,10 @@ These are especially important in high-security settings such as financial servi
 <dt id="RFC9683">[RFC9683]</dt>
         <dd>
 <span class="refAuthor">Fedorkow, G. C., Ed.</span>, <span class="refAuthor">Voit, E.</span>, and <span class="refAuthor">J. Fitzgerald-McKay</span>, <span class="refTitle">"Remote Integrity Verification of Network Devices Containing Trusted Platform Modules"</span>, <span class="seriesInfo">RFC 9683</span>, <span class="seriesInfo">DOI 10.17487/RFC9683</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9683">https://www.rfc-editor.org/rfc/rfc9683</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9684">[RFC9684]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Eckel, M.</span>, <span class="refAuthor">Bhandari, S.</span>, <span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Sulzen, B.</span>, <span class="refAuthor">Xia, L.</span>, <span class="refAuthor">Laffey, T.</span>, and <span class="refAuthor">G. C. Fedorkow</span>, <span class="refTitle">"A YANG Data Model for Challenge-Response-Based Remote Attestation (CHARRA) Procedures Using Trusted Platform Modules (TPMs)"</span>, <span class="seriesInfo">RFC 9684</span>, <span class="seriesInfo">DOI 10.17487/RFC9684</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9684">https://www.rfc-editor.org/rfc/rfc9684</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9781">[RFC9781]</dt>
         <dd>
