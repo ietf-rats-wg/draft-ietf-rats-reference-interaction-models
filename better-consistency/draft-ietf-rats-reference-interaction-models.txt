@@ -2038,7 +2038,7 @@ Appendix B.  An Exemplary Interaction Model for Endorsement Retrieval
    additional _logistic_ role of CoSERV producer and consumer.
 
 .-------------------.                                .-----------------.
-|  CoSERV producer  |                                | CoSERV consumer |
+|  CoSERV producer  |                               | CoSERV consumer  |
 |  (e.g., Endorser) |                               | (e.g., Verifier) |
 '----+--------------'                               '-------------+----'
      |                                                            |
