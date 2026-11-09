@@ -1238,7 +1238,7 @@ Server-Authenticated TLS with HTTP Authentication:
 
 Remote attestation procedures mostly rely on hardware-enforced isolation of the Attesting Environment from the Target Environment and on the physical security of the Attester, anchored in a root of trust.
 Only the strength of the protection provided varies, from process isolation enforced by the processor of a general-purpose device to specialized hardware that resists physical attacks on a chip (see {{Section 12.1.1 of -RATS}}).
-Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
+Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physical(ly) Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
 High-security settings, such as financial services or military applications, typically require specialized hardware that resists physical attacks to meet regulatory and security standards.
 
 # IANA Considerations
