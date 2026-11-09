@@ -1317,7 +1317,7 @@ The RATS roles of Verifier, Endorser, and Reference Value Provider can take on a
 
 ~~~~ aasvg
 .-------------------.                                .-----------------.
-|  CoSERV producer  |                                | CoSERV consumer |
+|  CoSERV producer  |                               | CoSERV consumer  |
 |  (e.g., Endorser) |                               | (e.g., Verifier) |
 '----+--------------'                               '-------------+----'
      |                                                            |
