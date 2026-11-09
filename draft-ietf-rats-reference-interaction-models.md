@@ -773,7 +773,7 @@ To manage this complexity, it is essential to define a clear policy for Handle v
 
 * *Synchronization Checks*:
   Implement periodic synchronization checks between the Handle Distributor and both Attesters and Verifiers to ensure that Handles are updated consistently across all participants.
-  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps of the Attester (e.g., TPM tick counter values) to fresh Handles issued by a trusted TSA, which the Handle Distributor also conveys to the Verifier.
+  For example, in TUDA {{-TUDA}}, synchronization checks can be realized by cryptographically binding local timestamps of the Attester (e.g., TPM tick counter values or internal clock/time information) to fresh Handles issued by a trusted TSA, which the Handle Distributor also conveys to the Verifier.
 
 * *Grace Periods*:
   Define grace periods during which both the newly issued Handle and the previous Handle are accepted, after which the previous Handle stops being valid.
