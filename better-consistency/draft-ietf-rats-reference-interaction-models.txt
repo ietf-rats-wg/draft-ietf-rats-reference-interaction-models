@@ -1700,13 +1700,13 @@ Table of Contents
    process isolation enforced by the processor of a general-purpose
    device to specialized hardware that resists physical attacks on a
    chip (see Section 12.1.1 of [RFC9334]).  Technologies like Trusted
-   Platform Modules (TPMs), Hardware Security Modules (HSMs), Physically
-   Unclonable Functions (PUFs), and Trusted Execution Environments
-   (TEEs) provide hardware-enforced isolation and protect against
-   tampering and unauthorized access.  High-security settings, such as
-   financial services or military applications, typically require
-   specialized hardware that resists physical attacks to meet regulatory
-   and security standards.
+   Platform Modules (TPMs), Hardware Security Modules (HSMs),
+   Physical(ly) Unclonable Functions (PUFs), and Trusted Execution
+   Environments (TEEs) provide hardware-enforced isolation and protect
+   against tampering and unauthorized access.  High-security settings,
+   such as financial services or military applications, typically
+   require specialized hardware that resists physical attacks to meet
+   regulatory and security standards.
 
 10.  IANA Considerations
 
