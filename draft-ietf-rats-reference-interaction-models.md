@@ -314,7 +314,7 @@ For example, a group of Attesters can be identified by an Attester Identity.
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
 
-: An Attester Identity MAY be bound to an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+: An Attester Identity MAY be bound to an Authentication Secret of one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
 Evidence Authenticity:
