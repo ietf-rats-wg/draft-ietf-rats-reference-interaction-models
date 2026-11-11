@@ -364,7 +364,7 @@ Examples include attestation nonces (see {{nonce-disambiguation}}), which are us
 Handles that are known only to specific RATS roles (e.g., an attestation nonce in a challenge-response interaction) can also indicate Evidence provenance.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
 
-: This specification extends the set of RATS Conceptual Messages defined in {{Section 1 of -rats-cmw}} with the "Handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
+: This specification extends the set of RATS Conceptual Messages defined in {{Section 8 of -RATS}} with the "Handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
 An expected use of this indicator is to transport channel binders in the context of attested TLS, for example in {{-seat-expat}} and {{-seat-early-attestation}}.
 
 Claims (`claims`):
