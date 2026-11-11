@@ -1303,7 +1303,7 @@ The problem with including an explicit `handle` information element in CoSERV is
 
 Instead, since the `attEnvIDs` and `claimSelection` information elements can be mapped to the key elements of the stateful environment query (see {{Section 3.3.1 of -CoSERV}}), the query that includes their combination identifies the requested Endorsements and Reference Values in a stable way (see {{Section 3.4.3 of -CoSERV}}).
 Essentially, the URL in the GET request becomes the `handle` in the interaction.
-The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (for a query by environment, typically CoMID triples {{-CoRIM}} with their authority delegation chains) alongside the query and expiration timestamp for the response.
+The `generateEndorsements` operation illustrated in {{fig-coserv-transaction}} signs a set of Endorsements and Reference Values (for a query by environment, typically Concise Module Identifier (CoMID) triples {{-CoRIM}} with their authority delegation chains) alongside the query and expiration timestamp for the response.
 Semantically, an epoch starts when the CoSERV producer computes the result set for the query and ends at the expiration timestamp of that result set (see {{Section 6.1.5.1 of -CoSERV}}).
 Each new computation of a result set for the query starts a new epoch, which can begin before the previous epoch ends, for example, when a request with `Cache-Control: no-cache` causes a new computation (see {{Section 6.1.5 of -CoSERV}}).
 A response served from a cache includes the result set of the computation that produced it, together with its expiration timestamp, and therefore belongs to the epoch of that computation.
