@@ -129,6 +129,22 @@ informative:
     seriesinfo:
       DOI: 10.1145/41457.37515
     date: 1987
+  TCG-RIM-IM:
+    title: TCG Reference Integrity Manifest (RIM) Information Model
+    author:
+    - org: Trusted Computing Group
+    seriesinfo:
+      Version: 1.1, Revision 1.0
+    date: 2024-04-26
+    target: https://www.trustedcomputinggroup.org/resources/documents/tcg-reference-integrity-manifest-rim-information-model
+  TCG-PC-RIM:
+    title: TCG PC Client Reference Integrity Manifest Specification
+    author:
+    - org: Trusted Computing Group
+    seriesinfo:
+      Version: 1.1, Revision 11
+    date: 2024-04-26
+    target: https://www.trustedcomputinggroup.org/resources/documents/tcg-pc-client-reference-integrity-manifest-specification
   lampson06:
     title: Practical Principles for Computer Security
     author:
@@ -394,7 +410,8 @@ Verifier Inputs (`verInputs`):
 
 : Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence.
 These Conceptual Messages can take various forms.
-For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), such as the Concise Reference Integrity Manifest (CoRIM) {{-CoRIM}} or the RIMs specified by the Trusted Computing Group {{TCG-RIM-IM}} {{TCG-PC-RIM}}.
+Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Relying Party Inputs (`rpInputs`):
 
