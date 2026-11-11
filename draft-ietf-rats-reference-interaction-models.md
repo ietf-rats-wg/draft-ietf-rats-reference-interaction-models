@@ -74,6 +74,7 @@ informative:
   RFC9781: uccs
   RFC9052:
   RFC9257:
+  RFC9200:
   DAA:
     title: Direct Anonymous Attestation
     author:
@@ -305,6 +306,7 @@ Otherwise, another Verifier that holds the same secret could forge Evidence and 
 The paired Verifier cannot distinguish such forged Evidence from Evidence created by the Attester (see {{Section 6 of RFC9052}}).
 The paired Verifier MUST NOT use the symmetric Authentication Secret to protect statements of its own, as protected statements then no longer speak for the Attester alone.
 Pre-shared keys in TLS are also restricted to two parties (see {{Sections 4 and 6 of RFC9257}}).
+Secret keys used for authentication in constrained environments are restricted to two parties as well (see {{Section 6.3 of RFC9200}}).
 
 Attester Identity:
 
