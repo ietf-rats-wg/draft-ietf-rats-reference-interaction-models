@@ -293,10 +293,15 @@ In order to ensure Evidence is appropriately conveyed through the interaction mo
 
 Authentication Secret:
 
-: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester, or, if it is a symmetric key, also to the Verifiers that appraise the Evidence.
-Such Verifiers MUST NOT use a symmetric Authentication Secret to protect statements of their own, as protected statements then no longer speak for the Attester alone.
+: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester.
 
 : The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
+
+: As an exception, a symmetric Authentication Secret MAY also be made available to the Verifier that appraises the Evidence.
+A symmetric Authentication Secret MUST be used for exactly one pairing of an Attester and a Verifier.
+Otherwise, another Verifier that holds the same secret could forge Evidence and impersonate the Attester.
+The paired Verifier cannot distinguish such forged Evidence from Evidence created by the Attester.
+The paired Verifier MUST NOT use the symmetric Authentication Secret to protect statements of its own, as protected statements then no longer speak for the Attester alone.
 
 Attester Identity:
 
