@@ -73,6 +73,7 @@ informative:
   RFC9783: psa-token
   RFC9781: uccs
   RFC9052:
+  RFC9257:
   DAA:
     title: Direct Anonymous Attestation
     author:
@@ -303,6 +304,7 @@ A symmetric Authentication Secret MUST be used for exactly one pairing of an Att
 Otherwise, another Verifier that holds the same secret could forge Evidence and impersonate the Attester.
 The paired Verifier cannot distinguish such forged Evidence from Evidence created by the Attester (see {{Section 6 of RFC9052}}).
 The paired Verifier MUST NOT use the symmetric Authentication Secret to protect statements of its own, as protected statements then no longer speak for the Attester alone.
+Pre-shared keys in TLS are also restricted to two parties (see {{Sections 4 and 6 of RFC9257}}).
 
 Attester Identity:
 
