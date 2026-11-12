@@ -129,6 +129,22 @@ informative:
     seriesinfo:
       DOI: 10.1145/41457.37515
     date: 1987
+  TCG-RIM-IM:
+    title: TCG Reference Integrity Manifest (RIM) Information Model
+    author:
+    - org: Trusted Computing Group
+    seriesinfo:
+      Version: 1.1, Revision 1.0
+    date: 2024-04-26
+    target: https://www.trustedcomputinggroup.org/resources/documents/tcg-reference-integrity-manifest-rim-information-model
+  TCG-PC-RIM:
+    title: TCG PC Client Reference Integrity Manifest Specification
+    author:
+    - org: Trusted Computing Group
+    seriesinfo:
+      Version: 1.1, Revision 11
+    date: 2024-04-26
+    target: https://www.trustedcomputinggroup.org/resources/documents/tcg-pc-client-reference-integrity-manifest-specification
   lampson06:
     title: Practical Principles for Computer Security
     author:
@@ -348,7 +364,7 @@ Examples include attestation nonces (see {{nonce-disambiguation}}), which are us
 Handles that are known only to specific RATS roles (e.g., an attestation nonce in a challenge-response interaction) can also indicate Evidence provenance.
 In contexts where the concrete Handle type matters, this document uses the more specific term (e.g., "attestation nonce" or "Epoch Marker") in addition to the generic term Handle.
 
-: This specification extends the set of RATS Conceptual Messages defined in {{Section 1 of -rats-cmw}} with the "Handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
+: This specification extends the set of RATS Conceptual Messages defined in {{Section 8 of -RATS}} with the "Handle" Conceptual Message, and registers a corresponding CMW indicator ({{iana-handle-cmind}}).
 An expected use of this indicator is to transport channel binders in the context of attested TLS, for example in {{-seat-expat}} and {{-seat-early-attestation}}.
 
 Claims (`claims`):
@@ -394,7 +410,8 @@ Verifier Inputs (`verInputs`):
 
 : Appraisal procedures implemented by Verifiers require certain inputs as defined in {{-RATS}}: Reference Values, Endorsements, and Appraisal Policy for Evidence.
 These Conceptual Messages can take various forms.
-For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), and Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
+For example, Reference Values can be conveyed in Reference Integrity Manifests (RIMs), such as the Concise Reference Integrity Manifest (CoRIM) {{-CoRIM}} or the RIMs specified by the Trusted Computing Group {{TCG-RIM-IM}} {{TCG-PC-RIM}}.
+Endorsements can range from trust anchors to assertions cryptographically bound to the public key associated with an Attesting Environment.
 
 Relying Party Inputs (`rpInputs`):
 
@@ -1238,7 +1255,7 @@ Server-Authenticated TLS with HTTP Authentication:
 
 Remote attestation procedures mostly rely on hardware-enforced isolation of the Attesting Environment from the Target Environment and on the physical security of the Attester, anchored in a root of trust.
 Only the strength of the protection provided varies, from process isolation enforced by the processor of a general-purpose device to specialized hardware that resists physical attacks on a chip (see {{Section 12.1.1 of -RATS}}).
-Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physical(ly) Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
+Technologies like Trusted Platform Modules (TPMs), Hardware Security Modules (HSMs), Physically Unclonable Functions (PUFs), and Trusted Execution Environments (TEEs) provide hardware-enforced isolation and protect against tampering and unauthorized access.
 High-security settings, such as financial services or military applications, typically require specialized hardware that resists physical attacks to meet regulatory and security standards.
 
 # IANA Considerations
