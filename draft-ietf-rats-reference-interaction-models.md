@@ -72,6 +72,9 @@ informative:
   RFC9684: charra
   RFC9783: psa-token
   RFC9781: uccs
+  RFC9052:
+  RFC9257:
+  RFC9200:
   DAA:
     title: Direct Anonymous Attestation
     author:
@@ -293,10 +296,17 @@ In order to ensure Evidence is appropriately conveyed through the interaction mo
 
 Authentication Secret:
 
-: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester, or, if it is a symmetric key, also to the Verifiers that appraise the Evidence.
-Such Verifiers MUST NOT use a symmetric Authentication Secret to protect statements of their own, as protected statements then no longer speak for the Attester alone.
+: An Authentication Secret MUST be established before any RATS interaction takes place, and it MUST be made available exclusively to an Attesting Environment of the Attester.
 
 : The Attester MUST protect Claims with this Authentication Secret to prove the authenticity of the Claims included in Evidence.
+
+: As an exception, a symmetric Authentication Secret MAY also be made available to the Verifier that appraises the Evidence.
+A symmetric Authentication Secret MUST be used for exactly one pairing of an Attester and a Verifier.
+Otherwise, another Verifier that holds the same secret could forge Evidence and impersonate the Attester.
+The paired Verifier cannot distinguish such forged Evidence from Evidence created by the Attester (see {{Section 6 of RFC9052}}).
+The paired Verifier MUST NOT use the symmetric Authentication Secret to protect statements of its own, as protected statements then no longer speak for the Attester alone.
+Pre-shared keys in TLS are also restricted to two parties (see {{Sections 4 and 6 of RFC9257}}).
+Secret keys used for authentication in constrained environments are restricted to two parties as well (see {{Section 6.3 of RFC9200}}).
 
 Attester Identity:
 
@@ -309,7 +319,7 @@ For example, a group of Attesters can be identified by an Attester Identity.
 : The provenance of Evidence SHOULD be distinguishable with respect to the Attesting Environment and MUST be unambiguous with respect to the Attester Identity.
 For example, an Attester with a single Attesting Environment does not need this distinction, because the Attester Identity then also identifies that Attesting Environment.
 
-: An Attester Identity MAY be bound to an Authentication Secret which is available exclusively to one of the Attesting Environments of the Attester.
+: An Attester Identity MAY be bound to an Authentication Secret of one of the Attesting Environments of the Attester.
 It could be a unique identity, it could be included in a zero-knowledge proof (ZKP), it could be part of a group signature, or it could be a randomized DAA credential {{DAA}}.
 
 Evidence Authenticity:
